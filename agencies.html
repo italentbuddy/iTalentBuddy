@@ -1,0 +1,246 @@
+<style>
+.agencies-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 5px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.agencies-page-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* 📣 TOP ONBOARDING BANNER */
+.agencies-cta-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(0, 230, 118, 0.04) 0%, rgba(4, 28, 28, 0.4) 100%);
+    border: 1px solid rgba(0, 230, 118, 0.15);
+    border-radius: 16px;
+    padding: 16px 24px;
+    width: 100%;
+}
+.agencies-cta-text h3 {
+    margin: 0 0 4px 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+.agencies-cta-text p {
+    margin: 0;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+}
+.agencies-btn {
+    background: #00e676;
+    color: #010707;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.3);
+    white-space: nowrap;
+}
+.agencies-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(0, 230, 118, 0.5);
+}
+
+/* 🎯 STRICT 4 COLUMNS GRID */
+.agencies-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+}
+
+/* INDIVIDUAL AGENCY CARD COMPONENT */
+.agency-card {
+    background: rgba(2, 14, 14, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 250px; 
+}
+.agency-card:hover {
+    border-color: rgba(0, 230, 118, 0.4);
+    box-shadow: 0 12px 30px rgba(0, 230, 118, 0.08);
+    transform: translateY(-2px);
+}
+
+.agency-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+}
+.agency-name {
+    font-size: 17px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0;
+    line-height: 1.3;
+}
+.talent-counter {
+    background: rgba(0, 230, 118, 0.1);
+    color: #00e676;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 4px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    border: 1px solid rgba(0, 230, 118, 0.2);
+}
+
+.agency-body {
+    margin-top: 12px;
+    margin-bottom: 16px;
+    flex-grow: 1;
+}
+.agency-services-label {
+    font-size: 10px;
+    color: rgba(0, 230, 118, 0.75);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+    display: block;
+}
+.agency-desc {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.65);
+    line-height: 1.5;
+    margin: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* 🔒 REACHOUT / APPLY BUTTON WITH WHATSAPP ICON RIGHT-ALIGNED */
+.agency-apply-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Standard spacing flex */
+}
+.agency-card:hover .agency-apply-btn {
+    background: #00e676;
+    color: #010707;
+    border-color: #00e676;
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.3);
+}
+
+@media(max-width: 1300px) { .agencies-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media(max-width: 950px) { .agencies-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media(max-width: 600px) { 
+    .agencies-grid { grid-template-columns: 1fr; } 
+    .agencies-cta-banner { flex-direction: column; gap: 16px; text-align: center; }
+}
+</style>
+
+<div class="agencies-page-container">
+    <div class="agencies-cta-banner">
+        <div class="agencies-cta-text">
+            <h3>Are you a Creator Management Agency?</h3>
+            <p>List your agency network here to showcase your services, talent size, and open onboarding pools.</p>
+        </div>
+        <a href="https://wa.me/919999999999" target="_blank" class="agencies-btn">
+            <i class="fa-solid fa-building" style="margin-right: 5px;"></i> JOIN AS AGENCY
+        </a>
+    </div>
+
+    <div class="agencies-grid">
+        <div class="agency-card">
+            <div class="agency-header"><h4 class="agency-name">Alpha Media Talent</h4><span class="talent-counter">45+ Creators</span></div>
+            <div class="agency-body"><span class="agency-services-label">Offers</span><p class="agency-desc">Brand Deals, Legal Support, Campaign Management, and Exclusive YouTube Growth Sponsorship Strategy plans.</p></div>
+            <a href="https://wa.me/919999999999" target="_blank" class="agency-apply-btn">Connect on WhatsApp <i class="fa-brands fa-whatsapp" style="font-size: 15px;"></i></a>
+        </div>
+
+        <div class="agency-card">
+            <div class="agency-header"><h4 class="agency-name">Vibe Viral Network</h4><span class="talent-counter">120+ Creators</span></div>
+            <div class="agency-body"><span class="agency-services-label">Offers</span><p class="agency-desc">Instagram Reel distribution scale up, Short-form editing teams, Monetization setup, and Barter outreach execution.</p></div>
+            <a href="https://wa.me/919999999999" target="_blank" class="agency-apply-btn">Connect on WhatsApp <i class="fa-brands fa-whatsapp" style="font-size: 15px;"></i></a>
+        </div>
+
+        <div class="agency-card">
+            <div class="agency-header"><h4 class="agency-name">NextGen Tech Catalyst</h4><span class="talent-counter">30+ Creators</span></div>
+            <div class="agency-body"><span class="agency-services-label">Offers</span><p class="agency-desc">Exclusive management for Tech & Finance creators. High-paying SaaS partnerships and premium affiliate funnels setup.</p></div>
+            <a href="https://wa.me/919999999999" target="_blank" class="agency-apply-btn">Connect on WhatsApp <i class="fa-brands fa-whatsapp" style="font-size: 15px;"></i></a>
+        </div>
+
+        <div class="agency-card">
+            <div class="agency-header"><h4 class="agency-name">Aesthetic Lifestyle Labs</h4><span class="talent-counter">60+ Creators</span></div>
+            <div class="agency-body"><span class="agency-services-label">Offers</span><p class="agency-desc">Fashion & Beauty brand collaborations, UGC production, dedicated PR agency lists access, and offline event invites management.</p></div>
+            <a href="https://wa.me/919999999999" target="_blank" class="agency-apply-btn">Connect on WhatsApp <i class="fa-brands fa-whatsapp" style="font-size: 15px;"></i></a>
+        </div>
+
+        <div class="agency-card">
+            <div class="agency-header"><h4 class="agency-name">Gaming Forge Group</h4><span class="talent-counter">85+ Creators</span></div>
+            <div class="agency-body"><span class="agency-services-label">Offers</span><p class="agency-desc">Livestream asset design packages, Esports tournaments integration contracts, and Hardware brand barter associations.</p></div>
+            <a href="https://wa.me/919999999999" target="_blank" class="agency-apply-btn">Connect on WhatsApp <i class="fa-brands fa-whatsapp" style="font-size: 15px;"></i></a>
+        </div>
+
+        <div class="agency-card">
+            <div class="agency-header"><h4 class="agency-name">Prime Finance Circle</h4><span class="talent-counter">15+ Creators</span></div>
+            <div class="agency-body"><span class="agency-services-label">Offers</span><p class="agency-desc">Premium compliance advisory, Fintech dedicated sponsorships, personal branding, and elite crypto network entries.</p></div>
+            <a href="https://wa.me/919999999999" target="_blank" class="agency-apply-btn">Connect on WhatsApp <i class="fa-brands fa-whatsapp" style="font-size: 15px;"></i></a>
+        </div>
+
+        <div class="agency-card">
+            <div class="agency-header"><h4 class="agency-name">ScaleUp Micro Ventures</h4><span class="talent-counter">200+ Creators</span></div>
+            <div class="agency-body"><span class="agency-services-label">Offers</span><p class="agency-desc">Dedicated onboarding hub for upcoming micro-influencers. High-volume barter campaigns and base community training program loops.</p></div>
+            <a href="https://wa.me/919999999999" target="_blank" class="agency-apply-btn">Connect on WhatsApp <i class="fa-brands fa-whatsapp" style="font-size: 15px;"></i></a>
+        </div>
+
+        <div class="agency-card">
+            <div class="agency-header"><h4 class="agency-name">Elite Blue Media</h4><span class="talent-counter">50+ Creators</span></div>
+            <div class="agency-body"><span class="agency-services-label">Offers</span><p class="agency-desc">End-to-end multi-platform management, cross-creator collabs, YouTube thumbnail optimization squads, and international deals.</p></div>
+            <a href="https://wa.me/919999999999" target="_blank" class="agency-apply-btn">Connect on WhatsApp <i class="fa-brands fa-whatsapp" style="font-size: 15px;"></i></a>
+        </div>
+
+        <div class="agency-card">
+            <div class="agency-header"><h4 class="agency-name">Aura Celebrity Hub</h4><span class="talent-counter">25+ Creators</span></div>
+            <div class="agency-body"><span class="agency-services-label">Offers</span><p class="agency-desc">High-tier luxury brand contracts, press release distribution, television casting opportunities, and intellectual property setups.</p></div>
+            <a href="https://wa.me/919999999999" target="_blank" class="agency-apply-btn">Connect on WhatsApp <i class="fa-brands fa-whatsapp" style="font-size: 15px;"></i></a>
+        </div>
+
+        <div class="agency-card">
+            <div class="agency-header"><h4 class="agency-name">Hyper Growth Media</h4><span class="talent-counter">70+ Creators</span></div>
+            <div class="agency-body"><span class="agency-services-label">Offers</span><p class="agency-desc">AI editing tool access, script-writing mentorship workshops, metadata optimization assistance, and paid ad campaign amplify hubs.</p></div>
+            <a href="https://wa.me/919999999999" target="_blank" class="agency-apply-btn">Connect on WhatsApp <i class="fa-brands fa-whatsapp" style="font-size: 15px;"></i></a>
+        </div>
+
+        <div class="agency-card">
+            <div class="agency-header"><h4 class="agency-name">Creative Pixel Network</h4><span class="talent-counter">40+ Creators</span></div>
+            <div class="agency-body"><span class="agency-services-label">Offers</span><p class="agency-desc">Design services, merchandise development launch support, digital course building strategy, and performance affiliate marketing loops.</p></div>
+            <a href="https://wa.me/919999999999" target="_blank" class="agency-apply-btn">Connect on WhatsApp <i class="fa-brands fa-whatsapp" style="font-size: 15px;"></i></a>
+        </div>
+
+        <div class="agency-card">
+            <div class="agency-header"><h4 class="agency-name">ZenITH Talent Squad</h4><span class="talent-counter">95+ Creators</span></div>
+            <div class="agency-body"><span class="agency-services-label">Offers</span><p class="agency-desc">Podcast production workflows, speaking gig pipeline contracts, corporate workshop collaborations, and full brand deal syndications.</p></div>
+            <a href="https://wa.me/919999999999" target="_blank" class="agency-apply-btn">Connect on WhatsApp <i class="fa-brands fa-whatsapp" style="font-size: 15px;"></i></a>
+        </div>
+    </div>
+</div>
