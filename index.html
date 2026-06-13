@@ -233,9 +233,9 @@ html, body {
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-// Firebase Configuration Verified from your Console Screenshot
+// 🔥 UPDATED WITH CORRECT API KEY FROM YOUR LATEST SCREENSHOT
 const firebaseConfig = {
-    apiKey: "AIzaSyDGJsSfxHi-DQhWuLEV7rQsGumH4k3I_wY",
+    apiKey: "AIzaSyB_60HwP_9_nL2zIes_f09u9L3K-v3V_wY",
     authDomain: "italentbuddy-5225d.firebaseapp.com",
     projectId: "italentbuddy-5225d",
     storageBucket: "italentbuddy-5225d.firebasestorage.app",
@@ -289,7 +289,7 @@ fetch(cleanBaseRoute + fileNameToLoad)
             </div>`;
     });
 
-// Event Listeners for UI interaction without full page reload triggers
+// Event Listeners for Dropdown Menu
 const avatarBtn = document.getElementById('avatarBtn');
 const userDropdown = document.getElementById('userDropdown');
 const authActionBtn = document.getElementById('authActionBtn');
@@ -303,7 +303,7 @@ document.addEventListener('click', () => {
     userDropdown.style.display = 'none';
 });
 
-// Explicit Login / Logout triggers
+// Authentication Trigger
 authActionBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     if (!auth.currentUser) {
