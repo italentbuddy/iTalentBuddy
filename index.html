@@ -143,10 +143,11 @@ body{
 </div>
 
 <script>
-// --- PAGE UTILITY LOADING SCRIPT ---
+// URL Check Setup
 const urlParams = new URLSearchParams(window.location.search);
-let targetPage = urlParams.get('page') || 'home'; // Agar link plain hai to automatic 'home.html' load hogi
+let targetPage = urlParams.get('page') || 'home';
 
+// Sabse pehle content file load karo
 fetch(`${targetPage}.html`)
     .then(res => {
         if(!res.ok) throw new Error('Page not found');
@@ -154,8 +155,8 @@ fetch(`${targetPage}.html`)
     })
     .then(html => {
         document.getElementById('dynamic-wrapper').innerHTML = html;
-        // Content inject hone ke baad form submission helper set up karne ke liye
-        if(targetPage === 'home') { loadGoogleSheetData(); }
+        // Content aate hi Google Sheet fetching trigger karo
+        loadGoogleSheetData();
     })
     .catch(err => {
         document.getElementById('dynamic-wrapper').innerHTML = `<div style="grid-column: span 2; text-align:center; padding:50px;"><h2>Page Not Found (404)</h2><p>The page you are looking for does not exist.</p></div>`;
@@ -212,19 +213,23 @@ function animate() {
 }
 init(); animate();
 
-// --- GOOGLE SHEETS DATA FETCHING ---
+// --- GOOGLE SHEETS DYNAMIC SYNC ---
 const CSV='https://docs.google.com/spreadsheets/d/e/2PACX-1vSlFHr4dfPT8yAXhybbYQb6NlHd_t3TKUimVWP0U5M7sfU_iQ6MZjavxkAqnF82VuCIygbI05_u9ge1/pub?output=csv';
 
 function loadGoogleSheetData() {
     Papa.parse(CSV,{download:true,complete:r=>{
     const rows=r.data;
-    document.getElementById('nav').innerHTML = ''; // Clear nav before adding
-    for(let i=1;i<=10;i++){
-     if(rows[i]?.[0]){
+    
+    // Strict Clean Clear: Nav element ko pehle poora khali kiya
+    const navContainer = document.getElementById('nav');
+    navContainer.innerHTML = ''; 
+    
+    // Strict mapping A2 to A11 (Rows 1 to 10 in array indices)
+    for(let i=1; i<=10; i++){
+     if(rows[i]?.[0] && rows[i][0].trim() !== ""){
       let a=document.createElement('a'); 
-      a.textContent=rows[i][0]; 
+      a.textContent=rows[i][0].trim(); 
       
-      // LOGIC CHANGER: Link ko HTML banane ki jagah parameter system par shift kiya hai
       let cleanName = rows[i][0].trim().toLowerCase();
       if(cleanName === "home") {
           a.href = "index.html";
@@ -233,38 +238,48 @@ function loadGoogleSheetData() {
       }
       
       if(cleanName === targetPage){ a.classList.add("active-nav"); }
-      document.getElementById('nav').appendChild(a);
+      navContainer.appendChild(a);
      }
     }
     
-    // Agar home page load hua hai sirf tabhi card/form options inject karo
+    // Home content scripts data updates
     if(targetPage === 'home') {
-        document.getElementById('stats').innerHTML = '';
-        for(let i=11;i<=14;i++){
-         if(rows[i]?.[0]){
-         document.getElementById('stats').innerHTML+=`<div class="card-wrapper"><div class="card"><div class="num">${rows[i][1]||''}</div><div class="label-text">${rows[i][0]}</div></div></div>`;
-         }
+        const statsBox = document.getElementById('stats');
+        if(statsBox) {
+            statsBox.innerHTML = '';
+            for(let i=11;i<=14;i++){
+             if(rows[i]?.[0]){
+             statsBox.innerHTML+=`<div class="card-wrapper"><div class="card"><div class="num">${rows[i][1]||''}</div><div class="label-text">${rows[i][0]}</div></div></div>`;
+             }
+            }
         }
-        if(rows[15]?.[1]){ document.getElementById('dd').innerHTML=rows[15][1].split(',').map(v=>`<option>${v.trim()}</option>`).join(''); }
         
-        document.getElementById('socials').innerHTML = '';
-        const icons={Email:'fa-envelope',WhatsApp:'fa-whatsapp',LinkedIn:'fa-linkedin-in',Instagram:'fa-instagram',YouTube:'fa-youtube','Twitter/X':'fa-x-twitter',Facebook:'fa-facebook-f',TikTok:'fa-tiktok'};
-        for(let i=17;i<=24;i++){
-         const name=rows[i]?.[0], val=rows[i]?.[1]; if(!name || !val) continue;
-         let href=val, icon={Email:'fa-envelope',WhatsApp:'fa-whatsapp',LinkedIn:'fa-linkedin-in',Instagram:'fa-instagram',YouTube:'fa-youtube','Twitter/X':'fa-x-twitter',Facebook:'fa-facebook-f',TikTok:'fa-tiktok'}[name];
-         if(name==='Email'){
-           href='mailto:'+val;
-           document.getElementById('socials').innerHTML+=`<a href="${href}"><i class="fa-solid fa-envelope"></i></a>`;
-           continue;
-         }
-         if(name==='WhatsApp') href='https://wa.me/'+String(val).replace(/\D/g,'');
-         document.getElementById('socials').innerHTML+=`<a target="_blank" href="${href}"><i class="fa-brands ${icon}"></i></a>`;
+        const dropdownMenu = document.getElementById('dd');
+        if(dropdownMenu && rows[15]?.[1]){ 
+            dropdownMenu.innerHTML=rows[15][1].split(',').map(v=>`<option>${v.trim()}</option>`).join(''); 
+        }
+        
+        const socialsBox = document.getElementById('socials');
+        if(socialsBox) {
+            socialsBox.innerHTML = '';
+            const icons={Email:'fa-envelope',WhatsApp:'fa-whatsapp',LinkedIn:'fa-linkedin-in',Instagram:'fa-instagram',YouTube:'fa-youtube','Twitter/X':'fa-x-twitter',Facebook:'fa-facebook-f',TikTok:'fa-tiktok'};
+            for(let i=17;i<=24;i++){
+             const name=rows[i]?.[0], val=rows[i]?.[1]; if(!name || !val) continue;
+             let href=val, icon=icons[name];
+             if(name==='Email'){
+               href='mailto:'+val;
+               socialsBox.innerHTML+=`<a href="${href}"><i class="fa-solid fa-envelope"></i></a>`;
+               continue;
+             }
+             if(name==='WhatsApp') href='https://wa.me/'+String(val).replace(/\D/g,'');
+             socialsBox.innerHTML+=`<a target="_blank" href="${href}"><i class="fa-brands ${icon}"></i></a>`;
+            }
         }
     }
     }});
 }
 
-// Global scope form integration helper
+// Mail Handling Logic
 function sendMail(){
     const name = document.getElementById('n').value.trim();
     const contact = document.getElementById('c').value.trim();
