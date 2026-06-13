@@ -152,27 +152,27 @@ html, body {
     backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 14px;
-    width: 160px;
+    width: 180px;
     padding: 6px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     display: none;
     z-index: 100;
 }
-.dropdown-menu a, .dropdown-menu button {
+.dropdown-menu button, .dropdown-menu a {
     display: block;
     width: 100%;
-    padding: 10px 14px;
+    padding: 12px 14px;
     text-align: left;
     background: none;
     border: none;
-    color: rgba(255, 255, 255, 0.75);
+    color: rgba(255, 255, 255, 0.85);
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
     border-radius: 10px;
     cursor: pointer;
 }
-.dropdown-menu a:hover, .dropdown-menu button:hover {
+.dropdown-menu button:hover, .dropdown-menu a:hover {
     background: rgba(0, 230, 118, 0.15);
     color: #00e676;
 }
@@ -215,11 +215,11 @@ html, body {
             </div>
             
             <div class="user-menu-container">
-                <div class="user-avatar" id="avatarBtn" onclick="toggleDropdown(event)">
+                <div class="user-avatar" id="avatarBtn">
                     <i class="fa-solid fa-user" id="defaultAvatarIcon"></i>
                 </div>
                 <div class="dropdown-menu" id="userDropdown">
-                    <button id="authActionBtn" onclick="handleAuthAction()">Login</button>
+                    <button id="authActionBtn">Login with Google</button>
                     <a href="index.html?page=profile" id="profileLink" style="display: none;">My Profile</a>
                 </div>
             </div>
@@ -233,7 +233,7 @@ html, body {
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-// Sahi wali Firebase Configuration (Aapke Screenshot se Li Gayi)
+// Firebase Configuration Verified from your Console Screenshot
 const firebaseConfig = {
     apiKey: "AIzaSyDGJsSfxHi-DQhWuLEV7rQsGumH4k3I_wY",
     authDomain: "italentbuddy-5225d.firebaseapp.com",
@@ -248,6 +248,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
+// Handle Dynamic Routing
 const urlParams = new URLSearchParams(window.location.search);
 let targetPage = (urlParams.get('page') || 'home').toLowerCase().trim();
 
@@ -288,38 +289,52 @@ fetch(cleanBaseRoute + fileNameToLoad)
             </div>`;
     });
 
-window.toggleDropdown = function(e) {
-    e.stopPropagation();
-    const menu = document.getElementById('userDropdown');
-    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
-}
+// Event Listeners for UI interaction without full page reload triggers
+const avatarBtn = document.getElementById('avatarBtn');
+const userDropdown = document.getElementById('userDropdown');
+const authActionBtn = document.getElementById('authActionBtn');
 
-document.addEventListener('click', () => {
-    document.getElementById('userDropdown').style.display = 'none';
+avatarBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
 });
 
-window.handleAuthAction = function() {
+document.addEventListener('click', () => {
+    userDropdown.style.display = 'none';
+});
+
+// Explicit Login / Logout triggers
+authActionBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     if (!auth.currentUser) {
         setPersistence(auth, browserLocalPersistence)
             .then(() => {
                 return signInWithPopup(auth, provider);
             })
-            .catch((error) => console.error("Auth Error: ", error));
+            .then((result) => {
+                console.log("Logged in successfully:", result.user);
+                userDropdown.style.display = 'none';
+            })
+            .catch((error) => {
+                console.error("Auth Error details:", error);
+                alert("Login Error: " + error.message);
+            });
     } else {
-        signOut(auth);
+        signOut(auth).then(() => {
+            userDropdown.style.display = 'none';
+        });
     }
-}
+});
 
+// Global state monitoring
 onAuthStateChanged(auth, (user) => {
-    const avatarBtn = document.getElementById('avatarBtn');
-    const authActionBtn = document.getElementById('authActionBtn');
     const profileLink = document.getElementById('profileLink');
 
     if (user) {
         authActionBtn.innerText = "Logout";
         profileLink.style.display = "block";
         if (user.photoURL) {
-            avatarBtn.innerHTML = `<img src="${user.photoURL}" alt="Profile">`;
+            avatarBtn.innerHTML = `<img src="${user.photoURL}" alt="Profile" style="width:100%; height:100%; border-radius:50%;">`;
         } else {
             avatarBtn.innerHTML = `<i class="fa-solid fa-user-check" style="color: #00e676;"></i>`;
         }
