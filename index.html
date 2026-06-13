@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>iTalentBuddy | Next-Gen Creator Directory</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+<style>
+*{
+    box-sizing:border-box;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+body{
+    margin:0;
+    font-family:Inter,Arial,sans-serif;
+    background:#010707;
+    color:#fff;
+    overflow:hidden;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 50%, #021414 0%, #000606 100%);
+}
+@keyframes screenReveal {
+    from { opacity: 0; transform: translateY(10px); filter: blur(3px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+.container{
+    width: 96%;
+    max-width: 1550px;
+    margin: 0 auto;
+    padding: 10px;
+    height: 96vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    animation: screenReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom: 24px;
+    height: 54px;
+}
+.logo{
+    font-size:36px;
+    font-weight:900;
+    letter-spacing: -1.5px;
+    background: linear-gradient(135deg, #fff 40%, #00e676 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    cursor: pointer;
+}
+#nav{display:flex;gap:12px;flex-wrap:wrap;align-items: center;}
+#nav a{
+    padding:10px 20px;
+    border-radius:12px;
+    text-decoration:none;
+    color:rgba(255,255,255,0.65);
+    background:rgba(255,255,255,.02);
+    backdrop-filter:blur(10px);
+    border: 1px solid rgba(255,255,255,0.06);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    display: inline-block;
+    text-align: center;
+}
+#nav a::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: #00e676;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), height 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+#nav a:hover{
+    color: #010707;
+    border-color: #00e676;
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.3);
+}
+#nav a:hover::before {
+    width: 300px;
+    height: 300px;
+}
+#nav a.active-nav {
+    color: #010707 !important;
+    border-color: #00e676 !important;
+    background: #00e676 !important;
+    box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
+}
+.wrap{
+    display:grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+    gap: 24px;
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:24px;
+    padding: 24px;
+    background: rgba(4, 16, 16, 0.45);
+    backdrop-filter:blur(25px);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+    flex: 1;
+    max-height: 800px;
+    height: 100%;
+}
+@media(max-width:1100px), (max-height: 740px){
+    body { overflow-y: auto; height: auto; display: block; }
+    .container { height: auto; padding: 10px; }
+    .wrap { grid-template-columns: 1fr; max-height: none; padding: 16px; }
+}
+</style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+<div class="container">
+    <div class="nav">
+        <div class="logo" onclick="window.location.href='index.html'">iTalentBuddy</div>
+        <div id="nav"></div>
+    </div>
+    
+    <div class="wrap" id="dynamic-wrapper">
+        </div>
+</div>
+
+<script>
+// --- PAGE UTILITY LOADING SCRIPT ---
+const urlParams = new URLSearchParams(window.location.search);
+let targetPage = urlParams.get('page') || 'home'; // Agar link plain hai to automatic 'home.html' load hogi
+
+fetch(`${targetPage}.html`)
+    .then(res => {
+        if(!res.ok) throw new Error('Page not found');
+        return res.text();
+    })
+    .then(html => {
+        document.getElementById('dynamic-wrapper').innerHTML = html;
+        // Content inject hone ke baad form submission helper set up karne ke liye
+        if(targetPage === 'home') { loadGoogleSheetData(); }
+    })
+    .catch(err => {
+        document.getElementById('dynamic-wrapper').innerHTML = `<div style="grid-column: span 2; text-align:center; padding:50px;"><h2>Page Not Found (404)</h2><p>The page you are looking for does not exist.</p></div>`;
+        loadGoogleSheetData();
+    });
+
+// --- CANVAS BACKGROUND ANIMATION ---
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let particles = [];
+const particleCount = 65; 
+const maxDistance = 140;
+function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+window.addEventListener('resize', resizeCanvas);
+resizeCanvas();
+class Particle {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.vx = (Math.random() - 0.5) * 0.35;
+        this.vy = (Math.random() - 0.5) * 0.35;
+        this.radius = Math.random() * 2 + 1;
+    }
+    update() {
+        this.x += this.vx; this.y += this.vy;
+        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    }
+    draw() {
+        ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(0, 230, 118, 0.4)'; ctx.fill();
+    }
+}
+function init() { particles = []; for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); } }
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let grad = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 10, canvas.width/2, canvas.height/2, canvas.width);
+    grad.addColorStop(0, '#021515'); grad.addColorStop(1, '#000505');
+    ctx.fillStyle = grad; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    for (let i = 0; i < particles.length; i++) {
+        particles[i].update(); particles[i].draw();
+        for (let j = i + 1; j < particles.length; j++) {
+            const dx = particles[i].x - particles[j].x;
+            const dy = particles[i].y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < maxDistance) {
+                ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
+                let alpha = (1 - (dist / maxDistance)) * 0.12;
+                ctx.strokeStyle = `rgba(0, 230, 118, ${alpha})`; ctx.lineWidth = 0.8; ctx.stroke();
+            }
+        }
+    }
+    requestAnimationFrame(animate);
+}
+init(); animate();
+
+// --- GOOGLE SHEETS DATA FETCHING ---
+const CSV='https://docs.google.com/spreadsheets/d/e/2PACX-1vSlFHr4dfPT8yAXhybbYQb6NlHd_t3TKUimVWP0U5M7sfU_iQ6MZjavxkAqnF82VuCIygbI05_u9ge1/pub?output=csv';
+
+function loadGoogleSheetData() {
+    Papa.parse(CSV,{download:true,complete:r=>{
+    const rows=r.data;
+    document.getElementById('nav').innerHTML = ''; // Clear nav before adding
+    for(let i=1;i<=10;i++){
+     if(rows[i]?.[0]){
+      let a=document.createElement('a'); 
+      a.textContent=rows[i][0]; 
+      
+      // LOGIC CHANGER: Link ko HTML banane ki jagah parameter system par shift kiya hai
+      let cleanName = rows[i][0].trim().toLowerCase();
+      if(cleanName === "home") {
+          a.href = "index.html";
+      } else {
+          a.href = `index.html?page=${cleanName}`;
+      }
+      
+      if(cleanName === targetPage){ a.classList.add("active-nav"); }
+      document.getElementById('nav').appendChild(a);
+     }
+    }
+    
+    // Agar home page load hua hai sirf tabhi card/form options inject karo
+    if(targetPage === 'home') {
+        document.getElementById('stats').innerHTML = '';
+        for(let i=11;i<=14;i++){
+         if(rows[i]?.[0]){
+         document.getElementById('stats').innerHTML+=`<div class="card-wrapper"><div class="card"><div class="num">${rows[i][1]||''}</div><div class="label-text">${rows[i][0]}</div></div></div>`;
+         }
+        }
+        if(rows[15]?.[1]){ document.getElementById('dd').innerHTML=rows[15][1].split(',').map(v=>`<option>${v.trim()}</option>`).join(''); }
+        
+        document.getElementById('socials').innerHTML = '';
+        const icons={Email:'fa-envelope',WhatsApp:'fa-whatsapp',LinkedIn:'fa-linkedin-in',Instagram:'fa-instagram',YouTube:'fa-youtube','Twitter/X':'fa-x-twitter',Facebook:'fa-facebook-f',TikTok:'fa-tiktok'};
+        for(let i=17;i<=24;i++){
+         const name=rows[i]?.[0], val=rows[i]?.[1]; if(!name || !val) continue;
+         let href=val, icon={Email:'fa-envelope',WhatsApp:'fa-whatsapp',LinkedIn:'fa-linkedin-in',Instagram:'fa-instagram',YouTube:'fa-youtube','Twitter/X':'fa-x-twitter',Facebook:'fa-facebook-f',TikTok:'fa-tiktok'}[name];
+         if(name==='Email'){
+           href='mailto:'+val;
+           document.getElementById('socials').innerHTML+=`<a href="${href}"><i class="fa-solid fa-envelope"></i></a>`;
+           continue;
+         }
+         if(name==='WhatsApp') href='https://wa.me/'+String(val).replace(/\D/g,'');
+         document.getElementById('socials').innerHTML+=`<a target="_blank" href="${href}"><i class="fa-brands ${icon}"></i></a>`;
+        }
+    }
+    }});
+}
+
+// Global scope form integration helper
+function sendMail(){
+    const name = document.getElementById('n').value.trim();
+    const contact = document.getElementById('c').value.trim();
+    const type = document.getElementById('dd').value;
+    const msg = document.getElementById('m').value.trim();
+    const btn = document.getElementById('submit-btn');
+    if(!name || !contact || !msg) { alert("Please fill out all fields."); return; }
+    btn.innerText = "SENDING..."; btn.style.pointerEvents = "none";
+    const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSe-z5w03kgLdJR5uF2TYMwkAm4Vgrki1JdBA5n0jwrFd7bHrg/formResponse";
+    const formData = new FormData();
+    formData.append("entry.1865534570", name); formData.append("entry.1888082746", contact);
+    formData.append("entry.291980041", type); formData.append("entry.1143027145", msg);
+    fetch(formURL, { method: "POST", mode: "no-cors", body: formData })
+    .then(() => {
+        alert("🚀 Submitted successfully!");
+        document.getElementById('n').value = ""; document.getElementById('c').value = ""; document.getElementById('m').value = "";
+    })
+    .catch(() => alert("Submission failed."))
+    .finally(() => { btn.innerText = "SEND INQUIRY"; btn.style.pointerEvents = "auto"; });
+}
+</script>
+</body>
+</html>
