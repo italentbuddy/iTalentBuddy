@@ -1,0 +1,343 @@
+<style>
+/* Pure grid content area container with hidden scrollbar */
+.creators-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 5px;
+    
+    /* 🔒 HIDE SCROLLBAR TRACK BUT RETAIN INTERACTIVE SCROLLING */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.creators-page-container::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
+}
+
+/* 📣 CALL TO ACTION HEAD BAR */
+.cta-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(0, 230, 118, 0.04) 0%, rgba(4, 28, 28, 0.4) 100%);
+    border: 1px solid rgba(0, 230, 118, 0.15);
+    border-radius: 16px;
+    padding: 16px 24px;
+    width: 100%;
+}
+.cta-text-side h3 {
+    margin: 0 0 4px 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+}
+.cta-text-side p {
+    margin: 0;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+}
+.cta-btn {
+    background: #00e676;
+    color: #010707;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.3);
+    white-space: nowrap;
+}
+.cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(0, 230, 118, 0.5);
+}
+
+/* 🎴 CARDS GRID SYSTEM (Strictly 6 Cards per row on full screens) */
+.creators-grid {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 16px;
+    width: 100%;
+}
+
+/* INDIVIDUAL MINIMALIST CARD LOGIC */
+.creator-card {
+    background: rgba(2, 14, 14, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 20px 12px;
+    text-align: center;
+    position: relative;
+}
+.creator-card:hover {
+    border-color: rgba(0, 230, 118, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 230, 118, 0.05);
+    transform: translateY(-4px);
+}
+.img-frame {
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    margin: 0 auto 12px auto;
+    padding: 3px;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.img-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.c-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.c-handle {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 12px;
+}
+.c-tag {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+.c-niche {
+    font-size: 11px;
+    font-weight: 700;
+    color: #00e676;
+    margin-bottom: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+.c-stats {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 12px;
+}
+.stat-box { text-align: center; }
+.stat-val { font-size: 14px; font-weight: 800; color: #fff; }
+.stat-lbl { font-size: 9px; color: rgba(255, 255, 255, 0.3); text-transform: uppercase; margin-top: 2px; }
+
+/* Responsive break-downs */
+@media(max-width: 1400px) { .creators-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+@media(max-width: 900px) { .creators-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media(max-width: 500px) { 
+    .creators-grid { grid-template-columns: 1fr; } 
+    .cta-banner { flex-direction: column; gap: 16px; text-align: center; }
+}
+</style>
+
+<div class="creators-page-container">
+    <div class="cta-banner">
+        <div class="cta-text-side">
+            <h3>Are you a Digital Creator or Influencer?</h3>
+            <p>Get listed in India's next-gen ecosystem directory. Show your reach, get direct inquiries and sponsorships.</p>
+        </div>
+        <a href="#join" class="cta-btn" onclick="alert('Google form link can be attached here!')">
+            <i class="fa-solid fa-bolt" style="margin-right: 5px;"></i> JOIN AS CREATOR
+        </a>
+    </div>
+
+    <div class="creators-grid">
+        
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Ananya Sharma</div><div class="c-handle">@ananya_st</div>
+            <div class="c-tag">Mumbai</div><div class="c-niche">Fashion & Styling</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">1.2M</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">450K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Aarav Verma</div><div class="c-handle">@aaravtech</div>
+            <div class="c-tag">Delhi NCR</div><div class="c-niche">Tech & AI</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">3.5M</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">120K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Diya Kapoor</div><div class="c-handle">@diyavlogs</div>
+            <div class="c-tag">Bangalore</div><div class="c-niche">Travel Vlogs</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">850K</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">620K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Kabir Singh</div><div class="c-handle">@kabirlive</div>
+            <div class="c-tag">Punjab</div><div class="c-niche">Gaming & Esport</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">2.1M</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">95K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Ishita Patel</div><div class="c-handle">@ishitafit</div>
+            <div class="c-tag">Gujarat</div><div class="c-niche">Health & Fitness</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">410K</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">890K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Rohan Das</div><div class="c-handle">@rohanfinance</div>
+            <div class="c-tag">Kolkata</div><div class="c-niche">Finance & Biz</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">1.7M</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">340K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Kriti Joshi</div><div class="c-handle">@kriti_vfx</div>
+            <div class="c-tag">Jaipur</div><div class="c-niche">VFX & Animation</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">980K</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">210K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Manish Malo</div><div class="c-handle">@manishvines</div>
+            <div class="c-tag">Pune</div><div class="c-niche">Comedy Skits</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">4.2M</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">1.5M</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Sanya Gupta</div><div class="c-handle">@sanyafoodie</div>
+            <div class="c-tag">Hyderabad</div><div class="c-niche">Food & Cuisine</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">620K</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">1.1M</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1566492031773-4f4e44671857?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Vikram Raj</div><div class="c-handle">@vikrammotors</div>
+            <div class="c-tag">Chennai</div><div class="c-niche">Automobile</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">1.5M</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">230K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Neha Roy</div><div class="c-handle">@nehaart</div>
+            <div class="c-tag">Assam</div><div class="c-niche">Art & Painting</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">280K</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">540K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Arjun Dev</div><div class="c-handle">@arjuntv</div>
+            <div class="c-tag">Kerala</div><div class="c-niche">Adventure</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">1.1M</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">420K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Meera Joshi</div><div class="c-handle">@meera_crafts</div>
+            <div class="c-tag">Odisha</div><div class="c-niche">DIY & Crafts</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">740K</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">310K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Devansh Dixit</div><div class="c-handle">@devanshguitars</div>
+            <div class="c-tag">Lucknow</div><div class="c-niche">Music & Cover</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">1.3M</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">190K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Riya Sen</div><div class="c-handle">@riyas_kitchen</div>
+            <div class="c-tag">Kochi</div><div class="c-niche">Baking Vlogs</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">920K</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">580K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Samarth Goel</div><div class="c-handle">@samarth_reviews</div>
+            <div class="c-tag">Indore</div><div class="c-niche">Gadget Reviews</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">2.8M</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">490K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Zoya Khan</div><div class="c-handle">@zoyabeauty</div>
+            <div class="c-tag">Bhopal</div><div class="c-niche">Skincare & Makeup</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">670K</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">820K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card">
+            <div class="img-frame"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80"></div>
+            <div class="c-name">Rohan Joshi</div><div class="c-handle">@rohan_clicks</div>
+            <div class="c-tag">Goa</div><div class="c-niche">Photography</div>
+            <div class="c-stats">
+                <div class="stat-box"><div class="stat-val">1.1M</div><div class="stat-lbl">Subs</div></div>
+                <div class="stat-box"><div class="stat-val">990K</div><div class="stat-lbl">Followers</div></div>
+            </div>
+        </div>
+
+    </div>
+</div>
