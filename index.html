@@ -11,16 +11,16 @@
     box-sizing:border-box;
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-body{
-    margin:0;
-    font-family:Inter,Arial,sans-serif;
-    background:#010707;
-    color:#fff;
-    overflow:hidden;
+html, body {
+    margin: 0;
+    padding: 0;
     height: 100vh;
-    display: flex;
-    align-items: center;
-    position: relative;
+    background: #010707;
+    font-family: Inter, Arial, sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+    /* 🔒 SCROLLBAR SHIFT FIX: Scrollbar aaye ya jaye, layout ko hile nahi dega */
+    scrollbar-gutter: stable; 
 }
 #bg-canvas {
     position: fixed;
@@ -36,15 +36,17 @@ body{
     from { opacity: 0; transform: translateY(10px); filter: blur(3px); }
     to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
+
+/* 🔒 POSITION LOCK: Flex align-items center hataya taaki vertical shifting na ho */
 .container{
     width: 96%;
     max-width: 1550px;
     margin: 0 auto;
-    padding: 10px;
+    padding: 2vh 10px;
     height: 96vh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start; /* Hamesha top se shuru hoga, stable spacing ke saath */
     animation: screenReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .nav{
@@ -53,6 +55,7 @@ body{
     align-items:center;
     margin-bottom: 24px;
     height: 54px;
+    flex-shrink: 0; /* Navbar ko shrink hone se rokega */
 }
 .logo{
     font-size:36px;
@@ -109,6 +112,8 @@ body{
     background: #00e676 !important;
     box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
 }
+
+/* 🔒 SIZE LOCK: Min aur max heights ko freeze kar diya hai */
 .wrap{
     display:grid;
     grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
@@ -120,13 +125,15 @@ body{
     backdrop-filter:blur(25px);
     box-shadow: 0 25px 60px rgba(0,0,0,0.6);
     flex: 1;
-    max-height: 800px;
     height: 100%;
+    min-height: 650px; 
+    max-height: 800px;
 }
+
 @media(max-width:1100px), (max-height: 740px){
-    body { overflow-y: auto; height: auto; display: block; }
+    body { overflow-y: auto; height: auto; }
     .container { height: auto; padding: 10px; }
-    .wrap { grid-template-columns: 1fr; max-height: none; padding: 16px; }
+    .wrap { grid-template-columns: 1fr; max-height: none; min-height: auto; padding: 16px; }
 }
 </style>
 </head>
@@ -143,25 +150,34 @@ body{
 </div>
 
 <script>
-// URL Check Setup
 const urlParams = new URLSearchParams(window.location.search);
-let targetPage = urlParams.get('page') || 'home';
+let targetPage = (urlParams.get('page') || 'home').toLowerCase();
 
-// Sabse pehle content file load karo
-fetch(`${targetPage}.html`)
-    .then(res => {
-        if(!res.ok) throw new Error('Page not found');
-        return res.text();
-    })
-    .then(html => {
-        document.getElementById('dynamic-wrapper').innerHTML = html;
-        // Content aate hi Google Sheet fetching trigger karo
-        loadGoogleSheetData();
-    })
-    .catch(err => {
-        document.getElementById('dynamic-wrapper').innerHTML = `<div style="grid-column: span 2; text-align:center; padding:50px;"><h2>Page Not Found (404)</h2><p>The page you are looking for does not exist.</p></div>`;
-        loadGoogleSheetData();
-    });
+if (targetPage === 'home') {
+    document.getElementById('dynamic-wrapper').style.gridTemplateColumns = 'minmax(0, 1.35fr) minmax(0, 1fr)';
+    fetch('home.html')
+        .then(res => {
+            if(!res.ok) throw new Error('Home chunk missing');
+            return res.text();
+        })
+        .then(html => {
+            document.getElementById('dynamic-wrapper').innerHTML = html;
+            loadGoogleSheetData();
+        })
+        .catch(err => {
+            document.getElementById('dynamic-wrapper').innerHTML = `<div style="text-align:center; padding-top:150px; width: 100%;"><h2>Error loading Home</h2></div>`;
+            loadGoogleSheetData();
+        });
+} else {
+    document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
+    let pageDisplayTitle = targetPage.charAt(0).toUpperCase() + targetPage.slice(1);
+    document.getElementById('dynamic-wrapper').innerHTML = `
+        <div style="text-align:center; padding-top:180px; width: 100%;">
+            <h2 style="font-size: 32px; color: #00e676; margin-bottom: 10px;">${pageDisplayTitle}</h2>
+            <p style="color: rgba(255,255,255,0.5); font-size: 16px;">This section is coming soon. We are building something awesome!</p>
+        </div>`;
+    loadGoogleSheetData();
+}
 
 // --- CANVAS BACKGROUND ANIMATION ---
 const canvas = document.getElementById('bg-canvas');
@@ -220,11 +236,9 @@ function loadGoogleSheetData() {
     Papa.parse(CSV,{download:true,complete:r=>{
     const rows=r.data;
     
-    // Strict Clean Clear: Nav element ko pehle poora khali kiya
     const navContainer = document.getElementById('nav');
     navContainer.innerHTML = ''; 
     
-    // Strict mapping A2 to A11 (Rows 1 to 10 in array indices)
     for(let i=1; i<=10; i++){
      if(rows[i]?.[0] && rows[i][0].trim() !== ""){
       let a=document.createElement('a'); 
@@ -242,7 +256,6 @@ function loadGoogleSheetData() {
      }
     }
     
-    // Home content scripts data updates
     if(targetPage === 'home') {
         const statsBox = document.getElementById('stats');
         if(statsBox) {
@@ -279,7 +292,6 @@ function loadGoogleSheetData() {
     }});
 }
 
-// Mail Handling Logic
 function sendMail(){
     const name = document.getElementById('n').value.trim();
     const contact = document.getElementById('c').value.trim();
