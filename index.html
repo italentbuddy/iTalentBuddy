@@ -150,40 +150,43 @@ html, body {
 
 <script>
 const urlParams = new URLSearchParams(window.location.search);
-let targetPage = (urlParams.get('page') || 'home').toLowerCase();
+let targetPage = (urlParams.get('page') || 'home').toLowerCase().trim();
 
-// Global execution: Navbar har single condition par fetch hoga sabse pehle
+// Global execution: Navbar build
 loadGoogleSheetData();
 
-// --- FIXED RELATIVE ROUTER LOADER SYSTEM ---
+// --- 🚀 UNIVERSAL SMART AUTOMATIC ROUTER ---
 const cleanBaseRoute = window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
 
+// 1. Grid structure selection rule
 if (targetPage === 'home') {
     document.getElementById('dynamic-wrapper').style.gridTemplateColumns = 'minmax(0, 1.35fr) minmax(0, 1fr)';
-    fetch(cleanBaseRoute + 'home.html')
-        .then(res => { if(!res.ok) throw new Error('Home template missing'); return res.text(); })
-        .then(html => { document.getElementById('dynamic-wrapper').innerHTML = html; })
-        .catch(err => {
-            document.getElementById('dynamic-wrapper').innerHTML = `<div style="text-align:center; padding-top:150px; width: 100%;"><h2>Error loading Home</h2></div>`;
-        });
-} else if (targetPage === 'creators') {
-    // ⚡ Strict Full width framework injection for Creators Area
-    document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
-    fetch(cleanBaseRoute + 'creators.html')
-        .then(res => { if(!res.ok) throw new Error('Creators template missing'); return res.text(); })
-        .then(html => { document.getElementById('dynamic-wrapper').innerHTML = html; })
-        .catch(err => {
-            document.getElementById('dynamic-wrapper').innerHTML = `<div style="text-align:center; padding-top:150px; width: 100%;"><h2>Failed to load creators.html template</h2></div>`;
-        });
 } else {
     document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
-    let pageDisplayTitle = targetPage.charAt(0).toUpperCase() + targetPage.slice(1);
-    document.getElementById('dynamic-wrapper').innerHTML = `
-        <div style="text-align:center; padding-top:180px; width: 100%;">
-            <h2 style="font-size: 32px; color: #00e676; margin-bottom: 10px;">${pageDisplayTitle}</h2>
-            <p style="color: rgba(255,255,255,0.5); font-size: 16px;">This section is coming soon. We are building something awesome!</p>
-        </div>`;
 }
+
+// 2. Pure Automatic File Fetcher
+const fileNameToLoad = targetPage + '.html';
+
+fetch(cleanBaseRoute + fileNameToLoad)
+    .then(res => {
+        // Agar file GitHub repository mein nahi milti (404), toh dynamic error handler display hoga
+        if (!res.ok) throw new Error('File Not Found');
+        return res.text();
+    })
+    .then(html => {
+        document.getElementById('dynamic-wrapper').innerHTML = html;
+    })
+    .catch(err => {
+        // Agar file ready nahi hai, toh yeh automatic clean placeholder dikhayega
+        let pageDisplayTitle = targetPage.charAt(0).toUpperCase() + targetPage.slice(1);
+        document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
+        document.getElementById('dynamic-wrapper').innerHTML = `
+            <div style="text-align:center; padding-top:180px; width: 100%;">
+                <h2 style="font-size: 32px; color: #00e676; margin-bottom: 10px;">${pageDisplayTitle}</h2>
+                <p style="color: rgba(255,255,255,0.5); font-size: 16px;">This section is coming soon. We are building something awesome!</p>
+            </div>`;
+    });
 
 // --- CANVAS BACKGROUND ANIMATION ---
 const canvas = document.getElementById('bg-canvas');
@@ -262,7 +265,6 @@ function loadGoogleSheetData() {
         }
     }
     
-    // Baaki component updates sirf home template ke liye target honge
     if(targetPage === 'home') {
         const statsBox = document.getElementById('stats');
         if(statsBox) {
