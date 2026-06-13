@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>iTalentBuddy | Next-Gen Creator Directory</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <style>
 *{
     box-sizing:border-box;
@@ -36,7 +35,6 @@ html, body {
     to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
-/* 🔒 LAYOUT POSITION LOCK */
 .container{
     width: 96%;
     max-width: 1550px;
@@ -64,6 +62,11 @@ html, body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     cursor: pointer;
+}
+.nav-right-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 #nav{display:flex;gap:12px;flex-wrap:wrap;align-items: center;}
 #nav a{
@@ -112,7 +115,68 @@ html, body {
     box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
 }
 
-/* 🔒 BOX SIZE LOCK */
+.user-menu-container {
+    position: relative;
+    display: inline-block;
+}
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+.user-avatar:hover {
+    border-color: #00e676;
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.3);
+}
+.user-avatar i {
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+}
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.dropdown-menu {
+    position: absolute;
+    top: 52px;
+    right: 0;
+    background: rgba(4, 16, 16, 0.95);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 14px;
+    width: 160px;
+    padding: 6px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    display: none;
+    z-index: 100;
+}
+.dropdown-menu a, .dropdown-menu button {
+    display: block;
+    width: 100%;
+    padding: 10px 14px;
+    text-align: left;
+    background: none;
+    border: none;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.dropdown-menu a:hover, .dropdown-menu button:hover {
+    background: rgba(0, 230, 118, 0.15);
+    color: #00e676;
+}
+
 .wrap{
     display:grid;
     grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
@@ -141,36 +205,73 @@ html, body {
 <div class="container">
     <div class="nav">
         <div class="logo" onclick="window.location.href='index.html'">iTalentBuddy</div>
-        <div id="nav"></div>
+        <div class="nav-right-wrapper">
+            <div id="nav">
+                <a href="index.html" id="nav-home">Home</a>
+                <a href="index.html?page=creators" id="nav-creators">Creators</a>
+                <a href="index.html?page=deals" id="nav-deals">Deals</a>
+                <a href="index.html?page=agencies" id="nav-agencies">Agencies</a>
+                <a href="index.html?page=production houses" id="nav-production">Production Houses</a>
+            </div>
+            
+            <div class="user-menu-container">
+                <div class="user-avatar" id="avatarBtn" onclick="toggleDropdown(event)">
+                    <i class="fa-solid fa-user" id="defaultAvatarIcon"></i>
+                </div>
+                <div class="dropdown-menu" id="userDropdown">
+                    <button id="authActionBtn" onclick="handleAuthAction()">Login</button>
+                    <a href="index.html?page=profile" id="profileLink" style="display: none;">My Profile</a>
+                </div>
+            </div>
+        </div>
     </div>
     
-    <div class="wrap" id="dynamic-wrapper">
-        </div>
+    <div class="wrap" id="dynamic-wrapper"></div>
 </div>
 
-<script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+// Sahi wali Firebase Configuration (Aapke Screenshot se Li Gayi)
+const firebaseConfig = {
+    apiKey: "AIzaSyDGJsSfxHi-DQhWuLEV7rQsGumH4k3I_wY",
+    authDomain: "italentbuddy-5225d.firebaseapp.com",
+    projectId: "italentbuddy-5225d",
+    storageBucket: "italentbuddy-5225d.firebasestorage.app",
+    messagingSenderId: "31982716088",
+    appId: "1:31982716088:web:7a05fc8691b65c6af0604d",
+    measurementId: "G-6W2WN0416R"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
 const urlParams = new URLSearchParams(window.location.search);
 let targetPage = (urlParams.get('page') || 'home').toLowerCase().trim();
 
-// Global execution: Navbar build
-loadGoogleSheetData();
+setupNavbarActiveState();
 
-// --- 🚀 UNIVERSAL SMART AUTOMATIC ROUTER ---
-const cleanBaseRoute = window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
+function setupNavbarActiveState() {
+    if (targetPage === 'home') document.getElementById('nav-home').classList.add('active-nav');
+    else if (targetPage === 'creators') document.getElementById('nav-creators').classList.add('active-nav');
+    else if (targetPage === 'deals') document.getElementById('nav-deals').classList.add('active-nav');
+    else if (targetPage === 'agencies') document.getElementById('nav-agencies').classList.add('active-nav');
+    else if (targetPage.includes('production')) document.getElementById('nav-production').classList.add('active-nav');
+}
 
-// 1. Grid structure selection rule
 if (targetPage === 'home') {
     document.getElementById('dynamic-wrapper').style.gridTemplateColumns = 'minmax(0, 1.35fr) minmax(0, 1fr)';
 } else {
     document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
 }
 
-// 2. Pure Automatic File Fetcher
+const cleanBaseRoute = window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
 const fileNameToLoad = targetPage + '.html';
 
 fetch(cleanBaseRoute + fileNameToLoad)
     .then(res => {
-        // Agar file GitHub repository mein nahi milti (404), toh dynamic error handler display hoga
         if (!res.ok) throw new Error('File Not Found');
         return res.text();
     })
@@ -178,7 +279,6 @@ fetch(cleanBaseRoute + fileNameToLoad)
         document.getElementById('dynamic-wrapper').innerHTML = html;
     })
     .catch(err => {
-        // Agar file ready nahi hai, toh yeh automatic clean placeholder dikhayega
         let pageDisplayTitle = targetPage.charAt(0).toUpperCase() + targetPage.slice(1);
         document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
         document.getElementById('dynamic-wrapper').innerHTML = `
@@ -188,6 +288,50 @@ fetch(cleanBaseRoute + fileNameToLoad)
             </div>`;
     });
 
+window.toggleDropdown = function(e) {
+    e.stopPropagation();
+    const menu = document.getElementById('userDropdown');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+}
+
+document.addEventListener('click', () => {
+    document.getElementById('userDropdown').style.display = 'none';
+});
+
+window.handleAuthAction = function() {
+    if (!auth.currentUser) {
+        setPersistence(auth, browserLocalPersistence)
+            .then(() => {
+                return signInWithPopup(auth, provider);
+            })
+            .catch((error) => console.error("Auth Error: ", error));
+    } else {
+        signOut(auth);
+    }
+}
+
+onAuthStateChanged(auth, (user) => {
+    const avatarBtn = document.getElementById('avatarBtn');
+    const authActionBtn = document.getElementById('authActionBtn');
+    const profileLink = document.getElementById('profileLink');
+
+    if (user) {
+        authActionBtn.innerText = "Logout";
+        profileLink.style.display = "block";
+        if (user.photoURL) {
+            avatarBtn.innerHTML = `<img src="${user.photoURL}" alt="Profile">`;
+        } else {
+            avatarBtn.innerHTML = `<i class="fa-solid fa-user-check" style="color: #00e676;"></i>`;
+        }
+    } else {
+        authActionBtn.innerText = "Login with Google";
+        profileLink.style.display = "none";
+        avatarBtn.innerHTML = `<i class="fa-solid fa-user" id="defaultAvatarIcon"></i>`;
+    }
+});
+</script>
+
+<script>
 // --- CANVAS BACKGROUND ANIMATION ---
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
@@ -237,90 +381,6 @@ function animate() {
     requestAnimationFrame(animate);
 }
 init(); animate();
-
-// --- GOOGLE SHEETS DYNAMIC SYNC ---
-function loadGoogleSheetData() {
-    const CSV='https://docs.google.com/spreadsheets/d/e/2PACX-1vSlFHr4dfPT8yAXhybbYQb6NlHd_t3TKUimVWP0U5M7sfU_iQ6MZjavxkAqnF82VuCIygbI05_u9ge1/pub?output=csv';
-    Papa.parse(CSV,{download:true,complete:r=>{
-    const rows=r.data;
-    
-    const navContainer = document.getElementById('nav');
-    if(navContainer) {
-        navContainer.innerHTML = ''; 
-        for(let i=1; i<=10; i++){
-         if(rows[i]?.[0] && rows[i][0].trim() !== ""){
-          let a=document.createElement('a'); 
-          a.textContent=rows[i][0].trim(); 
-          
-          let cleanName = rows[i][0].trim().toLowerCase();
-          if(cleanName === "home") {
-              a.href = "index.html";
-          } else {
-              a.href = `index.html?page=${cleanName}`;
-          }
-          
-          if(cleanName === targetPage){ a.classList.add("active-nav"); }
-          navContainer.appendChild(a);
-         }
-        }
-    }
-    
-    if(targetPage === 'home') {
-        const statsBox = document.getElementById('stats');
-        if(statsBox) {
-            statsBox.innerHTML = '';
-            for(let i=11;i<=14;i++){
-             if(rows[i]?.[0]){
-             statsBox.innerHTML+=`<div class="card-wrapper"><div class="card"><div class="num">${rows[i][1]||''}</div><div class="label-text">${rows[i][0]}</div></div></div>`;
-             }
-            }
-        }
-        
-        const dropdownMenu = document.getElementById('dd');
-        if(dropdownMenu && rows[15]?.[1]){ 
-            dropdownMenu.innerHTML=rows[15][1].split(',').map(v=>`<option>${v.trim()}</option>`).join(''); 
-        }
-        
-        const socialsBox = document.getElementById('socials');
-        if(socialsBox) {
-            socialsBox.innerHTML = '';
-            const icons={Email:'fa-envelope',WhatsApp:'fa-whatsapp',LinkedIn:'fa-linkedin-in',Instagram:'fa-instagram',YouTube:'fa-youtube','Twitter/X':'fa-x-twitter',Facebook:'fa-facebook-f',TikTok:'fa-tiktok'};
-            for(let i=17;i<=24;i++){
-             const name=rows[i]?.[0], val=rows[i]?.[1]; if(!name || !val) continue;
-             let href=val, icon=icons[name];
-             if(name==='Email'){
-               href='mailto:'+val;
-               socialsBox.innerHTML+=`<a href="${href}"><i class="fa-solid fa-envelope"></i></a>`;
-               continue;
-             }
-             if(name==='WhatsApp') href='https://wa.me/'+String(val).replace(/\D/g,'');
-             socialsBox.innerHTML+=`<a target="_blank" href="${href}"><i class="fa-brands ${icon}"></i></a>`;
-            }
-        }
-    }
-    }});
-}
-
-function sendMail(){
-    const name = document.getElementById('n').value.trim();
-    const contact = document.getElementById('c').value.trim();
-    const type = document.getElementById('dd').value;
-    const msg = document.getElementById('m').value.trim();
-    const btn = document.getElementById('submit-btn');
-    if(!name || !contact || !msg) { alert("Please fill out all fields."); return; }
-    btn.innerText = "SENDING..."; btn.style.pointerEvents = "none";
-    const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSe-z5w03kgLdJR5uF2TYMwkAm4Vgrki1JdBA5n0jwrFd7bHrg/formResponse";
-    const formData = new FormData();
-    formData.append("entry.1865534570", name); formData.append("entry.1888082746", contact);
-    formData.append("entry.291980041", type); formData.append("entry.1143027145", msg);
-    fetch(formURL, { method: "POST", mode: "no-cors", body: formData })
-    .then(() => {
-        alert("🚀 Submitted successfully!");
-        document.getElementById('n').value = ""; document.getElementById('c').value = ""; document.getElementById('m').value = "";
-    })
-    .catch(() => alert("Submission failed."))
-    .finally(() => { btn.innerText = "SEND INQUIRY"; btn.style.pointerEvents = "auto"; });
-}
 </script>
 </body>
 </html>
