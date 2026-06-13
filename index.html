@@ -34,7 +34,6 @@ html, body {
     from { opacity: 0; transform: translateY(10px); filter: blur(3px); }
     to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
-
 .container{
     width: 96%;
     max-width: 1550px;
@@ -114,7 +113,6 @@ html, body {
     background: #00e676 !important;
     box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
 }
-
 .user-menu-container {
     position: relative;
     display: inline-block;
@@ -122,7 +120,7 @@ html, body {
 .user-avatar {
     width: 42px;
     height: 42px;
-    border-radius: 50%;
+    border-radius: 12px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.15);
     display: flex;
@@ -143,6 +141,7 @@ html, body {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 11px;
 }
 .dropdown-menu {
     position: absolute;
@@ -151,32 +150,30 @@ html, body {
     background: rgba(4, 16, 16, 0.95);
     backdrop-filter: blur(15px);
     border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 14px;
-    width: 180px;
+    border-radius: 12px;
+    width: 140px;
     padding: 6px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     display: none;
     z-index: 100;
 }
-.dropdown-menu button, .dropdown-menu a {
+.dropdown-menu button {
     display: block;
     width: 100%;
-    padding: 12px 14px;
-    text-align: left;
+    padding: 10px 14px;
+    text-align: center;
     background: none;
     border: none;
     color: rgba(255, 255, 255, 0.85);
     font-size: 13px;
     font-weight: 600;
-    text-decoration: none;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
 }
-.dropdown-menu button:hover, .dropdown-menu a:hover {
-    background: rgba(0, 230, 118, 0.15);
-    color: #00e676;
+.dropdown-menu button:hover {
+    background: rgba(230, 57, 70, 0.15);
+    color: #ff4d4d;
 }
-
 .wrap{
     display:grid;
     grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
@@ -192,7 +189,6 @@ html, body {
     min-height: 650px; 
     max-height: 800px;
 }
-
 @media(max-width:1100px), (max-height: 740px){
     body { overflow-y: auto; height: auto; display: block; }
     .container { height: auto; padding: 10px; }
@@ -219,8 +215,7 @@ html, body {
                     <i class="fa-solid fa-user" id="defaultAvatarIcon"></i>
                 </div>
                 <div class="dropdown-menu" id="userDropdown">
-                    <button id="authActionBtn">Login with Google</button>
-                    <a href="index.html?page=profile" id="profileLink" style="display: none;">My Profile</a>
+                    <button id="authActionBtn">Logout</button>
                 </div>
             </div>
         </div>
@@ -233,7 +228,6 @@ html, body {
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-// 🔥 UPDATED WITH CORRECT API KEY FROM YOUR LATEST SCREENSHOT
 const firebaseConfig = {
     apiKey: "AIzaSyDGJsSfxHi-DQhWulEV7rQsGumH4k3I_wY",
     authDomain: "italentbuddy-5225d.firebaseapp.com",
@@ -248,7 +242,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// Handle Dynamic Routing
 const urlParams = new URLSearchParams(window.location.search);
 let targetPage = (urlParams.get('page') || 'home').toLowerCase().trim();
 
@@ -289,65 +282,61 @@ fetch(cleanBaseRoute + fileNameToLoad)
             </div>`;
     });
 
-// Event Listeners for Dropdown Menu
 const avatarBtn = document.getElementById('avatarBtn');
 const userDropdown = document.getElementById('userDropdown');
 const authActionBtn = document.getElementById('authActionBtn');
 
+function triggerLogin() {
+    setPersistence(auth, browserLocalPersistence)
+        .then(() => {
+            return signInWithPopup(auth, provider);
+        })
+        .then((result) => {
+            console.log("Logged in:", result.user);
+        })
+        .catch((error) => {
+            console.error("Auth Error:", error);
+            alert("Login Error: " + error.message);
+        });
+}
+
 avatarBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
+    if (!auth.currentUser) {
+        triggerLogin();
+    } else {
+        userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
+    }
 });
 
 document.addEventListener('click', () => {
     userDropdown.style.display = 'none';
 });
 
-// Authentication Trigger
 authActionBtn.addEventListener('click', (e) => {
     e.stopPropagation();
-    if (!auth.currentUser) {
-        setPersistence(auth, browserLocalPersistence)
-            .then(() => {
-                return signInWithPopup(auth, provider);
-            })
-            .then((result) => {
-                console.log("Logged in successfully:", result.user);
-                userDropdown.style.display = 'none';
-            })
-            .catch((error) => {
-                console.error("Auth Error details:", error);
-                alert("Login Error: " + error.message);
-            });
-    } else {
+    if (auth.currentUser) {
         signOut(auth).then(() => {
             userDropdown.style.display = 'none';
         });
     }
 });
 
-// Global state monitoring
 onAuthStateChanged(auth, (user) => {
-    const profileLink = document.getElementById('profileLink');
-
     if (user) {
-        authActionBtn.innerText = "Logout";
-        profileLink.style.display = "block";
         if (user.photoURL) {
-            avatarBtn.innerHTML = `<img src="${user.photoURL}" alt="Profile" style="width:100%; height:100%; border-radius:50%;">`;
+            avatarBtn.innerHTML = `<img src="${user.photoURL}" alt="Profile">`;
         } else {
             avatarBtn.innerHTML = `<i class="fa-solid fa-user-check" style="color: #00e676;"></i>`;
         }
     } else {
-        authActionBtn.innerText = "Login with Google";
-        profileLink.style.display = "none";
+        userDropdown.style.display = 'none';
         avatarBtn.innerHTML = `<i class="fa-solid fa-user" id="defaultAvatarIcon"></i>`;
     }
 });
 </script>
 
 <script>
-// --- CANVAS BACKGROUND ANIMATION ---
 const canvas = document.getElementById('bg-canvas');
 const ctx = canvas.getContext('2d');
 let particles = [];
