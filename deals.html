@@ -1,0 +1,256 @@
+<style>
+.deals-page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 5px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.deals-page-container::-webkit-scrollbar {
+    display: none;
+}
+
+/* 📣 ONBOARDING HEADER BAR */
+.deals-cta-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(0, 230, 118, 0.04) 0%, rgba(4, 28, 28, 0.4) 100%);
+    border: 1px solid rgba(0, 230, 118, 0.15);
+    border-radius: 16px;
+    padding: 16px 24px;
+    width: 100%;
+}
+.deals-cta-text h3 {
+    margin: 0 0 4px 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+}
+.deals-cta-text p {
+    margin: 0;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+}
+.deals-btn {
+    background: #00e676;
+    color: #010707;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.3);
+    white-space: nowrap;
+}
+.deals-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(0, 230, 118, 0.5);
+}
+
+/* 🎯 FLEXIBLE DEALS GRID */
+.deals-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+}
+
+/* INDIVIDUAL FLEX DEAL CARD */
+.deal-card {
+    background: rgba(2, 14, 14, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 100%;
+}
+.deal-card:hover {
+    border-color: rgba(0, 230, 118, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 230, 118, 0.05);
+    transform: translateY(-4px);
+}
+
+/* 🖼️ IMAGE & NO-IMAGE HANDLER */
+.deal-image-area {
+    width: 100%;
+    height: 160px;
+    position: relative;
+    background: #021414;
+    overflow: hidden;
+}
+.deal-image-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+/* No-Image Fallback Style */
+.deal-no-image {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #021919 0%, #000a0a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+.deal-no-image i {
+    font-size: 32px;
+    color: rgba(0, 230, 118, 0.4);
+}
+
+/* CARD DETAILS */
+.deal-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+.deal-badge {
+    align-self: flex-start;
+    background: rgba(0, 230, 118, 0.1);
+    color: #00e676;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.deal-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 8px 0;
+}
+
+/* 🔒 TEXT LIMIT CLAMP: Taaki bada text layout na tode */
+.deal-desc {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+    margin: 0 0 20px 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Max 3 lines text dikhega */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex-grow: 1;
+}
+
+/* 🔗 APPLY BUTTON */
+.deal-apply-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #fff;
+    text-align: center;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: auto;
+}
+.deal-apply-btn:hover {
+    background: #fff;
+    color: #010707;
+    border-color: #fff;
+}
+
+/* Responsive breakdowns */
+@media(max-width: 1200px) { .deals-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media(max-width: 768px) { 
+    .deals-grid { grid-template-columns: 1fr; } 
+    .deals-cta-banner { flex-direction: column; gap: 16px; text-align: center; }
+}
+</style>
+
+<div class="deals-page-container">
+    <div class="deals-cta-banner">
+        <div class="deals-cta-text">
+            <h3>Have an exclusive deal, tool discount, or sponsorship offer?</h3>
+            <p>List your campaign or barter deal here so our listed creators can apply directly to your brand.</p>
+        </div>
+        <a href="#post-deal" class="deals-btn" onclick="alert('Form link for posting deals can be attached here!')">
+            <i class="fa-solid fa-plus" style="margin-right: 5px;"></i> POST A DEAL
+        </a>
+    </div>
+
+    <div class="deals-grid">
+        
+        <div class="deal-card">
+            <div class="deal-image-area">
+                <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=500&q=80" alt="Sponsorship">
+            </div>
+            <div class="deal-content">
+                <div class="deal-badge">Sponsorship</div>
+                <h4 class="deal-title">Zeta Gaming Mouse Barter</h4>
+                <p class="deal-desc">Looking for tech and gaming creators on YouTube with 50k+ subscribers. We will send our flagship mouse for a dedicated review video.</p>
+                <a href="https://wa.me/yournumber" target="_blank" class="deal-apply-btn">
+                    Apply Now <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 11px;"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="deal-card">
+            <div class="deal-image-area">
+                <div class="deal-no-image">
+                    <i class="fa-solid fa-rectangle-ad"></i>
+                    <span style="font-size: 11px; color: rgba(255,255,255,0.3);">NO MEDIA PROVIDED</span>
+                </div>
+            </div>
+            <div class="deal-content">
+                <div class="deal-badge">Paid Campaign</div>
+                <h4 class="deal-title">Fintech App Download Drive</h4>
+                <p class="deal-desc">Urgent requirement for finance and business content creators. Need 60-second integrated reel spots. Compensation is fixed + performance bonus per verified signup. High engagement rates required. No fake followers tracker will analyze analytics.</p>
+                <a href="https://forms.google.com" target="_blank" class="deal-apply-btn">
+                    Apply via Form <i class="fa-solid fa-file-lines" style="font-size: 11px;"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="deal-card">
+            <div class="deal-image-area">
+                <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80" alt="Saas Tool">
+            </div>
+            <div class="deal-content">
+                <div class="deal-badge">Affiliate / Tool</div>
+                <h4 class="deal-title">60% Off EditPro Tool</h4>
+                <p class="deal-desc">Exclusive lifetime discount coupon for registered community members.</p>
+                <a href="https://yourwebsite.com" target="_blank" class="deal-apply-btn">
+                    Claim Deal <i class="fa-solid fa-tag" style="font-size: 11px;"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="deal-card">
+            <div class="deal-image-area">
+                <div class="deal-no-image">
+                    <i class="fa-solid fa-bullhorn"></i>
+                    <span style="font-size: 11px; color: rgba(255,255,255,0.3);">NO MEDIA PROVIDED</span>
+                </div>
+            </div>
+            <div class="deal-content">
+                <div class="deal-badge">UGC Video</div>
+                <h4 class="deal-title">Skincare Brand Unboxing</h4>
+                <p class="deal-desc">Female lifestyle micro-influencers needed for unboxing aesthetic reels. Product will be sent free. Retainer options available for long-term sync.</p>
+                <a href="https://wa.me/yournumber" target="_blank" class="deal-apply-btn">
+                    Apply Now <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 11px;"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
