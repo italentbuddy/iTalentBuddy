@@ -12,15 +12,14 @@
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 html, body {
-    margin: 0;
-    padding: 0;
+    margin:0;
+    padding:0;
+    font-family:Inter,Arial,sans-serif;
+    background:#010707;
+    color:#fff;
+    overflow:hidden;
     height: 100vh;
-    background: #010707;
-    font-family: Inter, Arial, sans-serif;
-    color: #fff;
-    overflow-x: hidden;
-    /* 🔒 SCROLLBAR SHIFT FIX: Scrollbar aaye ya jaye, layout ko hile nahi dega */
-    scrollbar-gutter: stable; 
+    scrollbar-gutter: stable;
 }
 #bg-canvas {
     position: fixed;
@@ -37,16 +36,16 @@ html, body {
     to { opacity: 1; transform: translateY(0); filter: blur(0); }
 }
 
-/* 🔒 POSITION LOCK: Flex align-items center hataya taaki vertical shifting na ho */
+/* 🔒 LAYOUT POSITION LOCK: justify-content center se hata kar flex-start kiya taaki navbar top vertical position fix rakhe */
 .container{
     width: 96%;
     max-width: 1550px;
     margin: 0 auto;
-    padding: 2vh 10px;
+    padding-top: 24px; /* Top margin fix jo har page par absolute constant spacing dega */
     height: 96vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Hamesha top se shuru hoga, stable spacing ke saath */
+    justify-content: flex-start; 
     animation: screenReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .nav{
@@ -55,7 +54,7 @@ html, body {
     align-items:center;
     margin-bottom: 24px;
     height: 54px;
-    flex-shrink: 0; /* Navbar ko shrink hone se rokega */
+    flex-shrink: 0;
 }
 .logo{
     font-size:36px;
@@ -113,7 +112,7 @@ html, body {
     box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
 }
 
-/* 🔒 SIZE LOCK: Min aur max heights ko freeze kar diya hai */
+/* 🔒 BOX SIZE LOCK: Height transitions hataye taaki pure framework ka layout static rahe */
 .wrap{
     display:grid;
     grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
@@ -131,7 +130,7 @@ html, body {
 }
 
 @media(max-width:1100px), (max-height: 740px){
-    body { overflow-y: auto; height: auto; }
+    body { overflow-y: auto; height: auto; display: block; }
     .container { height: auto; padding: 10px; }
     .wrap { grid-template-columns: 1fr; max-height: none; min-height: auto; padding: 16px; }
 }
@@ -153,20 +152,21 @@ html, body {
 const urlParams = new URLSearchParams(window.location.search);
 let targetPage = (urlParams.get('page') || 'home').toLowerCase();
 
+// Global execution: Navbar har single condition par fetch aur render hoga sabse pehle!
+loadGoogleSheetData();
+
 if (targetPage === 'home') {
     document.getElementById('dynamic-wrapper').style.gridTemplateColumns = 'minmax(0, 1.35fr) minmax(0, 1fr)';
     fetch('home.html')
         .then(res => {
-            if(!res.ok) throw new Error('Home chunk missing');
+            if(!res.ok) throw new Error('Home template missing');
             return res.text();
         })
         .then(html => {
             document.getElementById('dynamic-wrapper').innerHTML = html;
-            loadGoogleSheetData();
         })
         .catch(err => {
             document.getElementById('dynamic-wrapper').innerHTML = `<div style="text-align:center; padding-top:150px; width: 100%;"><h2>Error loading Home</h2></div>`;
-            loadGoogleSheetData();
         });
 } else {
     document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
@@ -176,7 +176,6 @@ if (targetPage === 'home') {
             <h2 style="font-size: 32px; color: #00e676; margin-bottom: 10px;">${pageDisplayTitle}</h2>
             <p style="color: rgba(255,255,255,0.5); font-size: 16px;">This section is coming soon. We are building something awesome!</p>
         </div>`;
-    loadGoogleSheetData();
 }
 
 // --- CANVAS BACKGROUND ANIMATION ---
@@ -230,32 +229,33 @@ function animate() {
 init(); animate();
 
 // --- GOOGLE SHEETS DYNAMIC SYNC ---
-const CSV='https://docs.google.com/spreadsheets/d/e/2PACX-1vSlFHr4dfPT8yAXhybbYQb6NlHd_t3TKUimVWP0U5M7sfU_iQ6MZjavxkAqnF82VuCIygbI05_u9ge1/pub?output=csv';
-
 function loadGoogleSheetData() {
+    const CSV='https://docs.google.com/spreadsheets/d/e/2PACX-1vSlFHr4dfPT8yAXhybbYQb6NlHd_t3TKUimVWP0U5M7sfU_iQ6MZjavxkAqnF82VuCIygbI05_u9ge1/pub?output=csv';
     Papa.parse(CSV,{download:true,complete:r=>{
     const rows=r.data;
     
     const navContainer = document.getElementById('nav');
-    navContainer.innerHTML = ''; 
-    
-    for(let i=1; i<=10; i++){
-     if(rows[i]?.[0] && rows[i][0].trim() !== ""){
-      let a=document.createElement('a'); 
-      a.textContent=rows[i][0].trim(); 
-      
-      let cleanName = rows[i][0].trim().toLowerCase();
-      if(cleanName === "home") {
-          a.href = "index.html";
-      } else {
-          a.href = `index.html?page=${cleanName}`;
-      }
-      
-      if(cleanName === targetPage){ a.classList.add("active-nav"); }
-      navContainer.appendChild(a);
-     }
+    if(navContainer) {
+        navContainer.innerHTML = ''; 
+        for(let i=1; i<=10; i++){
+         if(rows[i]?.[0] && rows[i][0].trim() !== ""){
+          let a=document.createElement('a'); 
+          a.textContent=rows[i][0].trim(); 
+          
+          let cleanName = rows[i][0].trim().toLowerCase();
+          if(cleanName === "home") {
+              a.href = "index.html";
+          } else {
+              a.href = `index.html?page=${cleanName}`;
+          }
+          
+          if(cleanName === targetPage){ a.classList.add("active-nav"); }
+          navContainer.appendChild(a);
+         }
+        }
     }
     
+    // Baaki components check (Sirf home ke liye trigger)
     if(targetPage === 'home') {
         const statsBox = document.getElementById('stats');
         if(statsBox) {
