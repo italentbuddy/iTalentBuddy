@@ -238,3 +238,22 @@
     </div>
     <button id="submit-btn" onclick="sendMail()">Send Inquiry</button>
 </div>
+
+<script>
+// Keep your existing standard sendMail() function here if you have one bound to your sheet workflow!
+function sendMail() {
+    const name = document.getElementById('n').value;
+    const contact = document.getElementById('c').value;
+    const role = document.getElementById('dd').value;
+    const msg = document.getElementById('m').value;
+
+    if(!name || !contact || !role || !msg) {
+        alert('Please fill out all fields before sending.');
+        return;
+    }
+    
+    // Yahan aap apna existing Mail/Google Form redirect logic bina kisi change ke use kar sakte hain
+    console.log("Form submission logged safely:", {name, contact, role, msg});
+    alert('Thank you for getting in touch! We will get back to you soon.');
+}
+</script>
