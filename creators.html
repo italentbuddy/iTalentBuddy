@@ -5,7 +5,7 @@
     <div class="transparent-glass-header">
         <div class="header-text-block">
             <h1>Discover Ecosystem Creators</h1>
-            <p>Join the iTalentBuddy directory to instantly create and list your live profile card. Click the action button to link your account and showcase your talent directly on our ecosystem feed.</p>
+            <p>Yeh ek centralized ecosystem directory hai jahan aap "Join as Creator" par click karke, apne Google account se authorization complete karke apna customized profile card instantly list kar sakte hain taaki aapka card iTalentBuddy directory feed par visible ho sake.</p>
         </div>
         
         <div class="header-action-block">
@@ -20,7 +20,7 @@
             
             <div class="creator-card gender-male">
                 <div>
-                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"></div>
+                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Aarav"></div>
                     <div class="c-name">Aarav Verma</div>
                     <div class="c-handle">@aaravtech</div>
                     <div class="c-tag">DELHI NCR</div>
@@ -34,7 +34,7 @@
 
             <div class="creator-card gender-female">
                 <div>
-                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"></div>
+                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Ananya"></div>
                     <div class="c-name">Ananya Sharma</div>
                     <div class="c-handle">@ananya_st</div>
                     <div class="c-tag">MUMBAI</div>
@@ -48,7 +48,7 @@
 
             <div class="creator-card gender-female">
                 <div>
-                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"></div>
+                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Diya"></div>
                     <div class="c-name">Diya Kapoor</div>
                     <div class="c-handle">@diyavlogs</div>
                     <div class="c-tag">BANGALORE</div>
@@ -62,7 +62,7 @@
 
             <div class="creator-card gender-male">
                 <div>
-                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80"></div>
+                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Kabir"></div>
                     <div class="c-name">Kabir Singh</div>
                     <div class="c-handle">@kabirlive</div>
                     <div class="c-tag">PUNJAB</div>
@@ -76,7 +76,7 @@
 
             <div class="creator-card gender-female">
                 <div>
-                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80"></div>
+                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" alt="Ishita"></div>
                     <div class="c-name">Ishita Patel</div>
                     <div class="c-handle">@ishitafit</div>
                     <div class="c-tag">GUJARAT</div>
@@ -90,7 +90,7 @@
 
             <div class="creator-card gender-male">
                 <div>
-                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80"></div>
+                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80" alt="Rohan"></div>
                     <div class="c-name">Rohan Das</div>
                     <div class="c-handle">@rohanfinance</div>
                     <div class="c-tag">KOLKATA</div>
@@ -104,7 +104,7 @@
 
             <div class="creator-card gender-female">
                 <div>
-                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80"></div>
+                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80" alt="Meera"></div>
                     <div class="c-name">Meera Nair</div>
                     <div class="c-handle">@meera_cooks</div>
                     <div class="c-tag">KERALA</div>
@@ -118,7 +118,7 @@
 
             <div class="creator-card gender-male">
                 <div>
-                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80"></div>
+                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80" alt="Devansh"></div>
                     <div class="c-name">Devansh Joshi</div>
                     <div class="c-handle">@devcodez</div>
                     <div class="c-tag">PUNE</div>
@@ -130,7 +130,7 @@
                 </div>
             </div>
 
-            </div>
+        </div>
     </div>
 </div>
 
@@ -143,32 +143,28 @@ function initiateFirebaseGoogleAuth(event) {
     
     console.log("Firebase Google Authentication Stream Initiated...");
 
-    // Setup direct dynamic trigger hooks to link to your Firebase project application layout instance
     if (window.firebase && firebase.auth) {
         const googleAuthProviderInstance = new firebase.auth.GoogleAuthProvider();
         
         firebase.auth().signInWithPopup(googleAuthProviderInstance)
         .then((result) => {
-            // Success Path: Save variables & route to profile wizard dashboard
             const integratedUser = result.user;
             localStorage.setItem('currentUser', JSON.stringify({
                 uid: integratedUser.uid,
                 name: integratedUser.displayName || "Ecosystem Creator",
                 email: integratedUser.email
             }));
+            // Successful Logic: Redirect to onboarding form wizard
             window.location.href = 'onboarding.html';
         })
         .catch((error) => {
-            // Fail Path / Cancel Handlers: Gracefully return back to original state parameters safely
-            console.error("Firebase single sign-on handshaking sequence broken or rejected:", error.message);
-            alert("Google Sign-In process was interrupted. Reverting securely back to view stream dashboard feed.");
+            console.error("Firebase Auth cancelled or rejected:", error.message);
+            // Condition A fallback: Safe reversion on error/cancel without breaking view states
         });
     } else {
-        // Core Simulation Engine (Runs instantly if modular scripts are loading asynchronously)
-        console.warn("Direct Firebase Context script variables missing. Running internal automated auth routing system...");
+        console.warn("Firebase Auth Environment missing. Triggering secure simulation fallback...");
         
-        // Mocking secure Google Auth handshake response parameters setup
-        let simulatedPromptInput = confirm("Simulating Firebase Google Login Popup Sequence:\n\nClick OK to authenticate your Google Identity and proceed to setup page, or click Cancel to mock auth rejection failure.");
+        let simulatedPromptInput = confirm("Simulating Firebase Google Login Popup Sequence:\n\nClick OK to authenticate your Identity and proceed to setup page, or click Cancel to reject.");
         
         if (simulatedPromptInput) {
             localStorage.setItem('currentUser', JSON.stringify({
@@ -178,14 +174,14 @@ function initiateFirebaseGoogleAuth(event) {
             }));
             window.location.href = 'onboarding.html';
         } else {
-            console.log("Simulated authentication cancelled. Reverting context back.");
+            console.log("Simulated authentication cancelled. Securely reverted to viewport state.");
         }
     }
 }
 </script>
 
 <style>
-/* 🔑 PARENT BODY RESET - Completely locks screen outer window boundaries scrolling flow */
+/* 🔑 GLOBAL PAGE BOUNDARY CONTROL - Outer body constraints setup */
 html, body {
     overflow: hidden !important;
     height: 100vh !important;
@@ -193,41 +189,37 @@ html, body {
     padding: 0 !important;
 }
 
-/* 🔑 THE FLOATING CORNER BUTTON IS COMPLETELY WIPED OUT OUT SYSTEM-WIDE */
+/* ❌ ABSOLUTE REMOVAL OF BOTTOM FLOATING ACTIONS ACCORDING TO POINT 4 */
 .fixed, .add-user-btn, [class*="floating-btn"], [id*="floating"], 
-div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][style*="bottom"] {
+div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][style*="bottom"],
+.fixed-action-btn, [class*="-btn-floating"] {
     display: none !important;
     opacity: 0 !important;
     visibility: hidden !important;
     pointer-events: none !important;
 }
 
-/* Master Fixed Boundary Context Structure */
+/* Main Workspace Boundary Plate */
 .creators-master-workspace {
     position: relative !important;
     display: flex !important;
     flex-direction: column !important;
-    height: calc(100vh - 80px) !important; /* Calibrated clearance limit depth for workspace box layout */
+    height: calc(100vh - 40px) !important;
     padding: 0 24px !important;
     box-sizing: border-box !important;
 }
 
-/* 🪐 GLASSMORPHISM TRANSPARENT FLOATING HEADER PLATES DESIGN */
+/* 🪐 HEADER LAYOUT PROPERTIES */
 .transparent-glass-header {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
     padding: 16px 24px !important;
-    
-    /* True Transparent setup backdrop rule parameters */
     background: rgba(10, 15, 15, 0.45) !important;
     backdrop-filter: blur(16px) !important;
     -webkit-backdrop-filter: blur(16px) !important;
-    
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
     border-radius: 14px !important;
-    
-    /* Anchored fix system layers so card nodes loop behind fluidly */
     position: absolute !important;
     top: 10px !important;
     left: 24px !important;
@@ -243,7 +235,7 @@ div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][st
     color: #8899a6 !important; font-size: 13px !important; margin: 0 !important; line-height: 1.4 !important; max-width: 80% !important;
 }
 
-/* ⚡ CTA BUTTON CONTROLLER - Stable Fixed Content Rules Matrix */
+/* ⚡ CALL TO ACTION ACTION CONTROLLER - TEXT STABILITY (POINT 5) */
 #nativeGatekeeperCreatorBtn {
     background: #00e676 !important; 
     color: #000 !important; 
@@ -263,19 +255,19 @@ div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][st
 }
 #nativeGatekeeperCreatorBtn:hover {
     transform: scale(1.02) !important;
-    background: #00ff84 !important; /* Button transitions background fill safely without flipping text layers */
+    background: #00ff84 !important; /* Visual illumination without text alternation */
 }
 
-/* 🗂️ MAIN INTERNAL SCROLLABLE VIEWPORT SECTION CONTAINER BOX */
+/* 🗂️ MAIN INTERNAL SCROLLABLE VIEWPORT SECTION CONTAINER BOX (POINT 2) */
 .scrollable-cards-viewport {
     flex: 1 !important;
-    overflow-y: auto !important; /* Locks and handles full active scrollbar track vectors directly inside this bounding area box */
-    padding-top: 115px !important; /* Space buffer so elements map accurately right below glass header layout block */
+    overflow-y: auto !important; /* Smooth scroll context bound explicitly to this container */
+    padding-top: 115px !important; 
     padding-right: 4px !important;
     box-sizing: border-box !important;
 }
 
-/* Native Workspace Scrolling Bar Styling Profiles */
+/* Internal Custom Track Scrollbars */
 .scrollable-cards-viewport::-webkit-scrollbar {
     width: 6px;
 }
@@ -287,7 +279,7 @@ div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][st
     border-radius: 10px;
 }
 
-/* 🔑 EXACT DESIGN GRID SYSTEM MATRICES - STUCTURING EXACTLY 6 COMPLETE CARDS PER SINGLE ROW FLAT */
+/* 🔑 GRID SCHEDULER - EXACTLY 6 COMPLETELY FORMED COLUMNS PER ROW (POINT 3) */
 .creators-6col-grid {
     display: grid !important; 
     grid-template-columns: repeat(6, minmax(0, 1fr)) !important; 
@@ -297,7 +289,7 @@ div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][st
     box-sizing: border-box !important;
 }
 
-/* Creator Layout Blocks Styling Setup Elements */
+/* Individual Workspace Elements Matrix */
 .creator-card {
     background: rgba(255, 255, 255, 0.015) !important; 
     border: 1px solid rgba(255, 255, 255, 0.04) !important; 
@@ -319,7 +311,7 @@ div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][st
 .c-tag { display: inline-block !important; background: rgba(255,255,255,0.03) !important; padding: 2px 7px !important; border-radius: 20px !important; font-size: 8.5px !important; color: rgba(255,255,255,0.35) !important; margin-bottom: 8px !important; }
 .c-niche { font-size: 10.5px !important; font-weight: 700 !important; color: #00e676 !important; letter-spacing: 0.2px; }
 
-/* 📊 STATS LAYER - Social vectors setup details */
+/* Metrics Metrics Section Layer (Clean minimalist vector anchors) */
 .c-stats { 
     display: flex !important; 
     flex-direction: column !important;
@@ -336,7 +328,7 @@ div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][st
     color: #fff !important;
 }
 
-/* Default Platform Icons Configs (Clean minimalist uniform white output display state rules) */
+/* Default Platform Styling Parameters (Uniform Neutral White) */
 .platform-icon {
     font-size: 13px !important;
     color: #ffffff !important;
@@ -349,31 +341,31 @@ div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][st
     transition: color 0.2s ease !important;
 }
 
-/* 🪐 DYNAMIC TARGET HOVER RENDER ENGINE RULES */
+/* 🪐 DYNAMIC HOVER CONDITIONAL ACTION TRIGGERS (POINT 3) */
 
-/* A. General / Male Card Hover Trigger Metrics (Transform border wrap color to custom Green outline) */
+/* Male / Generic Card States Hover Outline -> Active Ecosystem Green */
 .creator-card.gender-male:hover {
     border-color: #00e676 !important;
     background: rgba(0, 230, 118, 0.01) !important;
 }
 
-/* B. Female Specific Card Hover Trigger Metrics (Transform border wrap color to pink outline) */
+/* Female Specific States Hover Outline -> Active Hot Pink */
 .creator-card.gender-female:hover {
     border-color: #ff4081 !important;
     background: rgba(255, 64, 129, 0.01) !important;
 }
 
-/* C. Dynamic Row Icon Color Flipped Shifts on Card Hover Actions */
+/* Dynamic Brand Platform Color Alternations on Hover Interaction */
 .creator-card:hover .yt-stat .platform-icon, 
 .creator-card:hover .yt-stat .stat-num {
-    color: #ff0000 !important; /* Converts vector icons to native YouTube Brand Red on mouse hover interaction */
+    color: #ff0000 !important; /* Native YouTube Brand Red */
 }
 .creator-card:hover .insta-stat .platform-icon, 
 .creator-card:hover .insta-stat .stat-num {
-    color: #f50057 !important; /* Converts vector icons to native Instagram Brand Vibrant Pink on mouse hover interaction */
+    color: #f50057 !important; /* Native Instagram Vibrant Pink */
 }
 
-/* Responsive view breakpoints fallbacks scaling adjustments templates rules */
+/* Responsive Overrides (Keeps layout intact down to small targets) */
 @media(max-width: 1440px) { .creators-6col-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; } }
 @media(max-width: 1024px) { .creators-6col-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; } }
 @media(max-width: 768px)  { .creators-6col-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
