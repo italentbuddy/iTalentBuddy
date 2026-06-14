@@ -45,6 +45,7 @@
     letter-spacing: 0.5px !important;
     white-space: nowrap !important;
     box-shadow: 0 4px 15px rgba(0, 230, 118, 0.05) !important;
+    transition: all 0.3s ease !important;
 }
 
 .join-itb-btn:hover {
@@ -76,12 +77,12 @@
 
 /* 🎴 CREATOR CARD STYLES */
 .creator-card {
-    background: rgba(255, 255, 255, 0.01) !important;
+    background: rgba(4, 16, 16, 0.2) !important;
     border: 1px solid rgba(255, 255, 255, 0.04) !important;
     border-radius: 20px !important;
     padding: 24px 20px !important;
     text-align: center !important;
-    background: rgba(4, 16, 16, 0.2) !important;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
 }
 
 /* Hover Effect for Standard/Male Cards */
@@ -94,7 +95,7 @@
 
 /* 🚺 FEMALE CARD SPECIAL STYLE */
 .creator-card.female-card {
-    border: 1px solid rgba(255, 105, 180, 0.35) !important; /* Premium Pink Border */
+    border: 1px solid rgba(255, 105, 180, 0.2) !important; /* Soft Pink Border */
 }
 .creator-card.female-card:hover {
     border-color: #ff69b4 !important;
@@ -115,6 +116,7 @@
     border-radius: 50% !important;
     object-fit: cover !important;
     border: 2px solid rgba(255, 255, 255, 0.08) !important;
+    transition: border-color 0.3s ease !important;
 }
 .creator-card:hover .creator-avatar { border-color: #00e676 !important; }
 .creator-card.female-card:hover .creator-avatar { border-color: #ff69b4 !important; }
@@ -136,6 +138,7 @@
     color: #fff !important; /* Default White Logo */
     text-decoration: none !important;
     font-size: 16px !important;
+    transition: all 0.3s ease !important;
 }
 
 /* Instagram Multi-gradient Color */
@@ -163,7 +166,7 @@
 <div class="creators-page-container">
     <div class="creators-header">
         <h2 id="dynamicHeading">ये सारे creators हैं ITB के पास।</h2>
-        <button class="join-itb-btn" id="joinItbBtn" onclick="handleCreatorLoginWorkflow()">Join ITB</button>
+        <button class="join-itb-btn" id="joinItbBtn" onclick="if(window.triggerGmailVerificationWorkflow){ window.triggerGmailVerificationWorkflow(); } else if(parent.triggerGmailVerificationWorkflow){ parent.triggerGmailVerificationWorkflow(); } else { alert('Firebase authentication model not loaded yet.'); }">Join ITB</button>
     </div>
 
     <div class="creators-grid-scroll">
@@ -227,14 +230,14 @@ const headingText = document.getElementById('dynamicHeading');
 const joinButton = document.getElementById('joinItbBtn');
 
 const hindiHeadingText = "ये सारे creators हैं ITB के पास।";
-const englishHoverText = "You can join ITB as a content creator or influencer, and your card will show up below.";
+const englishHoverText = "Join as Creator to build your profile card and directory presence instantly.";
 
 joinButton.addEventListener('mouseenter', () => {
     headingText.style.opacity = '0';
     setTimeout(() => {
         headingText.textContent = englishHoverText;
         headingText.style.fontSize = '15px';
-        headingText.style.color = 'rgba(255, 255, 255, 0.65)';
+        headingText.style.color = 'rgba(255, 255, 255, 0.6)';
         headingText.style.fontWeight = '500';
         headingText.style.opacity = '1';
     }, 150);
@@ -250,15 +253,4 @@ joinButton.addEventListener('mouseleave', () => {
         headingText.style.opacity = '1';
     }, 150);
 });
-
-// 🔐 FIREBASE GOOGLE LOGIN ROUTER LINK
-function handleCreatorLoginWorkflow() {
-    // यह फ़ंक्शन index.html में बने मुख्य 'window.triggerGmailVerificationWorkflow()' को सुरक्षित ट्रिगर करता है
-    if (typeof window.triggerGmailVerificationWorkflow === 'function') {
-        window.triggerGmailVerificationWorkflow();
-    } else {
-        console.error("Firebase auth handler missing in parent index frame context.");
-        alert("Authentication setup is loading... please refresh or try again in a moment.");
-    }
-}
 </script>
