@@ -4,15 +4,13 @@
     position: fixed;
     bottom: 30px;
     right: 30px;
-    z-index: 9999; /* Isko sabse upar rakhna hai taaki cards ke peeche na chupe */
+    z-index: 9999;
     display: flex;
     align-items: center;
     justify-content: center;
-    
-    /* Initial State: Just a small premium square icon */
     width: 54px;
     height: 54px;
-    background: rgba(11, 21, 19, 0.85);
+    background: rgba(11, 21, 19, 0.9);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(0, 230, 118, 0.35);
@@ -20,49 +18,32 @@
     cursor: pointer;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    
-    /* Smooth cubic-bezier transitions */
     transition: width 0.6s cubic-bezier(0.2, 1, 0.2, 1), 
                 height 0.6s cubic-bezier(0.2, 1, 0.2, 1), 
                 transform 0.4s ease, opacity 0.4s ease, border-radius 0.6s ease;
-    
-    /* 🔥 CINEMATIC EXPLOSION LOOP (Runs every 20 seconds) */
     animation: premiumBlastLoop 20s infinite ease-in-out;
 }
 
-/* Base Icon setup inside the square */
+/* Dynamic Width Changes for EDIT vs JOIN state on hover */
+.cta-floating-widget.state-join:hover {
+    width: 620px; 
+    height: 80px;
+    border-radius: 20px;
+    animation: none;
+}
+/* Condition 3: Agar edit profile hai toh kam text aur chota box khulega */
+.cta-floating-widget.state-edit:hover {
+    width: 340px; 
+    height: 70px;
+    border-radius: 16px;
+    animation: none;
+}
+
 .widget-icon {
     font-size: 18px;
     color: #00e676;
     position: absolute;
     transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Hidden Content Layer initially */
-.widget-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 550px; 
-    padding: 0 24px;
-    opacity: 0;
-    transform: translateX(20px);
-    transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.2, 1, 0.2, 1);
-    pointer-events: none;
-}
-
-/* ✨ ULTRA PREMIUM HOVER STATE (The Magic Unroll) */
-.cta-floating-widget:hover {
-    width: 620px; 
-    height: 80px;
-    border-radius: 20px;
-    border-color: rgba(0, 230, 118, 0.7);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 230, 118, 0.25);
-    background: rgba(8, 18, 16, 0.95);
-    animation: none; /* Hover par animation pause ho jayega */
 }
 
 .cta-floating-widget:hover .widget-icon {
@@ -70,35 +51,35 @@
     transform: scale(0.5) rotate(90deg);
 }
 
+/* Content Container Layers */
+.widget-content {
+    display: none; /* Controlled dynamically via JS */
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 24px;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.3s ease, transform 0.5s cubic-bezier(0.2, 1, 0.2, 1);
+    pointer-events: none;
+}
+
 .cta-floating-widget:hover .widget-content {
+    display: flex;
     opacity: 1;
     transform: translateX(0);
     pointer-events: auto;
 }
 
-/* Inner Text Styles */
 .cta-text-side {
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: left;
 }
-.cta-text-side h3 {
-    margin: 0 0 2px 0;
-    font-size: 15px;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: -0.2px;
-}
-.cta-text-side p {
-    margin: 0;
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.5);
-    max-width: 360px;
-    line-height: 1.4;
-}
+.cta-text-side h3 { margin: 0 0 2px 0; font-size: 14px; font-weight: 700; color: #fff; }
+.cta-text-side p { margin: 0; font-size: 11px; color: rgba(255, 255, 255, 0.5); max-width: 360px; }
 
-/* Premium Button inside Widget */
 .cta-btn {
     background: rgba(0, 230, 118, 0.08);
     color: #00e676;
@@ -107,213 +88,147 @@
     border-radius: 10px;
     font-size: 12px;
     font-weight: 800;
-    text-decoration: none;
+    cursor: pointer;
     white-space: nowrap;
-    letter-spacing: 0.5px;
     transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    cursor: pointer;
 }
-.cta-btn:hover {
-    background: #00e676;
-    color: #010707;
-    box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
-}
+.cta-btn:hover { background: #00e676; color: #010707; box-shadow: 0 0 20px rgba(0, 230, 118, 0.4); }
 
-/* 💥 KEYFRAME FOR THE BURST / BLAST ANIMATION EFFECT */
 @keyframes premiumBlastLoop {
-    0%, 92%, 100% {
-        transform: scale(1);
-        opacity: 1;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        border-color: rgba(0, 230, 118, 0.35);
-    }
-    94% {
-        transform: scale(1.2);
-        border-color: rgba(0, 230, 118, 1);
-        box-shadow: 0 0 30px rgba(0, 230, 118, 0.8);
-        opacity: 1;
-    }
-    95.5% {
-        transform: scale(2.5);
-        opacity: 0;
-        box-shadow: 0 0 60px rgba(0, 230, 118, 0);
-        border-color: rgba(0, 230, 118, 0);
-    }
-    96.5% {
-        transform: scale(0);
-        opacity: 0;
-    }
-    98% {
-        transform: scale(1);
-        opacity: 1;
-    }
+    0%, 92%, 100% { transform: scale(1); opacity: 1; }
+    94% { transform: scale(1.15); border-color: rgba(0, 230, 118, 1); }
+    95.5% { transform: scale(2.2); opacity: 0; }
+    96.5% { transform: scale(0); opacity: 0; }
+    98% { transform: scale(1); opacity: 1; }
 }
 
-/* 🔐 COMPULSORY SECURITY MODAL POPUP LAYER */
+/* 🔐 AUTH MODAL */
 .login-modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(2, 8, 8, 0.85);
-    backdrop-filter: blur(8px);
-    z-index: 10000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.4s ease;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(2, 8, 8, 0.85); backdrop-filter: blur(8px);
+    z-index: 10000; display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: all 0.4s ease;
 }
-.login-modal-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
-}
+.login-modal-overlay.active { opacity: 1; pointer-events: auto; }
 .login-modal-box {
-    background: #061110;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
-    border-radius: 24px;
-    padding: 32px;
-    width: 400px;
-    text-align: center;
-    position: relative;
-    transform: translateY(30px);
-    transition: all 0.4s cubic-bezier(0.2, 1, 0.2, 1);
+    background: #061110; border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px; padding: 32px; width: 380px; text-align: center;
 }
-.login-modal-overlay.active .login-modal-box {
-    transform: translateY(0);
-    border-color: rgba(0, 230, 118, 0.3);
-}
-.modal-close-btn {
-    position: absolute;
-    top: 16px;
-    right: 20px;
-    background: none;
-    border: none;
-    color: rgba(255,255,255,0.4);
-    font-size: 20px;
-    cursor: pointer;
-}
-.modal-close-btn:hover { color: #fff; }
 .google-login-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    background: #fff;
-    color: #000;
-    border: none;
-    padding: 12px 24px;
-    border-radius: 12px;
-    font-weight: 700;
-    font-size: 14px;
-    width: 100%;
-    margin-top: 24px;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(255,255,255,0.1);
-    transition: all 0.3s ease;
-}
-.google-login-btn:hover {
-    background: #f1f1f1;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 230, 118, 0.2);
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    background: #fff; color: #000; border: none; padding: 12px 24px;
+    border-radius: 12px; font-weight: 700; width: 100%; margin-top: 20px; cursor: pointer;
 }
 </style>
 
-<div class="cta-floating-widget" id="creatorWidget" style="display: none;">
+<div class="cta-floating-widget state-join" id="creatorWidget" style="display: none;">
     <div class="widget-icon" id="widgetIconLayer">
-        <i class="fa-solid fa-user-plus" style="font-size: 16px;"></i>
+        <i class="fa-solid fa-user-plus"></i>
     </div>
-    <div class="widget-content">
-        <div class="cta-text-side">
-            <h3 id="widgetTitleText">Are you a Digital Creator or Influencer?</h3>
-            <p>Get listed in India's next-gen ecosystem directory. Show your reach, get direct inquiries and sponsorships.</p>
+    
+    <div class="widget-content" id="widgetContentLayer">
         </div>
-        <button class="cta-btn" onclick="triggerCompulsoryGoogleLogin()" id="widgetMainBtn">
-            <i class="fa-solid fa-bolt"></i> <span id="btnDynamicText">JOIN AS CREATOR</span>
-        </button>
-    </div>
 </div>
 
 <div class="login-modal-overlay" id="googleLoginModal">
     <div class="login-modal-box">
-        <button class="modal-close-btn" onclick="closeLoginModal()">&times;</button>
-        <i class="fa-solid fa-shield-halved" style="font-size: 42px; color: #00e676; margin-bottom: 16px; display:block;"></i>
-        <h2 style="color: #fff; font-size: 20px; margin: 0 0 8px 0; font-weight: 700;">Google Authentication</h2>
-        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin: 0; line-height: 1.5;">To create or modify your official ecosystem creator profile page, verify your security identity with Google.</p>
-        
-        <button class="google-login-btn" onclick="simulateGoogleLoginSuccess()">
-            <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/web-24dp/copy_res2.png" style="width:18px; height:18px;" />
+        <h2 style="color: #fff; font-size: 20px; margin-bottom: 8px;">Google Authentication</h2>
+        <p style="color: rgba(255,255,255,0.6); font-size: 13px;">Please secure your identity to manage your ecosystem portfolio.</p>
+        <button class="google-login-btn" onclick="handleGoogleLogin()">
+            <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/web-24dp/copy_res2.png" style="width:18px;" />
             Continue with Google
         </button>
     </div>
 </div>
 
+
 <script>
-// Backend Auth Simulator Condition
-let userHasExistingCreatorAccount = false; 
+// IMPORTANT: Yeh function Firebase auth changes ko listen karega
+// Jab aap real Firebase implementation script embed karoge, isko wahan link kar dena
 
-function checkCreatorAccountStatus() {
-    const iconLayer = document.getElementById('widgetIconLayer');
-    const titleText = document.getElementById('widgetTitleText');
-    const btnText = document.getElementById('btnDynamicText');
+// Global User Variable State Holder
+let currentUser = null; 
+let hasCreatorProfile = false;
+
+// Simulated Execution Trigger (Jab Firebase se data check ho raha ho)
+// Aap real app me auth.onAuthStateChanged() lagayenge.
+function initEcosystemAuthCheck() {
+    // Check if user parameter is set in URL for testing
+    const urlParams = new URLSearchParams(window.location.search);
     
-    if(userHasExistingCreatorAccount) {
-        iconLayer.innerHTML = '<i class="fa-solid fa-user-gear" style="font-size: 16px;"></i>';
-        titleText.innerText = "Want to update your directory list?";
-        btnText.innerText = "EDIT PROFILE";
+    if(window.location.href.includes('page=creators')) {
+        document.getElementById('creatorWidget').style.display = 'flex';
+        evaluateWidgetUiState();
     } else {
-        iconLayer.innerHTML = '<i class="fa-solid fa-user-plus" style="font-size: 16px;"></i>';
-        titleText.innerText = "Are you a Digital Creator or Influencer?";
-        btnText.innerText = "JOIN AS CREATOR";
+        document.getElementById('creatorWidget').style.display = 'none';
     }
 }
 
-// 🚀 ROUTER CONTROLLER FOR WIDGET VISIBILITY
-function handleWidgetVisibilityBasedOnPage() {
-    const currentUrl = window.location.href;
+// Logic Rules Evaluator Engine (Handling Condition 1, 2, 3)
+function evaluateWidgetUiState() {
     const widget = document.getElementById('creatorWidget');
+    const iconLayer = document.getElementById('widgetIconLayer');
+    const contentLayer = document.getElementById('widgetContentLayer');
     
-    // Agar URL me page=creators hai tabhi widget dikhega, warna home page par nahi dikhega
-    if(currentUrl.includes('page=creators')) {
-        if(widget) widget.style.display = 'flex';
-        checkCreatorAccountStatus();
-    } else {
-        if(widget) widget.style.display = 'none';
+    if (!currentUser) {
+        // Condition 2: Not Logged In State
+        widget.className = "cta-floating-widget state-join";
+        iconLayer.innerHTML = '<i class="fa-solid fa-user-plus"></i>';
+        contentLayer.innerHTML = `
+            <div class="cta-text-side">
+                <h3>Are you a Digital Creator?</h3>
+                <p>Join India's next-gen ecosystem directory setup.</p>
+            </div>
+            <button class="cta-btn" onclick="openLoginModal()">JOIN NOW</button>
+        `;
+    } else if (currentUser && !hasCreatorProfile) {
+        // Condition 1: Logged In but Profile nahi hai -> Seedha Form page par bhejega, Bina login poocha
+        widget.className = "cta-floating-widget state-join";
+        iconLayer.innerHTML = '<i class="fa-solid fa-user-plus"></i>';
+        contentLayer.innerHTML = `
+            <div class="cta-text-side">
+                <h3>Welcome, Setup Profile!</h3>
+                <p>Complete your ecosystem listing immediately.</p>
+            </div>
+            <button class="cta-btn" onclick="navigateToOnboardingForm()">CREATE NOW</button>
+        `;
+    } else if (currentUser && hasCreatorProfile) {
+        // Condition 3: Logged In + Profile Active -> Baki sab gayab, Simple Edit Profile Layout!
+        widget.className = "cta-floating-widget state-edit";
+        iconLayer.innerHTML = '<i class="fa-solid fa-user-gear"></i>';
+        contentLayer.innerHTML = `
+            <div class="cta-text-side">
+                <h3>Profile Active</h3>
+            </div>
+            <button class="cta-btn" onclick="navigateToOnboardingForm('edit')">EDIT PROFILE</button>
+        `;
     }
 }
 
-// Global Triggers for Modal and Auth
-function triggerCompulsoryGoogleLogin() {
-    document.getElementById('googleLoginModal').classList.add('active');
-}
+// Open / Close Modals
+function openLoginModal() { document.getElementById('googleLoginModal').classList.add('active'); }
+function closeLoginModal() { document.getElementById('googleLoginModal').classList.remove('active'); }
 
-function closeLoginModal() {
-    document.getElementById('googleLoginModal').classList.remove('active');
-}
-
-function simulateGoogleLoginSuccess() {
-    alert("Google Authentication Successful!");
+// Handle Google Trigger Auth Action
+function handleGoogleLogin() {
+    // Firebase real action trigger: firebase.auth().signInWithPopup(provider)...
+    alert("Google Sign In Successful via Firebase!");
     closeLoginModal();
     
-    if(userHasExistingCreatorAccount) {
-        alert("Redirecting to profile configuration editor dashboard...");
-    } else {
-        alert("Verification success! Opening onboarding wizard...");
-        userHasExistingCreatorAccount = true;
-        checkCreatorAccountStatus();
-    }
+    // Simulating user login details mapping object
+    currentUser = { uid: "FCVNViHSusfdGZA5stijyFH", email: "thakur291291@gmail.com" };
+    
+    // Check if entry exists in firestore database collection 'creators'
+    // for this simulation, setting false first, then true if completed
+    evaluateWidgetUiState();
 }
 
-// URL modifications trace hook monitor karne ke liye intervals / listeners
-window.addEventListener('popstate', handleWidgetVisibilityBasedOnPage);
-window.addEventListener('DOMContentLoaded', handleWidgetVisibilityBasedOnPage);
+// Condition 4: Redirect to Dynamic Onboarding New URL Page Form Wizard
+function navigateToOnboardingForm(mode = 'new') {
+    // Is link ko aapne naye form structure page ya file path par navigate kar dena hai
+    window.location.href = `onboarding.html?mode=${mode}&uid=${currentUser ? currentUser.uid : ''}`;
+}
 
-// Run immediately to trap query params on refresh
-setTimeout(handleWidgetVisibilityBasedOnPage, 200);
+// Run checks on trigger loads
+window.addEventListener('DOMContentLoaded', initEcosystemAuthCheck);
 </script>
