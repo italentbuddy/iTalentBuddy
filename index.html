@@ -159,7 +159,8 @@ html, body {
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+// initializeFirestore और persistentLocalCache इम्पोर्ट किया गया ऑफलाइन बग को ठीक करने के लिए
+import { initializeFirestore, persistentLocalCache, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDGJsSfxHi-DQhWulEV7rQsGumH4k3I_wY",
@@ -173,8 +174,12 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
+
+// मजबूत कैश सिंकिंग इंजन के साथ Firestore इनिशियलाइजेशन (क्रॉस-पेज बग सोल्यूशन)
+const db = initializeFirestore(app, {
+    localCache: persistentLocalCache({})
+});
 
 const urlParams = new URLSearchParams(window.location.search);
 let targetPage = (urlParams.get('page') || 'home').toLowerCase().trim();
@@ -213,7 +218,7 @@ fetch(cleanBaseRoute + fileNameToLoad)
             </div>`;
     });
 
-// 🔐 GLOBAL FIREBASE AUTH WORKFLOW (Directly accessible by subpages)
+// 🔐 GLOBAL FIREBASE AUTH WORKFLOW (सुरक्षित टाइमआउट और एरर हैंडलिंग के साथ अपडेटेड)
 window.triggerGmailVerificationWorkflow = function() {
     console.log("Firebase Login Workflow Triggered from Index.");
     setPersistence(auth, browserLocalPersistence)
@@ -222,18 +227,25 @@ window.triggerGmailVerificationWorkflow = function() {
         })
         .then(async (result) => {
             const user = result.user;
+            console.log("Google Auth Success for UID:", user.uid);
             
-            // Check cross identity entry lock
-            const docRef = doc(db, "creators", user.uid);
-            const docSnap = await getDoc(docRef);
-            
-            if (docSnap.exists()) {
-                // Card already created -> Transfer state to Edit mode directly
-                window.location.href = `onboarding.html?mode=edit&uid=${user.uid}`;
-            } else {
-                // Completely new unique account profile
-                window.location.href = `onboarding.html?mode=new&uid=${user.uid}`;
-            }
+            // 1 सेकंड का सुरक्षित सिंकिंग डिले
+            setTimeout(async () => {
+                try {
+                    const docRef = doc(db, "creators", user.uid);
+                    const docSnap = await getDoc(docRef);
+                    
+                    if (docSnap.exists()) {
+                        window.location.href = `onboarding.html?mode=edit&uid=${user.uid}`;
+                    } else {
+                        window.location.href = `onboarding.html?mode=new&uid=${user.uid}`;
+                    }
+                } catch (firestoreError) {
+                    console.error("Firestore Error, safe redirecting to new registration:", firestoreError);
+                    // किसी भी नेटवर्क फ्लिकर के मामले में यूजर अटकेगा नहीं, सीधा ऑनबोर्डिंग पर ट्रांसफर होगा
+                    window.location.href = `onboarding.html?mode=new&uid=${user.uid}`;
+                }
+            }, 1000);
         })
         .catch((error) => {
             console.error("Auth Exception:", error);
