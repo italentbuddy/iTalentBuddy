@@ -7,7 +7,8 @@
     flex-direction: column !important;
     width: 100% !important;
     height: 100% !important;
-    overflow: hidden !important; /* पूरे पेज को स्क्रोल होने से रोकता है */
+    overflow: hidden !important; /* पूरे मुख्य पेज को स्क्रोल होने से रोकेगा */
+    position: relative !important;
 }
 
 /* 🏔️ TOP HEADER SECTION */
@@ -18,7 +19,9 @@
     padding-bottom: 24px !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
     flex-shrink: 0 !important;
-    height: 70px !important; /* हेडिंग चेंज होते वक्त लेआउट को हिलने से रोकने के लिए फिक्स्ड हाइट */
+    height: 70px !important;
+    position: relative !important;
+    z-index: 999 !important; /* हेडर को ग्रिड के ऊपर रखने के लिए */
 }
 
 .creators-header h2 {
@@ -32,8 +35,11 @@
     transition: opacity 0.2s ease, font-size 0.2s ease !important;
 }
 
-/* ⚡ "JOIN ITB" BUTTON STYLE */
+/* ⚡ "JOIN ITB" BUTTON STYLE (HOVER & CLICK FIXED) */
 .join-itb-btn {
+    position: relative !important;
+    z-index: 9999 !important; /* बटन सबसे टॉप लेयर पर रहेगा */
+    pointer-events: auto !important; /* माउस क्लिक और होवर को जबरन एक्टिवेट करेगा */
     background: rgba(0, 230, 118, 0.04) !important;
     color: #00e676 !important;
     padding: 12px 24px !important;
@@ -60,6 +66,8 @@
     overflow-y: auto !important; /* सिर्फ कार्ड वाला बड़ा बॉक्स स्क्रोल होगा */
     padding-top: 24px !important;
     padding-right: 4px !important;
+    position: relative !important;
+    z-index: 10 !important;
 }
 
 /* Custom Scrollbar */
@@ -135,7 +143,7 @@
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    color: #fff !important; /* Default White Logo */
+    color: #fff !important;
     text-decoration: none !important;
     font-size: 16px !important;
     transition: all 0.3s ease !important;
@@ -166,7 +174,7 @@
 <div class="creators-page-container">
     <div class="creators-header">
         <h2 id="dynamicHeading">ये सारे creators हैं ITB के पास।</h2>
-        <button class="join-itb-btn" id="joinItbBtn" onclick="if(window.triggerGmailVerificationWorkflow){ window.triggerGmailVerificationWorkflow(); } else if(parent.triggerGmailVerificationWorkflow){ parent.triggerGmailVerificationWorkflow(); } else { alert('Firebase authentication model not loaded yet.'); }">Join ITB</button>
+        <button class="join-itb-btn" id="joinItbBtn" onclick="if(window.triggerGmailVerificationWorkflow){ window.triggerGmailVerificationWorkflow(); } else if(parent.triggerGmailVerificationWorkflow){ parent.triggerGmailVerificationWorkflow(); } else { alert('Firebase authentication setup is not loaded yet.'); }">Join ITB</button>
     </div>
 
     <div class="creators-grid-scroll">
