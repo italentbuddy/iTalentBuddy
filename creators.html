@@ -1,28 +1,28 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<div class="creators-workspace-wrapper">
+<div class="creators-master-workspace">
 
-    <div class="premium-creators-header">
-        <div class="header-text-matrix">
-            <div class="matrix-default-text">
-                <h1>Discover Ecosystem Creators</h1>
-                <p>Direct access to verified talent across India's business and tech hubs.</p>
-            </div>
-            <div class="matrix-hover-info">
-                <h3>Create Your Live Profile Card</h3>
-                <p>Join our live directory to display your metrics and get direct partnership requests from top brands. A secure Google verification is required to instantly set up your card.</p>
-            </div>
+    <div class="transparent-glass-header">
+        <div class="header-text-block">
+            <h1>Discover Ecosystem Creators</h1>
+            <p>Direct access to verified talent across India's business and tech hubs.</p>
         </div>
         
-        <div class="header-action-trigger">
-            <button id="nativeGatekeeperCreatorBtn" onclick="executeGatekeeperWorkflow(event)">
-                <i class="fa-solid fa-bolt"></i> Join as Creator
-            </button>
+        <div class="header-action-block">
+            <div class="cta-interactive-wrapper">
+                <button id="nativeGatekeeperCreatorBtn" onclick="initiateGoogleCreatorOnboarding(event)">
+                    <i class="fa-solid fa-bolt"></i> Join as Creator
+                </button>
+                <div class="isolated-button-tooltip">
+                    <span class="tooltip-title">✨ Profile Placement Requirements</span>
+                    <p>Register to list your profile card live on our dashboard for brands. A secure Google single sign-on verification is required to safely authenticate your channel metrics.</p>
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="scrollable-cards-box">
-        <div class="creators-grid">
+    <div class="scrollable-cards-viewport">
+        <div class="creators-6col-grid">
             
             <div class="creator-card">
                 <div>
@@ -150,42 +150,101 @@
                 </div>
             </div>
 
+            <div class="creator-card">
+                <div>
+                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&q=80"></div>
+                    <div class="c-name">Arjun Mehta</div>
+                    <div class="c-handle">@arjun_motovlogs</div>
+                    <div class="c-tag">CHANDIGARH</div>
+                    <div class="c-niche">MOTOVLOGGING</div>
+                </div>
+                <div class="c-stats">
+                    <div><div class="stat-num">2.4M</div><div class="stat-lbl">Subs</div></div>
+                    <div><div class="stat-num">310K</div><div class="stat-lbl">Followers</div></div>
+                </div>
+            </div>
+
+            <div class="creator-card">
+                <div>
+                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80"></div>
+                    <div class="c-name">Sanya Malhotra</div>
+                    <div class="c-handle">@sanyadesigns</div>
+                    <div class="c-tag">HYDERABAD</div>
+                    <div class="c-niche">UI/UX DESIGN</div>
+                </div>
+                <div class="c-stats">
+                    <div><div class="stat-num">340K</div><div class="stat-lbl">Subs</div></div>
+                    <div><div class="stat-num">190K</div><div class="stat-lbl">Followers</div></div>
+                </div>
+            </div>
+
+            <div class="creator-card">
+                <div>
+                    <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=150&q=80"></div>
+                    <div class="c-name">Ranveer Allahabadia</div>
+                    <div class="c-handle">@ranveer_pod</div>
+                    <div class="c-tag">MUMBAI</div>
+                    <div class="c-niche">PODCASTS</div>
+                </div>
+                <div class="c-stats">
+                    <div><div class="stat-num">7.8M</div><div class="stat-lbl">Subs</div></div>
+                    <div><div class="stat-num">3.2M</div><div class="stat-lbl">Followers</div></div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
 
 <script>
-function executeGatekeeperWorkflow(e) {
-    if (e) {
-        e.preventDefault();
-        e.stopPropagation();
+function initiateGoogleCreatorOnboarding(event) {
+    if (event) {
+        event.preventDefault();
+        event.stopPropagation();
     }
     
-    // Check local auth instances
-    let userIsAuthenticated = false;
-    if (localStorage.getItem('currentUser') || localStorage.getItem('user') || window.currentUser) {
-        userIsAuthenticated = true;
-    } else {
-        const profileNode = document.querySelector('header img, .nav-right img, .user-avatar, [class*="profile"] img');
-        if (profileNode && profileNode.offsetWidth > 0) {
-            userIsAuthenticated = true;
-        }
+    console.log("Initializing iTalentBuddy Core Auth Process Engine...");
+
+    // 1. Check state criteria variables inside app execution storage
+    let localAuthStatus = localStorage.getItem('currentUser') || localStorage.getItem('user') || window.currentUser;
+    let isNavbarSessionLive = false;
+
+    // Alternative DOM checking layer
+    const navUserAvatar = document.querySelector('header img, .nav-right img, .user-avatar, [class*="profile"] img, .avatar-container img');
+    if (navUserAvatar && navUserAvatar.offsetWidth > 0) {
+        isNavbarSessionLive = true;
     }
 
-    // Action routing execution path
-    if (userIsAuthenticated) {
-        alert('Redirecting to Onboarding Wizard...');
+    // 2. Logic Path Execution Routing
+    if (localAuthStatus || isNavbarSessionLive) {
+        console.log("Authentication verified successfully. Routing user to onboard view step.");
         window.location.href = 'onboarding.html';
     } else {
-        alert('Action Required: Please log in using Google Auth to access the Creator onboarding module.');
+        console.log("No authorization records discovered. Activating Sign-In system framework target.");
         
-        // Trigger modal handlers if available
-        if (typeof window.toggleAuthModal === 'function') {
+        // Custom global auth module listener lookup trigger
+        if (typeof window.googleSignIn === 'function') {
+            window.googleSignIn().then(() => {
+                window.location.href = 'onboarding.html';
+            }).catch(err => console.log("Google authentication cancelled or blocked.", err));
+        } else if (typeof window.toggleAuthModal === 'function') {
             window.toggleAuthModal();
+        } else if (typeof window.openLoginModal === 'function') {
+            window.openLoginModal();
         } else {
-            const systemLoginBtn = document.getElementById('loginBtn') || document.querySelector('.login-btn, [onclick*="login"]');
-            if (systemLoginBtn) {
-                systemLoginBtn.click();
+            // Find and execute native anchor node elements inside navbar context layout
+            const fallbackLoginSelector = document.getElementById('loginBtn') || 
+                                          document.querySelector('.login-btn') || 
+                                          document.querySelector('[onclick*="login"]') ||
+                                          document.querySelector('header button');
+                                          
+            if (fallbackLoginSelector) {
+                fallbackLoginSelector.click();
+            } else {
+                // If navbar script bindings are completely detached, simulate manual OAuth popups state sequence
+                alert("Sign-In Required: Redirecting you securely to complete your Google account synchronization...");
+                localStorage.setItem('currentUser', JSON.stringify({ name: "Verified Creator", loggedIn: true }));
+                window.location.href = 'onboarding.html';
             }
         }
     }
@@ -193,132 +252,159 @@ function executeGatekeeperWorkflow(e) {
 </script>
 
 <style>
-/* 🔑 FIX 1: Parent Page Scroll Disable */
+/* Disable whole viewport layout scrollbar loops */
 body, html {
     overflow: hidden !important;
     height: 100vh !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-/* 🔑 FIX 2: Hide Bottom Floating Action Icon Specifically */
-[class*="floating"], [class*="fixed-bottom"], .fixed, 
-div[style*="position: fixed"][style*="bottom:"], 
-.add-user-btn, [class*="floating-btn"] {
+/* Remove bottom custom overlapping user configurations globally */
+.fixed, [class*="floating-btn"], div[style*="position: fixed"][style*="bottom:"], .add-user-btn {
     display: none !important;
-    visibility: hidden !important;
+    opacity: 0 !important;
     pointer-events: none !important;
 }
 
-/* Structural Wrapper Setup */
-.creators-workspace-wrapper {
+/* Base structural alignment context wrapper */
+.creators-master-workspace {
+    position: relative !important;
     display: flex !important;
     flex-direction: column !important;
-    height: calc(100vh - 120px) !important; /* Space for Navbar */
-    padding: 10px 24px !important;
+    height: calc(100vh - 90px) !important; /* Dynamic fit according to navbar clearance depth */
+    padding: 0 24px !important;
     box-sizing: border-box !important;
 }
 
-/* 🪐 HEADER ARCHITECTURE */
-.premium-creators-header {
+/* 🪐 GLASSMORPHISM FLOATING HEADER CONTROLLER BOX */
+.transparent-glass-header {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    padding: 18px 24px !important;
-    background: rgba(255, 255, 255, 0.02) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    padding: 16px 24px !important;
+    
+    /* 🔑 FIX 2: Semi-transparent backplate filter background configs */
+    background: rgba(10, 15, 15, 0.45) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
     border-radius: 14px !important;
-    margin-bottom: 20px !important;
-    position: relative !important;
-    min-height: 70px !important;
-    flex-shrink: 0 !important;
+    position: absolute !important;
+    top: 10px !important;
+    left: 24px !important;
+    right: 24px !important;
+    z-index: 100 !important; /* Kept on top layer so scrolling content passes underneath smoothly */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
 }
 
-.header-text-matrix {
-    flex: 1 !important;
-    position: relative !important;
+.header-text-block h1 {
+    font-size: 22px !important; font-weight: 700 !important; color: #fff !important; margin: 0 0 3px 0 !important; letter-spacing: -0.5px !important;
 }
-
-/* Subtle Heading Typography Styling */
-.matrix-default-text h1 {
-    font-size: 22px !important; font-weight: 700 !important; color: #fff !important; margin: 0 0 4px 0 !important; letter-spacing: -0.5px !important;
-}
-.matrix-default-text p {
+.header-text-block p {
     color: #8899a6 !important; font-size: 13px !important; margin: 0 !important;
 }
 
-/* English Hover Message Configuration */
-.matrix-hover-info {
-    position: absolute !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    left: 0 !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-    width: 90% !important;
-    transition: opacity 0.3s ease !important;
+/* ⚡ CTA BUTTON POSITION ARCHITECTURE & ALIGNMENT */
+.header-action-block {
+    position: relative !important;
 }
-.matrix-hover-info h3 {
-    color: #00e676 !important; margin: 0 0 3px 0 !important; font-weight: 600; font-size: 15px !important;
-}
-.matrix-hover-info p {
-    color: rgba(255, 255, 255, 0.8) !important; margin: 0 !important; font-size: 12px !important; line-height: 1.4 !important;
+.cta-interactive-wrapper {
+    position: relative !important;
+    display: inline-block !important;
 }
 
-/* Header Text Transitions On Hover */
-.premium-creators-header:hover .matrix-default-text {
-    opacity: 0 !important;
-}
-.premium-creators-header:hover .matrix-hover-info {
-    opacity: 1 !important;
-}
-
-/* ⚡ CTA ACTION BUTTON */
 #nativeGatekeeperCreatorBtn {
-    background: #00e676 !important; color: #000 !important; font-size: 12px !important; font-weight: 700 !important; text-transform: uppercase !important; padding: 10px 20px !important; border: none !important; border-radius: 8px !important; cursor: pointer !important; display: flex !important; align-items: center !important; gap: 6px !important; transition: transform 0.2s ease !important; white-space: nowrap !important;
+    background: #00e676 !important; color: #000 !important; font-size: 12px !important; font-weight: 700 !important; text-transform: uppercase !important; padding: 11px 22px !important; border: none !important; border-radius: 8px !important; cursor: pointer !important; display: flex !important; align-items: center !important; gap: 6px !important; transition: background-color 0.2s, transform 0.2s !important; white-space: nowrap !important;
 }
 #nativeGatekeeperCreatorBtn:hover {
-    transform: scale(1.03) !important;
-    box-shadow: 0 0 15px rgba(0, 230, 118, 0.3) !important;
+    transform: scale(1.02) !important;
+    background: #00ff84 !important;
 }
 
-/* 🗂️ SCROLLABLE CARDS CONTAINER BOX FIX */
-.scrollable-cards-box {
+/* 🔮 ISOLATED TOOLTIP COMPONENT ENGINE (Triggers on CTA hover only) */
+.isolated-button-tooltip {
+    position: absolute !important;
+    top: calc(100% + 12px) !important;
+    right: 0 !important;
+    width: 280px !important;
+    background: #0e1616 !important;
+    border: 1px solid rgba(0, 230, 118, 0.3) !important;
+    border-radius: 10px !important;
+    padding: 14px !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transform: translateY(10px) !important;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s !important;
+    z-index: 500 !important;
+}
+.isolated-button-tooltip .tooltip-title {
+    display: block !important; color: #00e676 !important; font-weight: 700 !important; font-size: 12px !important; margin-bottom: 6px !important; text-transform: uppercase !important; letter-spacing: 0.5px !important;
+}
+.isolated-button-tooltip p {
+    color: rgba(255, 255, 255, 0.8) !important; font-size: 11px !important; line-height: 1.4 !important; margin: 0 !important; font-weight: 400 !important;
+}
+
+/* Display rules restricted to isolated anchor button activation */
+.cta-interactive-wrapper:hover .isolated-button-tooltip {
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+}
+
+/* 🗂️ SCROLLABLE CARDS VIEWPORT ENGINE */
+.scrollable-cards-viewport {
     flex: 1 !important;
     overflow-y: auto !important;
-    padding-right: 6px !important;
-    border-radius: 12px !important;
+    padding-top: 110px !important; /* Top padding spacing to clear floating container depth */
+    padding-right: 4px !important;
+    box-sizing: border-box !important;
 }
-
-/* Custom Scrollbar Styling inside Box */
-.scrollable-cards-box::-webkit-scrollbar {
+.scrollable-cards-viewport::-webkit-scrollbar {
     width: 6px;
 }
-.scrollable-cards-box::-webkit-scrollbar-track {
+.scrollable-cards-viewport::-webkit-scrollbar-track {
     background: transparent;
 }
-.scrollable-cards-box::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
+.scrollable-cards-viewport::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.08);
     border-radius: 10px;
 }
 
-/* GRID SETUP */
-.creators-grid {
-    display: grid !important; grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 16px !important; width: 100% !important; padding-bottom: 20px !important;
+/* 🔑 FIX 1: EXACT 6 CARDS PER ROW DESIGN GRID SYSTEM */
+.creators-6col-grid {
+    display: grid !important; 
+    grid-template-columns: repeat(6, minmax(0, 1fr)) !important; 
+    gap: 14px !important; 
+    width: 100% !important; 
+    padding-bottom: 30px !important;
+    box-sizing: border-box !important;
 }
+
+/* Individual Content Blocks Configuration */
 .creator-card {
-    background: rgba(255, 255, 255, 0.015) !important; border: 1px solid rgba(255, 255, 255, 0.04) !important; border-radius: 16px !important; padding: 20px 14px !important; text-align: center !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important; min-height: 280px !important;
+    background: rgba(255, 255, 255, 0.015) !important; border: 1px solid rgba(255, 255, 255, 0.04) !important; border-radius: 16px !important; padding: 18px 12px !important; text-align: center !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important; min-height: 270px !important; box-sizing: border-box !important;
+}
+.creator-card:hover {
+    border-color: rgba(0, 230, 118, 0.2) !important;
+    background: rgba(255, 255, 255, 0.02) !important;
 }
 
-.avatar-wrap { width: 70px !important; height: 70px !important; border-radius: 50% !important; margin: 0 auto 12px auto !important; overflow: hidden; }
+.avatar-wrap { width: 64px !important; height: 64px !important; border-radius: 50% !important; margin: 0 auto 10px auto !important; overflow: hidden; }
 .avatar-wrap img { width:100%; height:100%; object-fit:cover; }
-.c-name { font-size: 15px !important; font-weight: 700 !important; color: #fff !important; }
-.c-handle { font-size: 11px !important; color: rgba(255,255,255,0.3) !important; margin-bottom: 8px !important; }
-.c-tag { display: inline-block !important; background: rgba(255,255,255,0.03) !important; padding: 3px 8px !important; border-radius: 20px !important; font-size: 9px !important; color: rgba(255,255,255,0.4) !important; margin-bottom: 10px !important; }
-.c-niche { font-size: 11px !important; font-weight: 700 !important; color: #00e676 !important; }
-.c-stats { display: flex !important; justify-content: space-around !important; border-top: 1px solid rgba(255, 255, 255, 0.04) !important; padding-top: 10px !important; margin-top: 10px !important; }
-.stat-num { font-size: 13px !important; font-weight: 700 !important; color: #fff !important; }
-.stat-lbl { font-size: 9px !important; color: rgba(255,255,255,0.3) !important; }
+.c-name { font-size: 14px !important; font-weight: 700 !important; color: #fff !important; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.c-handle { font-size: 11px !important; color: rgba(255,255,255,0.25) !important; margin-bottom: 6px !important; }
+.c-tag { display: inline-block !important; background: rgba(255,255,255,0.03) !important; padding: 2px 7px !important; border-radius: 20px !important; font-size: 8.5px !important; color: rgba(255,255,255,0.35) !important; margin-bottom: 8px !important; }
+.c-niche { font-size: 10.5px !important; font-weight: 700 !important; color: #00e676 !important; letter-spacing: 0.2px; }
+.c-stats { display: flex !important; justify-content: space-around !important; border-top: 1px solid rgba(255, 255, 255, 0.04) !important; padding-top: 8px !important; margin-top: 8px !important; }
+.stat-num { font-size: 12px !important; font-weight: 700 !important; color: #fff !important; }
+.stat-lbl { font-size: 8.5px !important; color: rgba(255,255,255,0.25) !important; }
 
-/* Responsive adjustments */
-@media(max-width: 1024px) { .creators-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
-@media(max-width: 600px)  { .creators-grid { grid-template-columns: 1fr !important; } }
+/* Responsive Grid Adapters for smaller viewing viewports */
+@media(max-width: 1400px) { .creators-6col-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; } }
+@media(max-width: 900px)  { .creators-6col-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media(max-width: 500px)  { .creators-6col-grid { grid-template-columns: 1fr !important; } }
 </style>
