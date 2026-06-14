@@ -4,7 +4,7 @@
         <p style="font-size: 14px; color: rgba(255, 255, 255, 0.5); font-weight: 500; line-height: 1.5;">Get listed in India's next-gen ecosystem directory. Show your reach, get direct inquiries and sponsorships.</p>
     </div>
     <div>
-        <button id="nativeGatekeeperCreatorBtn" onclick="handleCreatorButtonClick(event)" style="background: #00e676; color: #010707; font-size: 14px; font-weight: 800; text-transform: uppercase; padding: 16px 32px; border: none; border-radius: 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 0 25px rgba(0, 230, 118, 0.25); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;">
+        <button id="nativeGatekeeperCreatorBtn" onclick="executeGatekeeperWorkflow(event)" style="background: #00e676; color: #010707; font-size: 14px; font-weight: 800; text-transform: uppercase; padding: 16px 32px; border: none; border-radius: 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 0 25px rgba(0, 230, 118, 0.25); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;">
             <i class="fa-solid fa-bolt"></i> Join as Creator
         </button>
     </div>
@@ -98,36 +98,70 @@
 
 </div>
 
-<script>
-function handleCreatorButtonClick(e) {
-    e.preventDefault();
-    
-    // User login check session variables
-    const isLoggedIn = localStorage.getItem('currentUser') || 
-                       localStorage.getItem('user') || 
-                       window.currentUser || 
-                       (document.querySelector('header img, .nav-right img, [class*="profile"] img') !== null);
+<div id="floatingCreatorActionNode" onclick="executeGatekeeperWorkflow(event)" style="position: fixed; bottom: 24px; right: 24px; width: 48px; height: 48px; background: rgba(4, 28, 20, 0.8); border: 1px solid rgba(0, 230, 118, 0.3); border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 999999; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); transition: transform 0.2s ease, border-color 0.2s ease;">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00e676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <line x1="19" y1="8" x2="19" y2="14"></line>
+        <line x1="16" y1="11" x2="22" y2="11"></line>
+    </svg>
+</div>
 
-    if (isLoggedIn) {
+<script>
+function executeGatekeeperWorkflow(e) {
+    if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    // 🔒 1. MULTI-LAYER USER AUTH STATE DETECTOR
+    let userIsAuthenticated = false;
+
+    if (localStorage.getItem('currentUser') || localStorage.getItem('user') || window.currentUser) {
+        userIsAuthenticated = true;
+    } else {
+        // UI Check: Top Navbar scan for active user state indicators
+        const navbarAvatarImg = document.querySelector('header img, .nav-right img, [class*="profile"] img, .user-avatar');
+        const loginBtnMissing = !document.getElementById('loginBtn') && !document.querySelector('.login-btn, [onclick*="login"]');
+        
+        if ((navbarAvatarImg && navbarAvatarImg.offsetWidth > 0) || loginBtnMissing) {
+            userIsAuthenticated = true;
+        }
+    }
+
+    // 🚀 2. ROUTING LOGIC DIRECTION
+    if (userIsAuthenticated) {
+        // Logged In -> Direct Onboarding Frame Trigger
+        console.log("User verified. Transitioning to Onboarding...");
         window.location.href = 'onboarding.html';
     } else {
+        // Guest User -> Prompt warning and simulate navbar authenticators trigger click
         alert('⚠️ Please login first to register as a Creator on iTalentBuddy!');
         
-        // Execute global modals if present
-        if (typeof toggleAuthModal === 'function') {
-            toggleAuthModal();
-        } else if (typeof openLoginModal === 'function') {
-            openLoginModal();
+        // Modal function triggers fallbacks
+        if (typeof window.toggleAuthModal === 'function') {
+            window.toggleAuthModal();
+        } else if (typeof window.openLoginModal === 'function') {
+            window.openLoginModal();
         } else {
-            const loginBtn = document.getElementById('loginBtn') || document.querySelector('[onclick*="login"], .login-btn');
-            if (loginBtn) loginBtn.click();
+            const topNavbarLoginTarget = document.getElementById('loginBtn') || document.querySelector('[onclick*="login"], .login-btn, header button');
+            if (topNavbarLoginTarget) {
+                topNavbarLoginTarget.click();
+            } else {
+                console.error("Auth modal functions or navbar login elements not found.");
+            }
         }
     }
 }
 </script>
 
 <style>
-/* 🔥 HIGH-PERFORMANCE PREFERRED HOVER STYLINGS */
+/* 🔥 FLOATING HOVER & INTERACTION PARAMETERS */
+#floatingCreatorActionNode:hover {
+    transform: scale(1.08);
+    border-color: #00e676 !important;
+    background: rgba(4, 40, 28, 0.9) !important;
+}
 .creator-card { transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, background 0.3s ease; }
 .creator-card:hover { 
     transform: translateY(-6px); 
@@ -139,7 +173,7 @@ function handleCreatorButtonClick(e) {
     box-shadow: 0 0 35px rgba(0, 230, 118, 0.45) !important;
 }
 
-/* 📱 BREAKPOINT LAYOUT ADAPTABILITY ENGINE */
+/* 📱 ADAPTIVE BREAKPOINTS ENGINE */
 @media(max-width: 1400px) { .creators-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; } }
 @media(max-width: 950px)  { .creators-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
 @media(max-width: 550px)  { .creators-grid { grid-template-columns: 1fr !important; } }
