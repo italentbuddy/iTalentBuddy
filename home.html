@@ -126,12 +126,15 @@ input, select, textarea{
 input, select{height: 44px}
 textarea{ height: 95px; resize:none; }
 
+/* Dropdown styling patch for black background list items */
+select option { background: #0b1513; color: #fff; }
+
 /* Jab box select hoga toh Label neon green glow karega aur box thoda upar uthega */
 .form-group:focus-within { transform: translateY(-2px) scale(1.015); }
 .form-group:focus-within label { color: #00e676; text-shadow: 0 0 10px rgba(0, 230, 118, 0.5); transform: translateX(2px); }
 input:focus, select:focus, textarea:focus{ background: rgba(2, 22, 18, 0.7); border-color: #00e676; box-shadow: 0 0 20px rgba(0, 230, 118, 0.25); }
 
-/* 💎 Premium Button Animation Restored */
+/* 💎 Premium Button Animation */
 button{
     height: 48px; margin-top: auto; width:100%; border: 1px solid rgba(0, 230, 118, 0.4); border-radius:12px;
     background: rgba(0, 230, 118, 0.04); color: #00e676; font-size: 14px; font-weight: 800; text-transform: uppercase;
@@ -216,6 +219,7 @@ button:hover::before { left: 100%; }
     <div class="form-group">
         <label>Who Are You?</label>
         <select id="dd">
+            <option value="" disabled selected hidden>Choose your role...</option>
             <option value="Creator">Creator</option>
             <option value="Brand / Company">Brand / Company</option>
             <option value="Agency">Agency</option>
