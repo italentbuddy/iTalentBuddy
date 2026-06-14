@@ -1,24 +1,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<div style="margin-bottom: 32px;">
-    <h1 style="font-size: 42px; font-weight: 900; color: #fff; margin: 0 0 8px 0; letter-spacing: -1.5px; text-transform: uppercase;">
-        Discover Top <span style="color: #00e676; text-shadow: 0 0 20px rgba(0, 230, 118, 0.2);">Ecosystem Creators</span>
-    </h1>
-    <p style="color: #b0c0c0; font-size: 15px; margin: 0; font-weight: 500;">Direct access to vetted talent across India's premium tech, business, and creative hubs.</p>
-</div>
-
-<div class="creator-banner">
-    <div class="banner-text-wrapper">
-        <div class="default-content">
-            <h2>Are you a Digital Creator or Influencer?</h2>
-            <p>Get listed in India's next-gen ecosystem directory. Show your reach, get direct inquiries and sponsorships.</p>
+<div class="premium-creators-header">
+    <div class="header-text-matrix">
+        <div class="matrix-default-text">
+            <h1>Discover Top <span class="neon-glow-accent">Ecosystem Creators</span></h1>
+            <p>Direct access to verified talent across India's premium tech, business, and creative hubs.</p>
         </div>
-        <div class="hover-content">
-            <h3 style="color: #00e676; margin: 0 0 6px 0; font-weight: 800; font-size: 20px; letter-spacing: -0.3px;">🚀 Get Your Own Verified Card</h3>
-            <p style="color: #ffffff; margin: 0; font-size: 13px; font-weight: 600; line-height: 1.4;">Aap bhi apna live profile card yahan list kar sakte hain! Continue karne ke liye humara secure Gmail Auth setup complete karna hoga.</p>
+        <div class="matrix-hover-info">
+            <h3><i class="fa-solid fa-circle-info" style="color: #00e676;"></i> Create Your Live Creator Card</h3>
+            <p>Yahan register karke aap apna custom profile card live directory mein add kar sakte hain taaki brands aur agencies aapko directly approach kar sakein. Is process ko secure rakhne ke liye aage aapko apna Gmail account verify karna hoga.</p>
         </div>
     </div>
-    <div style="position: relative; z-index: 10;">
+    
+    <div class="header-action-trigger">
         <button id="nativeGatekeeperCreatorBtn" onclick="executeGatekeeperWorkflow(event)">
             <i class="fa-solid fa-bolt"></i> Join as Creator
         </button>
@@ -198,7 +192,7 @@
     <div class="creator-card">
         <div>
             <div class="avatar-wrap"><img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=150&q=80"></div>
-            <div class="c-name">Neha Kakkar</div>
+            <div class="c-name">Neha Kapoor</div>
             <div class="c-handle">@nehamusic</div>
             <div class="c-tag">DELHI</div>
             <div class="c-niche">MUSIC & COVERS</div>
@@ -281,15 +275,6 @@
 
 </div>
 
-<div id="floatingCreatorActionNode" onclick="executeGatekeeperWorkflow(event)">
-    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#00e676" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-        <circle cx="9" cy="7" r="4"></circle>
-        <line x1="19" y1="8" x2="19" y2="14"></line>
-        <line x1="16" y1="11" x2="22" y2="11"></line>
-    </svg>
-</div>
-
 <script>
 function executeGatekeeperWorkflow(e) {
     if (e) {
@@ -297,27 +282,25 @@ function executeGatekeeperWorkflow(e) {
         e.stopPropagation();
     }
     
-    // 🔒 MULTI-LAYER USER AUTH STATE DETECTOR
+    // Auth Checker Rule Engine
     let userIsAuthenticated = false;
-
     if (localStorage.getItem('currentUser') || localStorage.getItem('user') || window.currentUser) {
         userIsAuthenticated = true;
     } else {
         const navbarAvatarImg = document.querySelector('header img, .nav-right img, [class*="profile"] img, .user-avatar');
         const loginBtnMissing = !document.getElementById('loginBtn') && !document.querySelector('.login-btn, [onclick*="login"]');
-        
         if ((navbarAvatarImg && navbarAvatarImg.offsetWidth > 0) || loginBtnMissing) {
             userIsAuthenticated = true;
         }
     }
 
-    // 🚀 ROUTING LOGIC DIRECTION
+    // Process Flow Path Routing
     if (userIsAuthenticated) {
-        console.log("User verified. Transitioning to Onboarding...");
         window.location.href = 'onboarding.html';
     } else {
-        alert('⚠️ Please login first using Gmail to register as a Creator on iTalentBuddy!');
+        alert('⚠️ Please log in with your Gmail account to configure and launch your custom Creator Card!');
         
+        // Dynamic Auth Triggers
         if (typeof window.toggleAuthModal === 'function') {
             window.toggleAuthModal();
         } else if (typeof window.openLoginModal === 'function') {
@@ -327,7 +310,7 @@ function executeGatekeeperWorkflow(e) {
             if (topNavbarLoginTarget) {
                 topNavbarLoginTarget.click();
             } else {
-                console.error("Auth trigger elements not found.");
+                console.error("Authentication dialog component target missing.");
             }
         }
     }
@@ -335,89 +318,106 @@ function executeGatekeeperWorkflow(e) {
 </script>
 
 <style>
-/* 🎨 STRUCTURAL STYLING GRID & BANNERS */
-.creator-banner {
-    background: rgba(255, 255, 255, 0.015) !important; 
-    border: 1px solid rgba(255, 255, 255, 0.04) !important; 
-    border-radius: 24px !important; 
-    padding: 36px 40px !important; 
-    display: flex !important; 
-    justify-content: space-between !important; 
-    align-items: center !important; 
-    margin-bottom: 40px !important; 
+/* 🔑 FIX: Page scroll lock disabled */
+body, html {
+    overflow-y: auto !important;
+    height: auto !important;
+}
+
+/* 🪐 HEADER LAYOUT ARCHITECTURE */
+.premium-creators-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 24px 32px !important;
+    background: rgba(255, 255, 255, 0.015) !important;
+    border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    border-radius: 20px !important;
+    margin-bottom: 32px !important;
     gap: 24px !important;
     position: relative !important;
     overflow: hidden !important;
-    transition: border-color 0.4s ease, background 0.4s ease !important;
+    min-height: 90px !important;
 }
 
-.banner-text-wrapper {
+.header-text-matrix {
     flex: 1 !important;
     position: relative !important;
-    min-height: 72px !important; /* Prevents container layout shifting */
 }
 
-/* 🎪 CAROUSEL TEXT MATRIX INTERACTION ENGINE */
-.default-content, .hover-content {
+/* 🔮 ANIMATION MATRIX TRANSITIONS */
+.matrix-default-text, .matrix-hover-info {
     transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease !important;
 }
-.default-content {
+
+.matrix-default-text {
     opacity: 1 !important;
     transform: translateY(0) !important;
 }
-.default-content h2 {
-    font-size: 26px !important; font-weight: 800 !important; color: #fff !important; margin: 0 0 8px 0 !important; letter-spacing: -0.5px !important;
+.matrix-default-text h1 {
+    font-size: 28px !important; font-weight: 900 !important; color: #fff !important; margin: 0 0 6px 0 !important; letter-spacing: -1px !important; text-transform: uppercase !important;
 }
-.default-content p {
-    font-size: 14px !important; color: rgba(255, 255, 255, 0.5) !important; font-weight: 500 !important; margin: 0 !important; line-height: 1.5 !important;
+.matrix-default-text p {
+    color: #b0c0c0 !important; font-size: 14px !important; margin: 0 !important; font-weight: 500 !important;
+}
+.neon-glow-accent {
+    color: #00e676 !important; text-shadow: 0 0 20px rgba(0, 230, 118, 0.2) !important;
 }
 
-.hover-content {
+/* Hidden Informative Block State */
+.matrix-hover-info {
     position: absolute !important;
-    top: 0 !important;
+    top: 50% !important;
+    transform: translateY(-30%) !important;
     left: 0 !important;
     opacity: 0 !important;
-    transform: translateY(20px) !important;
     pointer-events: none !important;
+    width: 100% !important;
+}
+.matrix-hover-info h3 {
+    color: #00e676 !important; margin: 0 0 4px 0 !important; font-weight: 800 !important; font-size: 18px !important;
+}
+.matrix-hover-info p {
+    color: rgba(255, 255, 255, 0.85) !important; margin: 0 !important; font-size: 13px !important; font-weight: 500 !important; line-height: 1.4 !important;
 }
 
-/* ⚡ HOVER ENGINE: TRIPPED BY BANNER CONTAINER HOVER */
-.creator-banner:hover {
-    border-color: rgba(0, 230, 118, 0.25) !important;
+/* 🔥 ACTIONS TRIGGER: Fades text on action panel hover */
+.premium-creators-header:hover .matrix-default-text {
+    opacity: 0 !important;
+    transform: translateY(-30px) !important;
+}
+.premium-creators-header:hover .matrix-hover-info {
+    opacity: 1 !important;
+    transform: translateY(-50%) !important;
+}
+.premium-creators-header:hover {
+    border-color: rgba(0, 230, 118, 0.2) !important;
     background: rgba(0, 230, 118, 0.01) !important;
 }
-.creator-banner:hover .default-content {
-    opacity: 0 !important;
-    transform: translateY(-20px) !important;
-}
-.creator-banner:hover .hover-content {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-}
 
-/* 💎 BUTTON PARADIGM STYLES */
+/* ⚡ CALL TO ACTION BUTTON MECHANICS */
 #nativeGatekeeperCreatorBtn {
-    background: #00e676 !important; color: #010707 !important; font-size: 14px !important; font-weight: 800 !important; text-transform: uppercase !important; padding: 16px 32px !important; border: none !important; border-radius: 14px !important; cursor: pointer !important; display: flex !important; align-items: center !important; gap: 10px !important; box-shadow: 0 0 25px rgba(0, 230, 118, 0.2) !important; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s !important;
+    background: #00e676 !important; color: #010707 !important; font-size: 13px !important; font-weight: 800 !important; text-transform: uppercase !important; padding: 14px 28px !important; border: none !important; border-radius: 12px !important; cursor: pointer !important; display: flex !important; align-items: center !important; gap: 8px !important; box-shadow: 0 0 20px rgba(0, 230, 118, 0.15) !important; transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s !important; white-space: nowrap !important;
 }
 #nativeGatekeeperCreatorBtn:hover {
-    transform: scale(1.05) !important;
-    box-shadow: 0 0 35px rgba(0, 230, 118, 0.5) !important;
+    transform: scale(1.04) !important;
+    box-shadow: 0 0 30px rgba(0, 230, 118, 0.4) !important;
 }
 
-/* 🗂️ DIRECTORY CARDS STRUCTURE */
+/* 🗂️ DIRECTORY CARDS GRID SYSTEM */
 .creators-grid {
-    display: grid !important; grid-template-columns: repeat(6, minmax(0, 1fr)) !important; gap: 16px !important; width: 100% !important; padding-bottom: 80px !important;
+    display: grid !important; grid-template-columns: repeat(6, minmax(0, 1fr)) !important; gap: 16px !important; width: 100% !important; padding-bottom: 60px !important;
 }
 .creator-card {
     background: rgba(255, 255, 255, 0.015) !important; border: 1px solid rgba(255, 255, 255, 0.04) !important; border-radius: 20px !important; padding: 24px 16px !important; text-align: center !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important; min-height: 310px !important; transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, background 0.3s ease !important;
 }
 .creator-card:hover { 
     transform: translateY(-6px) !important; 
-    border-color: rgba(0, 230, 118, 0.3) !important;
+    border-color: rgba(0, 230, 118, 0.25) !important;
     background: rgba(255, 255, 255, 0.025) !important;
 }
 
-.avatar-wrap { width: 80px !important; height: 80px !important; border-radius: 50% !important; margin: 0 auto 16px auto !important; overflow: hidden !important; border: 2px solid rgba(0, 230, 118, 0.15) !important; }
+.avatar-wrap { width: 80px !important; height: 80px !important; border-radius: 50% !important; margin: 0 auto 16px auto !important; overflow: hidden !important; border: 2px solid rgba(0, 230, 118, 0.1) !important; }
 .avatar-wrap img { width:100% !important; height:100% !important; object-fit:cover !important; }
 .c-name { font-size: 16px !important; font-weight: 800 !important; color: #fff !important; margin-bottom: 2px !important; white-space: nowrap !important; overflow: hidden !important; text-overflow: ellipsis !important; }
 .c-handle { font-size: 11px !important; color: rgba(255, 255, 255, 0.3) !important; font-weight: 600 !important; margin-bottom: 12px !important; }
@@ -427,17 +427,13 @@ function executeGatekeeperWorkflow(e) {
 .stat-num { font-size: 14px !important; font-weight: 800 !important; color: #fff !important; }
 .stat-lbl { font-size: 9px !important; color: rgba(255,255,255,0.3) !important; font-weight: 700 !important; text-transform: uppercase !important; }
 
-#floatingCreatorActionNode {
-    position: fixed !important; bottom: 24px !important; right: 24px !important; width: 48px !important; height: 48px !important; background: rgba(4, 28, 20, 0.8) !important; border: 1px solid rgba(0, 230, 118, 0.3) !important; border-radius: 12px !important; display: flex !important; align-items: center !important; justify-content: center !important; cursor: pointer !important; z-index: 999999 !important; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important; transition: transform 0.2s ease, border-color 0.2s ease !important;
-}
-#floatingCreatorActionNode:hover {
-    transform: scale(1.08) !important;
-    border-color: #00e676 !important;
-    background: rgba(4, 40, 28, 0.9) !important;
-}
-
-/* 📱 RESPONSIVE LAYOUT ENGINE */
+/* 📱 BREAKPOINT MANAGER RESPONSIVENESS */
 @media(max-width: 1400px) { .creators-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; } }
-@media(max-width: 950px)  { .creators-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } .creator-banner { flex-direction: column !important; align-items: flex-start !important; padding: 28px !important; } }
+@media(max-width: 950px)  { 
+    .creators-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } 
+    .premium-creators-header { flex-direction: column !important; align-items: flex-start !important; padding: 24px !important; }
+    .matrix-hover-info { position: relative !important; top: 0 !important; transform: none !important; display: none; }
+    .premium-creators-header:hover .matrix-hover-info { display: block; transform: none !important; }
+}
 @media(max-width: 550px)  { .creators-grid { grid-template-columns: 1fr !important; } }
 </style>
