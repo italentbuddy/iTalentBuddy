@@ -1,29 +1,10 @@
 <style>
-/* Pure grid content area container with hidden scrollbar */
-.creators-page-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    padding-right: 5px;
-    position: relative;
-    
-    /* 🔒 HIDE SCROLLBAR TRACK BUT RETAIN INTERACTIVE SCROLLING */
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
-}
-.creators-page-container::-webkit-scrollbar {
-    display: none; /* Chrome, Safari and Opera */
-}
-
 /* 💎 PREMIUM FLOATING UNROLL WIDGET (Bottom Right) */
 .cta-floating-widget {
     position: fixed;
     bottom: 30px;
     right: 30px;
-    z-index: 2000;
+    z-index: 9999; /* Isko sabse upar rakhna hai taaki cards ke peeche na chupe */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -40,7 +21,7 @@
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     
-    /* Smooth cubic-bezier for rich transition physics */
+    /* Smooth cubic-bezier transitions */
     transition: width 0.6s cubic-bezier(0.2, 1, 0.2, 1), 
                 height 0.6s cubic-bezier(0.2, 1, 0.2, 1), 
                 transform 0.4s ease, opacity 0.4s ease, border-radius 0.6s ease;
@@ -49,7 +30,7 @@
     animation: premiumBlastLoop 20s infinite ease-in-out;
 }
 
-/* Base Icon setup inside the square with a clear join/plus intent */
+/* Base Icon setup inside the square */
 .widget-icon {
     font-size: 18px;
     color: #00e676;
@@ -65,7 +46,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 550px; /* Target expanded width */
+    width: 550px; 
     padding: 0 24px;
     opacity: 0;
     transform: translateX(20px);
@@ -75,22 +56,20 @@
 
 /* ✨ ULTRA PREMIUM HOVER STATE (The Magic Unroll) */
 .cta-floating-widget:hover {
-    width: 620px; /* Unrolls horizontally */
+    width: 620px; 
     height: 80px;
     border-radius: 20px;
     border-color: rgba(0, 230, 118, 0.7);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(0, 230, 118, 0.25);
     background: rgba(8, 18, 16, 0.95);
-    animation: none; /* Hover karne par auto-shining/burst pause ho jayega */
+    animation: none; /* Hover par animation pause ho jayega */
 }
 
-/* Hide initial icon on hover */
 .cta-floating-widget:hover .widget-icon {
     opacity: 0;
     transform: scale(0.5) rotate(90deg);
 }
 
-/* Show content on hover */
 .cta-floating-widget:hover .widget-content {
     opacity: 1;
     transform: translateX(0);
@@ -135,6 +114,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
+    cursor: pointer;
 }
 .cta-btn:hover {
     background: #00e676;
@@ -151,32 +131,28 @@
         border-color: rgba(0, 230, 118, 0.35);
     }
     94% {
-        /* Sudden Charge-up before explosion */
         transform: scale(1.2);
         border-color: rgba(0, 230, 118, 1);
         box-shadow: 0 0 30px rgba(0, 230, 118, 0.8);
         opacity: 1;
     }
     95.5% {
-        /* The Actual Fatna/Blast Explosion */
         transform: scale(2.5);
         opacity: 0;
         box-shadow: 0 0 60px rgba(0, 230, 118, 0);
         border-color: rgba(0, 230, 118, 0);
     }
     96.5% {
-        /* Instant stealth repositioning (invisible) */
         transform: scale(0);
         opacity: 0;
     }
     98% {
-        /* Clean fade-back into real life */
         transform: scale(1);
         opacity: 1;
     }
 }
 
-/* 🔐 COMPULSORY GOOGLE LOGIN MODAL POPUP */
+/* 🔐 COMPULSORY SECURITY MODAL POPUP LAYER */
 .login-modal-overlay {
     position: fixed;
     top: 0;
@@ -185,7 +161,7 @@
     height: 100%;
     background: rgba(2, 8, 8, 0.85);
     backdrop-filter: blur(8px);
-    z-index: 9999;
+    z-index: 10000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -247,238 +223,80 @@
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 230, 118, 0.2);
 }
-
-/* 🎴 CARDS GRID SYSTEM */
-.creators-grid {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 16px;
-    width: 100%;
-    padding-top: 10px;
-}
-
-/* INDIVIDUAL MINIMALIST CARD LOGIC */
-.creator-card {
-    background: rgba(2, 14, 14, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 20px 12px;
-    text-align: center;
-    position: relative;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-.creator-card:hover {
-    border-color: rgba(0, 230, 118, 0.3);
-    box-shadow: 0 10px 30px rgba(0, 230, 118, 0.05);
-    transform: translateY(-4px);
-}
-.img-frame {
-    width: 76px;
-    height: 76px;
-    border-radius: 50%;
-    margin: 0 auto 12px auto;
-    padding: 3px;
-    border: 1px solid rgba(255,255,255,0.1);
-}
-.img-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-.c-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.c-handle {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.4);
-    margin-bottom: 12px;
-}
-.c-tag {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 10px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-}
-.c-niche {
-    font-size: 11px;
-    font-weight: 700;
-    color: #00e676;
-    margin-bottom: 16px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
-.c-stats {
-    display: flex;
-    justify-content: space-around;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 12px;
-}
-.stat-box { text-align: center; }
-.stat-val { font-size: 14px; font-weight: 800; color: #fff; }
-.stat-lbl { font-size: 9px; color: rgba(255, 255, 255, 0.3); text-transform: uppercase; margin-top: 2px; }
-
-/* Responsive break-downs */
-@media(max-width: 1400px) { .creators-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media(max-width: 900px) { 
-    .creators-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } 
-    .cta-floating-widget:hover { width: calc(100% - 40px); right: 20px; left: 20px; }
-    .widget-content { width: 100%; padding: 0 12px; }
-}
-@media(max-width: 500px) { 
-    .creators-grid { grid-template-columns: 1fr; }
-    .cta-floating-widget:hover { height: auto; padding: 16px 0; }
-    .widget-content { flex-direction: column; gap: 10px; text-align: center; }
-    .cta-text-side { text-align: center; }
-}
 </style>
 
-<div class="creators-page-container">
-
-    <div class="cta-floating-widget" id="creatorWidget">
-        <div class="widget-icon" id="widgetIconLayer">
-            <i class="fa-solid fa-user-plus" style="font-size: 16px;"></i>
+<div class="cta-floating-widget" id="creatorWidget" style="display: none;">
+    <div class="widget-icon" id="widgetIconLayer">
+        <i class="fa-solid fa-user-plus" style="font-size: 16px;"></i>
+    </div>
+    <div class="widget-content">
+        <div class="cta-text-side">
+            <h3 id="widgetTitleText">Are you a Digital Creator or Influencer?</h3>
+            <p>Get listed in India's next-gen ecosystem directory. Show your reach, get direct inquiries and sponsorships.</p>
         </div>
+        <button class="cta-btn" onclick="triggerCompulsoryGoogleLogin()" id="widgetMainBtn">
+            <i class="fa-solid fa-bolt"></i> <span id="btnDynamicText">JOIN AS CREATOR</span>
+        </button>
+    </div>
+</div>
+
+<div class="login-modal-overlay" id="googleLoginModal">
+    <div class="login-modal-box">
+        <button class="modal-close-btn" onclick="closeLoginModal()">&times;</button>
+        <i class="fa-solid fa-shield-halved" style="font-size: 42px; color: #00e676; margin-bottom: 16px; display:block;"></i>
+        <h2 style="color: #fff; font-size: 20px; margin: 0 0 8px 0; font-weight: 700;">Google Authentication</h2>
+        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin: 0; line-height: 1.5;">To create or modify your official ecosystem creator profile page, verify your security identity with Google.</p>
         
-        <div class="widget-content">
-            <div class="cta-text-side">
-                <h3 id="widgetTitleText">Are you a Digital Creator or Influencer?</h3>
-                <p>Get listed in India's next-gen ecosystem directory. Show your reach, get direct inquiries and sponsorships.</p>
-            </div>
-            <button class="cta-btn" onclick="triggerCompulsoryGoogleLogin()" id="widgetMainBtn">
-                <i class="fa-solid fa-bolt"></i> <span id="btnDynamicText">JOIN AS CREATOR</span>
-            </button>
-        </div>
-    </div>
-
-    <div class="login-modal-overlay" id="googleLoginModal">
-        <div class="login-modal-box">
-            <button class="modal-close-btn" onclick="closeLoginModal()">&times;</button>
-            <i class="fa-solid fa-shield-halved" style="font-size: 42px; color: #00e676; margin-bottom: 16px; display:block;"></i>
-            <h2 style="color: #fff; font-size: 20px; margin: 0 0 8px 0; font-weight: 700;">Google Authentication</h2>
-            <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin: 0; line-height: 1.5;">To create or modify your official ecosystem creator profile page, verify your security identity with Google.</p>
-            
-            <button class="google-login-btn" onclick="simulateGoogleLoginSuccess()">
-                <img src="https://cdnjs.cloudflare.com/ajax/libs/gapi-script/1.2.3/index.js" onerror="this.src='https://fonts.gstatic.com/s/i/productlogos/googleg/v6/web-24dp/copy_res2.png'" style="width:18px; height:18px;" />
-                Continue with Google
-            </button>
-        </div>
-    </div>
-
-    <div class="creators-grid">
-        <div class="creator-card">
-            <div class="img-frame"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"></div>
-            <div class="c-name">Ananya Sharma</div><div class="c-handle">@ananya_st</div>
-            <div class="c-tag">Mumbai</div><div class="c-niche">Fashion & Styling</div>
-            <div class="c-stats">
-                <div class="stat-box"><div class="stat-val">1.2M</div><div class="stat-lbl">Subs</div></div>
-                <div class="stat-box"><div class="stat-val">450K</div><div class="stat-lbl">Followers</div></div>
-            </div>
-        </div>
-
-        <div class="creator-card">
-            <div class="img-frame"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"></div>
-            <div class="c-name">Aarav Verma</div><div class="c-handle">@aaravtech</div>
-            <div class="c-tag">Delhi NCR</div><div class="c-niche">Tech & AI</div>
-            <div class="c-stats">
-                <div class="stat-box"><div class="stat-val">3.5M</div><div class="stat-lbl">Subs</div></div>
-                <div class="stat-box"><div class="stat-val">120K</div><div class="stat-lbl">Followers</div></div>
-            </div>
-        </div>
-
-        <div class="creator-card">
-            <div class="img-frame"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"></div>
-            <div class="c-name">Diya Kapoor</div><div class="c-handle">@diyavlogs</div>
-            <div class="c-tag">Bangalore</div><div class="c-niche">Travel Vlogs</div>
-            <div class="c-stats">
-                <div class="stat-box"><div class="stat-val">850K</div><div class="stat-lbl">Subs</div></div>
-                <div class="stat-box"><div class="stat-val">620K</div><div class="stat-lbl">Followers</div></div>
-            </div>
-        </div>
-
-        <div class="creator-card">
-            <div class="img-frame"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80"></div>
-            <div class="c-name">Kabir Singh</div><div class="c-handle">@kabirlive</div>
-            <div class="c-tag">Punjab</div><div class="c-niche">Gaming & Esport</div>
-            <div class="c-stats">
-                <div class="stat-box"><div class="stat-val">2.1M</div><div class="stat-lbl">Subs</div></div>
-                <div class="stat-box"><div class="stat-val">95K</div><div class="stat-lbl">Followers</div></div>
-            </div>
-        </div>
-
-        <div class="creator-card">
-            <div class="img-frame"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80"></div>
-            <div class="c-name">Ishita Patel</div><div class="c-handle">@ishitafit</div>
-            <div class="c-tag">Gujarat</div><div class="c-niche">Health & Fitness</div>
-            <div class="c-stats">
-                <div class="stat-box"><div class="stat-val">410K</div><div class="stat-lbl">Subs</div></div>
-                <div class="stat-box"><div class="stat-val">890K</div><div class="stat-lbl">Followers</div></div>
-            </div>
-        </div>
-
-        <div class="creator-card">
-            <div class="img-frame"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80"></div>
-            <div class="c-name">Rohan Das</div><div class="c-handle">@rohanfinance</div>
-            <div class="c-tag">Kolkata</div><div class="c-niche">Finance & Biz</div>
-            <div class="c-stats">
-                <div class="stat-box"><div class="stat-val">1.7M</div><div class="stat-lbl">Subs</div></div>
-                <div class="stat-box"><div class="stat-val">340K</div><div class="stat-lbl">Followers</div></div>
-            </div>
-        </div>
+        <button class="google-login-btn" onclick="simulateGoogleLoginSuccess()">
+            <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/web-24dp/copy_res2.png" style="width:18px; height:18px;" />
+            Continue with Google
+        </button>
     </div>
 </div>
 
 <script>
-// Simulated user database condition
-// Agar user ne account bana rakha hai to isko true kar dena baad me back-end linkage ke time
+// Backend Auth Simulator Condition
 let userHasExistingCreatorAccount = false; 
 
-// Initial Dynamic UI Check
 function checkCreatorAccountStatus() {
     const iconLayer = document.getElementById('widgetIconLayer');
     const titleText = document.getElementById('widgetTitleText');
     const btnText = document.getElementById('btnDynamicText');
     
     if(userHasExistingCreatorAccount) {
-        // Switch to premium EDIT mode
         iconLayer.innerHTML = '<i class="fa-solid fa-user-gear" style="font-size: 16px;"></i>';
         titleText.innerText = "Want to update your directory list?";
         btnText.innerText = "EDIT PROFILE";
     } else {
-        // Standard fresh JOIN mode
         iconLayer.innerHTML = '<i class="fa-solid fa-user-plus" style="font-size: 16px;"></i>';
         titleText.innerText = "Are you a Digital Creator or Influencer?";
         btnText.innerText = "JOIN AS CREATOR";
     }
 }
 
-// Fire profile state check on load
-checkCreatorAccountStatus();
+// 🚀 ROUTER CONTROLLER FOR WIDGET VISIBILITY
+function handleWidgetVisibilityBasedOnPage() {
+    const currentUrl = window.location.href;
+    const widget = document.getElementById('creatorWidget');
+    
+    // Agar URL me page=creators hai tabhi widget dikhega, warna home page par nahi dikhega
+    if(currentUrl.includes('page=creators')) {
+        if(widget) widget.style.display = 'flex';
+        checkCreatorAccountStatus();
+    } else {
+        if(widget) widget.style.display = 'none';
+    }
+}
 
-// Open Compulsory Modal
+// Global Triggers for Modal and Auth
 function triggerCompulsoryGoogleLogin() {
     document.getElementById('googleLoginModal').classList.add('active');
 }
 
-// Close Modal
 function closeLoginModal() {
     document.getElementById('googleLoginModal').classList.remove('active');
 }
 
-// Simulated success actions
 function simulateGoogleLoginSuccess() {
     alert("Google Authentication Successful!");
     closeLoginModal();
@@ -486,10 +304,16 @@ function simulateGoogleLoginSuccess() {
     if(userHasExistingCreatorAccount) {
         alert("Redirecting to profile configuration editor dashboard...");
     } else {
-        alert("Verification success! Opening your onboarding form wizard...");
-        // Test karne ke liye toggle state dynamic kar dete hain click ke baad
+        alert("Verification success! Opening onboarding wizard...");
         userHasExistingCreatorAccount = true;
         checkCreatorAccountStatus();
     }
 }
+
+// URL modifications trace hook monitor karne ke liye intervals / listeners
+window.addEventListener('popstate', handleWidgetVisibilityBasedOnPage);
+window.addEventListener('DOMContentLoaded', handleWidgetVisibilityBasedOnPage);
+
+// Run immediately to trap query params on refresh
+setTimeout(handleWidgetVisibilityBasedOnPage, 200);
 </script>
