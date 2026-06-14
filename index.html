@@ -189,6 +189,40 @@ html, body {
     min-height: 650px; 
     max-height: 800px;
 }
+
+/* 🔮 DYNAMIC FLOATING WIDGET CUSTOM STYLES */
+.cta-floating-widget {
+    position: fixed !important;
+    bottom: 30px !important;
+    right: 30px !important;
+    z-index: 9999 !important;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    background: rgba(4, 16, 16, 0.95);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(0, 230, 118, 0.3);
+    border-radius: 14px;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1), height 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cta-floating-widget.state-join:hover { width: 480px; height: 76px; border-radius: 18px; }
+.cta-floating-widget.state-edit:hover { width: 230px; height: 62px; border-radius: 14px; }
+.widget-icon { font-size: 18px; color: #00e676; position: absolute; transition: all 0.3s ease; }
+.cta-floating-widget:hover .widget-icon { opacity: 0; transform: scale(0.6) rotate(90deg); }
+.widget-content { align-items: center; justify-content: space-between; width: 100%; padding: 0 18px; opacity: 0; transform: translateX(10px); transition: opacity 0.3s standard, transform 0.3s ease; pointer-events: none; display: flex; }
+.cta-floating-widget:hover .widget-content { opacity: 1; transform: translateX(0); pointer-events: auto; }
+.cta-text-side { display: flex; flex-direction: column; text-align: left; }
+.cta-text-side h3 { margin: 0; font-size: 13px; font-weight: 700; color: #fff; }
+.cta-text-side p { margin: 2px 0 0 0; font-size: 11px; color: rgba(255, 255, 255, 0.5); }
+.cta-btn { background: rgba(0, 230, 118, 0.08); color: #00e676; padding: 8px 14px; border: 1px solid rgba(0, 230, 118, 0.4); border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; white-space: nowrap; }
+.cta-btn:hover { background: #00e676; color: #010707; box-shadow: 0 0 15px rgba(0, 230, 118, 0.4); }
+
 @media(max-width:1100px), (max-height: 740px){
     body { overflow-y: auto; height: auto; display: block; }
     .container { height: auto; padding: 10px; }
@@ -224,9 +258,15 @@ html, body {
     <div class="wrap" id="dynamic-wrapper"></div>
 </div>
 
+<div class="cta-floating-widget state-join" id="creatorWidget">
+    <div class="widget-icon" id="widgetIconLayer"><i class="fa-solid fa-user-plus"></i></div>
+    <div id="widgetDynamicContainer" style="width: 100%;"></div>
+</div>
+
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged, signOut, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDGJsSfxHi-DQhWulEV7rQsGumH4k3I_wY",
@@ -240,6 +280,7 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 const provider = new GoogleAuthProvider();
 
 const urlParams = new URLSearchParams(window.location.search);
@@ -271,6 +312,7 @@ fetch(cleanBaseRoute + fileNameToLoad)
     })
     .then(html => {
         document.getElementById('dynamic-wrapper').innerHTML = html;
+        manageWidgetRendering();
     })
     .catch(err => {
         let pageDisplayTitle = targetPage.charAt(0).toUpperCase() + targetPage.slice(1);
@@ -280,6 +322,7 @@ fetch(cleanBaseRoute + fileNameToLoad)
                 <h2 style="font-size: 32px; color: #00e676; margin-bottom: 10px;">${pageDisplayTitle}</h2>
                 <p style="color: rgba(255,255,255,0.5); font-size: 16px;">This section is coming soon. We are building something awesome!</p>
             </div>`;
+        manageWidgetRendering();
     });
 
 const avatarBtn = document.getElementById('avatarBtn');
@@ -293,12 +336,21 @@ function triggerLogin() {
         })
         .then((result) => {
             console.log("Logged in:", result.user);
+            evaluateWidgetEcosystem(result.user);
         })
         .catch((error) => {
             console.error("Auth Error:", error);
             alert("Login Error: " + error.message);
         });
 }
+
+window.triggerLoginFromWidget = function() {
+    triggerLogin();
+};
+
+window.redirectToForm = function(mode, uid) {
+    window.location.href = `onboarding.html?mode=${mode}&uid=${uid}`;
+};
 
 avatarBtn.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -318,6 +370,7 @@ authActionBtn.addEventListener('click', (e) => {
     if (auth.currentUser) {
         signOut(auth).then(() => {
             userDropdown.style.display = 'none';
+            evaluateWidgetEcosystem(null);
         });
     }
 });
@@ -333,7 +386,72 @@ onAuthStateChanged(auth, (user) => {
         userDropdown.style.display = 'none';
         avatarBtn.innerHTML = `<i class="fa-solid fa-user" id="defaultAvatarIcon"></i>`;
     }
+    evaluateWidgetEcosystem(user);
 });
+
+/* 🧠 REAL-TIME MATRIX ECOSYSTEM STATE CONTROLLER FOR WIDGET */
+function manageWidgetRendering() {
+    const widget = document.getElementById('creatorWidget');
+    if (!widget) return;
+    if (targetPage === 'creators') {
+        widget.style.display = 'flex';
+        evaluateWidgetEcosystem(auth.currentUser);
+    } else {
+        widget.style.display = 'none';
+    }
+}
+
+async function evaluateWidgetEcosystem(user) {
+    const widget = document.getElementById('creatorWidget');
+    const iconLayer = document.getElementById('widgetIconLayer');
+    const container = document.getElementById('widgetDynamicContainer');
+    
+    if (!widget || !container) return;
+    if (targetPage !== 'creators') return;
+
+    if (!user) {
+        widget.className = "cta-floating-widget state-join";
+        if (iconLayer) iconLayer.innerHTML = '<i class="fa-solid fa-user-plus"></i>';
+        container.innerHTML = `
+            <div class="widget-content">
+                <div class="cta-text-side">
+                    <h3>Are you a Digital Creator?</h3>
+                    <p>Join India's next-gen ecosystem directory setup.</p>
+                </div>
+                <button class="cta-btn" onclick="triggerLoginFromWidget()">JOIN NOW</button>
+            </div>`;
+    } else {
+        try {
+            const docRef = doc(db, "creators", user.uid);
+            const docSnap = await getDoc(docRef);
+            
+            if (docSnap.exists()) {
+                widget.className = "cta-floating-widget state-edit";
+                if (iconLayer) iconLayer.innerHTML = '<i class="fa-solid fa-user-gear"></i>';
+                container.innerHTML = `
+                    <div class="widget-content">
+                        <div class="cta-text-side">
+                            <h3>Profile Dashboard</h3>
+                        </div>
+                        <button class="cta-btn" onclick="redirectToForm('edit', '${user.uid}')">EDIT PROFILE</button>
+                    </div>`;
+            } else {
+                widget.className = "cta-floating-widget state-join";
+                if (iconLayer) iconLayer.innerHTML = '<i class="fa-solid fa-user-plus"></i>';
+                container.innerHTML = `
+                    <div class="widget-content">
+                        <div class="cta-text-side">
+                            <h3>Welcome, Setup Profile!</h3>
+                            <p>Complete your platform listing data now.</p>
+                        </div>
+                        <button class="cta-btn" onclick="redirectToForm('new', '${user.uid}')">CREATE NOW</button>
+                    </div>`;
+            }
+        } catch (err) {
+            console.error("Firestore database check error:", err);
+        }
+    }
+}
 </script>
 
 <script>
@@ -376,15 +494,4 @@ function animate() {
             const dy = particles[i].y - particles[j].y;
             const dist = Math.sqrt(dx * dx + dy * dy);
             if (dist < maxDistance) {
-                ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
-                let alpha = (1 - (dist / maxDistance)) * 0.12;
-                ctx.strokeStyle = `rgba(0, 230, 118, ${alpha})`; ctx.lineWidth = 0.8; ctx.stroke();
-            }
-        }
-    }
-    requestAnimationFrame(animate);
-}
-init(); animate();
-</script>
-</body>
-</html>
+                ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].
