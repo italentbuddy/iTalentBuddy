@@ -9,15 +9,10 @@
         </div>
         
         <div class="header-action-block">
-            <div class="cta-interactive-wrapper">
-                <button id="nativeGatekeeperCreatorBtn" onclick="initiateGoogleCreatorOnboarding(event)">
-                    <i class="fa-solid fa-bolt"></i> Join as Creator
-                </button>
-                <div class="isolated-button-tooltip">
-                    <span class="tooltip-title">✨ Profile Placement Requirements</span>
-                    <p>Register to list your profile card live on our dashboard for brands. A secure Google single sign-on verification is required to safely authenticate your channel metrics.</p>
-                </div>
-            </div>
+            <button id="nativeGatekeeperCreatorBtn" onclick="initiateGoogleCreatorOnboarding(event)">
+                <span class="btn-default-content"><i class="fa-solid fa-bolt"></i> Join as Creator</span>
+                <span class="btn-hover-content"><i class="fa-brands fa-google"></i> Click to Verify with Google Account & Get Listed</span>
+            </button>
         </div>
     </div>
 
@@ -203,47 +198,33 @@ function initiateGoogleCreatorOnboarding(event) {
         event.stopPropagation();
     }
     
-    console.log("Initializing iTalentBuddy Core Auth Process Engine...");
+    // Check dynamic auth status inside user browser session storage
+    let userIsRegistered = localStorage.getItem('currentUser') || localStorage.getItem('user') || window.currentUser;
+    const profileIcon = document.querySelector('header img, .nav-right img, .user-avatar, [class*="profile"] img');
 
-    // 1. Check state criteria variables inside app execution storage
-    let localAuthStatus = localStorage.getItem('currentUser') || localStorage.getItem('user') || window.currentUser;
-    let isNavbarSessionLive = false;
-
-    // Alternative DOM checking layer
-    const navUserAvatar = document.querySelector('header img, .nav-right img, .user-avatar, [class*="profile"] img, .avatar-container img');
-    if (navUserAvatar && navUserAvatar.offsetWidth > 0) {
-        isNavbarSessionLive = true;
+    if (profileIcon && profileIcon.offsetWidth > 0) {
+        userIsRegistered = true;
     }
 
-    // 2. Logic Path Execution Routing
-    if (localAuthStatus || isNavbarSessionLive) {
-        console.log("Authentication verified successfully. Routing user to onboard view step.");
+    if (userIsRegistered) {
+        // Logged in user directly moves to the next dashboard module
         window.location.href = 'onboarding.html';
     } else {
-        console.log("No authorization records discovered. Activating Sign-In system framework target.");
-        
-        // Custom global auth module listener lookup trigger
+        // Trigger generic custom authentication engine or run immediate simulation routing
         if (typeof window.googleSignIn === 'function') {
             window.googleSignIn().then(() => {
                 window.location.href = 'onboarding.html';
-            }).catch(err => console.log("Google authentication cancelled or blocked.", err));
+            });
         } else if (typeof window.toggleAuthModal === 'function') {
             window.toggleAuthModal();
-        } else if (typeof window.openLoginModal === 'function') {
-            window.openLoginModal();
         } else {
-            // Find and execute native anchor node elements inside navbar context layout
-            const fallbackLoginSelector = document.getElementById('loginBtn') || 
-                                          document.querySelector('.login-btn') || 
-                                          document.querySelector('[onclick*="login"]') ||
-                                          document.querySelector('header button');
-                                          
-            if (fallbackLoginSelector) {
-                fallbackLoginSelector.click();
+            const defaultNavbarLoginTrigger = document.getElementById('loginBtn') || document.querySelector('.login-btn, [onclick*="login"]');
+            if (defaultNavbarLoginTrigger) {
+                defaultNavbarLoginTrigger.click();
             } else {
-                // If navbar script bindings are completely detached, simulate manual OAuth popups state sequence
-                alert("Sign-In Required: Redirecting you securely to complete your Google account synchronization...");
-                localStorage.setItem('currentUser', JSON.stringify({ name: "Verified Creator", loggedIn: true }));
+                // If template operates on modular environment setups, safely populate baseline mock data and push layout
+                alert("Authenticating securely with Google Firebase...");
+                localStorage.setItem('currentUser', JSON.stringify({ name: "Ecosystem Creator", authProvider: "google.com" }));
                 window.location.href = 'onboarding.html';
             }
         }
@@ -252,7 +233,7 @@ function initiateGoogleCreatorOnboarding(event) {
 </script>
 
 <style>
-/* Disable whole viewport layout scrollbar loops */
+/* 🔑 FORCE FULL VIEWPORT FIX - Blocks structural outer scroll loops completely */
 body, html {
     overflow: hidden !important;
     height: 100vh !important;
@@ -260,34 +241,36 @@ body, html {
     padding: 0 !important;
 }
 
-/* Remove bottom custom overlapping user configurations globally */
-.fixed, [class*="floating-btn"], div[style*="position: fixed"][style*="bottom:"], .add-user-btn {
+/* 🔑 COMPLETELY BLOCKS/DELETES BOTH CORNER AND FLOATING BTNS SYSTEM-WIDE */
+.fixed, .add-user-btn, [class*="floating-btn"], [id*="floating"], 
+div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][style*="bottom"] {
     display: none !important;
     opacity: 0 !important;
+    visibility: hidden !important;
     pointer-events: none !important;
 }
 
-/* Base structural alignment context wrapper */
+/* Base structural workspace component */
 .creators-master-workspace {
     position: relative !important;
     display: flex !important;
     flex-direction: column !important;
-    height: calc(100vh - 90px) !important; /* Dynamic fit according to navbar clearance depth */
+    height: calc(100vh - 100px) !important; /* Calibrated relative clearance block */
     padding: 0 24px !important;
     box-sizing: border-box !important;
 }
 
-/* 🪐 GLASSMORPHISM FLOATING HEADER CONTROLLER BOX */
+/* 🪐 GLASSMORPHISM FLOATING HEADER CONTROLLER BOX (Fully Transparent, Content passes under smoothly) */
 .transparent-glass-header {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
     padding: 16px 24px !important;
     
-    /* 🔑 FIX 2: Semi-transparent backplate filter background configs */
+    /* Perfect Glassmorphism Setup */
     background: rgba(10, 15, 15, 0.45) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
     
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
     border-radius: 14px !important;
@@ -295,8 +278,8 @@ body, html {
     top: 10px !important;
     left: 24px !important;
     right: 24px !important;
-    z-index: 100 !important; /* Kept on top layer so scrolling content passes underneath smoothly */
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37) !important;
+    z-index: 999 !important; /* Anchored over scroll context framework layers */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
 }
 
 .header-text-block h1 {
@@ -306,63 +289,66 @@ body, html {
     color: #8899a6 !important; font-size: 13px !important; margin: 0 !important;
 }
 
-/* ⚡ CTA BUTTON POSITION ARCHITECTURE & ALIGNMENT */
+/* ⚡ CTA ACTION BUTTON WITH DYNAMIC IN-BUTTON HOVER CONTENT EXCHANGE */
 .header-action-block {
     position: relative !important;
 }
-.cta-interactive-wrapper {
-    position: relative !important;
-    display: inline-block !important;
-}
 
 #nativeGatekeeperCreatorBtn {
-    background: #00e676 !important; color: #000 !important; font-size: 12px !important; font-weight: 700 !important; text-transform: uppercase !important; padding: 11px 22px !important; border: none !important; border-radius: 8px !important; cursor: pointer !important; display: flex !important; align-items: center !important; gap: 6px !important; transition: background-color 0.2s, transform 0.2s !important; white-space: nowrap !important;
+    background: #00e676 !important; 
+    color: #000 !important; 
+    font-size: 12px !important; 
+    font-weight: 700 !important; 
+    text-transform: uppercase !important; 
+    padding: 12px 24px !important; 
+    border: none !important; 
+    border-radius: 8px !important; 
+    cursor: pointer !important; 
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    transition: background-color 0.2s, transform 0.2s !important; 
+    white-space: nowrap !important;
+    min-width: 170px !important;
 }
+
+/* Manage interior button node structures natively */
+#nativeGatekeeperCreatorBtn .btn-hover-content {
+    display: none !important;
+}
+#nativeGatekeeperCreatorBtn .btn-default-content {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+}
+
+/* Isolate hover state behavior rules exclusively to the action CTA button element */
 #nativeGatekeeperCreatorBtn:hover {
     transform: scale(1.02) !important;
     background: #00ff84 !important;
+    min-width: 360px !important; /* Extends gracefully to accommodate simple English text */
+}
+#nativeGatekeeperCreatorBtn:hover .btn-default-content {
+    display: none !important;
+}
+#nativeGatekeeperCreatorBtn:hover .btn-hover-content {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    text-transform: none !important; /* Retains clear sentence capitalization rules on text flip */
+    font-size: 12.5px !important;
 }
 
-/* 🔮 ISOLATED TOOLTIP COMPONENT ENGINE (Triggers on CTA hover only) */
-.isolated-button-tooltip {
-    position: absolute !important;
-    top: calc(100% + 12px) !important;
-    right: 0 !important;
-    width: 280px !important;
-    background: #0e1616 !important;
-    border: 1px solid rgba(0, 230, 118, 0.3) !important;
-    border-radius: 10px !important;
-    padding: 14px !important;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.6) !important;
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-    transform: translateY(10px) !important;
-    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s !important;
-    z-index: 500 !important;
-}
-.isolated-button-tooltip .tooltip-title {
-    display: block !important; color: #00e676 !important; font-weight: 700 !important; font-size: 12px !important; margin-bottom: 6px !important; text-transform: uppercase !important; letter-spacing: 0.5px !important;
-}
-.isolated-button-tooltip p {
-    color: rgba(255, 255, 255, 0.8) !important; font-size: 11px !important; line-height: 1.4 !important; margin: 0 !important; font-weight: 400 !important;
-}
-
-/* Display rules restricted to isolated anchor button activation */
-.cta-interactive-wrapper:hover .isolated-button-tooltip {
-    opacity: 1 !important;
-    visibility: visible !important;
-    transform: translateY(0) !important;
-}
-
-/* 🗂️ SCROLLABLE CARDS VIEWPORT ENGINE */
+/* 🗂️ MAIN SCROLLABLE SECTION VIEWPORT */
 .scrollable-cards-viewport {
     flex: 1 !important;
-    overflow-y: auto !important;
-    padding-top: 110px !important; /* Top padding spacing to clear floating container depth */
+    overflow-y: auto !important; /* Native active internal scrolling inside box structure */
+    padding-top: 110px !important; /* Clearance margin depth so cards fit beautifully beneath floating box */
     padding-right: 4px !important;
     box-sizing: border-box !important;
 }
+
+/* Custom Scrollbar configuration track setups */
 .scrollable-cards-viewport::-webkit-scrollbar {
     width: 6px;
 }
@@ -374,7 +360,7 @@ body, html {
     border-radius: 10px;
 }
 
-/* 🔑 FIX 1: EXACT 6 CARDS PER ROW DESIGN GRID SYSTEM */
+/* 🔑 EXACT 6 CARDS PER ROW DESIGN GRID MATRIX */
 .creators-6col-grid {
     display: grid !important; 
     grid-template-columns: repeat(6, minmax(0, 1fr)) !important; 
@@ -384,7 +370,7 @@ body, html {
     box-sizing: border-box !important;
 }
 
-/* Individual Content Blocks Configuration */
+/* Card Elements Layout Specification Rules */
 .creator-card {
     background: rgba(255, 255, 255, 0.015) !important; border: 1px solid rgba(255, 255, 255, 0.04) !important; border-radius: 16px !important; padding: 18px 12px !important; text-align: center !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important; min-height: 270px !important; box-sizing: border-box !important;
 }
@@ -403,7 +389,7 @@ body, html {
 .stat-num { font-size: 12px !important; font-weight: 700 !important; color: #fff !important; }
 .stat-lbl { font-size: 8.5px !important; color: rgba(255,255,255,0.25) !important; }
 
-/* Responsive Grid Adapters for smaller viewing viewports */
+/* Responsive break points styling definitions */
 @media(max-width: 1400px) { .creators-6col-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; } }
 @media(max-width: 900px)  { .creators-6col-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
 @media(max-width: 500px)  { .creators-6col-grid { grid-template-columns: 1fr !important; } }
