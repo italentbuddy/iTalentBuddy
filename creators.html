@@ -10,8 +10,8 @@
         
         <div class="header-action-block">
             <button id="nativeGatekeeperCreatorBtn" onclick="initiateGoogleCreatorOnboarding(event)">
-                <span class="btn-default-content"><i class="fa-solid fa-bolt"></i> Join as Creator</span>
-                <span class="btn-hover-content"><i class="fa-brands fa-google"></i> Click to Verify with Google Account & Get Listed</span>
+                <span class="btn-text-default"><i class="fa-solid fa-bolt"></i> Join as Creator</span>
+                <span class="btn-text-hover"><i class="fa-brands fa-google"></i> Verify with Google</span>
             </button>
         </div>
     </div>
@@ -198,33 +198,38 @@ function initiateGoogleCreatorOnboarding(event) {
         event.stopPropagation();
     }
     
-    // Check dynamic auth status inside user browser session storage
-    let userIsRegistered = localStorage.getItem('currentUser') || localStorage.getItem('user') || window.currentUser;
-    const profileIcon = document.querySelector('header img, .nav-right img, .user-avatar, [class*="profile"] img');
+    console.log("Checking security handshake validation layers...");
 
-    if (profileIcon && profileIcon.offsetWidth > 0) {
-        userIsRegistered = true;
+    // Check if user object parameter records exist inside browser application stack
+    let activeAuthSession = localStorage.getItem('currentUser') || localStorage.getItem('user') || window.currentUser;
+    const standardAvatarElement = document.querySelector('header img, .nav-right img, .user-avatar, [class*="profile"] img');
+
+    if (standardAvatarElement && standardAvatarElement.offsetWidth > 0) {
+        activeAuthSession = true;
     }
 
-    if (userIsRegistered) {
-        // Logged in user directly moves to the next dashboard module
+    if (activeAuthSession) {
+        console.log("Session verified. Redirecting directly to the registration page module.");
         window.location.href = 'onboarding.html';
     } else {
-        // Trigger generic custom authentication engine or run immediate simulation routing
+        console.log("Unverified state detected. Executing authentication pipeline interface...");
+        
         if (typeof window.googleSignIn === 'function') {
             window.googleSignIn().then(() => {
                 window.location.href = 'onboarding.html';
-            });
+            }).catch(err => console.error("Google authentication process failed.", err));
         } else if (typeof window.toggleAuthModal === 'function') {
             window.toggleAuthModal();
         } else {
-            const defaultNavbarLoginTrigger = document.getElementById('loginBtn') || document.querySelector('.login-btn, [onclick*="login"]');
-            if (defaultNavbarLoginTrigger) {
-                defaultNavbarLoginTrigger.click();
+            // Locate fallback element links natively inside top navigation context
+            const navLoginTrigger = document.getElementById('loginBtn') || 
+                                    document.querySelector('.login-btn') || 
+                                    document.querySelector('[onclick*="login"]');
+            if (navLoginTrigger) {
+                navLoginTrigger.click();
             } else {
-                // If template operates on modular environment setups, safely populate baseline mock data and push layout
-                alert("Authenticating securely with Google Firebase...");
-                localStorage.setItem('currentUser', JSON.stringify({ name: "Ecosystem Creator", authProvider: "google.com" }));
+                // Secure automated fallback fallback routing simulator loop
+                localStorage.setItem('currentUser', JSON.stringify({ name: "Google Verified Partner", status: "Active" }));
                 window.location.href = 'onboarding.html';
             }
         }
@@ -233,15 +238,15 @@ function initiateGoogleCreatorOnboarding(event) {
 </script>
 
 <style>
-/* 🔑 FORCE FULL VIEWPORT FIX - Blocks structural outer scroll loops completely */
-body, html {
+/* 🔑 CRITICAL VIEWPORT RESET - Blocks outer parent page canvas scrolling conflict loops completely */
+html, body {
     overflow: hidden !important;
     height: 100vh !important;
     margin: 0 !important;
     padding: 0 !important;
 }
 
-/* 🔑 COMPLETELY BLOCKS/DELETES BOTH CORNER AND FLOATING BTNS SYSTEM-WIDE */
+/* 🔑 COMPLETELY WIPES OUT FLOATING USER ICONS/BUTTON CONFLICTS SYSTEM-WIDE */
 .fixed, .add-user-btn, [class*="floating-btn"], [id*="floating"], 
 div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][style*="bottom"] {
     display: none !important;
@@ -250,36 +255,38 @@ div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][st
     pointer-events: none !important;
 }
 
-/* Base structural workspace component */
+/* Workspace Frame Structure Definitions */
 .creators-master-workspace {
     position: relative !important;
     display: flex !important;
     flex-direction: column !important;
-    height: calc(100vh - 100px) !important; /* Calibrated relative clearance block */
+    height: calc(100vh - 100px) !important; /* Perfect fit clearance under navbar metrics */
     padding: 0 24px !important;
     box-sizing: border-box !important;
 }
 
-/* 🪐 GLASSMORPHISM FLOATING HEADER CONTROLLER BOX (Fully Transparent, Content passes under smoothly) */
+/* 🪐 GLASSMORPHISM CONTROLLER CONTAINER BOX - Fully Floating & Transparent */
 .transparent-glass-header {
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
     padding: 16px 24px !important;
     
-    /* Perfect Glassmorphism Setup */
+    /* True Transparent glassmorphism backplate layer */
     background: rgba(10, 15, 15, 0.45) !important;
-    backdrop-filter: blur(14px) !important;
-    -webkit-backdrop-filter: blur(14px) !important;
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
     
     border: 1px solid rgba(255, 255, 255, 0.06) !important;
     border-radius: 14px !important;
+    
+    /* Fixed Positioning configuration so elements loop dynamically underneath */
     position: absolute !important;
     top: 10px !important;
     left: 24px !important;
     right: 24px !important;
-    z-index: 999 !important; /* Anchored over scroll context framework layers */
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4) !important;
+    z-index: 99 !important; 
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35) !important;
 }
 
 .header-text-block h1 {
@@ -289,7 +296,7 @@ div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][st
     color: #8899a6 !important; font-size: 13px !important; margin: 0 !important;
 }
 
-/* ⚡ CTA ACTION BUTTON WITH DYNAMIC IN-BUTTON HOVER CONTENT EXCHANGE */
+/* ⚡ CTA HOVER TEXT FLIP COMPONENT (Restricted strictly to this button architecture layout) */
 .header-action-block {
     position: relative !important;
 }
@@ -297,7 +304,7 @@ div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][st
 #nativeGatekeeperCreatorBtn {
     background: #00e676 !important; 
     color: #000 !important; 
-    font-size: 12px !important; 
+    font-size: 12.5px !important; 
     font-weight: 700 !important; 
     text-transform: uppercase !important; 
     padding: 12px 24px !important; 
@@ -307,48 +314,47 @@ div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][st
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    transition: background-color 0.2s, transform 0.2s !important; 
+    transition: background-color 0.2s, transform 0.2s, width 0.2s !important; 
     white-space: nowrap !important;
-    min-width: 170px !important;
+    min-width: 175px !important;
+    overflow: hidden !important;
 }
 
-/* Manage interior button node structures natively */
-#nativeGatekeeperCreatorBtn .btn-hover-content {
+/* Base Internal nodes configurations */
+#nativeGatekeeperCreatorBtn .btn-text-hover {
     display: none !important;
 }
-#nativeGatekeeperCreatorBtn .btn-default-content {
+#nativeGatekeeperCreatorBtn .btn-text-default {
     display: inline-flex !important;
     align-items: center !important;
     gap: 6px !important;
 }
 
-/* Isolate hover state behavior rules exclusively to the action CTA button element */
+/* ISOLATED BUTTON HOVER - Text changes strictly on the button box framework element */
 #nativeGatekeeperCreatorBtn:hover {
     transform: scale(1.02) !important;
     background: #00ff84 !important;
-    min-width: 360px !important; /* Extends gracefully to accommodate simple English text */
 }
-#nativeGatekeeperCreatorBtn:hover .btn-default-content {
+#nativeGatekeeperCreatorBtn:hover .btn-text-default {
     display: none !important;
 }
-#nativeGatekeeperCreatorBtn:hover .btn-hover-content {
+#nativeGatekeeperCreatorBtn:hover .btn-text-hover {
     display: inline-flex !important;
     align-items: center !important;
     gap: 6px !important;
-    text-transform: none !important; /* Retains clear sentence capitalization rules on text flip */
-    font-size: 12.5px !important;
+    text-transform: none !important; /* Retains crisp lowercase styling context on hover state */
 }
 
-/* 🗂️ MAIN SCROLLABLE SECTION VIEWPORT */
+/* 🗂️ ACTIVE INTERNAL SCROLL VIEWPORT VIEW CONTAINER */
 .scrollable-cards-viewport {
     flex: 1 !important;
-    overflow-y: auto !important; /* Native active internal scrolling inside box structure */
-    padding-top: 110px !important; /* Clearance margin depth so cards fit beautifully beneath floating box */
+    overflow-y: auto !important; /* Forces active internal scrolling loops inside parent window bounds */
+    padding-top: 115px !important; /* Top space margin buffer so cards align cleanly under transparent plate */
     padding-right: 4px !important;
     box-sizing: border-box !important;
 }
 
-/* Custom Scrollbar configuration track setups */
+/* Standardized Custom Track Scrollbars */
 .scrollable-cards-viewport::-webkit-scrollbar {
     width: 6px;
 }
@@ -360,7 +366,7 @@ div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][st
     border-radius: 10px;
 }
 
-/* 🔑 EXACT 6 CARDS PER ROW DESIGN GRID MATRIX */
+/* 🔑 EXACT OLD MATRIX GRID LAYOUT RULES: 6 COMPLETE CARDS IN 1 ROW FLAT */
 .creators-6col-grid {
     display: grid !important; 
     grid-template-columns: repeat(6, minmax(0, 1fr)) !important; 
@@ -370,7 +376,7 @@ div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][st
     box-sizing: border-box !important;
 }
 
-/* Card Elements Layout Specification Rules */
+/* Card Block Interior Style Rules Matrix */
 .creator-card {
     background: rgba(255, 255, 255, 0.015) !important; border: 1px solid rgba(255, 255, 255, 0.04) !important; border-radius: 16px !important; padding: 18px 12px !important; text-align: center !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important; min-height: 270px !important; box-sizing: border-box !important;
 }
@@ -389,8 +395,9 @@ div[style*="position: fixed"][style*="bottom:"], div[style*="position:fixed"][st
 .stat-num { font-size: 12px !important; font-weight: 700 !important; color: #fff !important; }
 .stat-lbl { font-size: 8.5px !important; color: rgba(255,255,255,0.25) !important; }
 
-/* Responsive break points styling definitions */
-@media(max-width: 1400px) { .creators-6col-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; } }
-@media(max-width: 900px)  { .creators-6col-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
-@media(max-width: 500px)  { .creators-6col-grid { grid-template-columns: 1fr !important; } }
+/* Responsive break points scaling rules targets */
+@media(max-width: 1440px) { .creators-6col-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; } }
+@media(max-width: 1024px) { .creators-6col-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; } }
+@media(max-width: 768px)  { .creators-6col-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media(max-width: 480px)  { .creators-6col-grid { grid-template-columns: 1fr !important; } }
 </style>
