@@ -2,15 +2,36 @@
     <div class="widget-icon" id="widgetIconLayer">
         <i class="fa-solid fa-user-plus"></i>
     </div>
-    <div class="widget-content" id="widgetContentLayer">
+    
+    <div class="widget-content" id="widgetLayoutLoggedOut" style="display: none;">
+        <div class="cta-text-side">
+            <h3>Are you a Digital Creator?</h3>
+            <p>Join India's next-gen ecosystem directory setup.</p>
         </div>
+        <button class="cta-btn" onclick="openLoginModal()">JOIN NOW</button>
+    </div>
+
+    <div class="widget-content" id="widgetLayoutNoProfile" style="display: none;">
+        <div class="cta-text-side">
+            <h3>Welcome, Setup Profile!</h3>
+            <p>Complete your live platform listing data now.</p>
+        </div>
+        <button class="cta-btn" onclick="redirectToForm('new')">CREATE NOW</button>
+    </div>
+
+    <div class="widget-content" id="widgetLayoutHasProfile" style="display: none;">
+        <div class="cta-text-side">
+            <h3>Profile Dashboard</h3>
+        </div>
+        <button class="cta-btn" onclick="redirectToForm('edit')">EDIT PROFILE</button>
+    </div>
 </div>
 
 <div class="login-modal-overlay" id="googleLoginModal">
     <div class="login-modal-box">
         <span class="close-modal-x" onclick="closeLoginModal()">&times;</span>
-        <h2 style="color: #fff; font-size: 20px; margin: 10px 0 8px 0; font-family: sans-serif;">Google Authentication</h2>
-        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-bottom: 20px; font-family: sans-serif;">Please verify your identity to continue to the platform directory setup.</p>
+        <h2 style="color: #fff; font-size: 19px; margin: 10px 0 8px 0; font-family: system-ui, -apple-system, sans-serif;">Google Authentication</h2>
+        <p style="color: rgba(255,255,255,0.6); font-size: 13px; margin-bottom: 20px; font-family: system-ui, -apple-system, sans-serif;">Please verify your identity to continue to the platform directory setup.</p>
         <button class="google-login-btn" onclick="executeActualFirebaseLogin()">
             <img src="https://fonts.gstatic.com/s/i/productlogos/googleg/v6/web-24dp/copy_res2.png" style="width:18px; height:18px;" alt="Google" />
             Continue with Google
@@ -19,12 +40,10 @@
 </div>
 
 <style>
-/* Clean resets inside widget workspace to avoid main body corruption */
 .cta-floating-widget, .cta-floating-widget * {
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: system-ui, -apple-system, sans-serif;
 }
-
 .cta-floating-widget {
     position: fixed !important;
     bottom: 30px !important;
@@ -35,7 +54,7 @@
     justify-content: center;
     width: 54px;
     height: 54px;
-    background: rgba(11, 21, 19, 0.95);
+    background: rgba(11, 21, 19, 0.96);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border: 1px solid rgba(0, 230, 118, 0.35);
@@ -43,13 +62,13 @@
     cursor: pointer;
     overflow: hidden;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-    transition: width 0.5s cubic-bezier(0.2, 1, 0.2, 1), 
-                height 0.5s cubic-bezier(0.2, 1, 0.2, 1), 
-                transform 0.4s ease, opacity 0.4s ease;
+    transition: width 0.4s cubic-bezier(0.2, 1, 0.2, 1), 
+                height 0.4s cubic-bezier(0.2, 1, 0.2, 1), 
+                transform 0.3s ease, opacity 0.3s ease;
     animation: premiumWidgetBlast 20s infinite ease-in-out;
 }
 
-/* Hover States based on dynamic logical rules template definitions */
+/* Hover Configurations for safe width adjustments */
 .cta-floating-widget.state-join:hover {
     width: 580px; 
     height: 80px;
@@ -57,7 +76,7 @@
     animation: none;
 }
 .cta-floating-widget.state-edit:hover {
-    width: 240px; 
+    width: 250px; 
     height: 65px;
     border-radius: 14px;
     animation: none;
@@ -75,14 +94,13 @@
 }
 
 .widget-content {
-    display: flex;
     align-items: center;
     justify-content: space-between;
     width: 100%;
     padding: 0 20px;
     opacity: 0;
-    transform: translateX(15px);
-    transition: opacity 0.3s ease, transform 0.4s ease;
+    transform: translateX(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
     pointer-events: none;
 }
 .cta-floating-widget:hover .widget-content {
@@ -122,12 +140,12 @@
     99% { transform: scale(1); opacity: 1; }
 }
 
-/* AUTHENTICATION POPUP BOX SPECIFICS */
+/* MODAL CONTAINER BOX DIMENSIONS */
 .login-modal-overlay {
     position: fixed !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important;
     background: rgba(2, 8, 8, 0.85); backdrop-filter: blur(8px);
     z-index: 999999 !important; display: flex; align-items: center; justify-content: center;
-    opacity: 0; pointer-events: none; transition: all 0.4s ease;
+    opacity: 0; pointer-events: none; transition: all 0.3s ease;
 }
 .login-modal-overlay.active { opacity: 1; pointer-events: auto; }
 .login-modal-box {
@@ -163,50 +181,43 @@ function runRouterWidgetTracker() {
 function evaluateEcosystemState() {
     const widget = document.getElementById('creatorWidget');
     const iconLayer = document.getElementById('widgetIconLayer');
-    const contentLayer = document.getElementById('widgetContentLayer');
     
-    if (!widget || !iconLayer || !contentLayer) return;
+    // Fetching the layout containers safely
+    const layoutLoggedOut = document.getElementById('widgetLayoutLoggedOut');
+    const layoutNoProfile = document.getElementById('widgetLayoutNoProfile');
+    const layoutHasProfile = document.getElementById('widgetLayoutHasProfile');
+    
+    if (!widget || !layoutLoggedOut || !layoutNoProfile || !layoutHasProfile) return;
 
-    // Direct check if Firebase framework initialization has happened or not
+    // Reset visibility of all layouts first to prevent overlaps
+    layoutLoggedOut.style.display = 'none';
+    layoutNoProfile.style.display = 'none';
+    layoutHasProfile.style.display = 'none';
+
     if (typeof firebase !== 'undefined' && firebase.auth) {
         const activeUser = firebase.auth().currentUser;
 
         if (!activeUser) {
-            // Rule 2: Non Logged In Context
+            // RULE 2: User is Logged Out
             widget.className = "cta-floating-widget state-join";
-            iconLayer.innerHTML = '<i class="fa-solid fa-user-plus"></i>';
-            contentLayer.innerHTML = `
-                <div class="cta-text-side">
-                    <h3>Are you a Digital Creator?</h3>
-                    <p>Join India's next-gen ecosystem directory setup.</p>
-                </div>
-                <button class="cta-btn" onclick="openLoginModal()">JOIN NOW</button>
-            `;
+            if (iconLayer) iconLayer.innerHTML = '<i class="fa-solid fa-user-plus"></i>';
+            layoutLoggedOut.style.display = 'flex';
         } else {
-            // Rule 1 & 3 Check via Firestore documents lookup references
+            // Check Firestore tracking records safely
             firebase.firestore().collection("creators").doc(activeUser.uid).get()
             .then((doc) => {
                 if (doc.exists) {
+                    // RULE 3: Logged In + Has Profile active
                     widget.className = "cta-floating-widget state-edit";
-                    iconLayer.innerHTML = '<i class="fa-solid fa-user-gear"></i>';
-                    contentLayer.innerHTML = `
-                        <div class="cta-text-side">
-                            <h3>Profile Dashboard</h3>
-                        </div>
-                        <button class="cta-btn" onclick="redirectToForm('edit')">EDIT PROFILE</button>
-                    `;
+                    if (iconLayer) iconLayer.innerHTML = '<i class="fa-solid fa-user-gear"></i>';
+                    layoutHasProfile.style.display = 'flex';
                 } else {
+                    // RULE 1: Logged In but No Profile found
                     widget.className = "cta-floating-widget state-join";
-                    iconLayer.innerHTML = '<i class="fa-solid fa-user-plus"></i>';
-                    contentLayer.innerHTML = `
-                        <div class="cta-text-side">
-                            <h3>Welcome, Setup Profile!</h3>
-                            <p>Complete your live platform listing data now.</p>
-                        </div>
-                        <button class="cta-btn" onclick="redirectToForm('new')">CREATE NOW</button>
-                    `;
+                    if (iconLayer) iconLayer.innerHTML = '<i class="fa-solid fa-user-plus"></i>';
+                    layoutNoProfile.style.display = 'flex';
                 }
-            }).catch((err) => { console.error("Firestore sync fail: ", err); });
+            }).catch((err) => { console.error("Firestore balance sync failed: ", err); });
         }
     }
 }
@@ -233,10 +244,10 @@ function redirectToForm(mode) {
 function openLoginModal() { document.getElementById('googleLoginModal').classList.add('active'); }
 function closeLoginModal() { document.getElementById('googleLoginModal').classList.remove('active'); }
 
-// State trace integration event listeners hook setup bindings
+// Trigger events trackers initialization securely
 if (typeof firebase !== 'undefined' && firebase.auth) {
     firebase.auth().onAuthStateChanged(() => { runRouterWidgetTracker(); });
 }
 window.addEventListener('popstate', runRouterWidgetTracker);
-setInterval(runRouterWidgetTracker, 1200); 
+setInterval(runRouterWidgetTracker, 1500); 
 </script>
