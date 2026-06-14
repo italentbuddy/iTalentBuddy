@@ -1,13 +1,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-/* 🌍 MAIN WRAPPER RE-STRUCTURE */
+/* 🌍 MAIN CONTENT WRAPPER */
 .creators-page-container {
     display: flex !important;
     flex-direction: column !important;
     width: 100% !important;
     height: 100% !important;
-    overflow: hidden !important; /* रोकता है पूरे पेज को स्क्रोल होने से */
+    overflow: hidden !important; /* पूरे पेज को स्क्रोल होने से रोकता है */
 }
 
 /* 🏔️ TOP HEADER SECTION */
@@ -15,107 +15,98 @@
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    padding-bottom: 20px !important;
+    padding-bottom: 24px !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
     flex-shrink: 0 !important;
+    height: 70px !important; /* हेडिंग चेंज होते वक्त लेआउट को हिलने से रोकने के लिए फिक्स्ड हाइट */
 }
 
 .creators-header h2 {
-    font-size: 28px !important;
+    font-size: 26px !important;
     font-weight: 800 !important;
     letter-spacing: -0.5px !important;
     margin: 0 !important;
     color: #fff !important;
-    max-width: 70% !important;
+    max-width: 75% !important;
     line-height: 1.3 !important;
+    transition: opacity 0.2s ease, font-size 0.2s ease !important;
 }
 
-/* ⚡ JOIN BUTTON STYLE */
+/* ⚡ "JOIN ITB" BUTTON STYLE */
 .join-itb-btn {
-    background: rgba(0, 230, 118, 0.08) !important;
+    background: rgba(0, 230, 118, 0.04) !important;
     color: #00e676 !important;
     padding: 12px 24px !important;
-    border: 1px solid rgba(0, 230, 118, 0.4) !important;
+    border: 1px solid rgba(0, 230, 118, 0.3) !important;
     border-radius: 12px !important;
     font-size: 14px !important;
     font-weight: 700 !important;
     cursor: pointer !important;
     letter-spacing: 0.5px !important;
     white-space: nowrap !important;
-    box-shadow: 0 4px 15px rgba(0, 230, 118, 0.1) !important;
+    box-shadow: 0 4px 15px rgba(0, 230, 118, 0.05) !important;
 }
 
 .join-itb-btn:hover {
     background: #00e676 !important;
     color: #010707 !important;
-    box-shadow: 0 0 25px rgba(0, 230, 118, 0.45) !important;
+    box-shadow: 0 0 25px rgba(0, 230, 118, 0.4) !important;
 }
 
-/* 📜 SCROLLABLE CARDS GRID SECTION */
+/* 📜 SCROLLABLE CARDS SECTION */
 .creators-grid-scroll {
     flex: 1 !important;
-    overflow-y: auto !important; /* सिर्फ कार्ड वाला सेक्शन स्क्रोल होगा */
+    overflow-y: auto !important; /* सिर्फ कार्ड वाला बड़ा बॉक्स स्क्रोल होगा */
     padding-top: 24px !important;
-    padding-right: 5px !important;
+    padding-right: 4px !important;
 }
 
-/* Custom Scrollbar for Creators Section */
-.creators-grid-scroll::-webkit-scrollbar {
-    width: 6px;
-}
-.creators-grid-scroll::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.01);
-}
-.creators-grid-scroll::-webkit-scrollbar-thumb {
-    background: rgba(0, 230, 118, 0.2);
-    border-radius: 10px;
-}
-.creators-grid-scroll::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 230, 118, 0.5);
-}
+/* Custom Scrollbar */
+.creators-grid-scroll::-webkit-scrollbar { width: 6px; }
+.creators-grid-scroll::-webkit-scrollbar-track { background: transparent; }
+.creators-grid-scroll::-webkit-scrollbar-thumb { background: rgba(0, 230, 118, 0.2); border-radius: 10px; }
+.creators-grid-scroll::-webkit-scrollbar-thumb:hover { background: rgba(0, 230, 118, 0.5); }
 
 .creators-grid {
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
     gap: 20px !important;
-    padding-bottom: 24px !important;
+    padding-bottom: 30px !important;
 }
 
 /* 🎴 CREATOR CARD STYLES */
 .creator-card {
-    background: rgba(255, 255, 255, 0.015) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    background: rgba(255, 255, 255, 0.01) !important;
+    border: 1px solid rgba(255, 255, 255, 0.04) !important;
     border-radius: 20px !important;
-    padding: 20px !important;
+    padding: 24px 20px !important;
     text-align: center !important;
-    position: relative !important;
-    background: rgba(4, 16, 16, 0.3) !important;
+    background: rgba(4, 16, 16, 0.2) !important;
 }
 
-/* Green Theme Hover Effect for Standard Cards */
+/* Hover Effect for Standard/Male Cards */
 .creator-card:hover {
     border-color: #00e676 !important;
     background: rgba(0, 230, 118, 0.02) !important;
     box-shadow: 0 10px 30px rgba(0, 230, 118, 0.1) !important;
-    transform: translateY(-5px) !important;
+    transform: translateY(-4px) !important;
 }
 
-/* 🚺 FEMALE CARD CONFIG (Pink Border & Subtle Glow) */
+/* 🚺 FEMALE CARD SPECIAL STYLE */
 .creator-card.female-card {
-    border: 1px solid rgba(255, 105, 180, 0.4) !important; /* Pink Border */
+    border: 1px solid rgba(255, 105, 180, 0.35) !important; /* Premium Pink Border */
 }
 .creator-card.female-card:hover {
     border-color: #ff69b4 !important;
     background: rgba(255, 105, 180, 0.02) !important;
-    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.15) !important;
+    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.12) !important;
 }
 
-/* CARD INNER ELEMENTS */
+/* CARD DETAILS */
 .creator-avatar-wrapper {
-    width: 100px !important;
-    height: 100px !important;
-    margin: 0 auto 14px auto !important;
-    position: relative !important;
+    width: 110px !important;
+    height: 110px !important;
+    margin: 0 auto 16px auto !important;
 }
 
 .creator-avatar {
@@ -123,45 +114,22 @@
     height: 100% !important;
     border-radius: 50% !important;
     object-fit: cover !important;
-    border: 2px solid rgba(255, 255, 255, 0.1) !important;
+    border: 2px solid rgba(255, 255, 255, 0.08) !important;
 }
-.creator-card:hover .creator-avatar {
-    border-color: #00e676 !important;
-}
-.creator-card.female-card:hover .creator-avatar {
-    border-color: #ff69b4 !important;
-}
+.creator-card:hover .creator-avatar { border-color: #00e676 !important; }
+.creator-card.female-card:hover .creator-avatar { border-color: #ff69b4 !important; }
 
-.creator-name {
-    font-size: 18px !important;
-    font-weight: 700 !important;
-    margin: 0 0 4px 0 !important;
-    color: #fff !important;
-}
+.creator-name { font-size: 19px !important; font-weight: 700 !important; margin: 0 0 6px 0 !important; color: #fff !important; }
+.creator-location { font-size: 13px !important; color: #cbdad1 !important; margin: 0 0 20px 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 5px !important; }
 
-.creator-location {
-    font-size: 12px !important;
-    color: #b0c0c0 !important;
-    margin: 0 0 16px 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 4px !important;
-}
-
-/* 🌐 SOCIAL LINKS (White Logos -> Colorful on Hover) */
-.creator-socials {
-    display: flex !important;
-    justify-content: center !important;
-    gap: 14px !important;
-}
-
+/* 🌐 SOCIAL LOGOS (White -> Colorful on Hover) */
+.creator-socials { display: flex !important; justify-content: center !important; gap: 12px !important; }
 .creator-socials a {
-    width: 38px !important;
-    height: 38px !important;
+    width: 40px !important;
+    height: 40px !important;
     border-radius: 50% !important;
     background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border: 1px solid rgba(255, 255, 255, 0.06) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -170,29 +138,25 @@
     font-size: 16px !important;
 }
 
-/* Dynamic Brand Colors on Card Hover */
+/* Instagram Multi-gradient Color */
 .creator-card:hover .social-instagram:hover {
     background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%) !important;
     color: #fff !important;
     border-color: transparent !important;
 }
 
+/* YouTube Solid Brand Color */
 .creator-card:hover .social-youtube:hover {
     background: #ff0000 !important;
     color: #fff !important;
     border-color: transparent !important;
 }
 
-/* RESPONSIVE BREAKPOINT */
 @media(max-width: 768px) {
-    .creators-header {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        gap: 16px !important;
-    }
-    .creators-header h2 { max-width: 100% !important; font-size: 22px !important; }
-    .creators-grid-scroll { overflow-y: visible !important; }
+    .creators-header { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; height: auto !important; }
+    .creators-header h2 { max-width: 100% !important; font-size: 20px !important; }
     .creators-page-container { overflow: visible !important; height: auto !important; }
+    .creators-grid-scroll { overflow-y: visible !important; }
 }
 </style>
 
@@ -207,7 +171,7 @@
             
             <div class="creator-card">
                 <div class="creator-avatar-wrapper">
-                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200&auto=format&fit=crop" class="creator-avatar" alt="Creator">
+                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200&auto=format&fit=crop" class="creator-avatar" alt="Aarav">
                 </div>
                 <div class="creator-name">Aarav Sharma</div>
                 <div class="creator-location"><i class="fa-solid fa-location-dot" style="color: #00e676;"></i> Mumbai, India</div>
@@ -219,7 +183,7 @@
 
             <div class="creator-card female-card">
                 <div class="creator-avatar-wrapper">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" class="creator-avatar" alt="Creator">
+                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" class="creator-avatar" alt="Ananya">
                 </div>
                 <div class="creator-name">Ananya Iyer</div>
                 <div class="creator-location"><i class="fa-solid fa-location-dot" style="color: #ff69b4;"></i> Bangalore, India</div>
@@ -231,7 +195,7 @@
 
             <div class="creator-card">
                 <div class="creator-avatar-wrapper">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" class="creator-avatar" alt="Creator">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" class="creator-avatar" alt="Kabir">
                 </div>
                 <div class="creator-name">Kabir Verma</div>
                 <div class="creator-location"><i class="fa-solid fa-location-dot" style="color: #00e676;"></i> Delhi, India</div>
@@ -243,7 +207,7 @@
 
             <div class="creator-card female-card">
                 <div class="creator-avatar-wrapper">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" class="creator-avatar" alt="Creator">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" class="creator-avatar" alt="Riya">
                 </div>
                 <div class="creator-name">Riya Kapoor</div>
                 <div class="creator-location"><i class="fa-solid fa-location-dot" style="color: #ff69b4;"></i> New Delhi, India</div>
@@ -258,44 +222,43 @@
 </div>
 
 <script>
-// 🎯 INTERACTIVE HOVER INTERFACE ROUTE
-const headingElement = document.getElementById('dynamicHeading');
-const joinBtnElement = document.getElementById('joinItbBtn');
+// 🎯 HOVER TEXT UPDATE LOGIC
+const headingText = document.getElementById('dynamicHeading');
+const joinButton = document.getElementById('joinItbBtn');
 
-const defaultHindiText = "ये सारे creators हैं ITB के पास।";
-const hoverEnglishText = "You can join ITB as a content creator or influencer, and your card will show up below.";
+const hindiHeadingText = "ये सारे creators हैं ITB के पास।";
+const englishHoverText = "You can join ITB as a content creator or influencer, and your card will show up below.";
 
-joinBtnElement.addEventListener('mouseenter', () => {
-    headingElement.style.opacity = '0';
+joinButton.addEventListener('mouseenter', () => {
+    headingText.style.opacity = '0';
     setTimeout(() => {
-        headingElement.textContent = hoverEnglishText;
-        headingElement.style.fontSize = '18px';
-        headingElement.style.color = '#cbdad1';
-        headingElement.style.fontWeight = '500';
-        headingElement.style.opacity = '1';
+        headingText.textContent = englishHoverText;
+        headingText.style.fontSize = '15px';
+        headingText.style.color = 'rgba(255, 255, 255, 0.65)';
+        headingText.style.fontWeight = '500';
+        headingText.style.opacity = '1';
     }, 150);
 });
 
-joinBtnElement.addEventListener('mouseleave', () => {
-    headingElement.style.opacity = '0';
+joinButton.addEventListener('mouseleave', () => {
+    headingText.style.opacity = '0';
     setTimeout(() => {
-        headingElement.textContent = defaultHindiText;
-        headingElement.style.fontSize = '28px';
-        headingElement.style.color = '#fff';
-        headingElement.style.fontWeight = '800';
-        headingElement.style.opacity = '1';
+        headingText.textContent = hindiHeadingText;
+        headingText.style.fontSize = '26px';
+        headingText.style.color = '#fff';
+        headingText.style.fontWeight = '800';
+        headingText.style.opacity = '1';
     }, 150);
 });
 
-// 🔐 FIREBASE AUTH INTEGRATION WITH FAILSAFE REDIRECTS
+// 🔐 FIREBASE GOOGLE LOGIN ROUTER LINK
 function handleCreatorLoginWorkflow() {
-    // index.html में पहले से इम्पोर्टेड ग्लोबल 'window.triggerGmailVerificationWorkflow' को कॉल करता है
+    // यह फ़ंक्शन index.html में बने मुख्य 'window.triggerGmailVerificationWorkflow()' को सुरक्षित ट्रिगर करता है
     if (typeof window.triggerGmailVerificationWorkflow === 'function') {
         window.triggerGmailVerificationWorkflow();
     } else {
-        // Fallback सुरक्षा प्रबंधन अगर पैरेंट स्क्रिप्ट लोड न हुई हो
-        console.warn("Firebase Auth workflow initiated manually from inner component scope.");
-        alert("Authentication engine is initializing... Please click again in a brief second.");
+        console.error("Firebase auth handler missing in parent index frame context.");
+        alert("Authentication setup is loading... please refresh or try again in a moment.");
     }
 }
 </script>
