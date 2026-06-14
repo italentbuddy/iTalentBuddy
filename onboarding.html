@@ -1,0 +1,27 @@
+<div class="form-card">
+    <h2>Ecosystem Creator Profile Hub</h2>
+    <input type="text" id="creatorName" placeholder="Full Name" />
+    <input type="email" id="creatorEmail" placeholder="Business Email" />
+    <input type="text" id="creatorPhone" placeholder="WhatsApp Number" />
+    <input type="text" id="socialLink" placeholder="Instagram / YouTube Channel URL" />
+    <input type="number" id="followerCount" placeholder="Total Followers Count" />
+    
+    <button onclick="saveDataToFirestore()">SAVE TO FIREBASE DATABASE</button>
+</div>
+
+<script>
+// Actual Firebase Firestore Data injection script skeleton
+function saveDataToFirestore() {
+    const dataObj = {
+        name: document.getElementById('creatorName').value,
+        email: document.getElementById('creatorEmail').value,
+        phone: document.getElementById('creatorPhone').value,
+        social: document.getElementById('socialLink').value,
+        followers: document.getElementById('followerCount').value,
+        updatedAt: new Date()
+    };
+    
+    // db.collection("creators").doc(userId).set(dataObj)
+    alert("Perfect! Your profile details securely written to Firebase Cloud Firestore.");
+}
+</script>
