@@ -1,116 +1,98 @@
-<div class="creators-page-container">
+<div class="creators-panel" style="width: 100%; display: flex; flex-direction: column; gap: 24px; animation: screenReveal 0.5s ease forwards;">
+    
+    <div class="join-cta-banner" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 20px; padding: 28px 36px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 15px 35px rgba(0,0,0,0.3);">
+        <div class="join-cta-left">
+            <h2 style="font-size: 24px; font-weight: 800; color: #ffffff; margin: 0 0 6px 0; letter-spacing: -0.5px;">Are you a Digital Creator or Influencer?</h2>
+            <p style="font-size: 13px; color: rgba(255, 255, 255, 0.45); margin: 0;">Get listed in India's next-gen ecosystem directory. Show your reach, get direct inquiries and sponsorships.</p>
+        </div>
+        <button class="join-cta-btn" onclick="triggerLoginFromWidget()" style="background: #00e676; color: #010707; font-size: 13px; font-weight: 800; text-transform: uppercase; padding: 14px 24px; border: none; border-radius: 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: 0 0 20px rgba(0, 230, 118, 0.35); transition: transform 0.2s, box-shadow 0.2s;">
+            <i class="fa-solid fa-bolt"></i> Join as Creator
+        </button>
+    </div>
 
-    <div class="creators-grid">
+    <div class="creators-grid" style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; width: 100%;">
         
-        <div class="creator-card">
-            <div class="img-frame">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" alt="Ananya Sharma">
+        <div class="creator-card" style="background: rgba(4, 16, 16, 0.6); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 20px; padding: 28px 16px; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div class="img-frame" style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 14px auto; padding: 3px; border: 1px solid rgba(0, 230, 118, 0.25); background: rgba(0,230,118,0.02);"><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80" style="width:100%; height:100%; object-fit:cover; border-radius:50%;" alt="Ananya"></div>
+                <div class="c-name" style="font-size: 17px; font-weight: 800; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;">Ananya Sharma</div>
+                <div class="c-handle" style="font-size: 11px; color: rgba(255, 255, 255, 0.35); margin-bottom: 12px;">@ananya_st</div>
+                <div class="c-tag" style="display: inline-block; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 30px; font-size: 9px; font-weight: 700; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; margin-bottom: 12px;">Mumbai</div>
+                <div class="c-niche" style="font-size: 11px; font-weight: 800; color: #00e676; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 18px;">Fashion & Styling</div>
             </div>
-            <div class="c-name">Ananya Sharma</div>
-            <div class="c-handle">@ananya_st</div>
-            <div class="c-tag">Mumbai</div>
-            <div class="c-niche">Fashion & Styling</div>
-            <div class="c-stats">
-                <div class="stat-box"><div class="stat-val">1.2M</div><div class="stat-lbl">Subs</div></div>
-                <div class="stat-box"><div class="stat-val">450K</div><div class="stat-lbl">Followers</div></div>
-            </div>
-        </div>
-
-        <div class="creator-card">
-            <div class="img-frame">
-                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" alt="Aarav Verma">
-            </div>
-            <div class="c-name">Aarav Verma</div>
-            <div class="c-handle">@aaravtech</div>
-            <div class="c-tag">Delhi NCR</div>
-            <div class="c-niche">Tech & AI</div>
-            <div class="c-stats">
-                <div class="stat-box"><div class="stat-val">3.5M</div><div class="stat-lbl">Subs</div></div>
-                <div class="stat-box"><div class="stat-val">120K</div><div class="stat-lbl">Followers</div></div>
+            <div class="c-stats" style="display: flex; justify-content: space-around; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 14px;">
+                <div><div style="font-size: 14px; font-weight: 800; color: #ffffff;">1.2M</div><div style="font-size: 8px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; margin-top:1px;">Subs</div></div>
+                <div><div style="font-size: 14px; font-weight: 800; color: #ffffff;">450K</div><div style="font-size: 8px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; margin-top:1px;">Followers</div></div>
             </div>
         </div>
 
-        <div class="creator-card">
-            <div class="img-frame">
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" alt="Diya Kapoor">
+        <div class="creator-card" style="background: rgba(4, 16, 16, 0.6); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 20px; padding: 28px 16px; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div class="img-frame" style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 14px auto; padding: 3px; border: 1px solid rgba(0, 230, 118, 0.25); background: rgba(0,230,118,0.02);"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" style="width:100%; height:100%; object-fit:cover; border-radius:50%;" alt="Aarav"></div>
+                <div class="c-name" style="font-size: 17px; font-weight: 800; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;">Aarav Verma</div>
+                <div class="c-handle" style="font-size: 11px; color: rgba(255, 255, 255, 0.35); margin-bottom: 12px;">@aaravtech</div>
+                <div class="c-tag" style="display: inline-block; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 30px; font-size: 9px; font-weight: 700; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; margin-bottom: 12px;">Delhi NCR</div>
+                <div class="c-niche" style="font-size: 11px; font-weight: 800; color: #00e676; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 18px;">Tech & AI</div>
             </div>
-            <div class="c-name">Diya Kapoor</div>
-            <div class="c-handle">@diyavlogs</div>
-            <div class="c-tag">Bangalore</div>
-            <div class="c-niche">Travel Vlogs</div>
-            <div class="c-stats">
-                <div class="stat-box"><div class="stat-val">850K</div><div class="stat-lbl">Subs</div></div>
-                <div class="stat-box"><div class="stat-val">620K</div><div class="stat-lbl">Followers</div></div>
-            </div>
-        </div>
-
-        <div class="creator-card">
-            <div class="img-frame">
-                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" alt="Kabir Singh">
-            </div>
-            <div class="c-name">Kabir Singh</div>
-            <div class="c-handle">@kabirlive</div>
-            <div class="c-tag">Punjab</div>
-            <div class="c-niche">Gaming & Esport</div>
-            <div class="c-stats">
-                <div class="stat-box"><div class="stat-val">2.1M</div><div class="stat-lbl">Subs</div></div>
-                <div class="stat-box"><div class="stat-val">95K</div><div class="stat-lbl">Followers</div></div>
+            <div class="c-stats" style="display: flex; justify-content: space-around; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 14px;">
+                <div><div style="font-size: 14px; font-weight: 800; color: #ffffff;">3.5M</div><div style="font-size: 8px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; margin-top:1px;">Subs</div></div>
+                <div><div style="font-size: 14px; font-weight: 800; color: #ffffff;">120K</div><div style="font-size: 8px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; margin-top:1px;">Followers</div></div>
             </div>
         </div>
 
-        <div class="creator-card">
-            <div class="img-frame">
-                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" alt="Ishita Patel">
+        <div class="creator-card" style="background: rgba(4, 16, 16, 0.6); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 20px; padding: 28px 16px; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div class="img-frame" style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 14px auto; padding: 3px; border: 1px solid rgba(0, 230, 118, 0.25); background: rgba(0,230,118,0.02);"><img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" style="width:100%; height:100%; object-fit:cover; border-radius:50%;" alt="Diya"></div>
+                <div class="c-name" style="font-size: 17px; font-weight: 800; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;">Diya Kapoor</div>
+                <div class="c-handle" style="font-size: 11px; color: rgba(255, 255, 255, 0.35); margin-bottom: 12px;">@diyavlogs</div>
+                <div class="c-tag" style="display: inline-block; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 30px; font-size: 9px; font-weight: 700; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; margin-bottom: 12px;">Bangalore</div>
+                <div class="c-niche" style="font-size: 11px; font-weight: 800; color: #00e676; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 18px;">Travel Vlogs</div>
             </div>
-            <div class="c-name">Ishita Patel</div>
-            <div class="c-handle">@ishitafit</div>
-            <div class="c-tag">Gujarat</div>
-            <div class="c-niche">Health & Fitness</div>
-            <div class="c-stats">
-                <div class="stat-box"><div class="stat-val">410K</div><div class="stat-lbl">Subs</div></div>
-                <div class="stat-box"><div class="stat-val">890K</div><div class="stat-lbl">Followers</div></div>
-            </div>
-        </div>
-
-        <div class="creator-card">
-            <div class="img-frame">
-                <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80" alt="Rohan Das">
-            </div>
-            <div class="c-name">Rohan Das</div>
-            <div class="c-handle">@rohanfinance</div>
-            <div class="c-tag">Kolkata</div>
-            <div class="c-niche">Finance & Biz</div>
-            <div class="c-stats">
-                <div class="stat-box"><div class="stat-val">1.7M</div><div class="stat-lbl">Subs</div></div>
-                <div class="stat-box"><div class="stat-val">340K</div><div class="stat-lbl">Followers</div></div>
+            <div class="c-stats" style="display: flex; justify-content: space-around; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 14px;">
+                <div><div style="font-size: 14px; font-weight: 800; color: #ffffff;">850K</div><div style="font-size: 8px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; margin-top:1px;">Subs</div></div>
+                <div><div style="font-size: 14px; font-weight: 800; color: #ffffff;">620K</div><div style="font-size: 8px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; margin-top:1px;">Followers</div></div>
             </div>
         </div>
 
-        <div class="creator-card">
-            <div class="img-frame">
-                <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=150&q=80" alt="Kriti Joshi">
+        <div class="creator-card" style="background: rgba(4, 16, 16, 0.6); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 20px; padding: 28px 16px; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div class="img-frame" style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 14px auto; padding: 3px; border: 1px solid rgba(0, 230, 118, 0.25); background: rgba(0,230,118,0.02);"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80" style="width:100%; height:100%; object-fit:cover; border-radius:50%;" alt="Kabir"></div>
+                <div class="c-name" style="font-size: 17px; font-weight: 800; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;">Kabir Singh</div>
+                <div class="c-handle" style="font-size: 11px; color: rgba(255, 255, 255, 0.35); margin-bottom: 12px;">@kabirlive</div>
+                <div class="c-tag" style="display: inline-block; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 30px; font-size: 9px; font-weight: 700; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; margin-bottom: 12px;">Punjab</div>
+                <div class="c-niche" style="font-size: 11px; font-weight: 800; color: #00e676; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 18px;">Gaming & Esport</div>
             </div>
-            <div class="c-name">Kriti Joshi</div>
-            <div class="c-handle">@Kriti_vfx</div>
-            <div class="c-tag">Jaipur</div>
-            <div class="c-niche">VFX & Animation</div>
-            <div class="c-stats">
-                <div class="stat-box"><div class="stat-val">920K</div><div class="stat-lbl">Subs</div></div>
-                <div class="stat-box"><div class="stat-val">110K</div><div class="stat-lbl">Followers</div></div>
+            <div class="c-stats" style="display: flex; justify-content: space-around; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 14px;">
+                <div><div style="font-size: 14px; font-weight: 800; color: #ffffff;">2.1M</div><div style="font-size: 8px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; margin-top:1px;">Subs</div></div>
+                <div><div style="font-size: 14px; font-weight: 800; color: #ffffff;">95K</div><div style="font-size: 8px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; margin-top:1px;">Followers</div></div>
             </div>
         </div>
 
-        <div class="creator-card">
-            <div class="img-frame">
-                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80" alt="Manish Malo">
+        <div class="creator-card" style="background: rgba(4, 16, 16, 0.6); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 20px; padding: 28px 16px; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div class="img-frame" style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 14px auto; padding: 3px; border: 1px solid rgba(0, 230, 118, 0.25); background: rgba(0,230,118,0.02);"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80" style="width:100%; height:100%; object-fit:cover; border-radius:50%;" alt="Ishita"></div>
+                <div class="c-name" style="font-size: 17px; font-weight: 800; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;">Ishita Patel</div>
+                <div class="c-handle" style="font-size: 11px; color: rgba(255, 255, 255, 0.35); margin-bottom: 12px;">@ishitafit</div>
+                <div class="c-tag" style="display: inline-block; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 30px; font-size: 9px; font-weight: 700; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; margin-bottom: 12px;">Gujarat</div>
+                <div class="c-niche" style="font-size: 11px; font-weight: 800; color: #00e676; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 18px;">Health & Fitness</div>
             </div>
-            <div class="c-name">Manish Malo</div>
-            <div class="c-handle">@manishvines</div>
-            <div class="c-tag">Pune</div>
-            <div class="c-niche">Comedy Skits</div>
-            <div class="c-stats">
-                <div class="stat-box"><div class="stat-val">4.2M</div><div class="stat-lbl">Subs</div></div>
-                <div class="stat-box"><div class="stat-val">1.5M</div><div class="stat-lbl">Followers</div></div>
+            <div class="c-stats" style="display: flex; justify-content: space-around; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 14px;">
+                <div><div style="font-size: 14px; font-weight: 800; color: #ffffff;">410K</div><div style="font-size: 8px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; margin-top:1px;">Subs</div></div>
+                <div><div style="font-size: 14px; font-weight: 800; color: #ffffff;">890K</div><div style="font-size: 8px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; margin-top:1px;">Followers</div></div>
+            </div>
+        </div>
+
+        <div class="creator-card" style="background: rgba(4, 16, 16, 0.6); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 20px; padding: 28px 16px; text-align: center; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <div class="img-frame" style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 14px auto; padding: 3px; border: 1px solid rgba(0, 230, 118, 0.25); background: rgba(0,230,118,0.02);"><img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80" style="width:100%; height:100%; object-fit:cover; border-radius:50%;" alt="Rohan"></div>
+                <div class="c-name" style="font-size: 17px; font-weight: 800; color: #ffffff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px;">Rohan Das</div>
+                <div class="c-handle" style="font-size: 11px; color: rgba(255, 255, 255, 0.35); margin-bottom: 12px;">@rohanfinance</div>
+                <div class="c-tag" style="display: inline-block; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 4px 10px; border-radius: 30px; font-size: 9px; font-weight: 700; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; margin-bottom: 12px;">Kolkata</div>
+                <div class="c-niche" style="font-size: 11px; font-weight: 800; color: #00e676; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 18px;">Finance & Biz</div>
+            </div>
+            <div class="c-stats" style="display: flex; justify-content: space-around; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 14px;">
+                <div><div style="font-size: 14px; font-weight: 800; color: #ffffff;">1.7M</div><div style="font-size: 8px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; margin-top:1px;">Subs</div></div>
+                <div><div style="font-size: 14px; font-weight: 800; color: #ffffff;">340K</div><div style="font-size: 8px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 700; margin-top:1px;">Followers</div></div>
             </div>
         </div>
 
@@ -118,105 +100,14 @@
 </div>
 
 <style>
-.creators-page-container {
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-    padding: 10px 5px 40px 5px;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+@media(max-width: 1400px) {
+    .creators-grid { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
 }
-.creators-page-container::-webkit-scrollbar {
-    display: none;
+@media(max-width: 900px) {
+    .creators-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+    .join-cta-banner { flex-direction: column; text-align: center; gap: 16px; }
 }
-
-.creators-grid {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 16px;
-    width: 100%;
+@media(max-width: 550px) {
+    .creators-grid { grid-template-columns: 1fr !important; }
 }
-
-.creator-card {
-    background: rgba(2, 14, 14, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 20px 12px;
-    text-align: center;
-    position: relative;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-.creator-card:hover {
-    border-color: rgba(0, 230, 118, 0.3);
-    box-shadow: 0 10px 30px rgba(0, 230, 118, 0.05);
-    transform: translateY(-4px);
-}
-
-.img-frame {
-    width: 76px;
-    height: 76px;
-    border-radius: 50%;
-    margin: 0 auto 12px auto;
-    padding: 3px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-.img-frame img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.c-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 2px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.c-handle {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.4);
-    margin-bottom: 12px;
-}
-
-.c-tag {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 10px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.3px;
-}
-
-.c-niche {
-    font-size: 11px;
-    font-weight: 700;
-    color: #00e676;
-    margin-bottom: 16px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-}
-
-.c-stats {
-    display: flex;
-    justify-content: space-around;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 12px;
-}
-.stat-box { text-align: center; }
-.stat-val { font-size: 14px; font-weight: 800; color: #fff; }
-.stat-lbl { font-size: 9px; color: rgba(255, 255, 255, 0.3); text-transform: uppercase; margin-top: 2px; }
-
-/* Responsive Viewports */
-@media(max-width: 1400px) { .creators-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
-@media(max-width: 900px) { .creators-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-@media(max-width: 500px) { .creators-grid { grid-template-columns: 1fr; } }
 </style>
