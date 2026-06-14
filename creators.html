@@ -1,135 +1,134 @@
-<div class="creators-panel" style="width: 100%; display: flex; flex-direction: column; gap: 32px; padding: 20px 0 100px 0;">
-    
-    <div class="creators-grid" id="creatorsGridMatrix" style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; width: 100%;">
-        </div>
-
-    <div style="width: 100%; display: flex; justify-content: center; margin-top: 40px;">
-        <button id="gatekeeperCreatorBtn" style="background: #00e676; color: #010707; font-size: 14px; font-weight: 800; text-transform: uppercase; padding: 18px 45px; border: none; border-radius: 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 0 25px rgba(0, 230, 118, 0.35); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), padding 0.3s, box-shadow 0.3s;">
+<div class="creator-banner" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 24px; padding: 40px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; gap: 24px;">
+    <div style="flex: 1;">
+        <h2 style="font-size: 28px; font-weight: 800; color: #fff; margin-bottom: 8px; letter-spacing: -0.5px;">Are you a Digital Creator or Influencer?</h2>
+        <p style="font-size: 14px; color: rgba(255, 255, 255, 0.5); font-weight: 500; line-height: 1.5;">Get listed in India's next-gen ecosystem directory. Show your reach, get direct inquiries and sponsorships.</p>
+    </div>
+    <div>
+        <button id="nativeGatekeeperCreatorBtn" style="background: #00e676; color: #010707; font-size: 14px; font-weight: 800; text-transform: uppercase; padding: 16px 32px; border: none; border-radius: 14px; cursor: pointer; display: flex; align-items: center; gap: 10px; box-shadow: 0 0 25px rgba(0, 230, 118, 0.25); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;">
             <i class="fa-solid fa-bolt"></i> Join as Creator
         </button>
     </div>
 </div>
 
+<div class="creators-grid" id="nativeCreatorsGridContainer" style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 16px; width: 100%; padding-bottom: 80px;">
+    </div>
+
 <script>
 (function() {
-    // =========================================================================
-    // ⚙️ SYSTEM 1: AUTOMATIC USER LOGIN/LOGOUT STATE DETECTOR
-    // =========================================================================
-    function checkUserAuthentication() {
-        // 1. LocalStorage standard variables check karein
-        const storedUser = localStorage.getItem('currentUser') || localStorage.getItem('user');
-        if (storedUser) return true;
-
-        // 2. Firebase Session check karein (agar loaded hai)
+    // 🔒 1. SMART CLIENT AUTHENTICATION MATRIX SENSOR
+    function evaluateUserSessionState() {
+        // Local token check
+        if (localStorage.getItem('currentUser') || localStorage.getItem('user')) return true;
         if (window.currentUser) return true;
 
-        // 3. UI-BASED INTELLIGENCE SCANNER (Tumhari top-right navbar check karega)
-        // Agar top-right mein profile picture ya user icon visible hai, toh user logged in hai!
-        const profileImageElement = document.querySelector('header img, .nav-right img, [class*="profile"] img, [class*="user"] img');
-        if (profileImageElement && profileImageElement.style.display !== 'none') {
+        // Smart UI Verification Element Checklist (Navbar parsing)
+        const activeAvatarNode = document.querySelector('header img, .nav-right img, [class*="profile"] img, [class*="user"] img');
+        if (activeAvatarNode && activeAvatarNode.style.display !== 'none' && activeAvatarNode.offsetWidth > 0) {
             return true;
         }
 
-        // Agar logout button screen par visible hai
-        const logoutBtn = document.querySelector('button[id*="logout"], .logout-btn, [onclick*="logout"]');
-        if (logoutBtn && logoutBtn.style.display !== 'none') {
+        const logoutUINode = document.querySelector('button[id*="logout"], .logout-btn, [onclick*="logout"]');
+        if (logoutUINode && logoutUINode.style.display !== 'none') {
             return true;
         }
 
-        return false; // User identity verified nahi hui -> Not Logged In
+        return false;
     }
 
-    // =========================================================================
-    // ⚙️ SYSTEM 2: SECURE BUTTON WORKFLOW BINDING
-    // =========================================================================
-    const gateBtn = document.getElementById('gatekeeperCreatorBtn');
-    if (gateBtn) {
-        gateBtn.addEventListener('click', function(e) {
-            e.preventDefault();
+    // 🔒 2. INTERACTION TRIGGER POINT
+    const targetActionBtn = document.getElementById('nativeGatekeeperCreatorBtn');
+    if (targetActionBtn) {
+        targetActionBtn.addEventListener('click', function(event) {
+            event.preventDefault();
             
-            const isUserLoggedIn = checkUserAuthentication();
-
-            if (isUserLoggedIn) {
-                // User active hai -> Direct onboarding form par bhejo
+            if (evaluateUserSessionState()) {
                 window.location.href = 'onboarding.html';
             } else {
-                // User anonymous hai -> Block karke hint do
                 alert('⚠️ Please login first to register as a Creator on iTalentBuddy!');
                 
-                // Agar tumhara koi login popup trigger function hai (jaise openAuthModal), toh call karega:
+                // Fallback custom handlers executions check
                 if (typeof toggleAuthModal === 'function') {
                     toggleAuthModal();
                 } else if (typeof openLoginModal === 'function') {
                     openLoginModal();
                 } else {
-                    // Fallback: Agar popup nahi mila toh authorization section par active navigation scroll
-                    const loginTriggerElement = document.getElementById('loginBtn') || document.querySelector('[onclick*="login"]');
-                    if (loginTriggerElement) {
-                        loginTriggerElement.click();
-                    }
+                    const navbarLoginButton = document.getElementById('loginBtn') || document.querySelector('[onclick*="login"], .login-btn');
+                    if (navbarLoginButton) navbarLoginButton.click();
                 }
             }
         });
     }
 
-    // =========================================================================
-    // ⚙️ SYSTEM 3: 18 BASELINE CARDS ENGINE DATA LOAD
-    // =========================================================================
-    const targetGrid = document.getElementById('creatorsGridMatrix');
-    if(targetGrid) {
-        const baseData = [
-            {name:"Ananya Sharma", handle:"@ananya_st", location:"Mumbai", niche:"Fashion & Styling", subs:"1.2M", followers:"450K", img:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"},
-            {name:"Aarav Verma", handle:"@aaravtech", location:"Delhi NCR", niche:"Tech & AI", subs:"3.5M", followers:"120K", img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"},
-            {name:"Diya Kapoor", handle:"@diyavlogs", location:"Bangalore", niche:"Travel Vlogs", subs:"850K", followers:"620K", img:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"},
-            {name:"Kabir Singh", handle:"@kabirlive", location:"Punjab", niche:"Gaming & Esport", subs:"2.1M", followers:"95K", img:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80"},
-            {name:"Ishita Patel", handle:"@ishitafit", location:"Gujarat", niche:"Health & Fitness", subs:"410K", followers:"890K", img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80"},
-            {name:"Rohan Das", handle:"@rohanfinance", location:"Kolkata", niche:"Finance & Biz", subs:"1.7M", followers:"340K", img:"https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80"},
-            {name:"Kriti Joshi", handle:"@kriti_vfx", location:"Jaipur", niche:"VFX & Animation", subs:"920K", followers:"310K", img:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80"},
-            {name:"Manish Malo", handle:"@manishvines", location:"Pune", niche:"Comedy Skits", subs:"4.2M", followers:"1.8M", img:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80"},
-            {name:"Sanya Gupta", handle:"@sanyafoodie", location:"Hyderabad", niche:"Food Content", subs:"650K", followers:"920K", img:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80"},
-            {name:"Vikram Raj", handle:"@vikrammotors", location:"Chennai", niche:"Automobile", subs:"1.1M", followers:"240K", img:"https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&q=80"},
-            {name:"Neha Roy", handle:"@nehaart", location:"Assam", niche:"Art & Craft", subs:"350K", followers:"1.1M", img:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=150&q=80"},
-            {name:"Arjun Dev", handle:"@arjuntv", location:"Kerala", niche:"Adventure", subs:"2.5M", followers:"430K", img:"https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=150&q=80"},
-            {name:"Rahul Mehta", handle:"@rahul_vlogs", location:"Goa", niche:"Vlogging", subs:"900K", followers:"1.2M", img:"https://images.unsplash.com/photo-1489980508314-941910ded1f4?auto=format&fit=crop&w=150&q=80"},
-            {name:"Priya Nair", handle:"@priyadance", location:"Cochin", niche:"Dance Artist", subs:"300K", followers:"850K", img:"https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=150&q=80"},
-            {name:"Rohan Joshi", handle:"@rohanroasts", location:"Indore", niche:"Standup Comedy", subs:"4.1M", followers:"2.2M", img:"https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=150&q=80"},
-            {name:"Meera Ali", handle:"@meerasufi", location:"Lucknow", niche:"Sufi Music", subs:"1.5M", followers:"410K", img:"https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=150&q=80"},
-            {name:"Dev Dixit", handle:"@dev_code", location:"Noida", niche:"Programming", subs:"780K", followers:"190K", img:"https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?auto=format&fit=crop&w=150&q=80"},
-            {name:"Tanvi Shah", handle:"@tanvichef", location:"Surat", niche:"Baking & Pastry", subs:"1.8M", followers:"3.1M", img:"https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&q=80"}
-        ];
+    // 📊 3. THE 18 BASELINE EXTRAORDINARY ORIGINAL CREATOR MATRICES DATA
+    const masterBaselineSet = [
+        {name:"Ananya Sharma", handle:"@ananya_st", location:"MUMBAI", niche:"FASHION & STYLING", subs:"1.2M", followers:"450K", img:"https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=150&q=80"},
+        {name:"Aarav Verma", handle:"@aaravtech", location:"DELHI NCR", niche:"TECH & AI", subs:"3.5M", followers:"120K", img:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80"},
+        {name:"Diya Kapoor", handle:"@diyavlogs", location:"BANGALORE", niche:"TRAVEL VLOGS", subs:"850K", followers:"620K", img:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80"},
+        {name:"Kabir Singh", handle:"@kabirlive", location:"PUNJAB", niche:"GAMING & ESPORT", subs:"2.1M", followers:"95K", img:"https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80"},
+        {name:"Ishita Patel", handle:"@ishitafit", location:"GUJARAT", niche:"HEALTH & FITNESS", subs:"410K", followers:"890K", img:"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=150&q=80"},
+        {name:"Rohan Das", handle:"@rohanfinance", location:"KOLKATA", niche:"FINANCE & BIZ", subs:"1.7M", followers:"340K", img:"https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80"},
+        {name:"Kriti Joshi", handle:"@kriti_vfx", location:"JAIPUR", niche:"VFX & ANIMATION", subs:"920K", followers:"310K", img:"https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=150&q=80"},
+        {name:"Manish Malo", handle:"@manishvines", location:"PUNE", niche:"COMEDY SKITS", subs:"4.2M", followers:"1.8M", img:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80"},
+        {name:"Sanya Gupta", handle:"@sanyafoodie", location:"HYDERABAD", niche:"FOOD CONTENT", subs:"650K", followers:"920K", img:"https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=150&q=80"},
+        {name:"Vikram Raj", handle:"@vikrammotors", location:"CHENNAI", niche:"AUTOMOBILE", subs:"1.1M", followers:"240K", img:"https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?auto=format&fit=crop&w=150&q=80"},
+        {name:"Neha Roy", handle:"@nehaart", location:"ASSAM", niche:"ART & CRAFT", subs:"350K", followers:"1.1M", img:"https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=150&q=80"},
+        {name:"Arjun Dev", handle:"@arjuntv", location:"KERALA", niche:"ADVENTURE", subs:"2.5M", followers:"430K", img:"https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=150&q=80"},
+        {name:"Rahul Mehta", handle:"@rahul_vlogs", location:"GOA", niche:"VLOGGING", subs:"900K", followers:"1.2M", img:"https://images.unsplash.com/photo-1489980508314-941910ded1f4?auto=format&fit=crop&w=150&q=80"},
+        {name:"Priya Nair", handle:"@priyadance", location:"COCHIN", niche:"DANCE ARTIST", subs:"300K", followers:"850K", img:"https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=150&q=80"},
+        {name:"Rohan Joshi", handle:"@rohanroasts", location:"INDORE", niche:"STANDUP COMEDY", subs:"4.1M", followers:"2.2M", img:"https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?auto=format&fit=crop&w=150&q=80"},
+        {name:"Meera Ali", handle:"@meerasufi", location:"LUCKNOW", niche:"SUFI MUSIC", subs:"1.5M", followers:"410K", img:"https://images.unsplash.com/photo-1554151228-14d9def656e4?auto=format&fit=crop&w=150&q=80"},
+        {name:"Dev Dixit", handle:"@dev_code", location:"NOIDA", niche:"PROGRAMMING", subs:"780K", followers:"190K", img:"https://images.unsplash.com/photo-1513956589380-bad6acb9b9d4?auto=format&fit=crop&w=150&q=80"},
+        {name:"Tanvi Shah", handle:"@tanvichef", location:"SURAT", niche:"BAKING & PASTRY", subs:"1.8M", followers:"3.1M", img:"https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&q=80"}
+    ];
 
-        const extraData = JSON.parse(localStorage.getItem('itb_local_creators') || '[]');
-        const finalPool = [...baseData, ...extraData];
+    // Read dynamic entries
+    const customPool = JSON.parse(localStorage.getItem('itb_local_creators') || '[]');
+    const totalAggregatedPool = [...masterBaselineSet, ...customPool];
 
-        targetGrid.innerHTML = '';
-        finalPool.forEach((item, index) => {
-            const frame = document.createElement('div');
-            frame.className = "creator-card";
-            frame.style = "background: rgba(4, 16, 16, 0.6); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 20px; padding: 24px 14px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; min-height: 290px;";
-            frame.innerHTML = `
+    const renderingGridDOM = document.getElementById('nativeCreatorsGridContainer');
+    if (renderingGridDOM) {
+        renderingGridDOM.innerHTML = '';
+        totalAggregatedPool.forEach(item => {
+            const elementCard = document.createElement('div');
+            elementCard.className = "creator-card";
+            
+            // Premium layout parameters styling context matching perfectly
+            elementCard.style = "background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 24px 16px; text-align: center; display: flex; flex-direction: column; justify-content: space-between; min-height: 310px;";
+            
+            elementCard.innerHTML = `
                 <div>
-                    <div style="width: 75px; height: 75px; border-radius: 50%; margin: 0 auto 12px auto; padding: 3px; border: 1px solid rgba(0, 230, 118, 0.25);"><img src="${item.img}" style="width:100%; height:100%; object-fit:cover; border-radius:50%;"></div>
-                    <div style="font-size: 16px; font-weight: 800; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.name}</div>
-                    <div style="font-size: 11px; color: rgba(255, 255, 255, 0.35); margin-bottom: 10px;">${item.handle}</div>
-                    <div style="display: inline-block; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); padding: 3px 8px; border-radius: 30px; font-size: 9px; font-weight: 700; color: rgba(255, 255, 255, 0.5); text-transform: uppercase; margin-bottom: 10px;">${item.location}</div>
-                    <div style="font-size: 11px; font-weight: 800; color: #00e676; text-transform: uppercase; letter-spacing: 0.5px;">${item.niche}</div>
+                    <div style="width: 80px; height: 80px; border-radius: 50%; margin: 0 auto 16px auto; overflow: hidden; border: 2px solid rgba(0, 230, 118, 0.2);"><img src="${item.img}" style="width:100%; height:100%; object-fit:cover;"></div>
+                    <div style="font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${item.name}</div>
+                    <div style="font-size: 11px; color: rgba(255, 255, 255, 0.3); font-weight: 600; margin-bottom: 12px;">${item.handle}</div>
+                    <div style="display: inline-block; background: rgba(255, 255, 255, 0.04); padding: 4px 10px; border-radius: 30px; font-size: 9px; font-weight: 700; color: rgba(255, 255, 255, 0.6); margin-bottom: 14px; letter-spacing: 0.5px;">${item.location}</div>
+                    <div style="font-size: 11px; font-weight: 800; color: #00e676; letter-spacing: 0.5px;">${item.niche}</div>
                 </div>
-                <div style="display: flex; justify-content: space-around; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 12px; margin-top: 12px;">
-                    <div><div style="font-size: 13px; font-weight: 800; color: #fff;">${item.subs}</div><div style="font-size: 8px; color: rgba(255,255,255,0.3); font-weight: 700;">Subs</div></div>
-                    <div><div style="font-size: 13px; font-weight: 800; color: #fff;">${item.followers}</div><div style="font-size: 8px; color: rgba(255,255,255,0.3); font-weight: 700;">Followers</div></div>
+                <div style="display: flex; justify-content: space-around; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 14px; margin-top: 14px;">
+                    <div><div style="font-size: 14px; font-weight: 800; color: #fff;">${item.subs}</div><div style="font-size: 9px; color: rgba(255,255,255,0.3); font-weight: 700; text-transform: uppercase;">Subs</div></div>
+                    <div><div style="font-size: 14px; font-weight: 800; color: #fff;">${item.followers}</div><div style="font-size: 9px; color: rgba(255,255,255,0.3); font-weight: 700; text-transform: uppercase;">Followers</div></div>
                 </div>
             `;
-            targetGrid.appendChild(frame);
+            renderingGridDOM.appendChild(elementCard);
         });
     }
 })();
 </script>
 
 <style>
-#gatekeeperCreatorBtn:hover { transform: scale(1.08); padding: 18px 70px !important; box-shadow: 0 0 40px rgba(0, 230, 118, 0.6) !important; }
-.creator-card { transition: transform 0.3s ease, border-color 0.3s ease; }
-.creator-card:hover { transform: translateY(-5px); border-color: rgba(0, 230, 118, 0.3) !important; }
-@media(max-width: 1400px) { #creatorsGridMatrix { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; } }
-@media(max-width: 950px)  { #creatorsGridMatrix { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
-@media(max-width: 550px)  { #creatorsGridMatrix { grid-template-columns: 1fr !important; } }
+/* 🔥 THE ORIGINAL PREMIUM HOVER INTERACTIONS */
+#nativeGatekeeperCreatorBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 35px rgba(0, 230, 118, 0.45) !important;
+}
+.creator-card { transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease; }
+.creator-card:hover { 
+    transform: translateY(-6px); 
+    border-color: rgba(0, 230, 118, 0.3) !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+}
+
+/* 📱 NATIVE RESPONSIVE GRID MATRIX BREAKPOINTS */
+@media(max-width: 1400px) { #nativeCreatorsGridContainer { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; } }
+@media(max-width: 950px)  { #nativeCreatorsGridContainer { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; } }
+@media(max-width: 550px)  { #nativeCreatorsGridContainer { grid-template-columns: 1fr !important; } }
 </style>
