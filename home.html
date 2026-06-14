@@ -115,22 +115,46 @@
 
 .right h2{ font-size: 42px; line-height: 1; margin: 0 0 10px; letter-spacing: -1px; }
 .right p{ color:#cbdad1; line-height: 1.5; font-size: 15px; margin: 0 0 24px 0; }
+
+/* 🌟 Input effects (Text boxes text highlight effect) */
 .form-group { margin-bottom: 18px; display: flex; flex-direction: column; transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-label{ display:block; margin: 0 0 8px 0; font-weight:700; font-size:11px; letter-spacing: 0.5px; text-transform: uppercase; color: #00e676; }
+label{ display:block; margin: 0 0 8px 0; font-weight:700; font-size:11px; letter-spacing: 0.5px; text-transform: uppercase; color: rgba(0, 230, 118, 0.6); transition: color 0.3s, transform 0.3s; }
 input, select, textarea{
     width:100%; padding: 10px 14px; border: 1px solid rgba(255,255,255,.05); border-radius:12px;
-    background:rgba(255,255,255,.04); color:#fff; font-family: inherit; font-size: 14px; outline: none;
+    background:rgba(255,255,255,.04); color:#fff; font-family: inherit; font-size: 14px; outline: none; transition: all 0.3s ease;
 }
 input, select{height: 44px}
 textarea{ height: 95px; resize:none; }
+
+/* Jab box select hoga toh Label neon green glow karega aur box thoda upar uthega */
 .form-group:focus-within { transform: translateY(-2px) scale(1.015); }
+.form-group:focus-within label { color: #00e676; text-shadow: 0 0 10px rgba(0, 230, 118, 0.5); transform: translateX(2px); }
 input:focus, select:focus, textarea:focus{ background: rgba(2, 22, 18, 0.7); border-color: #00e676; box-shadow: 0 0 20px rgba(0, 230, 118, 0.25); }
+
+/* 💎 Premium Button Animation Restored */
 button{
     height: 48px; margin-top: auto; width:100%; border: 1px solid rgba(0, 230, 118, 0.4); border-radius:12px;
     background: rgba(0, 230, 118, 0.04); color: #00e676; font-size: 14px; font-weight: 800; text-transform: uppercase;
     letter-spacing: 0.5px; cursor: pointer; position: relative; overflow: hidden; z-index: 1; transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
-button:hover{ color: #ffffff; border-color: #00e676; background: rgba(0, 230, 118, 0.12); transform: scale(1.03); letter-spacing: 2px; box-shadow: 0 0 30px rgba(0, 230, 118, 0.35); }
+button::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 230, 118, 0.25), transparent);
+    transition: all 0.6s ease;
+    z-index: -1;
+}
+button:hover{ 
+    color: #ffffff; 
+    border-color: #00e676; 
+    background: linear-gradient(45deg, #00e676, #00b853);
+    transform: scale(1.03); 
+    letter-spacing: 2px; 
+    box-shadow: 0 0 30px rgba(0, 230, 118, 0.5), inset 0 0 15px rgba(255,255,255,0.3);
+}
+button:hover::before { left: 100%; }
 
 @media(max-width:1100px), (max-height: 740px){
     .left, .right { padding: 20px; }
@@ -142,9 +166,42 @@ button:hover{ color: #ffffff; border-color: #00e676; background: rgba(0, 230, 11
 <div class="left">
     <div class="hero">CONNECT<br><span class="green">CREATORS</span><br>AGENCIES &<br>BRANDS</div>
     <div class="desc">India's creator ecosystem directory. Discover creators, agencies, production houses, managers and brand opportunities from one place. Build partnerships faster and connect with the right people.</div>
-    <div id="socials"></div>
-    <div id="stats"></div>
+    
+    <div id="socials">
+        <a href="https://google.com" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://google.com" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://google.com" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://google.com" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+    </div>
+    
+    <div id="stats">
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="num">1.2K+</div>
+                <div class="label-text">Creators</div>
+            </div>
+        </div>
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="num">450+</div>
+                <div class="label-text">Agencies</div>
+            </div>
+        </div>
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="num">85+</div>
+                <div class="label-text">Brands</div>
+            </div>
+        </div>
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="num">300+</div>
+                <div class="label-text">Deals Closed</div>
+            </div>
+        </div>
+    </div>
 </div>
+
 <div class="right">
     <h2>Get In Touch</h2>
     <p>Want to join iTalentBuddy, ask a question, submit your profile, or discuss a partnership? Send us a message.</p>
@@ -158,7 +215,12 @@ button:hover{ color: #ffffff; border-color: #00e676; background: rgba(0, 230, 11
     </div>
     <div class="form-group">
         <label>Who Are You?</label>
-        <select id="dd"></select>
+        <select id="dd">
+            <option value="Creator">Creator</option>
+            <option value="Brand / Company">Brand / Company</option>
+            <option value="Agency">Agency</option>
+            <option value="Other">Other</option>
+        </select>
     </div>
     <div class="form-group" style="margin-bottom: 24px;">
         <label>Your Question / Message</label>
