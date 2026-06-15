@@ -110,14 +110,14 @@
                 <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Search / Select Category</label>
                 <input type="text" id="categorySearch" placeholder="Type to filter categories (e.g. Gaming, Tech, Finance...)" style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
                 <div id="categoryDropdown" style="display: none; position: absolute; width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; max-height: 200px; overflow-y: auto; z-index: 100; margin-top: 5px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
-                    </div>
+                </div>
             </div>
 
             <div id="subCategoryContainer" style="display: none;">
                 <label id="subCategoryLabel" style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Sub-Category / Game List</label>
                 <div style="display: flex; gap: 10px;">
                     <select id="subCategorySelect" style="flex: 1; background: #041010; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
-                        </select>
+                    </select>
                     <input type="text" id="customSubCategory" placeholder="Or type your own custom tag..." style="flex: 1; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
                 </div>
             </div>
@@ -177,7 +177,7 @@ function renderCategories(filter = "") {
             categorySearch.value = cat;
             categoryDropdown.style.display = 'none';
             updateSubCategoryView(cat);
-            document.getElementById('card-category-badge').innerText = cat;
+            updateCardBadge();
         });
         categoryDropdown.appendChild(div);
     });
@@ -199,12 +199,24 @@ function updateSubCategoryView(cat) {
     }
 }
 
+// Live card badge sync text helper
+function updateCardBadge() {
+    const mainCat = categorySearch.value || "Category";
+    const customSub = document.getElementById('customSubCategory').value.trim();
+    const selectSub = document.getElementById('subCategorySelect').value;
+    const subCat = customSub || selectSub || "";
+    
+    document.getElementById('card-category-badge').innerText = subCat ? `${mainCat} (${subCat})` : mainCat;
+}
+
+document.getElementById('subCategorySelect').addEventListener('change', updateCardBadge);
+document.getElementById('customSubCategory').addEventListener('input', updateCardBadge);
+
 // 2. Real-time Live Sync Preview & Metric Validator Execution
 function validateMetricFormat(val) {
     return /^([0-9]+(\.[0-9]+)?)[KMkm]$/.test(val.trim());
 }
 
-// Live Listeners mapping input parameters to visual card elements
 document.getElementById('brandName').addEventListener('input', (e) => {
     document.getElementById('card-brand-name').innerText = e.target.value || "Alias Name";
 });
@@ -212,7 +224,6 @@ document.getElementById('state').addEventListener('change', (e) => {
     document.getElementById('card-location').innerText = `${e.target.value}, India`;
 });
 
-// Border sync dynamically mapping to active gender node selections
 const genderNode = document.getElementById('gender');
 const previewCard = document.getElementById('live-preview-card');
 function syncGenderBorder(gender) {
@@ -222,7 +233,6 @@ function syncGenderBorder(gender) {
 }
 genderNode.addEventListener('change', (e) => syncGenderBorder(e.target.value));
 
-// Real-time metric inputs validation mapping to card elements
 document.getElementById('ytSubs').addEventListener('input', (e) => {
     const val = e.target.value;
     const statRow = document.getElementById('card-yt-stat');
@@ -243,7 +253,6 @@ document.getElementById('igFollowers').addEventListener('input', (e) => {
     } else { statRow.style.display = 'none'; }
 });
 
-// Image uploading stream sync layout context
 document.getElementById('imageInput').addEventListener('change', function(e) {
     const file = e.target.files[0];
     if(file) {
@@ -271,118 +280,4 @@ async function checkExistingUser() {
         if (docSnap.exists()) {
             const data = docSnap.data();
             document.getElementById('realName').value = data.realName || '';
-            document.getElementById('brandName').value = data.brandName || '';
-            document.getElementById('whatsapp').value = data.whatsapp || '';
-            document.getElementById('gender').value = data.gender || 'Male';
-            document.getElementById('state').value = data.state || '';
-            categorySearch.value = data.category || 'Tech & AI';
-            document.getElementById('ytLink').value = data.youtubeLink || '';
-            document.getElementById('ytSubs').value = data.youtubeSubs || '';
-            document.getElementById('igLink').value = data.instagramLink || '';
-            document.getElementById('igFollowers').value = data.instagramFollowers || '';
-            
-            updateSubCategoryView(data.category);
-            if(data.subCategory) document.getElementById('customSubCategory').value = data.subCategory;
-
-            // Trigger updates to visual element maps
-            syncGenderBorder(data.gender || 'Male');
-            if(data.brandName) document.getElementById('card-brand-name').innerText = data.brandName;
-            if(data.state) document.getElementById('card-location').innerText = `${data.state}, India`;
-            if(data.category) document.getElementById('card-category-badge').innerText = data.category;
-            
-            if(data.youtubeSubs) {
-                document.getElementById('card-yt-stat').style.display = 'flex';
-                document.getElementById('card-yt-count').innerText = data.youtubeSubs;
-            }
-            if(data.instagramFollowers) {
-                document.getElementById('card-ig-stat').style.display = 'flex';
-                document.getElementById('card-ig-count').innerText = data.instagramFollowers;
-            }
-
-            if(data.avatarUrl) {
-                savedAvatarBase64 = data.avatarUrl;
-                document.getElementById('avatarRender').src = data.avatarUrl;
-                document.getElementById('avatarRender').style.display = 'block';
-                document.getElementById('card-avatar').src = data.avatarUrl;
-                document.getElementById('upload-instruction').style.display = 'none';
-            }
-        } else {
-            syncGenderBorder('Male');
-        }
-    } catch (err) { console.error(err); }
-}
-
-checkExistingUser();
-
-// 4. Submission Loop processing operations
-document.getElementById('onboardingForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const ytSubsVal = document.getElementById('ytSubs').value;
-    const igFollowsVal = document.getElementById('igFollowers').value;
-
-    if((ytSubsVal && !validateMetricFormat(ytSubsVal)) || (igFollowsVal && !validateMetricFormat(igFollowsVal))) {
-        alert("Please correct the metric values format. Use only numbers directly suffixed with K or M (e.g., 25K, 4.5M).");
-        return;
-    }
-
-    const finalSubCategory = document.getElementById('customSubCategory').value.trim() || document.getElementById('subCategorySelect').value;
-
-    const profileData = {
-        realName: document.getElementById('realName').value,
-        brandName: document.getElementById('brandName').value,
-        whatsapp: document.getElementById('whatsapp').value,
-        email: document.getElementById('email').value,
-        gender: document.getElementById('gender').value,
-        state: document.getElementById('state').value,
-        category: categorySearch.value,
-        subCategory: finalSubCategory,
-        youtubeLink: document.getElementById('ytLink').value,
-        youtubeSubs: ytSubsVal,
-        instagramLink: document.getElementById('igLink').value,
-        instagramFollowers: igFollowsVal,
-        avatarUrl: savedAvatarBase64,
-        updatedAt: new Date().toISOString()
-    };
-
-    try {
-        await setDoc(doc(db, "creators", uid), profileData);
-        alert("Awesome! Profile details saved successfully.");
-        window.location.href = "index.html?page=creators";
-    } catch (error) { alert("Error saving data: " + error.message); }
-});
-</script>
-
-<style>
-#categoryDropdown div:hover {
-    background: rgba(0, 230, 118, 0.1) !important;
-    color: #00e676 !important;
-}
-.premium-btn {
-    width: 100%;
-    background: linear-gradient(135deg, #00e676 0%, #00b359 100%);
-    color: #010707;
-    font-size: 16px;
-    font-weight: 800;
-    border: none;
-    padding: 16px;
-    border-radius: 14px;
-    cursor: pointer;
-    margin-top: 10px;
-    display: block;
-    position: relative;
-    z-index: 999;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(0, 230, 118, 0.2);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-.premium-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 230, 118, 0.4);
-    background: linear-gradient(135deg, #00ff81 0%, #00e676 100%);
-}
-.premium-btn:active {
-    transform: translateY(1px);
-}
-</style>
+            document.getElementById('brandName
