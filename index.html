@@ -227,9 +227,9 @@ fetch(cleanBaseRoute + fileNameToLoad)
             </div>`;
     });
 
-// 🔐 DYNAMIC ONBOARDING INTEGRATION WORKFLOW
+// 🔐 DYNAMIC ONBOARDING INTEGRATION WORKFLOW (Join ITB बटन दबाने पर ही फॉर्म खुलेगा)
 window.triggerGmailVerificationWorkflow = function() {
-    console.log("Firebase Login Workflow Triggered from Index.");
+    console.log("Firebase Login Workflow Triggered from Join ITB Button.");
     setPersistence(auth, browserLocalPersistence)
         .then(() => {
             return signInWithPopup(auth, provider);
@@ -242,14 +242,17 @@ window.triggerGmailVerificationWorkflow = function() {
             localStorage.setItem('userEmail', user.email);
             localStorage.setItem('userUid', user.uid);
             
+            // सुरक्षित सिंकिंग डिले के बाद डेटाबेस चेक करके ऑनबोर्डिंग पर भेजें
             setTimeout(async () => {
                 try {
                     const docRef = doc(db, "creators", user.uid);
                     const docSnap = await getDoc(docRef);
                     
                     if (docSnap.exists()) {
+                        // अगर पहले से कार्ड बना हुआ है तो एडिट मोड में ऑनबोर्डिंग खोलें
                         window.location.href = `index.html?page=onboarding&mode=edit&uid=${user.uid}`;
                     } else {
+                        // अगर नया क्रिएटर है तो फ्रेश फॉर्म खोलें
                         window.location.href = `index.html?page=onboarding&mode=new&uid=${user.uid}`;
                     }
                 } catch (firestoreError) {
