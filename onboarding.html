@@ -1,4 +1,4 @@
-<div class="onboarding-container" style="display: grid; grid-template-columns: minmax(320px, 1.2fr) minmax(320px, 1fr); gap: 40px; padding: 40px; width: 100% !important; max-width: 100% !important; min-width: 100% !important; box-sizing: border-box; background: #020808; min-height: 100vh; align-items: start;">
+<div class="onboarding-container" style="display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 32px; padding: 12px; width: 100%; box-sizing: border-box; align-items: start;">
     
     <div class="form-section" style="color: #fff; display: flex; flex-direction: column; gap: 20px; width: 100%;">
         <div>
@@ -108,12 +108,12 @@
         </form>
     </div>
 
-    <div class="preview-section" style="position: sticky; top: 40px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box; width: 100%; min-height: calc(100vh - 80px);">
+    <div class="preview-section" style="position: sticky; top: 24px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box; width: 100%; min-height: calc(100vh - 120px);">
         <div style="text-align: center; margin-bottom: 24px;">
             <span style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 2px; font-family: sans-serif;"><i class="fa-solid fa-eye" style="margin-right: 6px; color: #00e676;"></i> Live Workspace Preview</span>
         </div>
         
-        <div id="live-preview-card" style="width: 100%; max-width: 340px; aspect-ratio: 9/15; background: #040d0d; border: 2px solid #00e676; border-radius: 24px; box-shadow: 0 30px 70px rgba(0,230,118,0.12); overflow: hidden; display: flex; flex-direction: column; position: relative;">
+        <div id="live-preview-card" style="width: 100%; max-width: 320px; aspect-ratio: 9/15; background: #040d0d; border: 2px solid #00e676; border-radius: 24px; box-shadow: 0 30px 70px rgba(0,230,118,0.12); overflow: hidden; display: flex; flex-direction: column; position: relative;">
             
             <div id="image-upload-zone" style="width: 100%; height: 50%; background: #071515; border-bottom: 1px solid rgba(255,255,255,0.05); position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden;">
                 <input type="file" id="imageInput" accept="image/*" style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 40;">
@@ -505,17 +505,16 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
     box-shadow: 0 8px 24px rgba(0, 230, 118, 0.35);
 }
 
-/* Force override if parent/wrapper script has strict narrow boundaries */
-@media (min-width: 992px) {
+@media(max-width: 1100px) {
     .onboarding-container {
-        width: 100vw !important;
+        grid-template-columns: 1fr !important;
+        gap: 24px;
+    }
+    .preview-section {
         position: relative !important;
-        left: 50% !important;
-        right: 50% !important;
-        margin-left: -50vw !important;
-        margin-right: -50vw !important;
-        padding-left: 80px !important;
-        padding-right: 80px !important;
+        top: 0 !important;
+        min-height: auto !important;
+        padding: 16px;
     }
 }
 </style>
