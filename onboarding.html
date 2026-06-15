@@ -1,143 +1,150 @@
-<div class="onboarding-container" style="width: 100%; color: #fff; position: relative; z-index: 20;">
-    <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 6px; background: linear-gradient(135deg, #fff 60%, #00e676 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Creator Ecosystem Entry</h2>
-    <p style="color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 30px;">Fill your profile metrics. Real-time changes appear on your premium live card.</p>
-
-    <div style="display: grid; grid-template-columns: 320px 1fr; gap: 40px; position: relative; z-index: 25;">
-        
-        <div style="position: sticky; top: 20px; height: max-content; display: flex; flex-direction: column; gap: 20px;">
-            <div id="image-upload-zone" style="border: 2px dashed rgba(0, 230, 118, 0.4); background: rgba(0, 230, 118, 0.02); border-radius: 20px; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; cursor: pointer; position: relative;">
-                <input type="file" id="imageInput" accept="image/*" style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 40;">
-                <div id="upload-instruction" style="z-index: 30; pointer-events: none;">
-                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 32px; color: #00e676; margin-bottom: 10px;"></i>
-                    <div style="font-weight: 700; font-size: 12px; color: #00e676; text-transform: uppercase;">Upload Photo</div>
-                </div>
-                <img id="avatarRender" style="display: none; position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; border-radius:18px; z-index: 35;">
-            </div>
-
-            <div id="live-preview-card" style="background: #041010; border: 2px solid #00e676; border-radius: 20px; padding: 24px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5); transition: border-color 0.4s ease;">
-                <img id="card-avatar" src="https://api.dicebear.com/7.x/bottts/svg?seed=placeholder" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; border: 2px solid rgba(255,255,255,0.1);">
-                <h3 id="card-brand-name" style="margin: 0 0 6px 0; font-size: 20px; font-weight: 700;">Alias Name</h3>
-                <p style="margin: 0 0 16px 0; color: rgba(255,255,255,0.5); font-size: 13px;">
-                    <i class="fa-solid fa-location-dot" style="color:#00e676; margin-right: 5px;"></i> <span id="card-location">State, India</span>
-                </p>
-                
-                <div style="display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 16px; background: rgba(255,255,255,0.02); padding: 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);">
-                    <div id="card-yt-stat" style="display: none; align-items: center; gap: 8px; font-size: 13px; color: #fff;">
-                        <i class="fa-brands fa-youtube" style="color: #fff;"></i> <span id="card-yt-count">0K</span> Subscribers
-                    </div>
-                    <div id="card-ig-stat" style="display: none; align-items: center; gap: 8px; font-size: 13px; color: #fff;">
-                        <i class="fa-brands fa-instagram" style="color: #fff;"></i> <span id="card-ig-count">0K</span> Followers
-                    </div>
-                </div>
-
-                <div id="card-category-badge" style="font-size: 11px; color: #00e676; text-transform: uppercase; font-weight:700; background: rgba(0,230,118,0.06); padding: 4px 12px; border-radius: 20px; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
-                    Category
-                </div>
-            </div>
-        </div>
+<div class="onboarding-container" style="display: grid; grid-template-columns: 1fr 400px; gap: 40px; padding: 40px; max-width: 1400px; margin: 0 auto; min-height: 100vh; background: #020808;">
+    
+    <div class="form-section" style="color: #fff; max-height: calc(100vh - 80px); overflow-y: auto; padding-right: 20px;">
+        <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 6px; background: linear-gradient(135deg, #fff 50%, #00e676 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px;">Creator Ecosystem Entry</h2>
+        <p style="color: rgba(255,255,255,0.4); font-size: 13px; margin-bottom: 35px;">Configure your professional network node. Changes update live in the sandbox.</p>
 
         <form id="onboardingForm" style="display: flex; flex-direction: column; gap: 24px;">
             
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">
+                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1px; text-transform: uppercase;">01. Identity Matrix</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                 <div>
-                    <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Real Name</label>
-                    <input type="text" id="realName" placeholder="e.g. Rahul Kumar" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+                    <label class="form-label">Real Name</label>
+                    <input type="text" id="realName" placeholder="e.g. Rahul Kumar" required class="premium-input">
                 </div>
                 <div>
-                    <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Asa Name (Alias / Brand)</label>
-                    <input type="text" id="brandName" placeholder="e.g. TechBuddy" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+                    <label class="form-label">Asa Name (Alias / Brand)</label>
+                    <input type="text" id="brandName" placeholder="e.g. TechBuddy" required class="premium-input">
                 </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                 <div>
-                    <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">WhatsApp Number</label>
-                    <input type="tel" id="whatsapp" placeholder="+91 XXXXX XXXXX" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+                    <label class="form-label">WhatsApp Number</label>
+                    <input type="tel" id="whatsapp" placeholder="+91 XXXXX XXXXX" required class="premium-input">
                 </div>
                 <div>
-                    <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Email ID (Auto-Filled)</label>
-                    <input type="email" id="email" readonly style="width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 14px; color: rgba(255,255,255,0.4); cursor: not-allowed; outline: none;">
+                    <label class="form-label">Email ID (Auto-Filled)</label>
+                    <input type="email" id="email" readonly class="premium-input" style="background: rgba(255,255,255,0.02); color: rgba(255,255,255,0.3); cursor: not-allowed; border-color: rgba(255,255,255,0.03);">
                 </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                 <div>
-                    <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Gender</label>
-                    <select id="gender" style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+                    <label class="form-label">Gender</label>
+                    <select id="gender" class="premium-input" style="appearance: none;">
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>
+                <div style="position: relative;">
+                    <label class="form-label">State (India)</label>
+                    <input type="text" id="stateSearch" placeholder="Type to search state..." class="premium-input" autocomplete="off">
+                    <div id="stateDropdown" class="floating-dropdown"></div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
                 <div>
-                    <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">State (India)</label>
-                    <select id="state" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
-                        <option value="" disabled selected>Select State</option>
-                        <option value="Andhra Pradesh">Andhra Pradesh</option>
-                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                        <option value="Assam">Assam</option>
-                        <option value="Bihar">Bihar</option>
-                        <option value="Chhattisgarh">Chhattisgarh</option>
-                        <option value="Delhi">Delhi</option>
-                        <option value="Goa">Goa</option>
-                        <option value="Gujarat">Gujarat</option>
-                        <option value="Haryana">Haryana</option>
-                        <option value="Himachal Pradesh">Himachal Pradesh</option>
-                        <option value="Jharkhand">Jharkhand</option>
-                        <option value="Karnataka">Karnataka</option>
-                        <option value="Kerala">Kerala</option>
-                        <option value="Madhya Pradesh">Madhya Pradesh</option>
-                        <option value="Maharashtra">Maharashtra</option>
-                        <option value="Manipur">Manipur</option>
-                        <option value="Meghalaya">Meghalaya</option>
-                        <option value="Mizoram">Mizoram</option>
-                        <option value="Nagaland">Nagaland</option>
-                        <option value="Odisha">Odisha</option>
-                        <option value="Punjab">Punjab</option>
-                        <option value="Rajasthan">Rajasthan</option>
-                        <option value="Sikkim">Sikkim</option>
-                        <option value="Tamil Nadu">Tamil Nadu</option>
-                        <option value="Telangana">Telangana</option>
-                        <option value="Tripura">Tripura</option>
-                        <option value="Uttar Pradesh">Uttar Pradesh</option>
-                        <option value="Uttarakhand">Uttarakhand</option>
-                        <option value="West Bengal">West Bengal</option>
+                    <label class="form-label">Profile Punchline / Bio</label>
+                    <input type="text" id="profileBio" placeholder="e.g. Building Next-Gen Tech Ecosystems" class="premium-input">
+                </div>
+                <div>
+                    <label class="form-label">Card Glow Theme</label>
+                    <select id="cardTheme" class="premium-input">
+                        <option value="#00e676">Neon Green</option>
+                        <option value="#00f0ff">Cyber Cyan</option>
+                        <option value="#ec008c">Sunset Pink</option>
+                        <option value="#9b5de5">Purple Haze</option>
                     </select>
                 </div>
+            </div>
+
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; margin-top: 10px;">
+                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1px; text-transform: uppercase;">02. Content Domain Select</span>
             </div>
 
             <div style="position: relative;">
-                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Search / Select Category</label>
-                <input type="text" id="categorySearch" placeholder="Type to filter categories (e.g. Gaming, Tech, Finance...)" style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
-                <div id="categoryDropdown" style="display: none; position: absolute; width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; max-height: 200px; overflow-y: auto; z-index: 100; margin-top: 5px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                <label class="form-label">Search & Multi-Select Categories (Top 2 display on card)</label>
+                <input type="text" id="categorySearch" placeholder="Type to filter categories (e.g. Gaming, Tech, Cooking...)" class="premium-input" autocomplete="off">
+                <div id="categoryDropdown" class="floating-dropdown"></div>
+                <div id="selectedCategoryChips" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;"></div>
+            </div>
+
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; margin-top: 10px;">
+                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1px; text-transform: uppercase;">03. Social Infrastructure Nodes</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div class="social-input-row">
+                    <div class="social-icon-box"><i class="fa-brands fa-youtube"></i></div>
+                    <input type="text" id="ytLink" placeholder="YouTube Channel Link" class="social-mid-input">
+                    <input type="text" id="ytSubs" placeholder="Subs (e.g. 50K)" class="social-short-input">
+                </div>
+                <div class="social-input-row">
+                    <div class="social-icon-box"><i class="fa-brands fa-instagram"></i></div>
+                    <input type="text" id="igLink" placeholder="Instagram Profile Link" class="social-mid-input">
+                    <input type="text" id="igFollowers" placeholder="Followers (e.g. 1.2M)" class="social-short-input">
+                </div>
+                <div class="social-input-row">
+                    <div class="social-icon-box"><i class="fa-brands fa-x-twitter"></i></div>
+                    <input type="text" id="xLink" placeholder="X Profile Link" class="social-mid-input">
+                    <input type="text" id="xMetrics" placeholder="Followers" class="social-short-input">
+                </div>
+                <div class="social-input-row">
+                    <div class="social-icon-box"><i class="fa-brands fa-linkedin-in"></i></div>
+                    <input type="text" id="liLink" placeholder="LinkedIn Profile Link" class="social-mid-input">
+                    <input type="text" id="liMetrics" placeholder="Connections" class="social-short-input">
                 </div>
             </div>
 
-            <div id="subCategoryContainer" style="display: none;">
-                <label id="subCategoryLabel" style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Sub-Category / Game List</label>
-                <div style="display: flex; gap: 10px;">
-                    <select id="subCategorySelect" style="flex: 1; background: #041010; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
-                    </select>
-                    <input type="text" id="customSubCategory" placeholder="Or type your own custom tag..." style="flex: 1; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
-                </div>
-            </div>
-
-            <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); padding: 20px; border-radius: 16px; display: flex; flex-direction: column; gap: 16px;">
-                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase;">Social Platforms & Metrics (Format: 10K, 2.5M)</label>
-                
-                <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 14px;">
-                    <input type="text" id="ytLink" placeholder="YouTube Channel Link" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
-                    <input type="text" id="ytSubs" placeholder="Subs (e.g. 50K, 1.2M)" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
-                </div>
-
-                <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 14px;">
-                    <input type="text" id="igLink" placeholder="Instagram Profile Link" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
-                    <input type="text" id="igFollowers" placeholder="Followers (e.g. 100K, 5M)" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
-                </div>
-            </div>
-
-            <button type="submit" id="submitBtn" class="premium-btn">Save & Exit To Directory</button>
+            <button type="submit" id="submitBtn" class="premium-btn">Save & Exit</button>
         </form>
+    </div>
+
+    <div class="preview-section" style="position: sticky; top: 40px; height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; z-index: 10;">
+        <div id="live-preview-card" style="width: 100%; max-width: 320px; aspect-ratio: 9/16; background: #040d0d; border: 2px solid #00e676; border-radius: 24px; box-shadow: 0 25px 50px rgba(0,230,118,0.12); overflow: hidden; display: flex; flex-direction: column; position: relative; transition: border-color 0.4s ease;">
+            
+            <div id="image-upload-zone" style="width: 100%; height: 50%; background: #071515; border-bottom: 1px solid rgba(255,255,255,0.04); position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden;">
+                <input type="file" id="imageInput" accept="image/*" style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 40;">
+                <div id="upload-instruction" style="text-align: center; color: rgba(0, 230, 118, 0.7); z-index: 30; pointer-events: none;">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 24px; margin-bottom: 6px;"></i>
+                    <div style="font-weight: 700; font-size: 10px; letter-spacing: 0.5px;">INJECT IMAGE</div>
+                </div>
+                <img id="avatarRender" style="display: none; position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; z-index: 35;">
+            </div>
+
+            <div style="padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(180deg, rgba(4,13,13,0) 0%, #030a0a 100%);">
+                
+                <div>
+                    <h3 id="card-brand-name" style="font-size: 20px; font-weight: 800; margin: 0 0 4px 0; letter-spacing: -0.3px; color: #fff;">Alias Name</h3>
+                    <p style="margin: 0; color: rgba(255,255,255,0.4); font-size: 12px; display: flex; align-items: center; gap: 5px;">
+                        <i class="fa-solid fa-location-dot" style="color: #00e676;"></i> <span id="card-location">State, India</span>
+                    </p>
+                    <p id="card-bio-render" style="margin: 8px 0 0 0; font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.4; font-style: italic;">No bio punchline configured.</p>
+                </div>
+
+                <div id="card-category-badge-container" style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;">
+                    <div style="font-size: 9px; color: #00e676; text-transform: uppercase; font-weight:800; background: rgba(0,230,118,0.06); padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(0,230,118,0.12);">No Domain Selected</div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 14px;">
+                    <div style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.02); padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.03);">
+                        <i class="fa-brands fa-youtube" style="color: #fff; font-size: 15px;"></i>
+                        <span id="card-yt-count" style="font-size: 11px; font-weight: 700; color: #fff;">0K</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.02); padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.03);">
+                        <i class="fa-brands fa-instagram" style="color: #fff; font-size: 15px;"></i>
+                        <span id="card-ig-count" style="font-size: 11px; font-weight: 700; color: #fff;">0K</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 </div>
 
@@ -147,112 +154,130 @@ import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/f
 const db = window.appDb;
 const uid = localStorage.getItem('userUid');
 let savedAvatarBase64 = "";
+let activeSelectedCategories = [];
 
-const categoryList = [
-    "Tech & AI", "Gaming", "Finance & Business", "Vlogging & Travel", 
-    "Fashion & Lifestyle", "Education", "Comedy & Entertainment", "Fitness & Health"
+// Complete Indian States & UTs Array Mapping
+const indiaStates = [
+    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", 
+    "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
+    "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", 
+    "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", 
+    "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
 ];
 
-const subCategories = {
-    "Gaming": ["BGMI", "Free Fire", "GTA V", "Minecraft", "Valorant", "Chess"],
-    "Tech & AI": ["Gadgets Review", "Coding & Dev", "AI Tools", "Tech News"],
-    "Finance & Business": ["Stock Market", "Crypto", "Personal Finance", "Startup Case Studies"]
-};
+// Expanded Premium Categories Pipeline Matrix
+const comprehensiveCategories = [
+    "Tech & AI", "Gaming & Esports", "Finance & Trading", "Vlogging & Travel", "Fashion & Lifestyle", 
+    "Education & Academics", "Comedy & Roasting", "Fitness & Health", "Art & Design", "Business & Startups",
+    "Crypto & Web3", "Food & Cooking", "Music & Dance", "Photography & Film", "Infotainment", "Automobile"
+];
 
-// 1. Filterable Searchable Dropdown Logic
+// 1. Dropdown State Engine Search Handler
+const stateSearch = document.getElementById('stateSearch');
+const stateDropdown = document.getElementById('stateDropdown');
+
+function renderStateDropdown(filter = "") {
+    stateDropdown.innerHTML = "";
+    const filtered = indiaStates.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
+    if(filtered.length === 0) { stateDropdown.style.display = 'none'; return; }
+    
+    filtered.forEach(state => {
+        const div = document.createElement('div');
+        div.className = 'dropdown-item';
+        div.innerText = state;
+        div.addEventListener('click', () => {
+            stateSearch.value = state;
+            stateDropdown.style.display = 'none';
+            document.getElementById('card-location').innerText = `${state}, India`;
+        });
+        stateDropdown.appendChild(div);
+    });
+}
+stateSearch.addEventListener('focus', () => { renderStateDropdown(stateSearch.value); stateDropdown.style.display = 'block'; });
+stateSearch.addEventListener('input', (e) => renderStateDropdown(e.target.value));
+
+// 2. Multi-Select Category Engine System
 const categorySearch = document.getElementById('categorySearch');
 const categoryDropdown = document.getElementById('categoryDropdown');
+const chipsContainer = document.getElementById('selectedCategoryChips');
 
-function renderCategories(filter = "") {
+function syncCategoryCardBadges() {
+    const cardBadgeBox = document.getElementById('card-category-badge-container');
+    cardBadgeBox.innerHTML = "";
+    if(activeSelectedCategories.length === 0) {
+        cardBadgeBox.innerHTML = `<div style="font-size: 9px; color: #00e676; text-transform: uppercase; font-weight:800; background: rgba(0,230,118,0.06); padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(0,230,118,0.12);">No Domain Selected</div>`;
+        return;
+    }
+    // Hard restriction to output top 2 arrays into preview visual layout nodes
+    activeSelectedCategories.slice(0, 2).forEach(cat => {
+        const badge = document.createElement('div');
+        badge.style = "font-size: 9px; color: #00e676; text-transform: uppercase; font-weight:800; background: rgba(0,230,118,0.06); padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(0,230,118,0.12);";
+        badge.innerText = cat;
+        cardBadgeBox.appendChild(badge);
+    });
+}
+
+function renderChips() {
+    chipsContainer.innerHTML = "";
+    activeSelectedCategories.forEach(cat => {
+        const chip = document.createElement('div');
+        chip.className = 'category-chip';
+        chip.innerHTML = `${cat} <i class="fa-solid fa-xmark"></i>`;
+        chip.querySelector('i').addEventListener('click', () => {
+            activeSelectedCategories = activeSelectedCategories.filter(item => item !== cat);
+            renderChips();
+            syncCategoryCardBadges();
+        });
+        chipsContainer.appendChild(chip);
+    });
+}
+
+function renderCategoryDropdown(filter = "") {
     categoryDropdown.innerHTML = "";
-    const filtered = categoryList.filter(c => c.toLowerCase().includes(filter.toLowerCase()));
+    const filtered = comprehensiveCategories.filter(c => c.toLowerCase().includes(filter.toLowerCase()) && !activeSelectedCategories.includes(c));
+    if(filtered.length === 0) { categoryDropdown.style.display = 'none'; return; }
     
     filtered.forEach(cat => {
         const div = document.createElement('div');
+        div.className = 'dropdown-item';
         div.innerText = cat;
-        div.style.padding = "12px 16px";
-        div.style.cursor = "pointer";
-        div.style.color = "#fff";
         div.addEventListener('click', () => {
-            categorySearch.value = cat;
+            activeSelectedCategories.push(cat);
+            categorySearch.value = "";
             categoryDropdown.style.display = 'none';
-            updateSubCategoryView(cat);
-            updateCardBadge();
+            renderChips();
+            syncCategoryCardBadges();
         });
         categoryDropdown.appendChild(div);
     });
 }
+categorySearch.addEventListener('focus', () => { renderCategoryDropdown(categorySearch.value); categoryDropdown.style.display = 'block'; });
+categorySearch.addEventListener('input', (e) => renderCategoryDropdown(e.target.value));
 
-categorySearch.addEventListener('focus', () => { renderCategories(categorySearch.value); categoryDropdown.style.display = 'block'; });
-categorySearch.addEventListener('input', (e) => renderCategories(e.target.value));
-document.addEventListener('click', (e) => { if(!categorySearch.contains(e.target) && !categoryDropdown.contains(e.target)) categoryDropdown.style.display = 'none'; });
+// Click outside drop dismiss triggers
+document.addEventListener('click', (e) => {
+    if(!stateSearch.contains(e.target) && !stateDropdown.contains(e.target)) stateDropdown.style.display = 'none';
+    if(!categorySearch.contains(e.target) && !categoryDropdown.contains(e.target)) categoryDropdown.style.display = 'none';
+});
 
-function updateSubCategoryView(cat) {
-    const container = document.getElementById('subCategoryContainer');
-    const select = document.getElementById('subCategorySelect');
-    if(subCategories[cat]) {
-        container.style.display = 'block';
-        select.innerHTML = subCategories[cat].map(sub => `<option value="${sub}">${sub}</option>`).join('');
-    } else {
-        container.style.display = cat ? 'block' : 'none';
-        select.innerHTML = `<option value="General">General ${cat}</option>`;
-    }
-}
-
-// Live card badge sync text helper
-function updateCardBadge() {
-    const mainCat = categorySearch.value || "Category";
-    const customSub = document.getElementById('customSubCategory').value.trim();
-    const selectSub = document.getElementById('subCategorySelect').value;
-    const subCat = customSub || selectSub || "";
-    
-    document.getElementById('card-category-badge').innerText = subCat ? `${mainCat} (${subCat})` : mainCat;
-}
-
-document.getElementById('subCategorySelect').addEventListener('change', updateCardBadge);
-document.getElementById('customSubCategory').addEventListener('input', updateCardBadge);
-
-// 2. Real-time Live Sync Preview & Metric Validator Execution
-function validateMetricFormat(val) {
-    return /^([0-9]+(\.[0-9]+)?)[KMkm]$/.test(val.trim());
-}
-
+// Real-time Preview Engine Interceptors
 document.getElementById('brandName').addEventListener('input', (e) => {
     document.getElementById('card-brand-name').innerText = e.target.value || "Alias Name";
 });
-document.getElementById('state').addEventListener('change', (e) => {
-    document.getElementById('card-location').innerText = `${e.target.value}, India`;
+document.getElementById('profileBio').addEventListener('input', (e) => {
+    document.getElementById('card-bio-render').innerText = e.target.value || "No bio punchline configured.";
 });
-
-const genderNode = document.getElementById('gender');
-const previewCard = document.getElementById('live-preview-card');
-function syncGenderBorder(gender) {
-    if(gender === 'Male') previewCard.style.borderColor = '#00e676';
-    else if(gender === 'Female') previewCard.style.borderColor = '#e1306c';
-    else previewCard.style.borderColor = '#9b5de5';
-}
-genderNode.addEventListener('change', (e) => syncGenderBorder(e.target.value));
-
+document.getElementById('cardTheme').addEventListener('change', (e) => {
+    document.getElementById('live-preview-card').style.borderColor = e.target.value;
+});
 document.getElementById('ytSubs').addEventListener('input', (e) => {
-    const val = e.target.value;
-    const statRow = document.getElementById('card-yt-stat');
-    if(val) {
-        statRow.style.display = 'flex';
-        document.getElementById('card-yt-count').innerText = val;
-        e.target.style.borderColor = validateMetricFormat(val) ? "rgba(255,255,255,0.06)" : "#ff4444";
-    } else { statRow.style.display = 'none'; }
+    document.getElementById('card-yt-count').innerText = e.target.value || "0K";
 });
-
 document.getElementById('igFollowers').addEventListener('input', (e) => {
-    const val = e.target.value;
-    const statRow = document.getElementById('card-ig-stat');
-    if(val) {
-        statRow.style.display = 'flex';
-        document.getElementById('card-ig-count').innerText = val;
-        e.target.style.borderColor = validateMetricFormat(val) ? "rgba(255,255,255,0.06)" : "#ff4444";
-    } else { statRow.style.display = 'none'; }
+    document.getElementById('card-ig-count').innerText = e.target.value || "0K";
 });
 
+// Image Upload Parser Pipeline
 document.getElementById('imageInput').addEventListener('change', function(e) {
     const file = e.target.files[0];
     if(file) {
@@ -261,15 +286,14 @@ document.getElementById('imageInput').addEventListener('change', function(e) {
             savedAvatarBase64 = evt.target.result;
             document.getElementById('avatarRender').src = savedAvatarBase64;
             document.getElementById('avatarRender').style.display = 'block';
-            document.getElementById('card-avatar').src = savedAvatarBase64;
             document.getElementById('upload-instruction').style.display = 'none';
         };
         reader.readAsDataURL(file);
     }
 });
 
-// 3. Pre-fill Framework Database Sync pipeline
-async function checkExistingUser() {
+// Firebase Framework Pre-Fill Lifecycle Engine
+async function initPrefillPipeline() {
     if(!db || !uid) return;
     if(localStorage.getItem('userEmail')) document.getElementById('email').value = localStorage.getItem('userEmail');
 
@@ -280,4 +304,200 @@ async function checkExistingUser() {
         if (docSnap.exists()) {
             const data = docSnap.data();
             document.getElementById('realName').value = data.realName || '';
-            document.getElementById('brandName
+            document.getElementById('brandName').value = data.brandName || '';
+            document.getElementById('whatsapp').value = data.whatsapp || '';
+            document.getElementById('gender').value = data.gender || 'Male';
+            stateSearch.value = data.state || '';
+            document.getElementById('profileBio').value = data.profileBio || '';
+            document.getElementById('cardTheme').value = data.cardTheme || '#00e676';
+            
+            document.getElementById('ytLink').value = data.youtubeLink || '';
+            document.getElementById('ytSubs').value = data.youtubeSubs || '';
+            document.getElementById('igLink').value = data.instagramLink || '';
+            document.getElementById('igFollowers').value = data.instagramFollowers || '';
+            document.getElementById('xLink').value = data.xLink || '';
+            document.getElementById('xMetrics').value = data.xMetrics || '';
+            document.getElementById('liLink').value = data.linkedinLink || '';
+            document.getElementById('liMetrics').value = data.linkedinMetrics || '';
+
+            if(data.categories) {
+                activeSelectedCategories = data.categories;
+                renderChips();
+                syncCategoryCardBadges();
+            }
+
+            if(data.brandName) document.getElementById('card-brand-name').innerText = data.brandName;
+            if(data.state) document.getElementById('card-location').innerText = `${data.state}, India`;
+            if(data.profileBio) document.getElementById('card-bio-render').innerText = data.profileBio;
+            document.getElementById('live-preview-card').style.borderColor = data.cardTheme || '#00e676';
+            if(data.youtubeSubs) document.getElementById('card-yt-count').innerText = data.youtubeSubs;
+            if(data.instagramFollowers) document.getElementById('card-ig-count').innerText = data.instagramFollowers;
+
+            if(data.avatarUrl) {
+                savedAvatarBase64 = data.avatarUrl;
+                document.getElementById('avatarRender').src = data.avatarUrl;
+                document.getElementById('avatarRender').style.display = 'block';
+                document.getElementById('upload-instruction').style.display = 'none';
+            }
+        }
+    } catch (err) { console.error("Pipeline failure: ", err); }
+}
+
+initPrefillPipeline();
+
+// Form Submit Handler
+document.getElementById('onboardingForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const profileData = {
+        realName: document.getElementById('realName').value,
+        brandName: document.getElementById('brandName').value,
+        whatsapp: document.getElementById('whatsapp').value,
+        email: document.getElementById('email').value,
+        gender: document.getElementById('gender').value,
+        state: stateSearch.value,
+        profileBio: document.getElementById('profileBio').value,
+        cardTheme: document.getElementById('cardTheme').value,
+        categories: activeSelectedCategories,
+        youtubeLink: document.getElementById('ytLink').value,
+        youtubeSubs: document.getElementById('ytSubs').value,
+        instagramLink: document.getElementById('igLink').value,
+        instagramFollowers: document.getElementById('igFollowers').value,
+        xLink: document.getElementById('xLink').value,
+        xMetrics: document.getElementById('xMetrics').value,
+        linkedinLink: document.getElementById('liLink').value,
+        linkedinMetrics: document.getElementById('liMetrics').value,
+        avatarUrl: savedAvatarBase64,
+        updatedAt: new Date().toISOString()
+    };
+    try {
+        await setDoc(doc(db, "creators", uid), profileData);
+        window.location.href = "index.html?page=creators";
+    } catch (error) { alert("Execution crash: " + error.message); }
+});
+</script>
+
+<style>
+/* Clean & Compact Premium Styles */
+.form-label {
+    display: block; 
+    font-size: 11px; 
+    font-weight: 700; 
+    color: rgba(255,255,255,0.4); 
+    text-transform: uppercase; 
+    margin-bottom: 6px; 
+    letter-spacing: 0.5px;
+}
+.premium-input {
+    width: 100%; 
+    background: #050e0e; 
+    border: 1px solid rgba(255,255,255,0.06); 
+    border-radius: 8px; 
+    padding: 10px 14px; 
+    color: #fff; 
+    font-size: 13px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+.premium-input:focus {
+    border-color: #00e676;
+    background: #071515;
+}
+.floating-dropdown {
+    display: none; 
+    position: absolute; 
+    width: 100%; 
+    background: #050e0e; 
+    border: 1px solid rgba(255,255,255,0.12); 
+    border-radius: 8px; 
+    max-height: 160px; 
+    overflow-y: auto; 
+    z-index: 100; 
+    margin-top: 4px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+.dropdown-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    color: rgba(255,255,255,0.8);
+}
+.dropdown-item:hover {
+    background: rgba(0, 230, 118, 0.08);
+    color: #00e676;
+}
+.category-chip {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(0, 230, 118, 0.08);
+    border: 1px solid rgba(0, 230, 118, 0.2);
+    color: #00e676;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+.category-chip i {
+    cursor: pointer;
+    color: rgba(255,255,255,0.4);
+}
+.category-chip i:hover { color: #ff4444; }
+
+/* Social Matrix Rows styling */
+.social-input-row {
+    display: grid; 
+    grid-template-columns: 36px 1fr 110px; 
+    gap: 8px; 
+    align-items: center;
+}
+.social-icon-box {
+    height: 36px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.6);
+    font-size: 15px;
+}
+.social-mid-input {
+    background: #050e0e;
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 8px 12px;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 6px;
+    outline: none;
+}
+.social-short-input {
+    background: #050e0e;
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 8px 12px;
+    color: #fff;
+    font-size: 12px;
+    border-radius: 6px;
+    outline: none;
+    text-align: center;
+}
+.social-mid-input:focus, .social-short-input:focus { border-color: #00e676; }
+
+.premium-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #00e676 0%, #00b359 100%);
+    color: #010707;
+    font-size: 14px;
+    font-weight: 800;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
+}
+.premium-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 230, 118, 0.3);
+}
+</style>
