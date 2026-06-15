@@ -12,28 +12,52 @@ import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.8.0/f
 
 async function loadDynamicCreators() {
     const grid = document.getElementById('cards-grid');
-    const db = window.appDb;
-    if(!db) return;
+    if (!grid) return;
+
+    // Retry runtime database context if initialization pipeline is syncing
+    let db = window.appDb;
+    if (!db) {
+        let retries = 0;
+        db = await new Promise((resolve) => {
+            const interval = setInterval(() => {
+                retries++;
+                if (window.appDb) {
+                    clearInterval(interval);
+                    resolve(window.appDb);
+                }
+                if (retries > 10) {
+                    clearInterval(interval);
+                    resolve(null);
+                }
+            }, 100);
+        });
+    }
+
+    if (!db) {
+        grid.innerHTML = `<div style="color: #ff4444; padding: 20px;">Database initialization timed out. Please refresh.</div>`;
+        return;
+    }
 
     try {
         const querySnapshot = await getDocs(collection(db, "creators"));
         
-        // CRITICAL FIX: Empty the placeholder element context entirely before rendering database records
+        // Explicitly clear any existing placeholders or remaining child components
         grid.innerHTML = '';
 
-        if(querySnapshot.empty) {
+        if (querySnapshot.empty) {
             grid.innerHTML = `<div style="color: rgba(255,255,255,0.4); padding: 20px;">No registered creators found inside the repository.</div>`;
             return;
         }
 
+        // Build HTML fragment buffer payload to minimize page reflow operations
+        let fragmentHtml = '';
+
         querySnapshot.forEach((doc) => {
             const data = doc.data();
             const profilePic = data.avatarUrl || "https://api.dicebear.com/7.x/bottts/svg?seed=" + doc.id;
-            
-            // Check cross-compatible context properties for alias naming
             const displayName = data.asaName || data.brandName || data.realName || "Anonymous Creator";
             
-            const cardHtml = `
+            fragmentHtml += `
                 <div style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 24px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
                     <img src="${profilePic}" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; border: 2px solid #00e676;">
                     <h3 style="margin: 0 0 6px 0; font-size: 20px; font-weight: 700;">${displayName}</h3>
@@ -49,14 +73,15 @@ async function loadDynamicCreators() {
                     </div>
                 </div>
             `;
-            grid.innerHTML += cardHtml;
         });
+        
+        grid.innerHTML = fragmentHtml;
     } catch (error) {
         console.error("Firestore loading failure context:", error);
         grid.innerHTML = `<div style="color: #ff4444; padding: 20px;">Failed to initialize public creator stream.</div>`;
     }
 }
 
-// Fire runtime query compilation instantly
+// Fire async fetch execution immediately
 loadDynamicCreators();
 </script>
