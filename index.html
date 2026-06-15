@@ -16,8 +16,10 @@ html, body {
     font-family:Inter,Arial,sans-serif;
     background:#010707;
     color:#fff;
-    overflow:hidden;
-    height: 100vh;
+    /* 🛠️ Fix: GitHub Pages aur scrolling forms ke liye full viewport control */
+    min-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
     scrollbar-gutter: stable;
 }
 #bg-canvas {
@@ -39,7 +41,8 @@ html, body {
     max-width: 1550px;
     margin: 0 auto;
     padding-top: 24px; 
-    height: 96vh;
+    padding-bottom: 24px;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start; 
@@ -124,16 +127,15 @@ html, body {
     backdrop-filter:blur(25px);
     box-shadow: 0 25px 60px rgba(0,0,0,0.6);
     flex: 1;
-    height: 100%;
-    min-height: 650px; 
-    max-height: 800px;
-    overflow-y: auto;
+    /* 🛠️ Fix: Max/Min heights hatakar flexibility di taaki content bheeche nahi */
+    width: 100%;
+    align-content: start;
 }
 
 @media(max-width:1100px), (max-height: 740px){
     body { overflow-y: auto; height: auto; display: block; }
     .container { height: auto; padding: 10px; }
-    .wrap { grid-template-columns: 1fr; max-height: none; min-height: auto; padding: 16px; }
+    .wrap { grid-template-columns: 1fr; padding: 16px; }
 }
 </style>
 </head>
@@ -191,17 +193,17 @@ else if (targetPage === 'deals') document.getElementById('nav-deals').classList.
 else if (targetPage === 'agencies') document.getElementById('nav-agencies').classList.add('active-nav');
 else if (targetPage.includes('production')) document.getElementById('nav-production').classList.add('active-nav');
 
-// 🛠️ डिज़ाइन को बिना छेड़े ग्रिड कॉलम हैंडलर
+// 🛠️ Dynamic Columns Grid System Setup
 if (targetPage === 'home' || targetPage.includes('onboarding')) {
     document.getElementById('dynamic-wrapper').style.gridTemplateColumns = 'minmax(0, 1.35fr) minmax(0, 1fr)';
 } else {
     document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
 }
 
-const cleanBaseRoute = window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
 const fileNameToLoad = targetPage + '.html';
 
-fetch(cleanBaseRoute + fileNameToLoad)
+/* 🛠️ Fix: GitHub Pages absolute route breaking issue solved via relative fetch */
+fetch(fileNameToLoad)
     .then(res => {
         if (!res.ok) throw new Error('File Not Found');
         return res.text();
@@ -221,7 +223,7 @@ fetch(cleanBaseRoute + fileNameToLoad)
         let pageDisplayTitle = targetPage.charAt(0).toUpperCase() + targetPage.slice(1);
         document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
         document.getElementById('dynamic-wrapper').innerHTML = `
-            <div style="text-align:center; padding-top:180px; width: 100%;">
+            <div style="text-align:center; padding:120px 20px; width: 100%;">
                 <h2 style="font-size: 32px; color: #00e676; margin-bottom: 10px;">${pageDisplayTitle}</h2>
                 <p style="color: rgba(255,255,255,0.5); font-size: 16px;">This section is coming soon. We are building something awesome!</p>
             </div>`;
