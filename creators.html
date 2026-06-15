@@ -1,264 +1,510 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-/* 🌍 MAIN CONTENT WRAPPER */
-.creators-page-container {
+/* 🌍 MAIN ONBOARDING CONTAINER */
+.onboarding-wrapper {
     display: flex !important;
-    flex-direction: column !important;
+    gap: 30px !important;
     width: 100% !important;
     height: 100% !important;
-    overflow: hidden !important; /* पूरे मुख्य पेज को स्क्रोल होने से रोकेगा */
-    position: relative !important;
+    color: #fff !important;
+    padding: 10px !important;
 }
 
-/* 🏔️ TOP HEADER SECTION */
-.creators-header {
+/* 📸 LEFT SECTION: PROFILE PIC & PRIMARY DETAILS */
+.onboarding-left {
+    flex: 0 0 300px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 20px !important;
+    align-items: center !important;
+}
+
+.photo-upload-box {
+    width: 220px !important;
+    height: 220px !important;
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 2px dashed rgba(0, 230, 118, 0.3) !important;
+    border-radius: 24px !important;
+    position: relative !important;
+    cursor: pointer !important;
+    overflow: hidden !important;
+    transition: all 0.4s ease !important;
+}
+
+.photo-upload-box:hover {
+    border-color: #00e676 !important;
+    background: rgba(0, 230, 118, 0.05) !important;
+    transform: scale(1.02) !important;
+}
+
+.photo-upload-box img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: none;
+}
+
+.upload-placeholder {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    height: 100% !important;
+    color: rgba(0, 230, 118, 0.6) !important;
+}
+
+.upload-placeholder i { font-size: 40px !important; margin-bottom: 10px !important; }
+.upload-placeholder p { font-size: 12px !important; font-weight: 600 !important; }
+
+/* 📝 FORM GRID SYSTEM */
+.onboarding-content {
+    flex: 1 !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 24px !important;
+    align-content: start !important;
+}
+
+.form-group {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 8px !important;
+}
+
+.form-group.full-width {
+    grid-column: span 2 !important;
+}
+
+.form-group label {
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    color: rgba(0, 230, 118, 0.8) !important;
+    margin-left: 4px !important;
+}
+
+.form-group input, .form-group select {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    padding: 12px 16px !important;
+    color: #fff !important;
+    font-size: 14px !important;
+    outline: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.form-group select option {
+    background: #010707 !important;
+    color: #fff !important;
+}
+
+.form-group input:focus, .form-group select:focus {
+    border-color: #00e676 !important;
+    background: rgba(0, 230, 118, 0.05) !important;
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.15) !important;
+}
+
+/* 🏷️ MULTI-SELECT CATEGORY DROPDOWN CONTAINER */
+.custom-dropdown {
+    position: relative !important;
+    width: 100% !important;
+}
+
+.dropdown-header {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 12px !important;
+    padding: 12px 16px !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
     display: flex !important;
     justify-content: space-between !important;
     align-items: center !important;
-    padding-bottom: 24px !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
-    flex-shrink: 0 !important;
-    height: 70px !important;
-    position: relative !important;
-    z-index: 999 !important; /* हेडर को ग्रिड के ऊपर रखने के लिए */
+    color: rgba(255, 255, 255, 0.7) !important;
 }
 
-.creators-header h2 {
-    font-size: 26px !important;
-    font-weight: 800 !important;
-    letter-spacing: -0.5px !important;
-    margin: 0 !important;
-    color: #fff !important;
-    max-width: 75% !important;
-    line-height: 1.3 !important;
-    transition: opacity 0.2s ease, font-size 0.2s ease !important;
-}
-
-/* ⚡ "JOIN ITB" BUTTON STYLE (HOVER & CLICK FIXED) */
-.join-itb-btn {
-    position: relative !important;
-    z-index: 9999 !important; /* बटन सबसे टॉप लेयर पर रहेगा */
-    pointer-events: auto !important; /* माउस क्लिक और होवर को जबरन एक्टिवेट करेगा */
-    background: rgba(0, 230, 118, 0.04) !important;
-    color: #00e676 !important;
-    padding: 12px 24px !important;
-    border: 1px solid rgba(0, 230, 118, 0.3) !important;
-    border-radius: 12px !important;
-    font-size: 14px !important;
-    font-weight: 700 !important;
-    cursor: pointer !important;
-    letter-spacing: 0.5px !important;
-    white-space: nowrap !important;
-    box-shadow: 0 4px 15px rgba(0, 230, 118, 0.05) !important;
-    transition: all 0.3s ease !important;
-}
-
-.join-itb-btn:hover {
-    background: #00e676 !important;
-    color: #010707 !important;
-    box-shadow: 0 0 25px rgba(0, 230, 118, 0.4) !important;
-}
-
-/* 📜 SCROLLABLE CARDS SECTION */
-.creators-grid-scroll {
-    flex: 1 !important;
-    overflow-y: auto !important; /* सिर्फ कार्ड वाला बड़ा बॉक्स स्क्रोल होगा */
-    padding-top: 24px !important;
-    padding-right: 4px !important;
-    position: relative !important;
-    z-index: 10 !important;
-}
-
-/* Custom Scrollbar */
-.creators-grid-scroll::-webkit-scrollbar { width: 6px; }
-.creators-grid-scroll::-webkit-scrollbar-track { background: transparent; }
-.creators-grid-scroll::-webkit-scrollbar-thumb { background: rgba(0, 230, 118, 0.2); border-radius: 10px; }
-.creators-grid-scroll::-webkit-scrollbar-thumb:hover { background: rgba(0, 230, 118, 0.5); }
-
-.creators-grid {
-    display: grid !important;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)) !important;
-    gap: 20px !important;
-    padding-bottom: 30px !important;
-}
-
-/* 🎴 CREATOR CARD STYLES */
-.creator-card {
-    background: rgba(4, 16, 16, 0.2) !important;
-    border: 1px solid rgba(255, 255, 255, 0.04) !important;
-    border-radius: 20px !important;
-    padding: 24px 20px !important;
-    text-align: center !important;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1) !important;
-}
-
-/* Hover Effect for Standard/Male Cards */
-.creator-card:hover {
-    border-color: #00e676 !important;
-    background: rgba(0, 230, 118, 0.02) !important;
-    box-shadow: 0 10px 30px rgba(0, 230, 118, 0.1) !important;
-    transform: translateY(-4px) !important;
-}
-
-/* 🚺 FEMALE CARD SPECIAL STYLE */
-.creator-card.female-card {
-    border: 1px solid rgba(255, 105, 180, 0.2) !important; /* Soft Pink Border */
-}
-.creator-card.female-card:hover {
-    border-color: #ff69b4 !important;
-    background: rgba(255, 105, 180, 0.02) !important;
-    box-shadow: 0 10px 30px rgba(255, 105, 180, 0.12) !important;
-}
-
-/* CARD DETAILS */
-.creator-avatar-wrapper {
-    width: 110px !important;
-    height: 110px !important;
-    margin: 0 auto 16px auto !important;
-}
-
-.creator-avatar {
+.dropdown-list {
+    position: absolute !important;
+    top: 105% !important;
+    left: 0 !important;
     width: 100% !important;
-    height: 100% !important;
-    border-radius: 50% !important;
-    object-fit: cover !important;
-    border: 2px solid rgba(255, 255, 255, 0.08) !important;
-    transition: border-color 0.3s ease !important;
+    background: #041010 !important;
+    border: 1px solid rgba(0, 230, 118, 0.2) !important;
+    border-radius: 12px !important;
+    max-height: 220px !important;
+    overflow-y: auto !important;
+    display: none;
+    z-index: 999 !important;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.8) !important;
+    padding: 10px !important;
 }
-.creator-card:hover .creator-avatar { border-color: #00e676 !important; }
-.creator-card.female-card:hover .creator-avatar { border-color: #ff69b4 !important; }
 
-.creator-name { font-size: 19px !important; font-weight: 700 !important; margin: 0 0 6px 0 !important; color: #fff !important; }
-.creator-location { font-size: 13px !important; color: #cbdad1 !important; margin: 0 0 20px 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 5px !important; }
+.dropdown-item {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    padding: 10px 12px !important;
+    border-radius: 8px !important;
+    cursor: pointer !important;
+    transition: 0.2s !important;
+}
 
-/* 🌐 SOCIAL LOGOS (White -> Colorful on Hover) */
-.creator-socials { display: flex !important; justify-content: center !important; gap: 12px !important; }
-.creator-socials a {
-    width: 40px !important;
-    height: 40px !important;
-    border-radius: 50% !important;
-    background: rgba(255, 255, 255, 0.03) !important;
-    border: 1px solid rgba(255, 255, 255, 0.06) !important;
+.dropdown-item:hover {
+    background: rgba(0, 230, 118, 0.08) !important;
+}
+
+.dropdown-item input[type="checkbox"] {
+    accent-color: #00e676 !important;
+    cursor: pointer !important;
+    width: 16px !important;
+    height: 16px !important;
+}
+
+/* 🔗 FAMOUS SOCIAL ROW GRID */
+.social-row {
+    display: grid !important;
+    grid-template-columns: 50px 1fr 160px !important;
+    gap: 12px !important;
+    align-items: center !important;
+    background: rgba(255, 255, 255, 0.01) !important;
+    padding: 8px 12px !important;
+    border-radius: 14px !important;
+    border: 1px solid rgba(255, 255, 255, 0.03) !important;
+}
+
+.social-icon-box {
+    width: 42px !important;
+    height: 42px !important;
+    border-radius: 10px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    color: #fff !important;
-    text-decoration: none !important;
+    font-size: 18px !important;
+}
+
+/* Specific Social Brand Icon Backgrounds */
+.si-yt { background: rgba(255, 0, 0, 0.1) !important; color: #ff0000 !important; }
+.si-ig { background: rgba(225, 48, 108, 0.1) !important; color: #e1306c !important; }
+.si-fb { background: rgba(24, 119, 242, 0.1) !important; color: #1877f2 !important; }
+.si-th { background: rgba(255, 255, 255, 0.1) !important; color: #fff !important; }
+.si-x { background: rgba(255, 255, 255, 0.05) !important; color: #cbdad1 !important; }
+.si-sc { background: rgba(255, 252, 0, 0.1) !important; color: #fffc00 !important; }
+
+/* 💎 PREMIUM SAVE BUTTON */
+.save-btn-container {
+    grid-column: span 2 !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    padding-top: 20px !important;
+}
+
+#saveProfileBtn {
+    background: linear-gradient(135deg, #00e676 0%, #00b853 100%) !important;
+    color: #010707 !important;
+    border: none !important;
+    padding: 15px 45px !important;
+    border-radius: 14px !important;
     font-size: 16px !important;
-    transition: all 0.3s ease !important;
+    font-weight: 800 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    cursor: pointer !important;
+    box-shadow: 0 10px 30px rgba(0, 230, 118, 0.3) !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
 }
 
-/* Instagram Multi-gradient Color */
-.creator-card:hover .social-instagram:hover {
-    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%) !important;
-    color: #fff !important;
-    border-color: transparent !important;
+#saveProfileBtn:hover {
+    transform: translateY(-5px) scale(1.02) !important;
+    box-shadow: 0 15px 40px rgba(0, 230, 118, 0.5) !important;
+    letter-spacing: 2px !important;
 }
 
-/* YouTube Solid Brand Color */
-.creator-card:hover .social-youtube:hover {
-    background: #ff0000 !important;
-    color: #fff !important;
-    border-color: transparent !important;
-}
-
-@media(max-width: 768px) {
-    .creators-header { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; height: auto !important; }
-    .creators-header h2 { max-width: 100% !important; font-size: 20px !important; }
-    .creators-page-container { overflow: visible !important; height: auto !important; }
-    .creators-grid-scroll { overflow-y: visible !important; }
+.email-disabled {
+    opacity: 0.6 !important;
+    cursor: not-allowed !important;
+    background: rgba(255, 255, 255, 0.02) !important;
 }
 </style>
 
-<div class="creators-page-container">
-    <div class="creators-header">
-        <h2 id="dynamicHeading">ये सारे creators हैं ITB के पास।</h2>
-        <button class="join-itb-btn" id="joinItbBtn" onclick="if(window.triggerGmailVerificationWorkflow){ window.triggerGmailVerificationWorkflow(); } else if(parent.triggerGmailVerificationWorkflow){ parent.triggerGmailVerificationWorkflow(); } else { alert('Firebase authentication setup is not loaded yet.'); }">Join ITB</button>
+<div class="onboarding-wrapper">
+    <div class="onboarding-left">
+        <label for="profileInput" class="photo-upload-box" id="photoBox">
+            <div class="upload-placeholder" id="placeholder">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <p>UPLOAD PHOTO</p>
+                <span style="font-size: 10px; opacity: 0.6; margin-top: 5px;">(MAX 1MB IMAGE ONLY)</span>
+            </div>
+            <img id="previewImg" src="" alt="Profile Preview">
+        </label>
+        <input type="file" id="profileInput" accept="image/*" style="display: none;">
+
+        <div class="form-group" style="width: 100%;">
+            <label>Gender</label>
+            <select id="gender">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+
+        <div class="form-group" style="width: 100%;">
+            <label>State (India)</label>
+            <select id="state">
+                <option value="" disabled selected>Select State</option>
+            </select>
+        </div>
     </div>
 
-    <div class="creators-grid-scroll">
-        <div class="creators-grid">
+    <div class="onboarding-content">
+        <div class="form-group">
+            <label>Real Name</label>
+            <input type="text" id="realName" placeholder="e.g. Rahul Kumar">
+        </div>
+        <div class="form-group">
+            <label>ASA Name (Alias / Brand)</label>
+            <input type="text" id="asaName" placeholder="e.g. TechBuddy">
+        </div>
+        <div class="form-group">
+            <label>WhatsApp Number</label>
+            <input type="tel" id="phone" placeholder="+91 XXXXX XXXXX">
+        </div>
+        <div class="form-group">
+            <label>Email ID (Auto-filled)</label>
+            <input type="email" id="email" class="email-disabled" readonly>
+        </div>
+
+        <div class="form-group full-width">
+            <label>Select Content Categories (Multiple)</label>
+            <div class="custom-dropdown">
+                <div class="dropdown-header" id="dropHeader" onclick="toggleCategoryDropdown()">
+                    <span id="dropSelectedText">Select Categories...</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="dropdown-list" id="dropList">
+                    <div class="dropdown-item"><input type="checkbox" value="Gaming" onchange="updateSelectedCategories()"> Gaming</div>
+                    <div class="dropdown-item"><input type="checkbox" value="Vlogging" onchange="updateSelectedCategories()"> Vlogging</div>
+                    <div class="dropdown-item"><input type="checkbox" value="Tech & Gadgets" onchange="updateSelectedCategories()"> Tech & Gadgets</div>
+                    <div class="dropdown-item"><input type="checkbox" value="Fashion & Lifestyle" onchange="updateSelectedCategories()"> Fashion & Lifestyle</div>
+                    <div class="dropdown-item"><input type="checkbox" value="Comedy & Roasting" onchange="updateSelectedCategories()"> Comedy & Roasting</div>
+                    <div class="dropdown-item"><input type="checkbox" value="Education & Info" onchange="updateSelectedCategories()"> Education & Info</div>
+                    <div class="dropdown-item"><input type="checkbox" value="Fitness & Health" onchange="updateSelectedCategories()"> Fitness & Health</div>
+                    <div class="dropdown-item"><input type="checkbox" value="Food & Cooking" onchange="updateSelectedCategories()"> Food & Cooking</div>
+                    <div class="dropdown-item"><input type="checkbox" value="Travel & Adventure" onchange="updateSelectedCategories()"> Travel & Adventure</div>
+                    <div class="dropdown-item"><input type="checkbox" value="Finance & Business" onchange="updateSelectedCategories()"> Finance & Business</div>
+                    <div class="dropdown-item"><input type="checkbox" value="Music & Dance" onchange="updateSelectedCategories()"> Music & Dance</div>
+                    <div class="dropdown-item"><input type="checkbox" value="Art & Design" onchange="updateSelectedCategories()"> Art & Design</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group full-width" style="gap: 14px;">
+            <label>Social Media Handles & Subscriber/Follower Ranges</label>
             
-            <div class="creator-card">
-                <div class="creator-avatar-wrapper">
-                    <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=200&auto=format&fit=crop" class="creator-avatar" alt="Aarav">
-                </div>
-                <div class="creator-name">Aarav Sharma</div>
-                <div class="creator-location"><i class="fa-solid fa-location-dot" style="color: #00e676;"></i> Mumbai, India</div>
-                <div class="creator-socials">
-                    <a href="#" class="social-instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="social-youtube"><i class="fa-brands fa-youtube"></i></a>
-                </div>
+            <div class="social-row">
+                <div class="social-icon-box si-yt"><i class="fa-brands fa-youtube"></i></div>
+                <input type="text" id="ytLink" placeholder="YouTube Channel Link">
+                <select id="ytRange">
+                    <option value="">No Account</option>
+                    <option value="0-10k">0 - 10K</option>
+                    <option value="10k-50k">10K - 50K</option>
+                    <option value="50k-100k">50K - 100K</option>
+                    <option value="100k-500k">100K - 500K</option>
+                    <option value="500k-1M">500K - 1M</option>
+                    <option value="1M+">1M+</option>
+                </select>
             </div>
 
-            <div class="creator-card female-card">
-                <div class="creator-avatar-wrapper">
-                    <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" class="creator-avatar" alt="Ananya">
-                </div>
-                <div class="creator-name">Ananya Iyer</div>
-                <div class="creator-location"><i class="fa-solid fa-location-dot" style="color: #ff69b4;"></i> Bangalore, India</div>
-                <div class="creator-socials">
-                    <a href="#" class="social-instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="social-youtube"><i class="fa-brands fa-youtube"></i></a>
-                </div>
+            <div class="social-row">
+                <div class="social-icon-box si-ig"><i class="fa-brands fa-instagram"></i></div>
+                <input type="text" id="igLink" placeholder="Instagram Profile Link">
+                <select id="igRange">
+                    <option value="">No Account</option>
+                    <option value="0-10k">0 - 10K</option>
+                    <option value="10k-50k">10K - 50K</option>
+                    <option value="50k-100k">50K - 100K</option>
+                    <option value="100k-500k">100K - 500K</option>
+                    <option value="500k-1M">500K - 1M</option>
+                    <option value="1M+">1M+</option>
+                </select>
             </div>
 
-            <div class="creator-card">
-                <div class="creator-avatar-wrapper">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" class="creator-avatar" alt="Kabir">
-                </div>
-                <div class="creator-name">Kabir Verma</div>
-                <div class="creator-location"><i class="fa-solid fa-location-dot" style="color: #00e676;"></i> Delhi, India</div>
-                <div class="creator-socials">
-                    <a href="#" class="social-instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="social-youtube"><i class="fa-brands fa-youtube"></i></a>
-                </div>
+            <div class="social-row">
+                <div class="social-icon-box si-fb"><i class="fa-brands fa-facebook"></i></div>
+                <input type="text" id="fbLink" placeholder="Facebook Page Link">
+                <select id="fbRange">
+                    <option value="">No Account</option>
+                    <option value="0-10k">0 - 10K</option>
+                    <option value="10k-50k">10K - 50K</option>
+                    <option value="50k-100k">50K - 100K</option>
+                    <option value="100k-500k">100K - 500K</option>
+                    <option value="500k-1M">500K - 1M</option>
+                    <option value="1M+">1M+</option>
+                </select>
             </div>
 
-            <div class="creator-card female-card">
-                <div class="creator-avatar-wrapper">
-                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop" class="creator-avatar" alt="Riya">
-                </div>
-                <div class="creator-name">Riya Kapoor</div>
-                <div class="creator-location"><i class="fa-solid fa-location-dot" style="color: #ff69b4;"></i> New Delhi, India</div>
-                <div class="creator-socials">
-                    <a href="#" class="social-instagram"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="social-youtube"><i class="fa-brands fa-youtube"></i></a>
-                </div>
+            <div class="social-row">
+                <div class="social-icon-box si-th"><i class="fa-brands fa-threads"></i></div>
+                <input type="text" id="thLink" placeholder="Threads Profile Link">
+                <select id="thRange">
+                    <option value="">No Account</option>
+                    <option value="0-10k">0 - 10K</option>
+                    <option value="10k-50k">10K - 50K</option>
+                    <option value="50k-100k">50K - 100K</option>
+                    <option value="100k-500k">100K - 500K</option>
+                    <option value="500k-1M">500K - 1M</option>
+                    <option value="1M+">1M+</option>
+                </select>
             </div>
 
+            <div class="social-row">
+                <div class="social-icon-box si-x"><i class="fa-brands fa-x-twitter"></i></div>
+                <input type="text" id="xLink" placeholder="X (Twitter) Profile Link">
+                <select id="xRange">
+                    <option value="">No Account</option>
+                    <option value="0-10k">0 - 10K</option>
+                    <option value="10k-50k">10K - 50K</option>
+                    <option value="50k-100k">50K - 100K</option>
+                    <option value="100k-500k">100K - 500K</option>
+                    <option value="500k-1M">500K - 1M</option>
+                    <option value="1M+">1M+</option>
+                </select>
+            </div>
+
+            <div class="social-row">
+                <div class="social-icon-box si-sc"><i class="fa-brands fa-snapchat"></i></div>
+                <input type="text" id="scLink" placeholder="Snapchat Public Profile Link">
+                <select id="scRange">
+                    <option value="">No Account</option>
+                    <option value="0-10k">0 - 10K</option>
+                    <option value="10k-50k">10K - 50K</option>
+                    <option value="50k-100k">50K - 100K</option>
+                    <option value="100k-500k">100K - 500K</option>
+                    <option value="500k-1M">500K - 1M</option>
+                    <option value="1M+">1M+</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="save-btn-container">
+            <button id="saveProfileBtn" onclick="saveCreatorData()">SAVE & BUILD CARD</button>
         </div>
     </div>
 </div>
 
 <script>
-// 🎯 HOVER TEXT UPDATE LOGIC
-const headingText = document.getElementById('dynamicHeading');
-const joinButton = document.getElementById('joinItbBtn');
+// 📧 AUTO-FILL EMAIL FROM AUTH LOCAL STORAGE
+const authEmail = localStorage.getItem('userEmail') || "creator@italentbuddy.com"; 
+document.getElementById('email').value = authEmail;
 
-const hindiHeadingText = "ये सारे creators हैं ITB के पास।";
-const englishHoverText = "Join as Creator to build your profile card and directory presence instantly.";
+// 🖼️ PHOTO UPLOAD VALIDATION (1MB LIMIT + IMAGE FORMAT STRICT CHECK)
+const fileInput = document.getElementById('profileInput');
+const previewImg = document.getElementById('previewImg');
+const placeholder = document.getElementById('placeholder');
 
-joinButton.addEventListener('mouseenter', () => {
-    headingText.style.opacity = '0';
-    setTimeout(() => {
-        headingText.textContent = englishHoverText;
-        headingText.style.fontSize = '15px';
-        headingText.style.color = 'rgba(255, 255, 255, 0.6)';
-        headingText.style.fontWeight = '500';
-        headingText.style.opacity = '1';
-    }, 150);
+fileInput.onchange = function() {
+    const file = this.files[0];
+    if (file) {
+        // Strict Type Check
+        if (!file.type.startsWith('image/')) {
+            alert("Invalid format! Please upload an image file only (PNG, JPG, WEBP).");
+            this.value = "";
+            return;
+        }
+        // 1MB Size Check
+        if (file.size > 1024 * 1024) {
+            alert("File is too large! Maximum limit is 1MB.");
+            this.value = "";
+            return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImg.src = e.target.result;
+            previewImg.style.display = 'block';
+            placeholder.style.display = 'none';
+        }
+        reader.readAsDataURL(file);
+    }
+};
+
+// 🏷️ MULTI-SELECT CATEGORY DROPDOWN TOGGLE LOGIC
+function toggleCategoryDropdown() {
+    const list = document.getElementById('dropList');
+    list.style.display = (list.style.display === 'block') ? 'none' : 'block';
+}
+
+// Window click helper to close dropdown when clicked outside
+window.addEventListener('click', function(e) {
+    if (!document.getElementById('dropHeader').contains(e.target) && !document.getElementById('dropList').contains(e.target)) {
+        document.getElementById('dropList').style.display = 'none';
+    }
 });
 
-joinButton.addEventListener('mouseleave', () => {
-    headingText.style.opacity = '0';
+let selectedCats = [];
+function updateSelectedCategories() {
+    const checkboxes = document.querySelectorAll('#dropList input[type="checkbox"]');
+    selectedCats = [];
+    checkboxes.forEach(cb => {
+        if (cb.checked) selectedCats.push(cb.value);
+    });
+    
+    const headerText = document.getElementById('dropSelectedText');
+    if (selectedCats.length > 0) {
+        headerText.textContent = selectedCats.join(', ');
+        headerText.style.color = '#00e676';
+    } else {
+        headerText.textContent = "Select Categories...";
+        headerText.style.color = 'rgba(255, 255, 255, 0.7)';
+    }
+}
+
+// 💾 SAVE SYSTEM 
+function saveCreatorData() {
+    const btn = document.getElementById('saveProfileBtn');
+    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> GENERATING CARD...';
+    btn.disabled = true;
+
+    // Data package object
+    const finalData = {
+        realName: document.getElementById('realName').value,
+        asaName: document.getElementById('asaName').value,
+        phone: document.getElementById('phone').value,
+        email: document.getElementById('email').value,
+        state: document.getElementById('state').value,
+        gender: document.getElementById('gender').value,
+        categories: selectedCats,
+        socials: {
+            youtube: { url: document.getElementById('ytLink').value, range: document.getElementById('ytRange').value },
+            instagram: { url: document.getElementById('igLink').value, range: document.getElementById('igRange').value },
+            facebook: { url: document.getElementById('fbLink').value, range: document.getElementById('fbRange').value },
+            threads: { url: document.getElementById('thLink').value, range: document.getElementById('thRange').value },
+            x: { url: document.getElementById('xLink').value, range: document.getElementById('xRange').value },
+            snapchat: { url: document.getElementById('scLink').value, range: document.getElementById('scRange').value }
+        }
+    };
+
+    console.log("Pushing Data to Firebase Architecture:", finalData);
+
     setTimeout(() => {
-        headingText.textContent = hindiHeadingText;
-        headingText.style.fontSize = '26px';
-        headingText.style.color = '#fff';
-        headingText.style.fontWeight = '800';
-        headingText.style.opacity = '1';
-    }, 150);
+        alert("Your Premium Creator Card is Live!");
+        window.location.href = "index.html?page=creators";
+    }, 1600);
+}
+
+// Dynamic injection of India States List
+const indianStates = [
+    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", 
+    "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
+    "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", 
+    "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Delhi", "Jammu and Kashmir", "Ladakh"
+];
+const stateDropdown = document.getElementById('state');
+indianStates.forEach(st => {
+    let opt = document.createElement('option');
+    opt.value = st;
+    opt.innerHTML = st;
+    stateDropdown.appendChild(opt);
 });
 </script>
