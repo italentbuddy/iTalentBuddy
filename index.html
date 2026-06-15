@@ -9,13 +9,15 @@
 *{ box-sizing:border-box; transition: all 0.2s ease-out; }
 html, body { margin:0; padding:0; font-family:Inter,Arial,sans-serif; background:#010707; color:#fff; overflow-x:hidden; min-height: 100vh; }
 #bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; background: radial-gradient(circle at 50% 50%, #021414 0%, #000606 100%); }
-.container{ width: 96%; max-width: 1550px; margin: 0 auto; padding: 24px 0; display: flex; flex-direction: column; }
-.nav{ display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px; height: 54px; }
+.container{ width: 94%; max-width: 1600px; margin: 0 auto; padding: 24px 0; display: flex; flex-direction: column; }
+.nav{ display:flex; justify-content:space-between; align-items:center; margin-bottom: 32px; height: 54px; position: relative; z-index: 99; }
 .logo{ font-size:36px; font-weight:900; letter-spacing: -1.5px; background: linear-gradient(135deg, #fff 40%, #00e676 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
 #nav{ display:flex; gap:12px; align-items: center; }
 #nav a{ padding:10px 20px; border-radius:12px; text-decoration:none; color:rgba(255,255,255,0.65); background:rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,0.06); font-size: 14px; font-weight: 600; }
 #nav a:hover, #nav a.active-nav { color: #010707; border-color: #00e676; background: #00e676; box-shadow: 0 0 15px rgba(0, 230, 118, 0.3); }
-.wrap{ border:1px solid rgba(255,255,255,.06); border-radius:24px; padding: 32px; background: rgba(4, 16, 16, 0.45); backdrop-filter:blur(25px); box-shadow: 0 25px 60px rgba(0,0,0,0.6); width: 100%; min-height: 500px; position: relative; z-index: 10; }
+
+/* यहाँ से वह डिब्बा हटा दिया है जो लेआउट तोड़ रहा था */
+.dynamic-view-wrapper { width: 100%; position: relative; z-index: 10; }
 </style>
 </head>
 <body>
@@ -30,7 +32,7 @@ html, body { margin:0; padding:0; font-family:Inter,Arial,sans-serif; background
             <a href="index.html?page=agencies" id="nav-agencies">Agencies</a>
         </div>
     </div>
-    <div class="wrap" id="dynamic-wrapper"></div>
+    <div class="dynamic-view-wrapper" id="dynamic-wrapper"></div>
 </div>
 
 <script type="module">
@@ -102,9 +104,9 @@ window.addEventListener('resize', resizeCanvas); resizeCanvas();
 class Particle {
     constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.vx = (Math.random() - 0.5) * 0.35; this.vy = (Math.random() - 0.5) * 0.35; this.radius = Math.random() * 2 + 1; }
     update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > canvas.width) this.vx *= -1; if (this.y < 0 || this.y > canvas.height) this.vy *= -1; }
-    draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = 'rgba(0, 230, 118, 0.4)'; ctx.fill(); }
+    draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = 'rgba(0, 230, 118, 0.3)'; ctx.fill(); }
 }
-for (let i = 0; i < 45; i++) particles.push(new Particle());
+for (let i = 0; i < 40; i++) particles.push(new Particle());
 function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
 animate();
 </script>
