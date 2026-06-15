@@ -6,7 +6,7 @@
 <title>iTalentBuddy | Next-Gen Creator Directory</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
-*{ box-sizing:border-box; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+*{ box-sizing:border-box; transition: all 0.2s ease-out; }
 html, body { margin:0; padding:0; font-family:Inter,Arial,sans-serif; background:#010707; color:#fff; overflow-x:hidden; min-height: 100vh; }
 #bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; background: radial-gradient(circle at 50% 50%, #021414 0%, #000606 100%); }
 .container{ width: 96%; max-width: 1550px; margin: 0 auto; padding: 24px 0; display: flex; flex-direction: column; }
@@ -15,7 +15,7 @@ html, body { margin:0; padding:0; font-family:Inter,Arial,sans-serif; background
 #nav{ display:flex; gap:12px; align-items: center; }
 #nav a{ padding:10px 20px; border-radius:12px; text-decoration:none; color:rgba(255,255,255,0.65); background:rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,0.06); font-size: 14px; font-weight: 600; }
 #nav a:hover, #nav a.active-nav { color: #010707; border-color: #00e676; background: #00e676; box-shadow: 0 0 15px rgba(0, 230, 118, 0.3); }
-.wrap{ border:1px solid rgba(255,255,255,.06); border-radius:24px; padding: 32px; background: rgba(4, 16, 16, 0.45); backdrop-filter:blur(25px); box-shadow: 0 25px 60px rgba(0,0,0,0.6); width: 100%; min-height: 500px; }
+.wrap{ border:1px solid rgba(255,255,255,.06); border-radius:24px; padding: 32px; background: rgba(4, 16, 16, 0.45); backdrop-filter:blur(25px); box-shadow: 0 25px 60px rgba(0,0,0,0.6); width: 100%; min-height: 500px; position: relative; z-index: 10; }
 </style>
 </head>
 <body>
@@ -52,17 +52,15 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const db = initializeFirestore(app, { localCache: persistentLocalCache({}) });
 
-window.appDb = db; // ग्लोबल एक्सेस
+window.appDb = db; 
 
 const urlParams = new URLSearchParams(window.location.search);
 let targetPage = (urlParams.get('page') || 'home').toLowerCase().trim();
 
-// एक्टिव टैब को हाईलाइट करना
 if (document.getElementById(`nav-${targetPage}`)) {
     document.getElementById(`nav-${targetPage}`).classList.add('active-nav');
 }
 
-// डायनेमिक पेज लोडर
 fetch(`${targetPage}.html`)
     .then(res => { if (!res.ok) throw new Error(); return res.text(); })
     .then(html => {
@@ -83,7 +81,6 @@ function executeScripts(container) {
     });
 }
 
-// ग्लोबल गूगल लॉगिन ट्रिगर
 window.triggerGmailVerificationWorkflow = function() {
     signInWithPopup(auth, provider)
         .then((result) => {
@@ -99,7 +96,6 @@ window.triggerGmailVerificationWorkflow = function() {
 </script>
 
 <script>
-// बैकग्राउंड पार्टिकल्स एनीमेशन स्क्रिप्ट
 const canvas = document.getElementById('bg-canvas'); const ctx = canvas.getContext('2d'); let particles = [];
 function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
 window.addEventListener('resize', resizeCanvas); resizeCanvas();
@@ -108,7 +104,7 @@ class Particle {
     update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > canvas.width) this.vx *= -1; if (this.y < 0 || this.y > canvas.height) this.vy *= -1; }
     draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = 'rgba(0, 230, 118, 0.4)'; ctx.fill(); }
 }
-for (let i = 0; i < 65; i++) particles.push(new Particle());
+for (let i = 0; i < 45; i++) particles.push(new Particle());
 function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
 animate();
 </script>
