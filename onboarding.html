@@ -1,16 +1,16 @@
-<div class="onboarding-container" style="display: grid; grid-template-columns: 1fr 400px; gap: 40px; padding: 40px; max-width: 1400px; margin: 0 auto; min-height: 100vh; background: #020808;">
+<div class="onboarding-container" style="display: grid; grid-template-columns: 1fr 420px; gap: 50px; padding: 40px; max-width: 100%; margin: 0 auto; box-sizing: border-box; background: #020808; min-height: 100vh;">
     
-    <div class="form-section" style="color: #fff; max-height: calc(100vh - 80px); overflow-y: auto; padding-right: 20px;">
-        <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 6px; background: linear-gradient(135deg, #fff 50%, #00e676 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px;">Creator Ecosystem Entry</h2>
-        <p style="color: rgba(255,255,255,0.4); font-size: 13px; margin-bottom: 35px;">Configure your professional network node. Changes update live in the sandbox.</p>
+    <div class="form-section" style="color: #fff; padding-right: 10px;">
+        <h2 style="font-size: 36px; font-weight: 800; margin: 0 0 8px 0; background: linear-gradient(135deg, #fff 60%, #00e676 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px;">Creator Ecosystem Entry</h2>
+        <p style="color: rgba(255,255,255,0.4); font-size: 14px; margin-bottom: 40px; font-weight: 400;">Configure your professional network node. Real-time updates sync instantly with the right preview terminal.</p>
 
-        <form id="onboardingForm" style="display: flex; flex-direction: column; gap: 24px;">
+        <form id="onboardingForm" style="display: flex; flex-direction: column; gap: 28px;">
             
-            <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">
-                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1px; text-transform: uppercase;">01. Identity Matrix</span>
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px;">
+                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1.5px; text-transform: uppercase;">01. Core Identity Matrix</span>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                 <div>
                     <label class="form-label">Real Name</label>
                     <input type="text" id="realName" placeholder="e.g. Rahul Kumar" required class="premium-input">
@@ -21,18 +21,18 @@
                 </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                 <div>
                     <label class="form-label">WhatsApp Number</label>
                     <input type="tel" id="whatsapp" placeholder="+91 XXXXX XXXXX" required class="premium-input">
                 </div>
                 <div>
                     <label class="form-label">Email ID (Auto-Filled)</label>
-                    <input type="email" id="email" readonly class="premium-input" style="background: rgba(255,255,255,0.02); color: rgba(255,255,255,0.3); cursor: not-allowed; border-color: rgba(255,255,255,0.03);">
+                    <input type="email" id="email" readonly class="premium-input" style="background: rgba(255,255,255,0.01); color: rgba(255,255,255,0.3); cursor: not-allowed; border-color: rgba(255,255,255,0.03);">
                 </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                 <div>
                     <label class="form-label">Gender</label>
                     <select id="gender" class="premium-input" style="appearance: none;">
@@ -48,7 +48,7 @@
                 </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
                 <div>
                     <label class="form-label">Profile Punchline / Bio</label>
                     <input type="text" id="profileBio" placeholder="e.g. Building Next-Gen Tech Ecosystems" class="premium-input">
@@ -64,22 +64,22 @@
                 </div>
             </div>
 
-            <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; margin-top: 10px;">
-                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1px; text-transform: uppercase;">02. Content Domain Select</span>
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-top: 10px;">
+                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1.5px; text-transform: uppercase;">02. Content Domain Select</span>
             </div>
 
             <div style="position: relative;">
-                <label class="form-label">Search & Multi-Select Categories (Top 2 display on card)</label>
+                <label class="form-label">Search & Multi-Select Categories (Top 2 will display on card)</label>
                 <input type="text" id="categorySearch" placeholder="Type to filter categories (e.g. Gaming, Tech, Cooking...)" class="premium-input" autocomplete="off">
                 <div id="categoryDropdown" class="floating-dropdown"></div>
-                <div id="selectedCategoryChips" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px;"></div>
+                <div id="selectedCategoryChips" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;"></div>
             </div>
 
-            <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; margin-top: 10px;">
-                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1px; text-transform: uppercase;">03. Social Infrastructure Nodes</span>
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-top: 10px;">
+                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1.5px; text-transform: uppercase;">03. Social Infrastructure Nodes</span>
             </div>
 
-            <div style="display: flex; flex-direction: column; gap: 12px;">
+            <div style="display: flex; flex-direction: column; gap: 14px;">
                 <div class="social-input-row">
                     <div class="social-icon-box"><i class="fa-brands fa-youtube"></i></div>
                     <input type="text" id="ytLink" placeholder="YouTube Channel Link" class="social-mid-input">
@@ -102,47 +102,47 @@
                 </div>
             </div>
 
-            <button type="submit" id="submitBtn" class="premium-btn">Save & Exit</button>
+            <button type="submit" id="submitBtn" class="premium-btn">Publish to Directory</button>
         </form>
     </div>
 
-    <div class="preview-section" style="position: sticky; top: 40px; height: calc(100vh - 80px); display: flex; align-items: center; justify-content: center; z-index: 10;">
-        <div id="live-preview-card" style="width: 100%; max-width: 320px; aspect-ratio: 9/16; background: #040d0d; border: 2px solid #00e676; border-radius: 24px; box-shadow: 0 25px 50px rgba(0,230,118,0.12); overflow: hidden; display: flex; flex-direction: column; position: relative; transition: border-color 0.4s ease;">
+    <div class="preview-section" style="position: sticky; top: 40px; height: calc(100vh - 80px); display: flex; flex-direction: column; align-items: center; justify-content: center; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); border-radius: 20px; padding: 20px; box-sizing: border-box;">
+        <span style="font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px;"><i class="fa-solid fa-eye" style="margin-right: 6px;"></i> Live Card Monitor</span>
+        
+        <div id="live-preview-card" style="width: 100%; max-width: 330px; aspect-ratio: 9/16; background: #040d0d; border: 2px solid #00e676; border-radius: 24px; box-shadow: 0 30px 60px rgba(0,230,118,0.15); overflow: hidden; display: flex; flex-direction: column; position: relative; transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);">
             
-            <div id="image-upload-zone" style="width: 100%; height: 50%; background: #071515; border-bottom: 1px solid rgba(255,255,255,0.04); position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden;">
+            <div id="image-upload-zone" style="width: 100%; height: 50%; background: #071515; border-bottom: 1px solid rgba(255,255,255,0.05); position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden;">
                 <input type="file" id="imageInput" accept="image/*" style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 40;">
-                <div id="upload-instruction" style="text-align: center; color: rgba(0, 230, 118, 0.7); z-index: 30; pointer-events: none;">
-                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 24px; margin-bottom: 6px;"></i>
-                    <div style="font-weight: 700; font-size: 10px; letter-spacing: 0.5px;">INJECT IMAGE</div>
+                <div id="upload-instruction" style="text-align: center; color: rgba(0, 230, 118, 0.8); z-index: 30; pointer-events: none;">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 28px; margin-bottom: 8px;"></i>
+                    <div style="font-weight: 700; font-size: 11px; letter-spacing: 1px;">UPLOAD PROFILE IMAGE</div>
                 </div>
                 <img id="avatarRender" style="display: none; position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; z-index: 35;">
             </div>
 
-            <div style="padding: 20px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(180deg, rgba(4,13,13,0) 0%, #030a0a 100%);">
-                
+            <div style="padding: 24px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(180deg, rgba(4,13,13,0) 0%, #030a0a 100%); box-sizing: border-box;">
                 <div>
-                    <h3 id="card-brand-name" style="font-size: 20px; font-weight: 800; margin: 0 0 4px 0; letter-spacing: -0.3px; color: #fff;">Alias Name</h3>
-                    <p style="margin: 0; color: rgba(255,255,255,0.4); font-size: 12px; display: flex; align-items: center; gap: 5px;">
+                    <h3 id="card-brand-name" style="font-size: 22px; font-weight: 800; margin: 0 0 6px 0; letter-spacing: -0.5px; color: #fff;">Alias Name</h3>
+                    <p style="margin: 0; color: rgba(255,255,255,0.4); font-size: 13px; display: flex; align-items: center; gap: 6px;">
                         <i class="fa-solid fa-location-dot" style="color: #00e676;"></i> <span id="card-location">State, India</span>
                     </p>
-                    <p id="card-bio-render" style="margin: 8px 0 0 0; font-size: 11px; color: rgba(255,255,255,0.5); line-height: 1.4; font-style: italic;">No bio punchline configured.</p>
+                    <p id="card-bio-render" style="margin: 12px 0 0 0; font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.5; font-style: italic;">No bio punchline configured.</p>
                 </div>
 
-                <div id="card-category-badge-container" style="display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px;">
-                    <div style="font-size: 9px; color: #00e676; text-transform: uppercase; font-weight:800; background: rgba(0,230,118,0.06); padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(0,230,118,0.12);">No Domain Selected</div>
+                <div id="card-category-badge-container" style="display: flex; flex-wrap: wrap; gap: 6px;">
+                    <div style="font-size: 9px; color: #00e676; text-transform: uppercase; font-weight:800; background: rgba(0,230,118,0.06); padding: 5px 12px; border-radius: 20px; border: 1px solid rgba(0,230,118,0.15);">No Domain Selected</div>
                 </div>
 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 14px;">
-                    <div style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.02); padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.03);">
-                        <i class="fa-brands fa-youtube" style="color: #fff; font-size: 15px;"></i>
-                        <span id="card-yt-count" style="font-size: 11px; font-weight: 700; color: #fff;">0K</span>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 16px;">
+                    <div style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.02); padding: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.04);">
+                        <i class="fa-brands fa-youtube" style="color: #ff0000; font-size: 16px;"></i>
+                        <span id="card-yt-count" style="font-size: 12px; font-weight: 700; color: #fff;">0K</span>
                     </div>
-                    <div style="display: flex; align-items: center; gap: 6px; background: rgba(255,255,255,0.02); padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.03);">
-                        <i class="fa-brands fa-instagram" style="color: #fff; font-size: 15px;"></i>
-                        <span id="card-ig-count" style="font-size: 11px; font-weight: 700; color: #fff;">0K</span>
+                    <div style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.02); padding: 10px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.04);">
+                        <i class="fa-brands fa-instagram" style="color: #e1306c; font-size: 16px;"></i>
+                        <span id="card-ig-count" style="font-size: 12px; font-weight: 700; color: #fff;">0K</span>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
@@ -156,7 +156,6 @@ const uid = localStorage.getItem('userUid');
 let savedAvatarBase64 = "";
 let activeSelectedCategories = [];
 
-// Complete Indian States & UTs Array Mapping
 const indiaStates = [
     "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", 
     "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
@@ -165,14 +164,12 @@ const indiaStates = [
     "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
 ];
 
-// Expanded Premium Categories Pipeline Matrix
 const comprehensiveCategories = [
     "Tech & AI", "Gaming & Esports", "Finance & Trading", "Vlogging & Travel", "Fashion & Lifestyle", 
     "Education & Academics", "Comedy & Roasting", "Fitness & Health", "Art & Design", "Business & Startups",
     "Crypto & Web3", "Food & Cooking", "Music & Dance", "Photography & Film", "Infotainment", "Automobile"
 ];
 
-// 1. Dropdown State Engine Search Handler
 const stateSearch = document.getElementById('stateSearch');
 const stateDropdown = document.getElementById('stateDropdown');
 
@@ -196,7 +193,6 @@ function renderStateDropdown(filter = "") {
 stateSearch.addEventListener('focus', () => { renderStateDropdown(stateSearch.value); stateDropdown.style.display = 'block'; });
 stateSearch.addEventListener('input', (e) => renderStateDropdown(e.target.value));
 
-// 2. Multi-Select Category Engine System
 const categorySearch = document.getElementById('categorySearch');
 const categoryDropdown = document.getElementById('categoryDropdown');
 const chipsContainer = document.getElementById('selectedCategoryChips');
@@ -205,13 +201,12 @@ function syncCategoryCardBadges() {
     const cardBadgeBox = document.getElementById('card-category-badge-container');
     cardBadgeBox.innerHTML = "";
     if(activeSelectedCategories.length === 0) {
-        cardBadgeBox.innerHTML = `<div style="font-size: 9px; color: #00e676; text-transform: uppercase; font-weight:800; background: rgba(0,230,118,0.06); padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(0,230,118,0.12);">No Domain Selected</div>`;
+        cardBadgeBox.innerHTML = `<div style="font-size: 9px; color: #00e676; text-transform: uppercase; font-weight:800; background: rgba(0,230,118,0.06); padding: 5px 12px; border-radius: 20px; border: 1px solid rgba(0,230,118,0.15);">No Domain Selected</div>`;
         return;
     }
-    // Hard restriction to output top 2 arrays into preview visual layout nodes
     activeSelectedCategories.slice(0, 2).forEach(cat => {
         const badge = document.createElement('div');
-        badge.style = "font-size: 9px; color: #00e676; text-transform: uppercase; font-weight:800; background: rgba(0,230,118,0.06); padding: 4px 10px; border-radius: 20px; border: 1px solid rgba(0,230,118,0.12);";
+        badge.style = "font-size: 9px; color: #00e676; text-transform: uppercase; font-weight:800; background: rgba(0,230,118,0.06); padding: 5px 12px; border-radius: 20px; border: 1px solid rgba(0,230,118,0.15);";
         badge.innerText = cat;
         cardBadgeBox.appendChild(badge);
     });
@@ -254,13 +249,11 @@ function renderCategoryDropdown(filter = "") {
 categorySearch.addEventListener('focus', () => { renderCategoryDropdown(categorySearch.value); categoryDropdown.style.display = 'block'; });
 categorySearch.addEventListener('input', (e) => renderCategoryDropdown(e.target.value));
 
-// Click outside drop dismiss triggers
 document.addEventListener('click', (e) => {
     if(!stateSearch.contains(e.target) && !stateDropdown.contains(e.target)) stateDropdown.style.display = 'none';
     if(!categorySearch.contains(e.target) && !categoryDropdown.contains(e.target)) categoryDropdown.style.display = 'none';
 });
 
-// Real-time Preview Engine Interceptors
 document.getElementById('brandName').addEventListener('input', (e) => {
     document.getElementById('card-brand-name').innerText = e.target.value || "Alias Name";
 });
@@ -277,7 +270,6 @@ document.getElementById('igFollowers').addEventListener('input', (e) => {
     document.getElementById('card-ig-count').innerText = e.target.value || "0K";
 });
 
-// Image Upload Parser Pipeline
 document.getElementById('imageInput').addEventListener('change', function(e) {
     const file = e.target.files[0];
     if(file) {
@@ -292,7 +284,6 @@ document.getElementById('imageInput').addEventListener('change', function(e) {
     }
 });
 
-// Firebase Framework Pre-Fill Lifecycle Engine
 async function initPrefillPipeline() {
     if(!db || !uid) return;
     if(localStorage.getItem('userEmail')) document.getElementById('email').value = localStorage.getItem('userEmail');
@@ -345,7 +336,6 @@ async function initPrefillPipeline() {
 
 initPrefillPipeline();
 
-// Form Submit Handler
 document.getElementById('onboardingForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     const profileData = {
@@ -377,14 +367,13 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
 </script>
 
 <style>
-/* Clean & Compact Premium Styles */
 .form-label {
     display: block; 
     font-size: 11px; 
     font-weight: 700; 
     color: rgba(255,255,255,0.4); 
     text-transform: uppercase; 
-    margin-bottom: 6px; 
+    margin-bottom: 8px; 
     letter-spacing: 0.5px;
 }
 .premium-input {
@@ -392,15 +381,17 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
     background: #050e0e; 
     border: 1px solid rgba(255,255,255,0.06); 
     border-radius: 8px; 
-    padding: 10px 14px; 
+    padding: 12px 16px; 
     color: #fff; 
-    font-size: 13px;
+    font-size: 14px;
     outline: none;
-    transition: all 0.2s ease;
+    box-sizing: border-box;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .premium-input:focus {
     border-color: #00e676;
     background: #071515;
+    box-shadow: 0 0 0 3px rgba(0, 230, 118, 0.1);
 }
 .floating-dropdown {
     display: none; 
@@ -409,14 +400,14 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
     background: #050e0e; 
     border: 1px solid rgba(255,255,255,0.12); 
     border-radius: 8px; 
-    max-height: 160px; 
+    max-height: 200px; 
     overflow-y: auto; 
     z-index: 100; 
-    margin-top: 4px; 
-    box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+    margin-top: 6px; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.7);
 }
 .dropdown-item {
-    padding: 10px 14px;
+    padding: 12px 16px;
     cursor: pointer;
     font-size: 13px;
     color: rgba(255,255,255,0.8);
@@ -428,13 +419,13 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
 .category-chip {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 8px;
     background: rgba(0, 230, 118, 0.08);
     border: 1px solid rgba(0, 230, 118, 0.2);
     color: #00e676;
-    padding: 4px 10px;
+    padding: 6px 14px;
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 13px;
 }
 .category-chip i {
     cursor: pointer;
@@ -442,62 +433,63 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
 }
 .category-chip i:hover { color: #ff4444; }
 
-/* Social Matrix Rows styling */
 .social-input-row {
     display: grid; 
-    grid-template-columns: 36px 1fr 110px; 
-    gap: 8px; 
+    grid-template-columns: 42px 1fr 140px; 
+    gap: 12px; 
     align-items: center;
 }
 .social-icon-box {
-    height: 36px;
+    height: 42px;
     background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.05);
-    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: rgba(255,255,255,0.6);
-    font-size: 15px;
+    font-size: 16px;
 }
 .social-mid-input {
     background: #050e0e;
-    border: 1px solid rgba(255,255,255,0.05);
-    padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 11px 16px;
     color: #fff;
-    font-size: 12px;
-    border-radius: 6px;
+    font-size: 13px;
+    border-radius: 8px;
     outline: none;
+    box-sizing: border-box;
 }
 .social-short-input {
     background: #050e0e;
-    border: 1px solid rgba(255,255,255,0.05);
-    padding: 8px 12px;
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 11px 16px;
     color: #fff;
-    font-size: 12px;
-    border-radius: 6px;
+    font-size: 13px;
+    border-radius: 8px;
     outline: none;
+    box-sizing: border-box;
     text-align: center;
 }
-.social-mid-input:focus, .social-short-input:focus { border-color: #00e676; }
+.social-mid-input:focus, .social-short-input:focus { border-color: #00e676; background: #071515; }
 
 .premium-btn {
     width: 100%;
     background: linear-gradient(135deg, #00e676 0%, #00b359 100%);
     color: #010707;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 800;
     border: none;
-    padding: 14px;
+    padding: 16px;
     border-radius: 8px;
     cursor: pointer;
-    margin-top: 15px;
+    margin-top: 10px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     transition: all 0.2s ease;
 }
 .premium-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 230, 118, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 230, 118, 0.35);
 }
 </style>
