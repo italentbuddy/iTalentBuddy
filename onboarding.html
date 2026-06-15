@@ -1,43 +1,43 @@
 <div class="onboarding-container" style="width: 100%; color: #fff; position: relative; z-index: 20;">
     <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 6px; background: linear-gradient(135deg, #fff 60%, #00e676 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Creator Ecosystem Entry</h2>
-    <p style="color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 30px;">Fill your profile metrics. If you have already registered, your old data will auto-load below.</p>
+    <p style="color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 30px;">Fill your profile metrics. Real-time changes appear on your premium live card.</p>
 
-    <form id="onboardingForm" style="display: grid; grid-template-columns: 280px 1fr; gap: 40px; position: relative; z-index: 25;">
+    <div style="display: grid; grid-template-columns: 320px 1fr; gap: 40px; position: relative; z-index: 25;">
         
-        <div style="display: flex; flex-direction: column; gap: 20px;">
-            <div id="image-upload-zone" style="border: 2px dashed rgba(0, 230, 118, 0.4); background: rgba(0, 230, 118, 0.02); border-radius: 20px; height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; cursor: pointer; position: relative;">
+        <div style="position: sticky; top: 20px; height: max-content; display: flex; flex-direction: column; gap: 20px;">
+            <div id="image-upload-zone" style="border: 2px dashed rgba(0, 230, 118, 0.4); background: rgba(0, 230, 118, 0.02); border-radius: 20px; height: 180px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; cursor: pointer; position: relative;">
                 <input type="file" id="imageInput" accept="image/*" style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 40;">
                 <div id="upload-instruction" style="z-index: 30; pointer-events: none;">
-                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 40px; color: #00e676; margin-bottom: 15px;"></i>
-                    <div style="font-weight: 700; font-size: 14px; color: #00e676; text-transform: uppercase;">Upload Photo</div>
-                    <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 8px;">(CLICK TO SELECT)</div>
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 32px; color: #00e676; margin-bottom: 10px;"></i>
+                    <div style="font-weight: 700; font-size: 12px; color: #00e676; text-transform: uppercase;">Upload Photo</div>
                 </div>
                 <img id="avatarRender" style="display: none; position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; border-radius:18px; z-index: 35;">
             </div>
 
-            <div>
-                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Gender</label>
-                <select id="gender" style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
+            <div id="live-preview-card" style="background: #041010; border: 2px solid #00e676; border-radius: 20px; padding: 24px; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.5); transition: border-color 0.4s ease;">
+                <img id="card-avatar" src="https://api.dicebear.com/7.x/bottts/svg?seed=placeholder" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; border: 2px solid rgba(255,255,255,0.1);">
+                <h3 id="card-brand-name" style="margin: 0 0 6px 0; font-size: 20px; font-weight: 700;">Alias Name</h3>
+                <p style="margin: 0 0 16px 0; color: rgba(255,255,255,0.5); font-size: 13px;">
+                    <i class="fa-solid fa-location-dot" style="color:#00e676; margin-right: 5px;"></i> <span id="card-location">State, India</span>
+                </p>
+                
+                <div style="display: flex; flex-direction: column; gap: 8px; align-items: center; margin-bottom: 16px; background: rgba(255,255,255,0.02); padding: 10px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.04);">
+                    <div id="card-yt-stat" style="display: none; align-items: center; gap: 8px; font-size: 13px; color: #fff;">
+                        <i class="fa-brands fa-youtube" style="color: #fff;"></i> <span id="card-yt-count">0K</span> Subscribers
+                    </div>
+                    <div id="card-ig-stat" style="display: none; align-items: center; gap: 8px; font-size: 13px; color: #fff;">
+                        <i class="fa-brands fa-instagram" style="color: #fff;"></i> <span id="card-ig-count">0K</span> Followers
+                    </div>
+                </div>
 
-            <div>
-                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">State (India)</label>
-                <select id="state" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
-                    <option value="" disabled selected>Select State</option>
-                    <option value="Maharashtra">Maharashtra</option>
-                    <option value="Delhi">Delhi</option>
-                    <option value="Karnataka">Karnataka</option>
-                    <option value="Uttar Pradesh">Uttar Pradesh</option>
-                    <option value="Haryana">Haryana</option>
-                </select>
+                <div id="card-category-badge" style="font-size: 11px; color: #00e676; text-transform: uppercase; font-weight:700; background: rgba(0,230,118,0.06); padding: 4px 12px; border-radius: 20px; display: inline-block; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                    Category
+                </div>
             </div>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 24px;">
+        <form id="onboardingForm" style="display: flex; flex-direction: column; gap: 24px;">
+            
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                 <div>
                     <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Real Name</label>
@@ -60,27 +60,85 @@
                 </div>
             </div>
 
-            <div>
-                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Select Content Categories</label>
-                <select id="category" style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
-                    <option value="Tech & AI">Tech & AI</option>
-                    <option value="Vlogging & Travel">Vlogging & Travel</option>
-                    <option value="Finance & Business">Finance & Business</option>
-                    <option value="Gaming">Gaming</option>
-                </select>
-            </div>
-
-            <div>
-                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 12px;">Social Media Links</label>
-                <div style="display: flex; flex-direction: column; gap: 12px;">
-                    <input type="text" id="ytLink" placeholder="YouTube Channel Link" style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
-                    <input type="text" id="igLink" placeholder="Instagram Profile Link" style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div>
+                    <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Gender</label>
+                    <select id="gender" style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">State (India)</label>
+                    <select id="state" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+                        <option value="" disabled selected>Select State</option>
+                        <option value="Andhra Pradesh">Andhra Pradesh</option>
+                        <option value="Arunachal Pradesh">Arunachal Pradesh</option>
+                        <option value="Assam">Assam</option>
+                        <option value="Bihar">Bihar</option>
+                        <option value="Chhattisgarh">Chhattisgarh</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Goa">Goa</option>
+                        <option value="Gujarat">Gujarat</option>
+                        <option value="Haryana">Haryana</option>
+                        <option value="Himachal Pradesh">Himachal Pradesh</option>
+                        <option value="Jharkhand">Jharkhand</option>
+                        <option value="Karnataka">Karnataka</option>
+                        <option value="Kerala">Kerala</option>
+                        <option value="Madhya Pradesh">Madhya Pradesh</option>
+                        <option value="Maharashtra">Maharashtra</option>
+                        <option value="Manipur">Manipur</option>
+                        <option value="Meghalaya">Meghalaya</option>
+                        <option value="Mizoram">Mizoram</option>
+                        <option value="Nagaland">Nagaland</option>
+                        <option value="Odisha">Odisha</option>
+                        <option value="Punjab">Punjab</option>
+                        <option value="Rajasthan">Rajasthan</option>
+                        <option value="Sikkim">Sikkim</option>
+                        <option value="Tamil Nadu">Tamil Nadu</option>
+                        <option value="Telangana">Telangana</option>
+                        <option value="Tripura">Tripura</option>
+                        <option value="Uttar Pradesh">Uttar Pradesh</option>
+                        <option value="Uttarakhand">Uttarakhand</option>
+                        <option value="West Bengal">West Bengal</option>
+                    </select>
                 </div>
             </div>
 
-            <button type="submit" id="submitBtn" style="width: 100%; background: #00e676; color: #010707; font-size: 16px; font-weight: 800; border: none; padding: 16px; border-radius: 14px; cursor: pointer; margin-top: 10px; display: block; position: relative; z-index: 999; text-transform: uppercase; letter-spacing: 0.5px;">Publish To Directory</button>
-        </div>
-    </form>
+            <div style="position: relative;">
+                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Search / Select Category</label>
+                <input type="text" id="categorySearch" placeholder="Type to filter categories (e.g. Gaming, Tech, Finance...)" style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+                <div id="categoryDropdown" style="display: none; position: absolute; width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.15); border-radius: 12px; max-height: 200px; overflow-y: auto; z-index: 100; margin-top: 5px; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+                    </div>
+            </div>
+
+            <div id="subCategoryContainer" style="display: none;">
+                <label id="subCategoryLabel" style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Sub-Category / Game List</label>
+                <div style="display: flex; gap: 10px;">
+                    <select id="subCategorySelect" style="flex: 1; background: #041010; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+                        </select>
+                    <input type="text" id="customSubCategory" placeholder="Or type your own custom tag..." style="flex: 1; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+                </div>
+            </div>
+
+            <div style="background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.04); padding: 20px; border-radius: 16px; display: flex; flex-direction: column; gap: 16px;">
+                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase;">Social Platforms & Metrics (Format: 10K, 2.5M)</label>
+                
+                <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 14px;">
+                    <input type="text" id="ytLink" placeholder="YouTube Channel Link" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+                    <input type="text" id="ytSubs" placeholder="Subs (e.g. 50K, 1.2M)" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 14px;">
+                    <input type="text" id="igLink" placeholder="Instagram Profile Link" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+                    <input type="text" id="igFollowers" placeholder="Followers (e.g. 100K, 5M)" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn" class="premium-btn">Save & Exit To Directory</button>
+        </form>
+    </div>
 </div>
 
 <script type="module">
@@ -90,7 +148,102 @@ const db = window.appDb;
 const uid = localStorage.getItem('userUid');
 let savedAvatarBase64 = "";
 
-// 1. Live Photo Preview Setup
+const categoryList = [
+    "Tech & AI", "Gaming", "Finance & Business", "Vlogging & Travel", 
+    "Fashion & Lifestyle", "Education", "Comedy & Entertainment", "Fitness & Health"
+];
+
+const subCategories = {
+    "Gaming": ["BGMI", "Free Fire", "GTA V", "Minecraft", "Valorant", "Chess"],
+    "Tech & AI": ["Gadgets Review", "Coding & Dev", "AI Tools", "Tech News"],
+    "Finance & Business": ["Stock Market", "Crypto", "Personal Finance", "Startup Case Studies"]
+};
+
+// 1. Filterable Searchable Dropdown Logic
+const categorySearch = document.getElementById('categorySearch');
+const categoryDropdown = document.getElementById('categoryDropdown');
+
+function renderCategories(filter = "") {
+    categoryDropdown.innerHTML = "";
+    const filtered = categoryList.filter(c => c.toLowerCase().includes(filter.toLowerCase()));
+    
+    filtered.forEach(cat => {
+        const div = document.createElement('div');
+        div.innerText = cat;
+        div.style.padding = "12px 16px";
+        div.style.cursor = "pointer";
+        div.style.color = "#fff";
+        div.addEventListener('click', () => {
+            categorySearch.value = cat;
+            categoryDropdown.style.display = 'none';
+            updateSubCategoryView(cat);
+            document.getElementById('card-category-badge').innerText = cat;
+        });
+        categoryDropdown.appendChild(div);
+    });
+}
+
+categorySearch.addEventListener('focus', () => { renderCategories(categorySearch.value); categoryDropdown.style.display = 'block'; });
+categorySearch.addEventListener('input', (e) => renderCategories(e.target.value));
+document.addEventListener('click', (e) => { if(!categorySearch.contains(e.target) && !categoryDropdown.contains(e.target)) categoryDropdown.style.display = 'none'; });
+
+function updateSubCategoryView(cat) {
+    const container = document.getElementById('subCategoryContainer');
+    const select = document.getElementById('subCategorySelect');
+    if(subCategories[cat]) {
+        container.style.display = 'block';
+        select.innerHTML = subCategories[cat].map(sub => `<option value="${sub}">${sub}</option>`).join('');
+    } else {
+        container.style.display = cat ? 'block' : 'none';
+        select.innerHTML = `<option value="General">General ${cat}</option>`;
+    }
+}
+
+// 2. Real-time Live Sync Preview & Metric Validator Execution
+function validateMetricFormat(val) {
+    return /^([0-9]+(\.[0-9]+)?)[KMkm]$/.test(val.trim());
+}
+
+// Live Listeners mapping input parameters to visual card elements
+document.getElementById('brandName').addEventListener('input', (e) => {
+    document.getElementById('card-brand-name').innerText = e.target.value || "Alias Name";
+});
+document.getElementById('state').addEventListener('change', (e) => {
+    document.getElementById('card-location').innerText = `${e.target.value}, India`;
+});
+
+// Border sync dynamically mapping to active gender node selections
+const genderNode = document.getElementById('gender');
+const previewCard = document.getElementById('live-preview-card');
+function syncGenderBorder(gender) {
+    if(gender === 'Male') previewCard.style.borderColor = '#00e676';
+    else if(gender === 'Female') previewCard.style.borderColor = '#e1306c';
+    else previewCard.style.borderColor = '#9b5de5';
+}
+genderNode.addEventListener('change', (e) => syncGenderBorder(e.target.value));
+
+// Real-time metric inputs validation mapping to card elements
+document.getElementById('ytSubs').addEventListener('input', (e) => {
+    const val = e.target.value;
+    const statRow = document.getElementById('card-yt-stat');
+    if(val) {
+        statRow.style.display = 'flex';
+        document.getElementById('card-yt-count').innerText = val;
+        e.target.style.borderColor = validateMetricFormat(val) ? "rgba(255,255,255,0.06)" : "#ff4444";
+    } else { statRow.style.display = 'none'; }
+});
+
+document.getElementById('igFollowers').addEventListener('input', (e) => {
+    const val = e.target.value;
+    const statRow = document.getElementById('card-ig-stat');
+    if(val) {
+        statRow.style.display = 'flex';
+        document.getElementById('card-ig-count').innerText = val;
+        e.target.style.borderColor = validateMetricFormat(val) ? "rgba(255,255,255,0.06)" : "#ff4444";
+    } else { statRow.style.display = 'none'; }
+});
+
+// Image uploading stream sync layout context
 document.getElementById('imageInput').addEventListener('change', function(e) {
     const file = e.target.files[0];
     if(file) {
@@ -99,20 +252,17 @@ document.getElementById('imageInput').addEventListener('change', function(e) {
             savedAvatarBase64 = evt.target.result;
             document.getElementById('avatarRender').src = savedAvatarBase64;
             document.getElementById('avatarRender').style.display = 'block';
+            document.getElementById('card-avatar').src = savedAvatarBase64;
             document.getElementById('upload-instruction').style.display = 'none';
         };
         reader.readAsDataURL(file);
     }
 });
 
-// 2. Pre-fill Logic (पुराना डेटा ढूंढकर वापस फॉर्म में लोड करना)
+// 3. Pre-fill Framework Database Sync pipeline
 async function checkExistingUser() {
     if(!db || !uid) return;
-    
-    // ईमेल ऑटो-फिल करें
-    if(localStorage.getItem('userEmail')) {
-        document.getElementById('email').value = localStorage.getItem('userEmail');
-    }
+    if(localStorage.getItem('userEmail')) document.getElementById('email').value = localStorage.getItem('userEmail');
 
     try {
         const docRef = doc(db, "creators", uid);
@@ -120,39 +270,63 @@ async function checkExistingUser() {
 
         if (docSnap.exists()) {
             const data = docSnap.data();
-            // फॉर्म इनपुट्स को पुराने डेटा से भरना
             document.getElementById('realName').value = data.realName || '';
             document.getElementById('brandName').value = data.brandName || '';
             document.getElementById('whatsapp').value = data.whatsapp || '';
             document.getElementById('gender').value = data.gender || 'Male';
             document.getElementById('state').value = data.state || '';
-            document.getElementById('category').value = data.category || 'Tech & AI';
+            categorySearch.value = data.category || 'Tech & AI';
             document.getElementById('ytLink').value = data.youtubeLink || '';
+            document.getElementById('ytSubs').value = data.youtubeSubs || '';
             document.getElementById('igLink').value = data.instagramLink || '';
+            document.getElementById('igFollowers').value = data.instagramFollowers || '';
             
+            updateSubCategoryView(data.category);
+            if(data.subCategory) document.getElementById('customSubCategory').value = data.subCategory;
+
+            // Trigger updates to visual element maps
+            syncGenderBorder(data.gender || 'Male');
+            if(data.brandName) document.getElementById('card-brand-name').innerText = data.brandName;
+            if(data.state) document.getElementById('card-location').innerText = `${data.state}, India`;
+            if(data.category) document.getElementById('card-category-badge').innerText = data.category;
+            
+            if(data.youtubeSubs) {
+                document.getElementById('card-yt-stat').style.display = 'flex';
+                document.getElementById('card-yt-count').innerText = data.youtubeSubs;
+            }
+            if(data.instagramFollowers) {
+                document.getElementById('card-ig-stat').style.display = 'flex';
+                document.getElementById('card-ig-count').innerText = data.instagramFollowers;
+            }
+
             if(data.avatarUrl) {
                 savedAvatarBase64 = data.avatarUrl;
                 document.getElementById('avatarRender').src = data.avatarUrl;
                 document.getElementById('avatarRender').style.display = 'block';
+                document.getElementById('card-avatar').src = data.avatarUrl;
                 document.getElementById('upload-instruction').style.display = 'none';
             }
+        } else {
+            syncGenderBorder('Male');
         }
-    } catch (err) {
-        console.error("Error fetching pre-fill details:", err);
-    }
+    } catch (err) { console.error(err); }
 }
 
-// Invoke check on startup
 checkExistingUser();
 
-// 3. Form Submission Handling
+// 4. Submission Loop processing operations
 document.getElementById('onboardingForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    if(!db || !uid) {
-        alert("Session Expired. Please login again via Creators Tab.");
+    const ytSubsVal = document.getElementById('ytSubs').value;
+    const igFollowsVal = document.getElementById('igFollowers').value;
+
+    if((ytSubsVal && !validateMetricFormat(ytSubsVal)) || (igFollowsVal && !validateMetricFormat(igFollowsVal))) {
+        alert("Please correct the metric values format. Use only numbers directly suffixed with K or M (e.g., 25K, 4.5M).");
         return;
     }
+
+    const finalSubCategory = document.getElementById('customSubCategory').value.trim() || document.getElementById('subCategorySelect').value;
 
     const profileData = {
         realName: document.getElementById('realName').value,
@@ -161,9 +335,12 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
         email: document.getElementById('email').value,
         gender: document.getElementById('gender').value,
         state: document.getElementById('state').value,
-        category: document.getElementById('category').value,
+        category: categorySearch.value,
+        subCategory: finalSubCategory,
         youtubeLink: document.getElementById('ytLink').value,
+        youtubeSubs: ytSubsVal,
         instagramLink: document.getElementById('igLink').value,
+        instagramFollowers: igFollowsVal,
         avatarUrl: savedAvatarBase64,
         updatedAt: new Date().toISOString()
     };
@@ -172,20 +349,40 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
         await setDoc(doc(db, "creators", uid), profileData);
         alert("Awesome! Profile details saved successfully.");
         window.location.href = "index.html?page=creators";
-    } catch (error) {
-        console.error("Firestore Save Error: ", error);
-        alert("Error saving data: " + error.message);
-    }
+    } catch (error) { alert("Error saving data: " + error.message); }
 });
 </script>
 
 <style>
-#submitBtn:hover {
-    background: #00ff81 !important;
-    box-shadow: 0 0 20px rgba(0, 255, 129, 0.4);
-    transform: translateY(-2px);
+#categoryDropdown div:hover {
+    background: rgba(0, 230, 118, 0.1) !important;
+    color: #00e676 !important;
 }
-#submitBtn:active {
+.premium-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #00e676 0%, #00b359 100%);
+    color: #010707;
+    font-size: 16px;
+    font-weight: 800;
+    border: none;
+    padding: 16px;
+    border-radius: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: block;
+    position: relative;
+    z-index: 999;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(0, 230, 118, 0.2);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.premium-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 230, 118, 0.4);
+    background: linear-gradient(135deg, #00ff81 0%, #00e676 100%);
+}
+.premium-btn:active {
     transform: translateY(1px);
 }
 </style>
