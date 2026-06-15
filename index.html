@@ -16,8 +16,8 @@ html, body {
     font-family:Inter,Arial,sans-serif;
     background:#010707;
     color:#fff;
-    overflow:hidden;
-    height: 100vh;
+    overflow-x:hidden;
+    min-height: 100vh;
     scrollbar-gutter: stable;
 }
 #bg-canvas {
@@ -39,7 +39,8 @@ html, body {
     max-width: 1550px;
     margin: 0 auto;
     padding-top: 24px; 
-    height: 96vh;
+    padding-bottom: 24px;
+    min-height: 96vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start; 
@@ -113,6 +114,8 @@ html, body {
     background: #00e676 !important;
     box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
 }
+
+/* यह क्लास केवल ऑनबोर्डिंग या फॉर्म्स पर ही एक्टिव होगी */
 .wrap{
     display:grid;
     grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
@@ -124,10 +127,10 @@ html, body {
     backdrop-filter:blur(25px);
     box-shadow: 0 25px 60px rgba(0,0,0,0.6);
     flex: 1;
-    height: 100%;
+    width: 100%;
     min-height: 650px; 
-    max-height: 800px;
-    overflow-y: auto; /* ऑनबोर्डिंग फॉर्म स्क्रोल करने के लिए आवश्यक */
+    max-height: 850px;
+    overflow-y: auto;
 }
 
 @media(max-width:1100px), (max-height: 740px){
@@ -150,10 +153,10 @@ html, body {
                 <a href="index.html?page=agencies" id="nav-agencies">Agencies</a>
                 <a href="index.html?page=production houses" id="nav-production">Production Houses</a>
             </div>
-            </div>
+        </div>
     </div>
     
-    <div class="wrap" id="dynamic-wrapper"></div>
+    <div id="dynamic-wrapper"></div>
 </div>
 
 
@@ -180,21 +183,27 @@ const db = initializeFirestore(app, {
     localCache: persistentLocalCache({})
 });
 
+window.appDb = db;
+
 const urlParams = new URLSearchParams(window.location.search);
 let targetPage = (urlParams.get('page') || 'home').toLowerCase().trim();
 
-// Active tab management UI
+// Active tab UI management
 if (targetPage === 'home') document.getElementById('nav-home').classList.add('active-nav');
 else if (targetPage === 'creators') document.getElementById('nav-creators').classList.add('active-nav');
 else if (targetPage === 'deals') document.getElementById('nav-deals').classList.add('active-nav');
 else if (targetPage === 'agencies') document.getElementById('nav-agencies').classList.add('active-nav');
 else if (targetPage.includes('production')) document.getElementById('nav-production').classList.add('active-nav');
 
-// Grid Column layout handling dynamically
-if (targetPage === 'home') {
-    document.getElementById('dynamic-wrapper').style.gridTemplateColumns = 'minmax(0, 1.35fr) minmax(0, 1fr)';
+const wrapperEl = document.getElementById('dynamic-wrapper');
+
+// 🛠️ स्मार्ट लेआउट हैंडलर: ऑनबोर्डिंग के समय पुराने .wrap बॉक्स स्टाइल को एक्टिव करेगा, बाकी जगह फ्री छोड़ेगा
+if (targetPage.includes('onboarding')) {
+    wrapperEl.className = "wrap";
 } else {
-    document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
+    wrapperEl.className = ""; // नॉर्मल पेजों के लिए बॉक्स हटा दिया ताकि ओरिजिनल ग्रिड न टूटे
+    wrapperEl.style.display = "block";
+    wrapperEl.style.width = "100%";
 }
 
 const cleanBaseRoute = window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
@@ -206,10 +215,10 @@ fetch(cleanBaseRoute + fileNameToLoad)
         return res.text();
     })
     .then(html => {
-        document.getElementById('dynamic-wrapper').innerHTML = html;
+        wrapperEl.innerHTML = html;
         
-        // स्क्रिप्ट्स को मैन्युअली री-एक्जीक्यूट करने के लिए (ऑनबोर्डिंग ड्रॉपडाउन और प्रिव्यू के लिए)
-        const scripts = document.getElementById('dynamic-wrapper').querySelectorAll('script');
+        // स्क्रिप्ट्स को मैन्युअली री-एक्जीक्यूट करने के लिए
+        const scripts = wrapperEl.querySelectorAll('script');
         scripts.forEach(oldScript => {
             const newScript = document.createElement('script');
             Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
@@ -219,44 +228,38 @@ fetch(cleanBaseRoute + fileNameToLoad)
     })
     .catch(err => {
         let pageDisplayTitle = targetPage.charAt(0).toUpperCase() + targetPage.slice(1);
-        document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
-        document.getElementById('dynamic-wrapper').innerHTML = `
+        wrapperEl.className = "wrap"; // एरर स्क्रीन के लिए सुंदर ग्लास बॉक्स वापस लाएं
+        wrapperEl.style.gridTemplateColumns = '1fr';
+        wrapperEl.innerHTML = `
             <div style="text-align:center; padding-top:180px; width: 100%;">
                 <h2 style="font-size: 32px; color: #00e676; margin-bottom: 10px;">${pageDisplayTitle}</h2>
                 <p style="color: rgba(255,255,255,0.5); font-size: 16px;">This section is coming soon. We are building something awesome!</p>
             </div>`;
     });
 
-// 🔐 DYNAMIC ONBOARDING INTEGRATION WORKFLOW (Join ITB बटन दबाने पर ही फॉर्म खुलेगा)
+// 🔐 DYNAMIC ONBOARDING INTEGRATION WORKFLOW
 window.triggerGmailVerificationWorkflow = function() {
-    console.log("Firebase Login Workflow Triggered from Join ITB Button.");
+    console.log("Firebase Login Workflow Triggered.");
     setPersistence(auth, browserLocalPersistence)
         .then(() => {
             return signInWithPopup(auth, provider);
         })
         .then(async (result) => {
             const user = result.user;
-            console.log("Google Auth Success for UID:", user.uid);
-            
-            // डेटा सिंकिंग के लिए लोकल स्टोरेज में ईमेल और यूआईडी सुरक्षित करें
             localStorage.setItem('userEmail', user.email);
             localStorage.setItem('userUid', user.uid);
             
-            // सुरक्षित सिंकिंग डिले के बाद डेटाबेस चेक करके ऑनबोर्डिंग पर भेजें
             setTimeout(async () => {
                 try {
                     const docRef = doc(db, "creators", user.uid);
                     const docSnap = await getDoc(docRef);
                     
                     if (docSnap.exists()) {
-                        // अगर पहले से कार्ड बना हुआ है तो एडिट मोड में ऑनबोर्डिंग खोलें
                         window.location.href = `index.html?page=onboarding&mode=edit&uid=${user.uid}`;
                     } else {
-                        // अगर नया क्रिएटर है तो फ्रेश फॉर्म खोलें
                         window.location.href = `index.html?page=onboarding&mode=new&uid=${user.uid}`;
                     }
                 } catch (firestoreError) {
-                    console.error("Firestore Error, safe redirecting to onboarding template:", firestoreError);
                     window.location.href = `index.html?page=onboarding&mode=new&uid=${user.uid}`;
                 }
             }, 1000);
