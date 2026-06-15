@@ -4,35 +4,7 @@
 </div>
 
 <div id="cards-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; position: relative; z-index: 20;">
-    
-    <div style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 24px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-        <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=150" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; border: 2px solid #00e676;">
-        <h3 style="margin: 0 0 6px 0; font-size: 20px; font-weight: 700;">Aarav Sharma</h3>
-        <p style="margin: 0 0 16px 0; color: rgba(255,255,255,0.5); font-size: 13px;"><i class="fa-solid fa-location-dot" style="color:#00e676; margin-right: 5px;"></i> Mumbai, India</p>
-        <div style="display: flex; justify-content: center; gap: 12px;"><i class="fa-brands fa-instagram" style="color: #e1306c;"></i> <i class="fa-brands fa-youtube" style="color: #ff0000;"></i></div>
-    </div>
-
-    <div style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 24px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; border: 2px solid #00e676;">
-        <h3 style="margin: 0 0 6px 0; font-size: 20px; font-weight: 700;">Ananya Iyer</h3>
-        <p style="margin: 0 0 16px 0; color: rgba(255,255,255,0.5); font-size: 13px;"><i class="fa-solid fa-location-dot" style="color:#00e676; margin-right: 5px;"></i> Bangalore, India</p>
-        <div style="display: flex; justify-content: center; gap: 12px;"><i class="fa-brands fa-instagram" style="color: #e1306c;"></i> <i class="fa-brands fa-youtube" style="color: #ff0000;"></i></div>
-    </div>
-
-    <div style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 24px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; border: 2px solid #00e676;">
-        <h3 style="margin: 0 0 6px 0; font-size: 20px; font-weight: 700;">Kabir Verma</h3>
-        <p style="margin: 0 0 16px 0; color: rgba(255,255,255,0.5); font-size: 13px;"><i class="fa-solid fa-location-dot" style="color:#00e676; margin-right: 5px;"></i> Delhi, India</p>
-        <div style="display: flex; justify-content: center; gap: 12px;"><i class="fa-brands fa-instagram" style="color: #e1306c;"></i> <i class="fa-brands fa-youtube" style="color: #ff0000;"></i></div>
-    </div>
-
-    <div style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 24px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; border: 2px solid #00e676;">
-        <h3 style="margin: 0 0 6px 0; font-size: 20px; font-weight: 700;">Riya Kapoor</h3>
-        <p style="margin: 0 0 16px 0; color: rgba(255,255,255,0.5); font-size: 13px;"><i class="fa-solid fa-location-dot" style="color:#00e676; margin-right: 5px;"></i> New Delhi, India</p>
-        <div style="display: flex; justify-content: center; gap: 12px;"><i class="fa-brands fa-instagram" style="color: #e1306c;"></i> <i class="fa-brands fa-youtube" style="color: #ff0000;"></i></div>
-    </div>
-
+    <div class="loading-placeholder" style="color: rgba(255,255,255,0.4); font-size: 16px; padding: 20px;">Loading directory metadata...</div>
 </div>
 
 <script type="module">
@@ -45,29 +17,46 @@ async function loadDynamicCreators() {
 
     try {
         const querySnapshot = await getDocs(collection(db, "creators"));
+        
+        // CRITICAL FIX: Empty the placeholder element context entirely before rendering database records
+        grid.innerHTML = '';
+
+        if(querySnapshot.empty) {
+            grid.innerHTML = `<div style="color: rgba(255,255,255,0.4); padding: 20px;">No registered creators found inside the repository.</div>`;
+            return;
+        }
+
         querySnapshot.forEach((doc) => {
             const data = doc.data();
             const profilePic = data.avatarUrl || "https://api.dicebear.com/7.x/bottts/svg?seed=" + doc.id;
             
+            // Check cross-compatible context properties for alias naming
+            const displayName = data.asaName || data.brandName || data.realName || "Anonymous Creator";
+            
             const cardHtml = `
                 <div style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 20px; padding: 24px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.3);">
                     <img src="${profilePic}" style="width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin: 0 auto 16px; border: 2px solid #00e676;">
-                    <h3 style="margin: 0 0 6px 0; font-size: 20px; font-weight: 700;">${data.brandName || data.realName}</h3>
-                    <p style="margin: 0 0 16px 0; color: rgba(255,255,255,0.5); font-size: 13px;"><i class="fa-solid fa-location-dot" style="color:#00e676; margin-right: 5px;"></i> ${data.state || 'India'}</p>
+                    <h3 style="margin: 0 0 6px 0; font-size: 20px; font-weight: 700;">${displayName}</h3>
+                    <p style="margin: 0 0 16px 0; color: rgba(255,255,255,0.5); font-size: 13px;">
+                        <i class="fa-solid fa-location-dot" style="color:#00e676; margin-right: 5px;"></i> ${data.state || 'India'}
+                    </p>
                     <div style="display: flex; justify-content: center; gap: 14px;">
                         ${data.youtubeLink ? `<a href="${data.youtubeLink}" target="_blank" style="color: #ff0000; font-size: 18px;"><i class="fa-brands fa-youtube"></i></a>` : ''}
                         ${data.instagramLink ? `<a href="${data.instagramLink}" target="_blank" style="color: #e1306c; font-size: 18px;"><i class="fa-brands fa-instagram"></i></a>` : ''}
                     </div>
                     <div style="font-size: 11px; color: #00e676; margin-top: 14px; text-transform: uppercase; font-weight:700; background: rgba(0,230,118,0.06); padding: 4px 10px; border-radius: 20px; display: inline-block;">
-                        ${data.category || 'Creator'}
+                        ${data.category || 'Tech & AI'}
                     </div>
                 </div>
             `;
             grid.innerHTML += cardHtml;
         });
     } catch (error) {
-        console.error(error);
+        console.error("Firestore loading failure context:", error);
+        grid.innerHTML = `<div style="color: #ff4444; padding: 20px;">Failed to initialize public creator stream.</div>`;
     }
 }
+
+// Fire runtime query compilation instantly
 loadDynamicCreators();
 </script>
