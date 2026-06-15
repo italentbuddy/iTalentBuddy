@@ -1,140 +1,376 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creator Ecosystem Entry | iTalentBuddy</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style>
-        body {
-            background-color: #0b0f17;
-            color: #ffffff;
-            font-family: system-ui, -apple-system, sans-serif;
-        }
-        input, select, textarea {
-            background-color: #131926 !important;
-            border: 1px solid #222f47 !important;
-            transition: all 0.2s ease;
-        }
-        input:focus, select:focus, textarea:focus {
-            outline: none !important;
-            border-color: #10b981 !important;
-            box-shadow: 0 0 8px rgba(16, 185, 129, 0.2);
-        }
-    </style>
-</head>
-<body class="p-6 md:p-12">
-
-    <div class="max-w-4xl mx-auto">
+<div class="onboarding-container" style="display: flex; align-items: center; justify-content: center; width: 100%; box-sizing: border-box; height: 100vh; background: #020808; overflow: hidden; padding: 40px;">
+    
+    <div class="form-section" style="color: #fff; display: flex; flex-direction: column; gap: 24px; width: 100%; max-width: 1100px; background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.03); padding: 36px; border-radius: 20px; box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);">
         
-        <div class="mb-10">
-            <h1 class="text-3xl md:text-4xl font-bold tracking-tight text-white mb-2">Creator Ecosystem Entry</h1>
-            <p class="text-gray-400 text-sm md:text-base">Configure your professional network node. Fill your metrics and save your profile.</p>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 16px;">
+            <h2 class="hero-title" style="font-size: 28px; font-weight: 900; margin: 0; background: linear-gradient(135deg, #fff 60%, #00f0ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; font-family: sans-serif;">CREATOR ECOSYSTEM ENTRY</h2>
+            <span style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.3); letter-spacing: 1px; font-family: sans-serif; text-transform: uppercase;">Direct Directory Node Sync</span>
         </div>
 
-        <form id="creatorForm" class="space-y-8" onsubmit="handleFormSubmit(event)">
+        <form id="onboardingForm" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="flex flex-col gap-2">
-                    <label class="text-emerald-400 font-semibold text-xs tracking-wider uppercase">Real Name</label>
-                    <input type="text" placeholder="e.g. Rahul Kumar" class="w-full px-4 py-3 rounded-lg text-white">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <div class="form-group-premium">
+                    <label class="form-label-premium">Real Name</label>
+                    <input type="text" id="realName" placeholder="e.g. Rahul Kumar" required class="premium-input-box">
                 </div>
-                
-                <div class="flex flex-col gap-2">
-                    <label class="text-emerald-400 font-semibold text-xs tracking-wider uppercase">Alias Name (Brand)</label>
-                    <input type="text" placeholder="e.g. TechBuddy" class="w-full px-4 py-3 rounded-lg text-white" required>
+                <div class="form-group-premium">
+                    <label class="form-label-premium">Alias Name (Brand)</label>
+                    <input type="text" id="brandName" placeholder="e.g. TechBuddy" required class="premium-input-box">
                 </div>
+                <div class="form-group-premium">
+                    <label class="form-label-premium">WhatsApp Number</label>
+                    <input type="tel" id="whatsapp" placeholder="+91 XXXXX XXXXX" required class="premium-input-box">
+                </div>
+            </div>
 
-                <div class="flex flex-col gap-2">
-                    <label class="text-emerald-400 font-semibold text-xs tracking-wider uppercase">WhatsApp Number</label>
-                    <input type="tel" placeholder="+91 XXXXX XXXXX" class="w-full px-4 py-3 rounded-lg text-white">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <div class="form-group-premium">
+                    <label class="form-label-premium">Email ID</label>
+                    <input type="email" id="email" readonly class="premium-input-box" style="background: rgba(255,255,255,0.01) !important; color: rgba(255,255,255,0.25) !important; cursor: not-allowed; border-color: rgba(255,255,255,0.02) !important;">
                 </div>
-
-                <div class="flex flex-col gap-2">
-                    <label class="text-emerald-400 font-semibold text-xs tracking-wider uppercase">Email ID (Auto-Filled)</label>
-                    <input type="email" placeholder="name@example.com" class="w-full px-4 py-3 rounded-lg text-gray-400 cursor-not-allowed" readonly>
-                </div>
-
-                <div class="flex flex-col gap-2">
-                    <label class="text-emerald-400 font-semibold text-xs tracking-wider uppercase">Gender</label>
-                    <select class="w-full px-4 py-3 rounded-lg text-white appearance-none cursor-pointer">
-                        <option value="Male">Male</option>
+                <div class="form-group-premium">
+                    <label class="form-label-premium">Gender</label>
+                    <select id="gender" class="premium-input-box" style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22></polyline></svg>'); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px;">
+                        <option value="Male" selected>Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>
-
-                <div class="flex flex-col gap-2">
-                    <label class="text-emerald-400 font-semibold text-xs tracking-wider uppercase">State (India)</label>
-                    <select class="w-full px-4 py-3 rounded-lg text-white appearance-none cursor-pointer">
-                        <option value="">Select State</option>
-                        <option value="Delhi">Delhi</option>
-                        <option value="Mumbai">Maharashtra</option>
-                        <option value="Uttar Pradesh">Uttar Pradesh</option>
-                        </select>
+                <div class="form-group-premium" style="position: relative;">
+                    <label class="form-label-premium">State (India)</label>
+                    <input type="text" id="stateSearch" placeholder="Search state..." class="premium-input-box" autocomplete="off">
+                    <div id="stateDropdown" class="floating-dropdown"></div>
                 </div>
             </div>
 
-            <div class="flex flex-col gap-2">
-                <label class="text-emerald-400 font-semibold text-xs tracking-wider uppercase">Profile Punchline / Bio</label>
-                <textarea rows="3" placeholder="e.g. Building Next-Gen Tech Ecosystems..." class="w-full px-4 py-3 rounded-lg text-white resize-none"></textarea>
+            <div class="form-group-premium" style="position: relative;">
+                <label class="form-label-premium">Categories Multi-Select</label>
+                <input type="text" id="categorySearch" placeholder="Type to filter domains..." class="premium-input-box" autocomplete="off">
+                <div id="categoryDropdown" class="floating-dropdown"></div>
+                <div id="selectedCategoryChips" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;"></div>
             </div>
 
-            <div class="flex flex-col gap-2">
-                <label class="text-emerald-400 font-semibold text-xs tracking-wider uppercase">Categories / Domain</label>
-                <input type="text" placeholder="Type to filter domains (e.g. Gaming, Tech, Finance, Cooking...)" class="w-full px-4 py-3 rounded-lg text-white">
-            </div>
-
-            <div class="space-y-4">
-                <label class="text-emerald-400 font-semibold text-xs tracking-wider uppercase block mb-1">Social Platforms & Metrics</label>
-                
-                <div class="flex flex-col sm:flex-row gap-3 max-w-3xl">
-                    <div class="flex-1 min-w-[200px]">
-                        <input type="url" placeholder="YouTube Channel Link" class="w-full px-4 py-2.5 rounded-lg text-sm text-white">
-                    </div>
-                    <div class="w-full sm:w-48">
-                        <input type="text" placeholder="Subs (e.g. 50K, 1.2M)" class="w-full px-4 py-2.5 rounded-lg text-sm text-white">
-                    </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: x; row-gap: 14px; column-gap: 24px; margin-top: 4px;">
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium"><i class="fa-brands fa-youtube"></i></div>
+                    <input type="text" id="ytLink" placeholder="YouTube Link" class="premium-input-box">
+                    <input type="text" id="ytSubs" placeholder="Subs" class="premium-input-box" style="text-align: center;">
                 </div>
-
-                <div class="flex flex-col sm:flex-row gap-3 max-w-3xl">
-                    <div class="flex-1 min-w-[200px]">
-                        <input type="url" placeholder="Instagram Profile Link" class="w-full px-4 py-2.5 rounded-lg text-sm text-white">
-                    </div>
-                    <div class="w-full sm:w-48">
-                        <input type="text" placeholder="Followers (e.g. 100K)" class="w-full px-4 py-2.5 rounded-lg text-sm text-white">
-                    </div>
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium"><i class="fa-brands fa-instagram"></i></div>
+                    <input type="text" id="igLink" placeholder="Instagram Link" class="premium-input-box">
+                    <input type="text" id="igFollowers" placeholder="Followers" class="premium-input-box" style="text-align: center;">
                 </div>
-
-                <div class="flex flex-col sm:flex-row gap-3 max-w-3xl">
-                    <div class="flex-1 min-w-[200px]">
-                        <input type="url" placeholder="X Profile Link" class="w-full px-4 py-2.5 rounded-lg text-sm text-white">
-                    </div>
-                    <div class="w-full sm:w-48">
-                        <input type="text" placeholder="Followers" class="w-full px-4 py-2.5 rounded-lg text-sm text-white">
-                    </div>
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium"><i class="fa-brands fa-x-twitter"></i></div>
+                    <input type="text" id="xLink" placeholder="X Link" class="premium-input-box">
+                    <input type="text" id="xMetrics" placeholder="Followers" class="premium-input-box" style="text-align: center;">
+                </div>
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium"><i class="fa-brands fa-facebook-f"></i></div>
+                    <input type="text" id="fbLink" placeholder="Facebook Link" class="premium-input-box">
+                    <input type="text" id="fbMetrics" placeholder="Followers" class="premium-input-box" style="text-align: center;">
+                </div>
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium"><i class="fa-brands fa-kickstarter-k"></i></div>
+                    <input type="text" id="kickLink" placeholder="Kick Link" class="premium-input-box">
+                    <input type="text" id="kickMetrics" placeholder="Followers" class="premium-input-box" style="text-align: center;">
+                </div>
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium"><i class="fa-brands fa-discord"></i></div>
+                    <input type="text" id="discordLink" placeholder="Discord Invite Link" class="premium-input-box">
+                    <input type="text" id="discordMetrics" placeholder="Members" class="premium-input-box" style="text-align: center;">
                 </div>
             </div>
 
-            <div class="pt-6 border-t border-gray-800 max-w-3xl flex justify-end">
-                <button type="submit" class="w-full sm:w-auto px-8 py-3.5 bg-emerald-500 hover:bg-emerald-600 active:scale-[0.98] text-gray-950 font-bold rounded-lg transition-all cursor-pointer shadow-lg shadow-emerald-500/10">
-                    Save and Exit
-                </button>
-            </div>
-
+            <button type="submit" id="submitBtn">Save and Exit</button>
         </form>
     </div>
+</div>
 
-    <script>
-        function handleFormSubmit(event) {
-            event.preventDefault();
+<script type="module">
+import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const db = window.appDb;
+const uid = localStorage.getItem('userUid');
+let activeSelectedCategories = [];
+
+const indiaStates = [
+    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", 
+    "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
+    "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", 
+    "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", 
+    "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
+];
+
+const comprehensiveCategories = [
+    "Tech AI", "Gaming Esports", "Finance Trading", "Vlogging Travel", "Fashion Lifestyle", 
+    "Education Academics", "Comedy Roasting", "Fitness Health", "Art Design", "Business Startups",
+    "Crypto Web3", "Food Cooking", "Music Dance", "Photography Film", "Infotainment", "Automobile",
+    "Motovlogging", "Beauty Skincare", "Reaction", "Unboxing Reviews", "Daily Vlogs", "Anime Manga",
+    "Gaming Walkthroughs", "Podcast Interviews", "Case Studies", "History Mythology", "Self Improvement"
+];
+
+const genderThemeMap = {
+    "Male": "#00f0ff",
+    "Female": "#ec008c",
+    "Other": "#00e676"
+};
+
+function applyDynamicLabelColors() {
+    const genVal = document.getElementById('gender').value;
+    const targetColor = genderThemeMap[genVal] || "#00f0ff";
+    
+    document.querySelectorAll('.form-label-premium').forEach(label => {
+        label.style.color = targetColor;
+    });
+    
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.style.borderColor = targetColor;
+    submitBtn.style.color = targetColor;
+}
+document.getElementById('gender').addEventListener('change', applyDynamicLabelColors);
+
+const stateSearch = document.getElementById('stateSearch');
+const stateDropdown = document.getElementById('stateDropdown');
+
+function renderStateDropdown(filter = "") {
+    stateDropdown.innerHTML = "";
+    const filtered = indiaStates.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
+    if(filtered.length === 0) { stateDropdown.style.display = 'none'; return; }
+    
+    filtered.forEach(state => {
+        const div = document.createElement('div');
+        div.className = 'dropdown-item';
+        div.innerText = state;
+        div.addEventListener('click', () => {
+            stateSearch.value = state;
+            stateDropdown.style.display = 'none';
+        });
+        stateDropdown.appendChild(div);
+    });
+}
+stateSearch.addEventListener('focus', () => { renderStateDropdown(stateSearch.value); stateDropdown.style.display = 'block'; });
+stateSearch.addEventListener('input', (e) => renderStateDropdown(e.target.value));
+
+const categorySearch = document.getElementById('categorySearch');
+const categoryDropdown = document.getElementById('categoryDropdown');
+const chipsContainer = document.getElementById('selectedCategoryChips');
+
+function renderChips() {
+    chipsContainer.innerHTML = "";
+    activeSelectedCategories.forEach(cat => {
+        const chip = document.createElement('div');
+        chip.className = 'category-chip';
+        chip.innerHTML = `${cat} <i class="fa-solid fa-xmark"></i>`;
+        chip.querySelector('i').addEventListener('click', () => {
+            activeSelectedCategories = activeSelectedCategories.filter(item => item !== cat);
+            renderChips();
+        });
+        chipsContainer.appendChild(chip);
+    });
+}
+
+function renderCategoryDropdown(filter = "") {
+    categoryDropdown.innerHTML = "";
+    const filtered = comprehensiveCategories.filter(c => c.toLowerCase().includes(filter.toLowerCase()) && !activeSelectedCategories.includes(c));
+    if(filtered.length === 0) { categoryDropdown.style.display = 'none'; return; }
+    
+    filtered.forEach(cat => {
+        const div = document.createElement('div');
+        div.className = 'dropdown-item';
+        div.innerText = cat;
+        div.addEventListener('click', () => {
+            activeSelectedCategories.push(cat);
+            categorySearch.value = "";
+            categoryDropdown.style.display = 'none';
+            renderChips();
+        });
+        categoryDropdown.appendChild(div);
+    });
+}
+categorySearch.addEventListener('focus', () => { renderCategoryDropdown(categorySearch.value); categoryDropdown.style.display = 'block'; });
+categorySearch.addEventListener('input', (e) => renderCategoryDropdown(e.target.value));
+
+document.addEventListener('click', (e) => {
+    if(!stateSearch.contains(e.target) && !stateDropdown.contains(e.target)) stateDropdown.style.display = 'none';
+    if(!categorySearch.contains(e.target) && !categoryDropdown.contains(e.target)) categoryDropdown.style.display = 'none';
+});
+
+async function initPrefillPipeline() {
+    if(!db || !uid) return;
+    if(localStorage.getItem('userEmail')) document.getElementById('email').value = localStorage.getItem('userEmail');
+
+    try {
+        const docRef = doc(db, "creators", uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            document.getElementById('realName').value = data.realName || '';
+            document.getElementById('brandName').value = data.brandName || '';
+            document.getElementById('whatsapp').value = data.whatsapp || '';
+            document.getElementById('gender').value = data.gender || 'Male';
+            stateSearch.value = data.state || '';
             
-            // App ka redirect logic yahan handles hoga (Save logic execute hone ke baad)
-            console.log("Saving profile changes...");
+            document.getElementById('ytLink').value = data.youtubeLink || '';
+            document.getElementById('ytSubs').value = data.youtubeSubs || '';
+            document.getElementById('igLink').value = data.instagramLink || '';
+            document.getElementById('igFollowers').value = data.instagramFollowers || '';
+            document.getElementById('xLink').value = data.xLink || '';
+            document.getElementById('xMetrics').value = data.xMetrics || '';
             
-            // Creator page par redirect
-            window.location.href = "creators.html"; 
+            if(data.fbLink) document.getElementById('fbLink').value = data.fbLink;
+            if(data.fbMetrics) document.getElementById('fbMetrics').value = data.fbMetrics;
+            if(data.kickLink) document.getElementById('kickLink').value = data.kickLink;
+            if(data.kickMetrics) document.getElementById('kickMetrics').value = data.kickMetrics;
+            if(data.discordLink) document.getElementById('discordLink').value = data.discordLink;
+            if(data.discordMetrics) document.getElementById('discordMetrics').value = data.discordMetrics;
+
+            if(data.categories) {
+                activeSelectedCategories = data.categories;
+                renderChips();
+            }
         }
-    </script>
-</body>
-</html>
+        applyDynamicLabelColors();
+    } catch (err) { console.error("Pipeline failure: ", err); }
+}
+
+initPrefillPipeline();
+
+document.getElementById('onboardingForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const profileData = {
+        realName: document.getElementById('realName').value,
+        brandName: document.getElementById('brandName').value,
+        whatsapp: document.getElementById('whatsapp').value,
+        email: document.getElementById('email').value,
+        gender: document.getElementById('gender').value,
+        state: stateSearch.value,
+        categories: activeSelectedCategories,
+        youtubeLink: document.getElementById('ytLink').value,
+        youtubeSubs: document.getElementById('ytSubs').value,
+        instagramLink: document.getElementById('igLink').value,
+        instagramFollowers: document.getElementById('igFollowers').value,
+        xLink: document.getElementById('xLink').value,
+        xMetrics: document.getElementById('xMetrics').value,
+        fbLink: document.getElementById('fbLink').value,
+        fbMetrics: document.getElementById('fbMetrics').value,
+        kickLink: document.getElementById('kickLink').value,
+        kickMetrics: document.getElementById('kickMetrics').value,
+        discordLink: document.getElementById('discordLink').value,
+        discordMetrics: document.getElementById('discordMetrics').value,
+        updatedAt: new Date().toISOString()
+    };
+    try {
+        await setDoc(doc(db, "creators", uid), profileData);
+        window.location.href = "index.html?page=creators";
+    } catch (error) { alert("Execution crash: " + error.message); }
+});
+</script>
+
+<style>
+/* 🌟 TOYING PREMIUM FIELD INTERACTION EXCLUSIVE ENGINE */
+.form-group-premium {
+    position: relative;
+    display: flex; 
+    flex-direction: column; 
+}
+.form-label-premium {
+    display: block; 
+    margin: 0 0 6px 0; 
+    font-weight: 700; 
+    font-size: 10px; 
+    letter-spacing: 0.5px; 
+    text-transform: uppercase; 
+    color: #00f0ff; 
+    transition: text-shadow 0.3s ease, color 0.3s ease;
+    font-family: sans-serif;
+}
+
+.premium-input-box {
+    width: 100%; 
+    height: 38px;
+    padding: 8px 12px; 
+    border: 1px solid rgba(255, 255, 255, .05); 
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .03); 
+    color: #fff; 
+    font-family: inherit; 
+    font-size: 13px; 
+    outline: none; 
+    box-sizing: border-box;
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.premium-input-box::placeholder { color: rgba(255, 255, 255, 0.2); }
+select.premium-input-box option { background: #050e0e; color: #fff; }
+
+/* Dynamic Focus Glow without shifting dimensions */
+.form-group-premium:focus-within .form-label-premium {
+    text-shadow: 0 0 8px currentColor;
+}
+.premium-input-box:focus { 
+    background: rgba(2, 22, 18, 0.6); 
+    border-color: currentColor; 
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.05); 
+}
+
+/* Dropdowns & Chips Setup */
+.floating-dropdown {
+    display: none; 
+    position: absolute; 
+    width: 100%; 
+    background: #050e0e; 
+    border: 1px solid rgba(255,255,255,0.1); 
+    border-radius: 8px; 
+    max-height: 150px; 
+    overflow-y: auto; 
+    z-index: 100; 
+    top: 100%;
+    margin-top: 4px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    font-family: sans-serif;
+}
+.dropdown-item { padding: 8px 12px; cursor: pointer; font-size: 12px; color: rgba(255,255,255,0.8); }
+.dropdown-item:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
+
+.category-chip {
+    display: flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-family: sans-serif;
+}
+.category-chip i { cursor: pointer; color: rgba(255,255,255,0.4); }
+.category-chip i:hover { color: #ff4444; }
+
+/* Social Grid Infrastructure */
+.social-input-row-premium {
+    display: grid; grid-template-columns: 38px 1fr 90px; gap: 8px; align-items: center; width: 100%;
+}
+.social-icon-box-premium {
+    height: 38px; border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; background: rgba(255,255,255,0.02); color: #fff;
+}
+
+/* SUBMIT CTA WAVE ENGINE */
+#submitBtn {
+    height: 42px; margin-top: 6px; width: 100%; border: 1px solid #00f0ff; border-radius: 8px;
+    background: rgba(255, 255, 255, 0.01); color: #00f0ff; font-size: 13px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.5px; cursor: pointer; position: relative; overflow: hidden; z-index: 1; transition: all 0.4s ease; font-family: sans-serif;
+}
+#submitBtn::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: all 0.5s ease; z-index: -1;
+}
+#submitBtn:hover { 
+    color: #020808 !important; background: currentColor;
+    letter-spacing: 1.5px; box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+#submitBtn:hover::before { left: 100%; }
+
+@media(max-width: 900px) {
+    .onboarding-container { height: auto !important; overflow: visible; padding: 16px; }
+    .form-section { padding: 20px; }
+    form { gap: 14px !important; }
+    div[style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; gap: 12px !important; }
+    .social-input-row-premium { gap: 6px; }
+}
+</style>
