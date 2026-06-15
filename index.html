@@ -127,6 +127,7 @@ html, body {
     height: 100%;
     min-height: 650px; 
     max-height: 800px;
+    overflow-y: auto; /* ऑनबोर्डिंग फॉर्म स्क्रोल करने के लिए आवश्यक */
 }
 
 @media(max-width:1100px), (max-height: 740px){
@@ -159,7 +160,6 @@ html, body {
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
 import { getAuth, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-// initializeFirestore और persistentLocalCache इम्पोर्ट किया गया ऑफलाइन बग को ठीक करने के लिए
 import { initializeFirestore, persistentLocalCache, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -176,7 +176,6 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 
-// मजबूत कैश सिंकिंग इंजन के साथ Firestore इनिशियलाइजेशन (क्रॉस-पेज बग सोल्यूशन)
 const db = initializeFirestore(app, {
     localCache: persistentLocalCache({})
 });
@@ -191,6 +190,7 @@ else if (targetPage === 'deals') document.getElementById('nav-deals').classList.
 else if (targetPage === 'agencies') document.getElementById('nav-agencies').classList.add('active-nav');
 else if (targetPage.includes('production')) document.getElementById('nav-production').classList.add('active-nav');
 
+// Grid Column layout handling dynamically
 if (targetPage === 'home') {
     document.getElementById('dynamic-wrapper').style.gridTemplateColumns = 'minmax(0, 1.35fr) minmax(0, 1fr)';
 } else {
@@ -207,6 +207,15 @@ fetch(cleanBaseRoute + fileNameToLoad)
     })
     .then(html => {
         document.getElementById('dynamic-wrapper').innerHTML = html;
+        
+        // स्क्रिप्ट्स को मैन्युअली री-एक्जीक्यूट करने के लिए (ऑनबोर्डिंग ड्रॉपडाउन और प्रिव्यू के लिए)
+        const scripts = document.getElementById('dynamic-wrapper').querySelectorAll('script');
+        scripts.forEach(oldScript => {
+            const newScript = document.createElement('script');
+            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+            oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
     })
     .catch(err => {
         let pageDisplayTitle = targetPage.charAt(0).toUpperCase() + targetPage.slice(1);
@@ -218,7 +227,7 @@ fetch(cleanBaseRoute + fileNameToLoad)
             </div>`;
     });
 
-// 🔐 GLOBAL FIREBASE AUTH WORKFLOW (सुरक्षित टाइमआउट और एरर हैंडलिंग के साथ अपडेटेड)
+// 🔐 DYNAMIC ONBOARDING INTEGRATION WORKFLOW
 window.triggerGmailVerificationWorkflow = function() {
     console.log("Firebase Login Workflow Triggered from Index.");
     setPersistence(auth, browserLocalPersistence)
@@ -229,21 +238,23 @@ window.triggerGmailVerificationWorkflow = function() {
             const user = result.user;
             console.log("Google Auth Success for UID:", user.uid);
             
-            // 1 सेकंड का सुरक्षित सिंकिंग डिले
+            // डेटा सिंकिंग के लिए लोकल स्टोरेज में ईमेल और यूआईडी सुरक्षित करें
+            localStorage.setItem('userEmail', user.email);
+            localStorage.setItem('userUid', user.uid);
+            
             setTimeout(async () => {
                 try {
                     const docRef = doc(db, "creators", user.uid);
                     const docSnap = await getDoc(docRef);
                     
                     if (docSnap.exists()) {
-                        window.location.href = `onboarding.html?mode=edit&uid=${user.uid}`;
+                        window.location.href = `index.html?page=onboarding&mode=edit&uid=${user.uid}`;
                     } else {
-                        window.location.href = `onboarding.html?mode=new&uid=${user.uid}`;
+                        window.location.href = `index.html?page=onboarding&mode=new&uid=${user.uid}`;
                     }
                 } catch (firestoreError) {
-                    console.error("Firestore Error, safe redirecting to new registration:", firestoreError);
-                    // किसी भी नेटवर्क फ्लिकर के मामले में यूजर अटकेगा नहीं, सीधा ऑनबोर्डिंग पर ट्रांसफर होगा
-                    window.location.href = `onboarding.html?mode=new&uid=${user.uid}`;
+                    console.error("Firestore Error, safe redirecting to onboarding template:", firestoreError);
+                    window.location.href = `index.html?page=onboarding&mode=new&uid=${user.uid}`;
                 }
             }, 1000);
         })
