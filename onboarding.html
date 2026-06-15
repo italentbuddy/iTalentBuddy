@@ -1,149 +1,125 @@
-<div class="onboarding-container" style="width: 100%; padding: 10px; color: #fff; animation: screenReveal 0.4s ease-out;">
+<div class="onboarding-container" style="width: 100%; color: #fff;">
     <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 6px; background: linear-gradient(135deg, #fff 60%, #00e676 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Creator Ecosystem Entry</h2>
-    <p style="color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 30px;">Fill your profile metrics. Your card will automatically start appending from Card #19 onwards.</p>
+    <p style="color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 30px;">Fill your profile metrics. Your card will automatically start appending from Card #5 onwards inside the directory.</p>
 
-    <form id="onboardingForm" onsubmit="handleOnboardingSubmit(event)" style="display: grid; grid-template-columns: 280px 1fr; gap: 40px;">
+    <form id="onboardingForm" style="display: grid; grid-template-columns: 280px 1fr; gap: 40px;">
         
-        <div class="left-panel" style="display: flex; flex-direction: column; gap: 20px;">
-            <div class="upload-box" style="border: 2px dashed rgba(0, 230, 118, 0.3); background: rgba(0, 230, 118, 0.02); border-radius: 20px; height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; position: relative; text-align: center; padding: 20px;">
-                <input type="file" id="avatarFile" accept="image/*" style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer;" onchange="previewAvatar(event)">
-                <div id="upload-placeholder">
-                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 40px; color: #00e676; margin-bottom: 15px;"></i>
-                    <div style="font-weight: 700; font-size: 14px; color: #00e676; text-transform: uppercase; letter-spacing: 0.5px;">Upload Photo</div>
-                    <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 8px;">(MAX 1MB IMAGE ONLY)</div>
-                </div>
-                <img id="avatarPreview" src="" style="display: none; width: 100%; height: 100%; object-fit: cover; border-radius: 18px; position: absolute; top: 0; left: 0; pointer-events: none;">
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+            <div style="border: 2px dashed rgba(0, 230, 118, 0.3); background: rgba(0, 230, 118, 0.02); border-radius: 20px; height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;">
+                <i class="fa-solid fa-cloud-arrow-up" style="font-size: 40px; color: #00e676; margin-bottom: 15px;"></i>
+                <div style="font-weight: 700; font-size: 14px; color: #00e676; text-transform: uppercase;">Upload Photo</div>
+                <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 8px;">(MAX 1MB IMAGE ONLY)</div>
             </div>
 
-            <div class="form-group">
-                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px;">Gender</label>
-                <select id="gender" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;">
+            <div>
+                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Gender</label>
+                <select id="gender" style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
                 </select>
             </div>
 
-            <div class="form-group">
-                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px;">State (India)</label>
-                <select id="state" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;">
+            <div>
+                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">State (India)</label>
+                <select id="state" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
                     <option value="" disabled selected>Select State</option>
                     <option value="Maharashtra">Maharashtra</option>
                     <option value="Delhi">Delhi</option>
                     <option value="Karnataka">Karnataka</option>
                     <option value="Uttar Pradesh">Uttar Pradesh</option>
                     <option value="Haryana">Haryana</option>
-                    <option value="Mumbai">Mumbai</option>
                 </select>
             </div>
         </div>
 
-        <div class="right-panel" style="display: flex; flex-direction: column; gap: 24px;">
-            
+        <div style="display: flex; flex-direction: column; gap: 24px;">
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div class="form-group">
+                <div>
                     <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Real Name</label>
-                    <input type="text" id="realName" placeholder="e.g. Rahul Kumar" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;">
+                    <input type="text" id="realName" placeholder="e.g. Rahul Kumar" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
                 </div>
-                <div class="form-group">
+                <div>
                     <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Asa Name (Alias / Brand)</label>
-                    <input type="text" id="brandName" placeholder="e.g. TechBuddy" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;">
+                    <input type="text" id="brandName" placeholder="e.g. TechBuddy" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
                 </div>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div class="form-group">
+                <div>
                     <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">WhatsApp Number</label>
-                    <input type="tel" id="whatsapp" placeholder="+91 XXXXX XXXXX" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;">
+                    <input type="tel" id="whatsapp" placeholder="+91 XXXXX XXXXX" required style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
                 </div>
-                <div class="form-group">
+                <div>
                     <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Email ID (Auto-Filled)</label>
-                    <input type="email" id="email" readonly style="width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 14px; color: rgba(255,255,255,0.4); font-size: 14px; outline: none; cursor: not-allowed;">
+                    <input type="email" id="email" readonly style="width: 100%; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 14px; color: rgba(255,255,255,0.4); cursor: not-allowed; outline: none;">
                 </div>
             </div>
 
-            <div class="form-group">
-                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Select Content Categories (Multiple)</label>
-                <select id="categories" style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;">
-                    <option value="" disabled selected>Select Categories...</option>
+            <div>
+                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 8px;">Select Content Categories</label>
+                <select id="category" style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
                     <option value="Tech & AI">Tech & AI</option>
                     <option value="Vlogging & Travel">Vlogging & Travel</option>
                     <option value="Finance & Business">Finance & Business</option>
                     <option value="Gaming">Gaming</option>
-                    <option value="Fashion & Lifestyle">Fashion & Lifestyle</option>
                 </select>
             </div>
 
-            <div style="margin-top: 10px;">
-                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 16px; letter-spacing: 0.5px;">Social Media Handles & Subscriber/Follower Ranges</label>
-                
-                <div style="display: flex; flex-direction: column; gap: 14px;">
-                    <div style="display: grid; grid-template-columns: 46px 1fr 160px; gap: 12px; align-items: center;">
-                        <div style="width: 46px; height: 46px; background: rgba(255,0,0,0.06); border: 1px solid rgba(255,0,0,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #ff0000; font-size: 18px;"><i class="fa-brands fa-youtube"></i></div>
-                        <input type="text" id="yt_link" placeholder="YouTube Channel Link" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;">
-                        <select id="yt_range" style="background: #041010; border: 1px solid rgba(0, 230, 118, 0.2); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;"><option value="No Account">No Account</option><option value="10K - 50K">10K - 50K</option><option value="50K - 100K">50K - 100K</option><option value="100K - 500K">100K - 500K</option><option value="500K - 1M">500K - 1M</option><option value="1M+">1M+</option></select>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 46px 1fr 160px; gap: 12px; align-items: center;">
-                        <div style="width: 46px; height: 46px; background: rgba(225,48,108,0.06); border: 1px solid rgba(225,48,108,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #e1306c; font-size: 18px;"><i class="fa-brands fa-instagram"></i></div>
-                        <input type="text" id="ig_link" placeholder="Instagram Profile Link" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;">
-                        <select id="ig_range" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;"><option value="No Account">No Account</option><option value="10K - 50K">10K - 50K</option><option value="50K - 100K">50K - 100K</option><option value="100K - 500K">100K - 500K</option><option value="500K - 1M">500K - 1M</option><option value="1M+">1M+</option></select>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 46px 1fr 160px; gap: 12px; align-items: center;">
-                        <div style="width: 46px; height: 46px; background: rgba(24,119,242,0.06); border: 1px solid rgba(24,119,242,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #1877f2; font-size: 18px;"><i class="fa-brands fa-facebook-f"></i></div>
-                        <input type="text" id="fb_link" placeholder="Facebook Page Link" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;">
-                        <select id="fb_range" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;"><option value="No Account">No Account</option><option value="10K - 50K">10K - 50K</option><option value="50K - 100K">50K - 100K</option><option value="100K - 500K">100K - 500K</option></select>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 46px 1fr 160px; gap: 12px; align-items: center;">
-                        <div style="width: 46px; height: 46px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 18px;"><i class="fa-brands fa-threads"></i></div>
-                        <input type="text" id="threads_link" placeholder="Threads Profile Link" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;">
-                        <select id="threads_range" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;"><option value="No Account">No Account</option><option value="10K - 50K">10K - 50K</option><option value="50K+">50K+</option></select>
-                    </div>
-
-                    <div style="display: grid; grid-template-columns: 46px 1fr 160px; gap: 12px; align-items: center;">
-                        <div style="width: 46px; height: 46px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 16px;"><i class="fa-brands fa-x-twitter"></i></div>
-                        <input type="text" id="x_link" placeholder="X (Twitter) Profile Link" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;">
-                        <select id="x_range" style="background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; font-size: 14px; outline: none;"><option value="No Account">No Account</option><option value="10K - 50K">10K - 50K</option><option value="50K+">50K+</option></select>
-                    </div>
+            <div>
+                <label style="display: block; font-size: 12px; font-weight: 700; color: #00e676; text-transform: uppercase; margin-bottom: 12px;">Social Media Links</label>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <input type="text" id="ytLink" placeholder="YouTube Channel Link" style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
+                    <input type="text" id="igLink" placeholder="Instagram Profile Link" style="width: 100%; background: #041010; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 14px; color: #fff; outline: none;">
                 </div>
             </div>
 
-            <button type="submit" style="width: 100%; margin-top: 20px; background: #00e676; color: #010707; font-size: 16px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; border: none; padding: 16px; border-radius: 14px; cursor: pointer; box-shadow: 0 8px 25px rgba(0, 230, 118, 0.25);">Publish To Directory</button>
+            <button type="submit" style="width: 100%; background: #00e676; color: #010707; font-size: 16px; font-weight: 800; border: none; padding: 16px; border-radius: 14px; cursor: pointer; margin-top: 10px;">Publish To Directory</button>
         </div>
     </form>
 </div>
 
-<script>
-// ऑटो-फिल यूजर ईमेल लोकलस्टोरेज से
+<script type="module">
+import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+// लोकलस्टोरेज से ऑटोमैटिक ईमेल यहाँ फिल होगी
 if(localStorage.getItem('userEmail')) {
     document.getElementById('email').value = localStorage.getItem('userEmail');
 }
 
-// इमेज अपलोड प्रिव्यू लॉजिक
-function previewAvatar(event) {
-    const file = event.target.files[0];
-    if (file) {
-        if(file.size > 1024 * 1024) {
-            alert("File size exceeds 1MB limitation!");
-            return;
-        }
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            document.getElementById('avatarPreview').src = e.target.result;
-            document.getElementById('avatarPreview').style.display = 'block';
-            document.getElementById('upload-placeholder').style.display = 'none';
-        }
-        reader.readAsDataURL(file);
-    }
-}
+document.getElementById('onboardingForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const db = window.appDb;
+    const uid = localStorage.getItem('userUid') || "user_" + Date.now();
 
-// फॉर्म सबमिशन का लॉजिक
-async function handleOnboardingSubmit(event) {
-    event.preventDefault();
-    console.log("Publishing Creator Profile Data to Database...");
-    alert("Awesome! Profile details saved successfully.");
-    // यहाँ आप अपना Firestore सेट या सिंकिंग लॉजिक लगा सकते हैं।
-}
+    if(!db) {
+        alert("Database connection not ready!");
+        return;
+    }
+
+    const profileData = {
+        realName: document.getElementById('realName').value,
+        brandName: document.getElementById('brandName').value,
+        whatsapp: document.getElementById('whatsapp').value,
+        email: document.getElementById('email').value,
+        gender: document.getElementById('gender').value,
+        state: document.getElementById('state').value,
+        category: document.getElementById('category').value,
+        youtubeLink: document.getElementById('ytLink').value,
+        instagramLink: document.getElementById('igLink').value,
+        createdAt: new Date().toISOString()
+    };
+
+    try {
+        // डाटा को "creators" कलेक्शन में सबमिट करना
+        await setDoc(doc(db, "creators", uid), profileData);
+        alert("Awesome! Profile details saved successfully.");
+        // फॉर्म सेव होने के बाद सीधा क्रिएटर्स लिस्टिंग पर रीडायरेक्ट
+        window.location.href = "index.html?page=creators";
+    } catch (error) {
+        console.error("Firestore Error: ", error);
+        alert("Error saving: " + error.message);
+    }
+});
 </script>
