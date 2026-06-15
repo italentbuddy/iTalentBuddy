@@ -16,7 +16,7 @@ html, body {
     font-family:Inter,Arial,sans-serif;
     background:#010707;
     color:#fff;
-    /* 🛠️ Fix: GitHub Pages aur scrolling forms ke liye full viewport control */
+    /* 🛠️ Fix: Content flow aur dynamic scroll bars ko fully handle karne ke liye viewport layout scale */
     min-height: 100vh;
     overflow-x: hidden;
     overflow-y: auto;
@@ -127,7 +127,6 @@ html, body {
     backdrop-filter:blur(25px);
     box-shadow: 0 25px 60px rgba(0,0,0,0.6);
     flex: 1;
-    /* 🛠️ Fix: Max/Min heights hatakar flexibility di taaki content bheeche nahi */
     width: 100%;
     align-content: start;
 }
@@ -135,7 +134,7 @@ html, body {
 @media(max-width:1100px), (max-height: 740px){
     body { overflow-y: auto; height: auto; display: block; }
     .container { height: auto; padding: 10px; }
-    .wrap { grid-template-columns: 1fr; padding: 16px; }
+    .wrap { grid-template-columns: 1fr !important; padding: 16px; }
 }
 </style>
 </head>
@@ -193,8 +192,8 @@ else if (targetPage === 'deals') document.getElementById('nav-deals').classList.
 else if (targetPage === 'agencies') document.getElementById('nav-agencies').classList.add('active-nav');
 else if (targetPage.includes('production')) document.getElementById('nav-production').classList.add('active-nav');
 
-// 🛠️ Dynamic Columns Grid System Setup
-if (targetPage === 'home' || targetPage.includes('onboarding')) {
+// 🛠️ Structural Fix: Onboarding page ke liye wrapper component ko full width (1fr) kiya gaya hai taaki internal layout break na ho
+if (targetPage === 'home') {
     document.getElementById('dynamic-wrapper').style.gridTemplateColumns = 'minmax(0, 1.35fr) minmax(0, 1fr)';
 } else {
     document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
@@ -202,7 +201,6 @@ if (targetPage === 'home' || targetPage.includes('onboarding')) {
 
 const fileNameToLoad = targetPage + '.html';
 
-/* 🛠️ Fix: GitHub Pages absolute route breaking issue solved via relative fetch */
 fetch(fileNameToLoad)
     .then(res => {
         if (!res.ok) throw new Error('File Not Found');
