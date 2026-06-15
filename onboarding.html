@@ -1,63 +1,63 @@
-<div class="onboarding-container" style="display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 32px; padding: 12px; width: 100%; box-sizing: border-box; align-items: start;">
+<div class="onboarding-container" style="display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 36px; padding: 24px; width: 100%; box-sizing: border-box; align-items: start; background: #020808; min-height: 100vh;">
     
-    <div class="form-section" style="color: #fff; display: flex; flex-direction: column; gap: 20px; width: 100%;">
+    <div class="form-section" style="color: #fff; display: flex; flex-direction: column; gap: 24px; width: 100%;">
         <div>
-            <h2 style="font-size: 32px; font-weight: 800; margin: 0 0 8px 0; background: linear-gradient(135deg, #fff 60%, #00e676 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; font-family: sans-serif;">Creator Ecosystem Entry</h2>
-            <p style="color: rgba(255,255,255,0.4); font-size: 14px; margin: 0; font-weight: 400; font-family: sans-serif;">Configure your professional network node. Real-time updates sync instantly with the preview terminal.</p>
+            <h2 class="hero-title" style="font-size: 38px; font-weight: 900; margin: 0 0 8px 0; background: linear-gradient(135deg, #fff 50%, #00e676 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -1px; font-family: sans-serif;">CREATOR ECOSYSTEM ENTRY</h2>
+            <p style="color: #b0c0c0; font-size: 14px; margin: 0; font-weight: 400; line-height: 1.6; font-family: sans-serif;">Configure your professional network node. Real-time updates sync instantly with the preview terminal.</p>
         </div>
 
         <form id="onboardingForm" style="display: flex; flex-direction: column; gap: 24px; width: 100%;">
             
-            <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1.5px; text-transform: uppercase; font-family: sans-serif;">01. Core Identity Matrix</span>
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; margin-top: 8px;">
+                <span style="font-size: 11px; font-weight: 800; color: #00e676; letter-spacing: 2px; text-transform: uppercase; font-family: sans-serif; text-shadow: 0 0 10px rgba(0, 230, 118, 0.3);">01. Core Identity Matrix</span>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div>
-                    <label class="form-label">Real Name</label>
-                    <input type="text" id="realName" placeholder="e.g. Rahul Kumar" required class="premium-input">
+                <div class="form-group-premium">
+                    <label class="form-label-premium">Real Name</label>
+                    <input type="text" id="realName" placeholder="e.g. Rahul Kumar" required class="premium-input-box">
                 </div>
-                <div>
-                    <label class="form-label">Asa Name (Alias / Brand)</label>
-                    <input type="text" id="brandName" placeholder="e.g. TechBuddy" required class="premium-input">
-                </div>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div>
-                    <label class="form-label">WhatsApp Number</label>
-                    <input type="tel" id="whatsapp" placeholder="+91 XXXXX XXXXX" required class="premium-input">
-                </div>
-                <div>
-                    <label class="form-label">Email ID (Auto-Filled)</label>
-                    <input type="email" id="email" readonly class="premium-input" style="background: rgba(255,255,255,0.01); color: rgba(255,255,255,0.3); cursor: not-allowed; border-color: rgba(255,255,255,0.03);">
+                <div class="form-group-premium">
+                    <label class="form-label-premium">Asa Name (Alias / Brand)</label>
+                    <input type="text" id="brandName" placeholder="e.g. TechBuddy" required class="premium-input-box">
                 </div>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                <div>
-                    <label class="form-label">Gender</label>
-                    <select id="gender" class="premium-input" style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22></polyline></svg>'); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px;">
+                <div class="form-group-premium">
+                    <label class="form-label-premium">WhatsApp Number</label>
+                    <input type="tel" id="whatsapp" placeholder="+91 XXXXX XXXXX" required class="premium-input-box">
+                </div>
+                <div class="form-group-premium">
+                    <label class="form-label-premium">Email ID (Auto-Filled)</label>
+                    <input type="email" id="email" readonly class="premium-input-box" style="background: rgba(255,255,255,0.01) !important; color: rgba(255,255,255,0.25) !important; cursor: not-allowed; border-color: rgba(255,255,255,0.02) !important;">
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="form-group-premium">
+                    <label class="form-label-premium">Gender</label>
+                    <select id="gender" class="premium-input-box" style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22></polyline></svg>'); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px;">
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
                     </select>
                 </div>
-                <div style="position: relative;">
-                    <label class="form-label">State (India)</label>
-                    <input type="text" id="stateSearch" placeholder="Type to search state..." class="premium-input" autocomplete="off">
+                <div class="form-group-premium" style="position: relative;">
+                    <label class="form-label-premium">State (India)</label>
+                    <input type="text" id="stateSearch" placeholder="Type to search state..." class="premium-input-box" autocomplete="off">
                     <div id="stateDropdown" class="floating-dropdown"></div>
                 </div>
             </div>
 
             <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
-                <div>
-                    <label class="form-label">Profile Punchline / Bio</label>
-                    <input type="text" id="profileBio" placeholder="e.g. Building Next-Gen Tech Ecosystems" class="premium-input">
+                <div class="form-group-premium">
+                    <label class="form-label-premium">Profile Punchline / Bio</label>
+                    <input type="text" id="profileBio" placeholder="e.g. Building Next-Gen Tech Ecosystems" class="premium-input-box">
                 </div>
-                <div>
-                    <label class="form-label">Card Glow Theme</label>
-                    <select id="cardTheme" class="premium-input" style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22></polyline></svg>'); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px;">
+                <div class="form-group-premium">
+                    <label class="form-label-premium">Card Glow Theme</label>
+                    <select id="cardTheme" class="premium-input-box" style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22></polyline></svg>'); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px;">
                         <option value="#00e676">Neon Green</option>
                         <option value="#00f0ff">Cyber Cyan</option>
                         <option value="#ec008c">Sunset Pink</option>
@@ -66,51 +66,51 @@
                 </div>
             </div>
 
-            <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1.5px; text-transform: uppercase; font-family: sans-serif;">02. Content Domain Select</span>
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; margin-top: 8px;">
+                <span style="font-size: 11px; font-weight: 800; color: #00e676; letter-spacing: 2px; text-transform: uppercase; font-family: sans-serif; text-shadow: 0 0 10px rgba(0, 230, 118, 0.3);">02. Content Domain Select</span>
             </div>
 
-            <div style="position: relative;">
-                <label class="form-label">Search & Multi-Select Categories</label>
-                <input type="text" id="categorySearch" placeholder="Type to filter categories (e.g. Gaming, Tech...)" class="premium-input" autocomplete="off">
+            <div class="form-group-premium" style="position: relative;">
+                <label class="form-label-premium">Search & Multi-Select Categories</label>
+                <input type="text" id="categorySearch" placeholder="Type to filter categories (e.g. Gaming, Tech...)" class="premium-input-box" autocomplete="off">
                 <div id="categoryDropdown" class="floating-dropdown"></div>
                 <div id="selectedCategoryChips" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;"></div>
             </div>
 
-            <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1.5px; text-transform: uppercase; font-family: sans-serif;">03. Social Infrastructure Nodes</span>
+            <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px; margin-top: 8px;">
+                <span style="font-size: 11px; font-weight: 800; color: #00e676; letter-spacing: 2px; text-transform: uppercase; font-family: sans-serif; text-shadow: 0 0 10px rgba(0, 230, 118, 0.3);">03. Social Infrastructure Nodes</span>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 14px;">
-                <div class="social-input-row">
-                    <div class="social-icon-box"><i class="fa-brands fa-youtube"></i></div>
-                    <input type="text" id="ytLink" placeholder="YouTube Channel Link" class="social-mid-input">
-                    <input type="text" id="ytSubs" placeholder="Subs (e.g. 50K)" class="social-short-input">
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium" style="color: #ff0000; background: rgba(255,0,0,0.03);"><i class="fa-brands fa-youtube"></i></div>
+                    <input type="text" id="ytLink" placeholder="YouTube Channel Link" class="premium-input-box">
+                    <input type="text" id="ytSubs" placeholder="Subs (e.g. 50K)" class="premium-input-box" style="text-align: center;">
                 </div>
-                <div class="social-input-row">
-                    <div class="social-icon-box"><i class="fa-brands fa-instagram"></i></div>
-                    <input type="text" id="igLink" placeholder="Instagram Profile Link" class="social-mid-input">
-                    <input type="text" id="igFollowers" placeholder="Followers (e.g. 1.2M)" class="social-short-input">
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium" style="color: #e1306c; background: rgba(225,48,108,0.03);"><i class="fa-brands fa-instagram"></i></div>
+                    <input type="text" id="igLink" placeholder="Instagram Profile Link" class="premium-input-box">
+                    <input type="text" id="igFollowers" placeholder="Followers (e.g. 1.2M)" class="premium-input-box" style="text-align: center;">
                 </div>
-                <div class="social-input-row">
-                    <div class="social-icon-box"><i class="fa-brands fa-x-twitter"></i></div>
-                    <input type="text" id="xLink" placeholder="X Profile Link" class="social-mid-input">
-                    <input type="text" id="xMetrics" placeholder="Followers" class="social-short-input">
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium" style="color: #fff; background: rgba(255,255,255,0.03);"><i class="fa-brands fa-x-twitter"></i></div>
+                    <input type="text" id="xLink" placeholder="X Profile Link" class="premium-input-box">
+                    <input type="text" id="xMetrics" placeholder="Followers" class="premium-input-box" style="text-align: center;">
                 </div>
-                <div class="social-input-row">
-                    <div class="social-icon-box"><i class="fa-brands fa-linkedin-in"></i></div>
-                    <input type="text" id="liLink" placeholder="LinkedIn Profile Link" class="social-mid-input">
-                    <input type="text" id="liMetrics" placeholder="Connections" class="social-short-input">
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium" style="color: #0077b5; background: rgba(0,119,181,0.03);"><i class="fa-brands fa-linkedin-in"></i></div>
+                    <input type="text" id="liLink" placeholder="LinkedIn Profile Link" class="premium-input-box">
+                    <input type="text" id="liMetrics" placeholder="Connections" class="premium-input-box" style="text-align: center;">
                 </div>
             </div>
 
-            <button type="submit" id="submitBtn" class="premium-btn">Publish to Directory</button>
+            <button type="submit" id="submitBtn">Publish to Directory</button>
         </form>
     </div>
 
-    <div class="preview-section" style="position: sticky; top: 24px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 24px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box; width: 100%; min-height: calc(100vh - 120px);">
+    <div class="preview-section" style="position: sticky; top: 24px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); border-radius: 18px; padding: 32px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box; width: 100%; min-height: calc(100vh - 48px); transition: border-color 0.4s, background 0.4s;">
         <div style="text-align: center; margin-bottom: 24px;">
-            <span style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 2px; font-family: sans-serif;"><i class="fa-solid fa-eye" style="margin-right: 6px; color: #00e676;"></i> Live Workspace Preview</span>
+            <span style="font-size: 11px; font-weight: 700; color: #cbdad1; text-transform: uppercase; letter-spacing: 2px; font-family: sans-serif;"><i class="fa-solid fa-eye" style="margin-right: 6px; color: #00e676;"></i> Live Workspace Preview</span>
         </div>
         
         <div id="live-preview-card" style="width: 100%; max-width: 320px; aspect-ratio: 9/15; background: #040d0d; border: 2px solid #00e676; border-radius: 24px; box-shadow: 0 30px 70px rgba(0,230,118,0.12); overflow: hidden; display: flex; flex-direction: column; position: relative;">
@@ -371,41 +371,56 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
 </script>
 
 <style>
-.form-label {
+/* 🌟 TOYING PREMIUM FIELD INTERACTION (FROM HOME SCREEN LOGIC) */
+.form-group-premium {
+    margin-bottom: 4px; 
+    display: flex; 
+    flex-direction: column; 
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.form-label-premium {
     display: block; 
-    font-size: 11px; 
+    margin: 0 0 8px 0; 
     font-weight: 700; 
-    color: rgba(255,255,255,0.4); 
+    font-size: 11px; 
+    letter-spacing: 0.5px; 
     text-transform: uppercase; 
-    margin-bottom: 8px; 
-    letter-spacing: 0.5px;
+    color: rgba(0, 230, 118, 0.6); 
+    transition: all 0.3s ease;
     font-family: sans-serif;
 }
-.premium-input {
+
+/* Glassmorphism Field Styling */
+.premium-input-box {
     width: 100%; 
-    background: #050e0e; 
-    border: 1px solid rgba(255,255,255,0.06); 
-    border-radius: 8px; 
-    padding: 12px 16px; 
+    height: 44px;
+    padding: 10px 14px; 
+    border: 1px solid rgba(255, 255, 255, .05); 
+    border-radius: 12px;
+    background: rgba(255, 255, 255, .04); 
     color: #fff; 
-    font-size: 14px;
-    outline: none;
+    font-family: inherit; 
+    font-size: 14px; 
+    outline: none; 
     box-sizing: border-box;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    font-family: sans-serif;
+    transition: all 0.3s ease;
 }
-.premium-input:focus {
-    border-color: #00e676;
-    background: #071515;
-    box-shadow: 0 0 0 3px rgba(0, 230, 118, 0.1);
-}
+.premium-input-box::placeholder { color: rgba(255, 255, 255, 0.3); }
+select.premium-input-box option { background: #0b1513; color: #fff; }
+
+/* Dynamic Focus Engine */
+.form-group-premium:focus-within { transform: translateY(-2px) scale(1.015); }
+.form-group-premium:focus-within .form-label-premium { color: #00e676; text-shadow: 0 0 10px rgba(0, 230, 118, 0.6); transform: translateX(4px); }
+.premium-input-box:focus { background: rgba(2, 22, 18, 0.7); border-color: #00e676; box-shadow: 0 0 20px rgba(0, 230, 118, 0.25); }
+
+/* Dropdown styling */
 .floating-dropdown {
     display: none; 
     position: absolute; 
     width: 100%; 
     background: #050e0e; 
     border: 1px solid rgba(255,255,255,0.12); 
-    border-radius: 8px; 
+    border-radius: 12px; 
     max-height: 200px; 
     overflow-y: auto; 
     z-index: 100; 
@@ -413,108 +428,52 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
     box-shadow: 0 15px 35px rgba(0,0,0,0.7);
     font-family: sans-serif;
 }
-.dropdown-item {
-    padding: 12px 16px;
-    cursor: pointer;
-    font-size: 13px;
-    color: rgba(255,255,255,0.8);
-}
-.dropdown-item:hover {
-    background: rgba(0, 230, 118, 0.08);
-    color: #00e676;
-}
+.dropdown-item { padding: 12px 16px; cursor: pointer; font-size: 13px; color: rgba(255,255,255,0.8); }
+.dropdown-item:hover { background: rgba(0, 230, 118, 0.08); color: #00e676; }
+
+/* Chips */
 .category-chip {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(0, 230, 118, 0.08);
-    border: 1px solid rgba(0, 230, 118, 0.2);
-    color: #00e676;
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    font-family: sans-serif;
+    display: flex; align-items: center; gap: 8px; background: rgba(0, 230, 118, 0.08);
+    border: 1px solid rgba(0, 230, 118, 0.2); color: #00e676; padding: 6px 14px; border-radius: 20px; font-size: 13px; font-family: sans-serif;
 }
-.category-chip i {
-    cursor: pointer;
-    color: rgba(255,255,255,0.4);
-}
+.category-chip i { cursor: pointer; color: rgba(255,255,255,0.4); }
 .category-chip i:hover { color: #ff4444; }
 
-.social-input-row {
-    display: grid; 
-    grid-template-columns: 42px 1fr 140px; 
-    gap: 12px; 
-    align-items: center;
-    width: 100%;
+/* Social Grid Infrastructure */
+.social-input-row-premium {
+    display: grid; grid-template-columns: 44px 1fr 140px; gap: 12px; align-items: center; width: 100%; transition: transform 0.4s ease;
 }
-.social-icon-box {
-    height: 42px;
-    background: rgba(255,255,255,0.02);
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255,255,255,0.6);
-    font-size: 16px;
-}
-.social-mid-input {
-    background: #050e0e;
-    border: 1px solid rgba(255,255,255,0.06);
-    padding: 11px 16px;
-    color: #fff;
-    font-size: 13px;
-    border-radius: 8px;
-    outline: none;
-    box-sizing: border-box;
-    font-family: sans-serif;
-}
-.social-short-input {
-    background: #050e0e;
-    border: 1px solid rgba(255,255,255,0.06);
-    padding: 11px 16px;
-    color: #fff;
-    font-size: 13px;
-    border-radius: 8px;
-    outline: none;
-    box-sizing: border-box;
-    text-align: center;
-    font-family: sans-serif;
-}
-.social-mid-input:focus, .social-short-input:focus { border-color: #00e676; background: #071515; }
-
-.premium-btn {
-    width: 100%;
-    background: linear-gradient(135deg, #00e676 0%, #00b359 100%);
-    color: #010707;
-    font-size: 15px;
-    font-weight: 800;
-    border: none;
-    padding: 16px;
-    border-radius: 8px;
-    cursor: pointer;
-    margin-top: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    transition: all 0.2s ease;
-    font-family: sans-serif;
-}
-.premium-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0, 230, 118, 0.35);
+.social-input-row-premium:focus-within { transform: translateX(4px); }
+.social-icon-box-premium {
+    height: 44px; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 16px;
 }
 
+/* 💎 PREMIUM SUBMIT BUTTON GLOBAL WAVE FIX */
+#submitBtn {
+    height: 48px; margin-top: 12px; width: 100%; border: 1px solid rgba(0, 230, 118, 0.4); border-radius: 12px;
+    background: rgba(0, 230, 118, 0.04); color: #00e676; font-size: 14px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.5px; cursor: pointer; position: relative; overflow: hidden; z-index: 1; transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1); font-family: sans-serif;
+}
+#submitBtn::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent); transition: all 0.6s ease; z-index: -1;
+}
+#submitBtn:hover { 
+    color: #ffffff; border-color: #00e676; background: linear-gradient(45deg, #00e676, #00b853);
+    transform: scale(1.02); letter-spacing: 2px; box-shadow: 0 0 30px rgba(0, 230, 118, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.3);
+}
+#submitBtn:hover::before { left: 100%; }
+
+/* Hover synchronization for preview section container */
+.preview-section:hover {
+    border-color: rgba(0, 230, 118, 0.15);
+    background: rgba(255, 255, 255, 0.02) !important;
+}
+
+/* Responsive UI Engine */
 @media(max-width: 1100px) {
-    .onboarding-container {
-        grid-template-columns: 1fr !important;
-        gap: 24px;
-    }
-    .preview-section {
-        position: relative !important;
-        top: 0 !important;
-        min-height: auto !important;
-        padding: 16px;
-    }
+    .onboarding-container { grid-template-columns: 1fr !important; gap: 28px; padding: 16px; }
+    .preview-section { position: relative !important; top: 0 !important; min-height: auto !important; padding: 24px; }
+    .hero-title { font-size: 32px !important; }
 }
 </style>
