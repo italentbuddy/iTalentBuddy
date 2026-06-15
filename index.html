@@ -6,135 +6,16 @@
 <title>iTalentBuddy | Next-Gen Creator Directory</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
-*{
-    box-sizing:border-box;
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-html, body {
-    margin:0;
-    padding:0;
-    font-family:Inter,Arial,sans-serif;
-    background:#010707;
-    color:#fff;
-    overflow:hidden;
-    height: 100vh;
-    scrollbar-gutter: stable;
-}
-#bg-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -1;
-    pointer-events: none;
-    background: radial-gradient(circle at 50% 50%, #021414 0%, #000606 100%);
-}
-@keyframes screenReveal {
-    from { opacity: 0; transform: translateY(10px); filter: blur(3px); }
-    to { opacity: 1; transform: translateY(0); filter: blur(0); }
-}
-.container{
-    width: 96%;
-    max-width: 1550px;
-    margin: 0 auto;
-    padding-top: 24px; 
-    height: 96vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; 
-    animation: screenReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-.nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom: 24px;
-    height: 54px;
-    flex-shrink: 0;
-}
-.logo{
-    font-size:36px;
-    font-weight:900;
-    letter-spacing: -1.5px;
-    background: linear-gradient(135deg, #fff 40%, #00e676 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    cursor: pointer;
-}
-.nav-right-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
-#nav{display:flex;gap:12px;flex-wrap:wrap;align-items: center;}
-#nav a{
-    padding:10px 20px;
-    border-radius:12px;
-    text-decoration:none;
-    color:rgba(255,255,255,0.65);
-    background:rgba(255,255,255,.02);
-    backdrop-filter:blur(10px);
-    border: 1px solid rgba(255,255,255,0.06);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    display: inline-block;
-    text-align: center;
-}
-#nav a::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: #00e676;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    transition: width 0.5s cubic-bezier(0.25, 0.8, 0.25, 1), height 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-#nav a:hover{
-    color: #010707;
-    border-color: #00e676;
-    box-shadow: 0 0 15px rgba(0, 230, 118, 0.3);
-}
-#nav a:hover::before {
-    width: 300px;
-    height: 300px;
-}
-#nav a.active-nav {
-    color: #010707 !important;
-    border-color: #00e676 !important;
-    background: #00e676 !important;
-    box-shadow: 0 0 20px rgba(0, 230, 118, 0.4);
-}
-.wrap{
-    display:grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
-    gap: 24px;
-    border:1px solid rgba(255,255,255,.06);
-    border-radius:24px;
-    padding: 24px;
-    background: rgba(4, 16, 16, 0.45);
-    backdrop-filter:blur(25px);
-    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
-    flex: 1;
-    height: 100%;
-    min-height: 650px; 
-    max-height: 800px;
-    overflow-y: auto; /* ऑनबोर्डिंग फॉर्म स्क्रोल करने के लिए आवश्यक */
-}
-
-@media(max-width:1100px), (max-height: 740px){
-    body { overflow-y: auto; height: auto; display: block; }
-    .container { height: auto; padding: 10px; }
-    .wrap { grid-template-columns: 1fr; max-height: none; min-height: auto; padding: 16px; }
-}
+*{ box-sizing:border-box; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); }
+html, body { margin:0; padding:0; font-family:Inter,Arial,sans-serif; background:#010707; color:#fff; overflow-x:hidden; min-height: 100vh; }
+#bg-canvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1; pointer-events: none; background: radial-gradient(circle at 50% 50%, #021414 0%, #000606 100%); }
+.container{ width: 96%; max-width: 1550px; margin: 0 auto; padding: 24px 0; display: flex; flex-direction: column; }
+.nav{ display:flex; justify-content:space-between; align-items:center; margin-bottom: 24px; height: 54px; }
+.logo{ font-size:36px; font-weight:900; letter-spacing: -1.5px; background: linear-gradient(135deg, #fff 40%, #00e676 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
+#nav{ display:flex; gap:12px; align-items: center; }
+#nav a{ padding:10px 20px; border-radius:12px; text-decoration:none; color:rgba(255,255,255,0.65); background:rgba(255,255,255,.02); border: 1px solid rgba(255,255,255,0.06); font-size: 14px; font-weight: 600; }
+#nav a:hover, #nav a.active-nav { color: #010707; border-color: #00e676; background: #00e676; box-shadow: 0 0 15px rgba(0, 230, 118, 0.3); }
+.wrap{ border:1px solid rgba(255,255,255,.06); border-radius:24px; padding: 32px; background: rgba(4, 16, 16, 0.45); backdrop-filter:blur(25px); box-shadow: 0 25px 60px rgba(0,0,0,0.6); width: 100%; min-height: 500px; }
 </style>
 </head>
 <body>
@@ -142,25 +23,20 @@ html, body {
 <div class="container">
     <div class="nav">
         <div class="logo" onclick="window.location.href='index.html'">iTalentBuddy</div>
-        <div class="nav-right-wrapper">
-            <div id="nav">
-                <a href="index.html" id="nav-home">Home</a>
-                <a href="index.html?page=creators" id="nav-creators">Creators</a>
-                <a href="index.html?page=deals" id="nav-deals">Deals</a>
-                <a href="index.html?page=agencies" id="nav-agencies">Agencies</a>
-                <a href="index.html?page=production houses" id="nav-production">Production Houses</a>
-            </div>
-            </div>
+        <div id="nav">
+            <a href="index.html" id="nav-home">Home</a>
+            <a href="index.html?page=creators" id="nav-creators">Creators</a>
+            <a href="index.html?page=deals" id="nav-deals">Deals</a>
+            <a href="index.html?page=agencies" id="nav-agencies">Agencies</a>
+        </div>
     </div>
-    
     <div class="wrap" id="dynamic-wrapper"></div>
 </div>
 
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-import { getAuth, signInWithPopup, GoogleAuthProvider, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-import { initializeFirestore, persistentLocalCache, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+import { initializeFirestore, persistentLocalCache } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDGJsSfxHi-DQhWulEV7rQsGumH4k3I_wY",
@@ -168,155 +44,73 @@ const firebaseConfig = {
     projectId: "italentbuddy-5225d",
     storageBucket: "italentbuddy-5225d.firebasestorage.app",
     messagingSenderId: "31982716088",
-    appId: "1:31982716088:web:7a05fc8691b65c6af0604d",
-    measurementId: "G-6W2WN0416R"
+    appId: "1:31982716088:web:7a05fc8691b65c6af0604d"
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+const db = initializeFirestore(app, { localCache: persistentLocalCache({}) });
 
-const db = initializeFirestore(app, {
-    localCache: persistentLocalCache({})
-});
+window.appDb = db; // ग्लोबल एक्सेस
 
 const urlParams = new URLSearchParams(window.location.search);
 let targetPage = (urlParams.get('page') || 'home').toLowerCase().trim();
 
-// Active tab management UI
-if (targetPage === 'home') document.getElementById('nav-home').classList.add('active-nav');
-else if (targetPage === 'creators') document.getElementById('nav-creators').classList.add('active-nav');
-else if (targetPage === 'deals') document.getElementById('nav-deals').classList.add('active-nav');
-else if (targetPage === 'agencies') document.getElementById('nav-agencies').classList.add('active-nav');
-else if (targetPage.includes('production')) document.getElementById('nav-production').classList.add('active-nav');
-
-// Grid Column layout handling dynamically
-if (targetPage === 'home') {
-    document.getElementById('dynamic-wrapper').style.gridTemplateColumns = 'minmax(0, 1.35fr) minmax(0, 1fr)';
-} else {
-    document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
+// एक्टिव टैब को हाईलाइट करना
+if (document.getElementById(`nav-${targetPage}`)) {
+    document.getElementById(`nav-${targetPage}`).classList.add('active-nav');
 }
 
-const cleanBaseRoute = window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-const fileNameToLoad = targetPage + '.html';
-
-fetch(cleanBaseRoute + fileNameToLoad)
-    .then(res => {
-        if (!res.ok) throw new Error('File Not Found');
-        return res.text();
-    })
+// डायनेमिक पेज लोडर
+fetch(`${targetPage}.html`)
+    .then(res => { if (!res.ok) throw new Error(); return res.text(); })
     .then(html => {
         document.getElementById('dynamic-wrapper').innerHTML = html;
-        
-        // स्क्रिप्ट्स को मैन्युअली री-एक्जीक्यूट करने के लिए (ऑनबोर्डिंग ड्रॉपडाउन और प्रिव्यू के लिए)
-        const scripts = document.getElementById('dynamic-wrapper').querySelectorAll('script');
-        scripts.forEach(oldScript => {
-            const newScript = document.createElement('script');
-            Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
-            newScript.appendChild(document.createTextNode(oldScript.innerHTML));
-            oldScript.parentNode.replaceChild(newScript, oldScript);
-        });
+        executeScripts(document.getElementById('dynamic-wrapper'));
     })
-    .catch(err => {
-        let pageDisplayTitle = targetPage.charAt(0).toUpperCase() + targetPage.slice(1);
-        document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
-        document.getElementById('dynamic-wrapper').innerHTML = `
-            <div style="text-align:center; padding-top:180px; width: 100%;">
-                <h2 style="font-size: 32px; color: #00e676; margin-bottom: 10px;">${pageDisplayTitle}</h2>
-                <p style="color: rgba(255,255,255,0.5); font-size: 16px;">This section is coming soon. We are building something awesome!</p>
-            </div>`;
+    .catch(() => {
+        document.getElementById('dynamic-wrapper').innerHTML = `<h2 style="text-align:center;color:#00e676;margin-top:100px;">Coming Soon!</h2>`;
     });
 
-// 🔐 DYNAMIC ONBOARDING INTEGRATION WORKFLOW (Join ITB बटन दबाने पर ही फॉर्म खुलेगा)
+function executeScripts(container) {
+    const scripts = container.querySelectorAll('script');
+    scripts.forEach(oldScript => {
+        const newScript = document.createElement('script');
+        Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+        newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+        oldScript.parentNode.replaceChild(newScript, oldScript);
+    });
+}
+
+// ग्लोबल गूगल लॉगिन ट्रिगर
 window.triggerGmailVerificationWorkflow = function() {
-    console.log("Firebase Login Workflow Triggered from Join ITB Button.");
-    setPersistence(auth, browserLocalPersistence)
-        .then(() => {
-            return signInWithPopup(auth, provider);
-        })
-        .then(async (result) => {
-            const user = result.user;
-            console.log("Google Auth Success for UID:", user.uid);
-            
-            // डेटा सिंकिंग के लिए लोकल स्टोरेज में ईमेल और यूआईडी सुरक्षित करें
-            localStorage.setItem('userEmail', user.email);
-            localStorage.setItem('userUid', user.uid);
-            
-            // सुरक्षित सिंकिंग डिले के बाद डेटाबेस चेक करके ऑनबोर्डिंग पर भेजें
-            setTimeout(async () => {
-                try {
-                    const docRef = doc(db, "creators", user.uid);
-                    const docSnap = await getDoc(docRef);
-                    
-                    if (docSnap.exists()) {
-                        // अगर पहले से कार्ड बना हुआ है तो एडिट मोड में ऑनबोर्डिंग खोलें
-                        window.location.href = `index.html?page=onboarding&mode=edit&uid=${user.uid}`;
-                    } else {
-                        // अगर नया क्रिएटर है तो फ्रेश फॉर्म खोलें
-                        window.location.href = `index.html?page=onboarding&mode=new&uid=${user.uid}`;
-                    }
-                } catch (firestoreError) {
-                    console.error("Firestore Error, safe redirecting to onboarding template:", firestoreError);
-                    window.location.href = `index.html?page=onboarding&mode=new&uid=${user.uid}`;
-                }
-            }, 1000);
+    signInWithPopup(auth, provider)
+        .then((result) => {
+            localStorage.setItem('userEmail', result.user.email);
+            localStorage.setItem('userUid', result.user.uid);
+            window.location.href = `index.html?page=onboarding&uid=${result.user.uid}`;
         })
         .catch((error) => {
-            console.error("Auth Exception:", error);
-            alert("Verification Cancelled or Failed: " + error.message);
+            console.error("Auth Error: ", error);
+            alert("Login Failed: " + error.message);
         });
 };
 </script>
 
 <script>
-const canvas = document.getElementById('bg-canvas');
-const ctx = canvas.getContext('2d');
-let particles = [];
-const particleCount = 65; 
-const maxDistance = 140;
+// बैकग्राउंड पार्टिकल्स एनीमेशन स्क्रिप्ट
+const canvas = document.getElementById('bg-canvas'); const ctx = canvas.getContext('2d'); let particles = [];
 function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-window.addEventListener('resize', resizeCanvas);
-resizeCanvas();
+window.addEventListener('resize', resizeCanvas); resizeCanvas();
 class Particle {
-    constructor() {
-        this.x = Math.random() * canvas.width;
-        this.y = Math.random() * canvas.height;
-        this.vx = (Math.random() - 0.5) * 0.35;
-        this.vy = (Math.random() - 0.5) * 0.35;
-        this.radius = Math.random() * 2 + 1;
-    }
-    update() {
-        this.x += this.vx; this.y += this.vy;
-        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-    }
-    draw() {
-        ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 230, 118, 0.4)'; ctx.fill();
-    }
+    constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.vx = (Math.random() - 0.5) * 0.35; this.vy = (Math.random() - 0.5) * 0.35; this.radius = Math.random() * 2 + 1; }
+    update() { this.x += this.vx; this.y += this.vy; if (this.x < 0 || this.x > canvas.width) this.vx *= -1; if (this.y < 0 || this.y > canvas.height) this.vy *= -1; }
+    draw() { ctx.beginPath(); ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2); ctx.fillStyle = 'rgba(0, 230, 118, 0.4)'; ctx.fill(); }
 }
-function init() { particles = []; for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); } }
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    let grad = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 10, canvas.width/2, canvas.height/2, canvas.width);
-    grad.addColorStop(0, '#021515'); grad.addColorStop(1, '#000505');
-    ctx.fillStyle = grad; ctx.fillRect(0, 0, canvas.width, canvas.height);
-    for (let i = 0; i < particles.length; i++) {
-        particles[i].update(); particles[i].draw();
-        for (let j = i + 1; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const dist = Math.sqrt(dx * dx + dy * dy);
-            if (dist < maxDistance) {
-                ctx.beginPath(); ctx.moveTo(particles[i].x, particles[i].y); ctx.lineTo(particles[j].x, particles[j].y);
-                let alpha = (1 - (dist / maxDistance)) * 0.12;
-                ctx.strokeStyle = `rgba(0, 230, 118, ${alpha})`; ctx.lineWidth = 0.8; ctx.stroke();
-            }
-        }
-    }
-    requestAnimationFrame(animate);
-}
-init(); animate();
+for (let i = 0; i < 65; i++) particles.push(new Particle());
+function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+animate();
 </script>
 </body>
 </html>
