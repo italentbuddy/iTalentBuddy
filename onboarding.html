@@ -1,15 +1,15 @@
-<div class="onboarding-container" style="display: grid; grid-template-columns: 55% 45%; gap: 30px; padding: 40px; max-width: 1400px; margin: 0 auto; box-sizing: border-box; background: #020808; min-height: 100vh; align-items: start;">
+<div class="onboarding-container" style="display: grid; grid-template-columns: minmax(320px, 1.2fr) minmax(320px, 1fr); gap: 40px; padding: 40px; width: 100% !important; max-width: 100% !important; min-width: 100% !important; box-sizing: border-box; background: #020808; min-height: 100vh; align-items: start;">
     
-    <div class="form-section" style="color: #fff; display: flex; flex-direction: column; gap: 20px;">
+    <div class="form-section" style="color: #fff; display: flex; flex-direction: column; gap: 20px; width: 100%;">
         <div>
-            <h2 style="font-size: 32px; font-weight: 800; margin: 0 0 8px 0; background: linear-gradient(135deg, #fff 60%, #00e676 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px;">Creator Ecosystem Entry</h2>
-            <p style="color: rgba(255,255,255,0.4); font-size: 14px; margin: 0; font-weight: 400;">Configure your professional network node. Real-time updates sync instantly with the preview terminal.</p>
+            <h2 style="font-size: 32px; font-weight: 800; margin: 0 0 8px 0; background: linear-gradient(135deg, #fff 60%, #00e676 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; font-family: sans-serif;">Creator Ecosystem Entry</h2>
+            <p style="color: rgba(255,255,255,0.4); font-size: 14px; margin: 0; font-weight: 400; font-family: sans-serif;">Configure your professional network node. Real-time updates sync instantly with the preview terminal.</p>
         </div>
 
-        <form id="onboardingForm" style="display: flex; flex-direction: column; gap: 24px;">
+        <form id="onboardingForm" style="display: flex; flex-direction: column; gap: 24px; width: 100%;">
             
             <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1.5px; text-transform: uppercase;">01. Core Identity Matrix</span>
+                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1.5px; text-transform: uppercase; font-family: sans-serif;">01. Core Identity Matrix</span>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
@@ -37,7 +37,7 @@
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
                 <div>
                     <label class="form-label">Gender</label>
-                    <select id="gender" class="premium-input" style="appearance: none;">
+                    <select id="gender" class="premium-input" style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22></polyline></svg>'); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px;">
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
@@ -57,7 +57,7 @@
                 </div>
                 <div>
                     <label class="form-label">Card Glow Theme</label>
-                    <select id="cardTheme" class="premium-input">
+                    <select id="cardTheme" class="premium-input" style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22></polyline></svg>'); background-repeat: no-repeat; background-position: right 12px center; background-size: 14px;">
                         <option value="#00e676">Neon Green</option>
                         <option value="#00f0ff">Cyber Cyan</option>
                         <option value="#ec008c">Sunset Pink</option>
@@ -67,7 +67,7 @@
             </div>
 
             <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1.5px; text-transform: uppercase;">02. Content Domain Select</span>
+                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1.5px; text-transform: uppercase; font-family: sans-serif;">02. Content Domain Select</span>
             </div>
 
             <div style="position: relative;">
@@ -78,7 +78,7 @@
             </div>
 
             <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 6px;">
-                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1.5px; text-transform: uppercase;">03. Social Infrastructure Nodes</span>
+                <span style="font-size: 11px; font-weight: 700; color: #00e676; letter-spacing: 1.5px; text-transform: uppercase; font-family: sans-serif;">03. Social Infrastructure Nodes</span>
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 14px;">
@@ -108,23 +108,23 @@
         </form>
     </div>
 
-    <div class="preview-section" style="position: sticky; top: 40px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box; min-height: calc(100vh - 80px);">
+    <div class="preview-section" style="position: sticky; top: 40px; background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.05); border-radius: 24px; padding: 40px; display: flex; flex-direction: column; align-items: center; justify-content: center; box-sizing: border-box; width: 100%; min-height: calc(100vh - 80px);">
         <div style="text-align: center; margin-bottom: 24px;">
-            <span style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 2px;"><i class="fa-solid fa-eye" style="margin-right: 6px; color: #00e676;"></i> Live Workspace Preview</span>
+            <span style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 2px; font-family: sans-serif;"><i class="fa-solid fa-eye" style="margin-right: 6px; color: #00e676;"></i> Live Workspace Preview</span>
         </div>
         
-        <div id="live-preview-card" style="width: 100%; max-width: 350px; aspect-ratio: 9/15; background: #040d0d; border: 2px solid #00e676; border-radius: 24px; box-shadow: 0 30px 70px rgba(0,230,118,0.12); overflow: hidden; display: flex; flex-direction: column; position: relative;">
+        <div id="live-preview-card" style="width: 100%; max-width: 340px; aspect-ratio: 9/15; background: #040d0d; border: 2px solid #00e676; border-radius: 24px; box-shadow: 0 30px 70px rgba(0,230,118,0.12); overflow: hidden; display: flex; flex-direction: column; position: relative;">
             
             <div id="image-upload-zone" style="width: 100%; height: 50%; background: #071515; border-bottom: 1px solid rgba(255,255,255,0.05); position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; overflow: hidden;">
                 <input type="file" id="imageInput" accept="image/*" style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 40;">
-                <div id="upload-instruction" style="text-align: center; color: rgba(0, 230, 118, 0.8); z-index: 30; pointer-events: none;">
+                <div id="upload-instruction" style="text-align: center; color: rgba(0, 230, 118, 0.8); z-index: 30; pointer-events: none; font-family: sans-serif;">
                     <i class="fa-solid fa-cloud-arrow-up" style="font-size: 32px; margin-bottom: 10px;"></i>
                     <div style="font-weight: 700; font-size: 11px; letter-spacing: 1px;">TAP TO UPLOAD AVATAR</div>
                 </div>
                 <img id="avatarRender" style="display: none; position: absolute; top:0; left:0; width:100%; height:100%; object-fit: cover; z-index: 35;">
             </div>
 
-            <div style="padding: 24px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(180deg, rgba(4,13,13,0) 0%, #030a0a 100%); box-sizing: border-box;">
+            <div style="padding: 24px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; background: linear-gradient(180deg, rgba(4,13,13,0) 0%, #030a0a 100%); box-sizing: border-box; font-family: sans-serif;">
                 <div>
                     <h3 id="card-brand-name" style="font-size: 24px; font-weight: 800; margin: 0 0 6px 0; letter-spacing: -0.5px; color: #fff;">Alias Name</h3>
                     <p style="margin: 0; color: rgba(255,255,255,0.4); font-size: 13px; display: flex; align-items: center; gap: 6px;">
@@ -379,6 +379,7 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
     text-transform: uppercase; 
     margin-bottom: 8px; 
     letter-spacing: 0.5px;
+    font-family: sans-serif;
 }
 .premium-input {
     width: 100%; 
@@ -391,6 +392,7 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
     outline: none;
     box-sizing: border-box;
     transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    font-family: sans-serif;
 }
 .premium-input:focus {
     border-color: #00e676;
@@ -409,6 +411,7 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
     z-index: 100; 
     margin-top: 6px; 
     box-shadow: 0 15px 35px rgba(0,0,0,0.7);
+    font-family: sans-serif;
 }
 .dropdown-item {
     padding: 12px 16px;
@@ -430,6 +433,7 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
     padding: 6px 14px;
     border-radius: 20px;
     font-size: 13px;
+    font-family: sans-serif;
 }
 .category-chip i {
     cursor: pointer;
@@ -442,6 +446,7 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
     grid-template-columns: 42px 1fr 140px; 
     gap: 12px; 
     align-items: center;
+    width: 100%;
 }
 .social-icon-box {
     height: 42px;
@@ -463,6 +468,7 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
     border-radius: 8px;
     outline: none;
     box-sizing: border-box;
+    font-family: sans-serif;
 }
 .social-short-input {
     background: #050e0e;
@@ -474,6 +480,7 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
     outline: none;
     box-sizing: border-box;
     text-align: center;
+    font-family: sans-serif;
 }
 .social-mid-input:focus, .social-short-input:focus { border-color: #00e676; background: #071515; }
 
@@ -491,9 +498,24 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
     text-transform: uppercase;
     letter-spacing: 1px;
     transition: all 0.2s ease;
+    font-family: sans-serif;
 }
 .premium-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px rgba(0, 230, 118, 0.35);
+}
+
+/* Force override if parent/wrapper script has strict narrow boundaries */
+@media (min-width: 992px) {
+    .onboarding-container {
+        width: 100vw !important;
+        position: relative !important;
+        left: 50% !important;
+        right: 50% !important;
+        margin-left: -50vw !important;
+        margin-right: -50vw !important;
+        padding-left: 80px !important;
+        padding-right: 80px !important;
+    }
 }
 </style>
