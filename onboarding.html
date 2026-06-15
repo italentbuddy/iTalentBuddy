@@ -1,14 +1,18 @@
-<div class="onboarding-container" style="width: 100%; color: #fff;">
+<div class="onboarding-container" style="width: 100%; color: #fff; position: relative; z-index: 20;">
     <h2 style="font-size: 32px; font-weight: 800; margin-bottom: 6px; background: linear-gradient(135deg, #fff 60%, #00e676 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Creator Ecosystem Entry</h2>
-    <p style="color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 30px;">Fill your profile metrics. Your card will automatically start appending from Card #5 onwards inside the directory.</p>
+    <p style="color: rgba(255,255,255,0.5); font-size: 14px; margin-bottom: 30px;">Fill your profile metrics. If you have already registered, your old data will auto-load below.</p>
 
-    <form id="onboardingForm" style="display: grid; grid-template-columns: 280px 1fr; gap: 40px;">
+    <form id="onboardingForm" style="display: grid; grid-template-columns: 280px 1fr; gap: 40px; position: relative; z-index: 25;">
         
         <div style="display: flex; flex-direction: column; gap: 20px;">
-            <div style="border: 2px dashed rgba(0, 230, 118, 0.3); background: rgba(0, 230, 118, 0.02); border-radius: 20px; height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px;">
-                <i class="fa-solid fa-cloud-arrow-up" style="font-size: 40px; color: #00e676; margin-bottom: 15px;"></i>
-                <div style="font-weight: 700; font-size: 14px; color: #00e676; text-transform: uppercase;">Upload Photo</div>
-                <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 8px;">(MAX 1MB IMAGE ONLY)</div>
+            <div id="image-upload-zone" style="border: 2px dashed rgba(0, 230, 118, 0.4); background: rgba(0, 230, 118, 0.02); border-radius: 20px; height: 240px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 20px; cursor: pointer; position: relative;">
+                <input type="file" id="imageInput" accept="image/*" style="position: absolute; width: 100%; height: 100%; opacity: 0; cursor: pointer; z-index: 40;">
+                <div id="upload-instruction" style="z-index: 30; pointer-events: none;">
+                    <i class="fa-solid fa-cloud-arrow-up" style="font-size: 40px; color: #00e676; margin-bottom: 15px;"></i>
+                    <div style="font-weight: 700; font-size: 14px; color: #00e676; text-transform: uppercase;">Upload Photo</div>
+                    <div style="font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 8px;">(CLICK TO SELECT)</div>
+                </div>
+                <img id="avatarRender" style="display: none; position: absolute; top:0; left:0; width:100%; height:100%; object-fit:cover; border-radius:18px; z-index: 35;">
             </div>
 
             <div>
@@ -74,27 +78,79 @@
                 </div>
             </div>
 
-            <button type="submit" style="width: 100%; background: #00e676; color: #010707; font-size: 16px; font-weight: 800; border: none; padding: 16px; border-radius: 14px; cursor: pointer; margin-top: 10px;">Publish To Directory</button>
+            <button type="submit" id="submitBtn" style="width: 100%; background: #00e676; color: #010707; font-size: 16px; font-weight: 800; border: none; padding: 16px; border-radius: 14px; cursor: pointer; margin-top: 10px; display: block; position: relative; z-index: 999; text-transform: uppercase; letter-spacing: 0.5px;">Publish To Directory</button>
         </div>
     </form>
 </div>
 
 <script type="module">
-import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-// लोकलस्टोरेज से ऑटोमैटिक ईमेल यहाँ फिल होगी
-if(localStorage.getItem('userEmail')) {
-    document.getElementById('email').value = localStorage.getItem('userEmail');
+const db = window.appDb;
+const uid = localStorage.getItem('userUid');
+let savedAvatarBase64 = "";
+
+// 1. Live Photo Preview Setup
+document.getElementById('imageInput').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if(file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+            savedAvatarBase64 = evt.target.result;
+            document.getElementById('avatarRender').src = savedAvatarBase64;
+            document.getElementById('avatarRender').style.display = 'block';
+            document.getElementById('upload-instruction').style.display = 'none';
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// 2. Pre-fill Logic (पुराना डेटा ढूंढकर वापस फॉर्म में लोड करना)
+async function checkExistingUser() {
+    if(!db || !uid) return;
+    
+    // ईमेल ऑटो-फिल करें
+    if(localStorage.getItem('userEmail')) {
+        document.getElementById('email').value = localStorage.getItem('userEmail');
+    }
+
+    try {
+        const docRef = doc(db, "creators", uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            // फॉर्म इनपुट्स को पुराने डेटा से भरना
+            document.getElementById('realName').value = data.realName || '';
+            document.getElementById('brandName').value = data.brandName || '';
+            document.getElementById('whatsapp').value = data.whatsapp || '';
+            document.getElementById('gender').value = data.gender || 'Male';
+            document.getElementById('state').value = data.state || '';
+            document.getElementById('category').value = data.category || 'Tech & AI';
+            document.getElementById('ytLink').value = data.youtubeLink || '';
+            document.getElementById('igLink').value = data.instagramLink || '';
+            
+            if(data.avatarUrl) {
+                savedAvatarBase64 = data.avatarUrl;
+                document.getElementById('avatarRender').src = data.avatarUrl;
+                document.getElementById('avatarRender').style.display = 'block';
+                document.getElementById('upload-instruction').style.display = 'none';
+            }
+        }
+    } catch (err) {
+        console.error("Error fetching pre-fill details:", err);
+    }
 }
 
+// Invoke check on startup
+checkExistingUser();
+
+// 3. Form Submission Handling
 document.getElementById('onboardingForm').addEventListener('submit', async (e) => {
     e.preventDefault();
     
-    const db = window.appDb;
-    const uid = localStorage.getItem('userUid') || "user_" + Date.now();
-
-    if(!db) {
-        alert("Database connection not ready!");
+    if(!db || !uid) {
+        alert("Session Expired. Please login again via Creators Tab.");
         return;
     }
 
@@ -108,18 +164,28 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
         category: document.getElementById('category').value,
         youtubeLink: document.getElementById('ytLink').value,
         instagramLink: document.getElementById('igLink').value,
-        createdAt: new Date().toISOString()
+        avatarUrl: savedAvatarBase64,
+        updatedAt: new Date().toISOString()
     };
 
     try {
-        // डाटा को "creators" कलेक्शन में सबमिट करना
         await setDoc(doc(db, "creators", uid), profileData);
         alert("Awesome! Profile details saved successfully.");
-        // फॉर्म सेव होने के बाद सीधा क्रिएटर्स लिस्टिंग पर रीडायरेक्ट
         window.location.href = "index.html?page=creators";
     } catch (error) {
-        console.error("Firestore Error: ", error);
-        alert("Error saving: " + error.message);
+        console.error("Firestore Save Error: ", error);
+        alert("Error saving data: " + error.message);
     }
 });
 </script>
+
+<style>
+#submitBtn:hover {
+    background: #00ff81 !important;
+    box-shadow: 0 0 20px rgba(0, 255, 129, 0.4);
+    transform: translateY(-2px);
+}
+#submitBtn:active {
+    transform: translateY(1px);
+}
+</style>
