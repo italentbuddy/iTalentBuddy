@@ -133,20 +133,20 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
     background: linear-gradient(45deg, #00e676, #00b853); border-color: transparent; color: #010707; box-shadow: 0 5px 15px rgba(0, 230, 118, 0.3);
 }
 
-/* 🔍 FLOATING DROPDOWN CONTEXT (SOLID BACKGROUND ADDED) */
+/* 🔍 FLOATING DROPDOWN CONTEXT (FIXED TRANSPARENCY & OVERLAY ISSUE) */
 .floating-dropdown {
     display: none; 
     position: absolute; 
     width: 100%; 
-    background: #0e1b18 !important; /* Made completely solid and deep to avoid mix-ups */
+    background: #0b1413 !important; /* Completely Solid Deep-Dark background to hide 100% of underlying contents */
     border: 1px solid rgba(0, 230, 118, 0.4); 
     border-radius: 12px; 
     max-height: 180px; 
     overflow-y: auto; 
-    z-index: 1000 !important; /* Raised z-index significantly */
+    z-index: 9999 !important; /* Stacked at topmost level over social rows */
     top: 100%; 
     margin-top: 6px; 
-    box-shadow: 0 15px 35px rgba(0,0,0,0.95), 0 0 15px rgba(0, 230, 118, 0.1);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.95), 0 0 20px rgba(0, 230, 118, 0.15);
 }
 .dropdown-item { padding: 10px 14px; cursor: pointer; font-size: 13px; color: #cbdad1; transition: all 0.2s; }
 .dropdown-item:hover { background: rgba(0, 230, 118, 0.15); color: #00e676; }
@@ -188,8 +188,6 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
     color: rgba(255, 255, 255, 0.6); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden;
 }
 
-/* ❌ LINE REMOVED FROM HERE (.social-input-row-premium::after completely wiped) */
-
 /* Uniform Textbox Transformation & Effects on Parent Hover */
 .social-input-row-premium:hover .social-icon-box-premium {
     color: #00e676; background: rgba(0, 230, 118, 0.08); border-color: rgba(0, 230, 118, 0.4);
@@ -207,7 +205,6 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
 }
 
 /* 🔒 DROPDOWN SAFETY FILTER */
-/* Jab dropdown active ho, tab niche wale items ke pointer events disabled ho jaye */
 .dropdown-active .social-input-row-premium {
     pointer-events: none !important;
 }
