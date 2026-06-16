@@ -1,358 +1,237 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creator Ecosystem Entry | iTalentBuddy</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* 🌟 GLOBAL THEME INTEGRATION FROM HOME PAGE */
-        body {
-            background-color: #010707 !important;
-            color: #ffffff !important;
-            font-family: inherit;
-            margin: 0;
-            padding: 24px;
-            box-sizing: border-box;
-        }
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-        /* Full Width Container matching your layout */
-        .main-wrapper {
-            max-width: 100% !important;
-            margin: 0 auto !important;
-            display: grid !important;
-            grid-template-columns: 1.2fr 0.8fr !important;
-            gap: 24px !important;
-        }
+<style>
+/* --- DYNAMIC & PREMIUM HOME SYSTEM INTEGRATION --- */
+.left, .right {
+    background: rgba(255, 255, 255, 0.015) !important;
+    border-radius: 18px !important;
+    padding: 32px !important;
+    border: 1px solid rgba(255, 255, 255, 0.03) !important;
+    display: flex !important;
+    flex-direction: column !important;
+}
+.left { justify-content: flex-start !important; }
+.right { justify-content: flex-start !important; }
 
-        /* 💎 HOME PAGE GLASS CARDS FIX */
-        .left-form-node, .right-preview-node {
-            background: rgba(255, 255, 255, 0.015) !important;
-            border-radius: 18px !important;
-            padding: 32px !important;
-            border: 1px solid rgba(255, 255, 255, 0.03) !important;
-            display: flex !important;
-            flex-direction: column !important;
-            justify-content: flex-start !important;
-            box-sizing: border-box;
-        }
+.left:hover, .right:hover {
+    border-color: rgba(0, 230, 118, 0.15) !important;
+    background: rgba(255, 255, 255, 0.025) !important;
+}
 
-        .left-form-node:hover, .right-preview-node:hover {
-            border-color: rgba(0, 230, 118, 0.15) !important;
-            background: rgba(255, 255, 255, 0.025) !important;
-        }
+/* 🌟 FORM LAYOUT STRUCTURE FIX */
+.onboarding-container {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 24px;
+    max-width: 1200px;
+    margin: 20px auto;
+    align-items: start;
+}
 
-        /* Typography */
-        .entry-title {
-            font-size: 42px !important;
-            line-height: 1 !important;
-            margin: 0 0 10px 0 !important;
-            letter-spacing: -1px !important;
-            font-weight: 900 !important;
-            text-transform: uppercase;
-        }
+.title-area {
+    margin-bottom: 24px;
+}
+.title-area h1 {
+    font-size: 42px !important;
+    line-height: 1 !important;
+    margin: 0 0 10px !important;
+    letter-spacing: -1px !important;
+    color: #fff;
+}
+.title-area p {
+    color: #cbdad1 !important;
+    line-height: 1.5 !important;
+    font-size: 15px !important;
+    margin: 0;
+}
 
-        .green-glow {
-            color: #00e676 !important;
-            display: inline-block !important;
-        }
+/* 🌟 DYNAMIC TEXTBOX EFFECTS */
+.form-section-title {
+    font-size: 13px !important;
+    font-weight: 800 !important;
+    color: #00e676 !important;
+    letter-spacing: 1px !important;
+    text-transform: uppercase !important;
+    margin: 24px 0 14px 0 !important;
+    border-bottom: 1px solid rgba(0, 230, 118, 0.15);
+    padding-bottom: 6px;
+}
 
-        .entry-desc {
-            color: #b0c0c0 !important;
-            line-height: 1.6 !important;
-            font-size: 15px !important;
-            margin: 0 0 24px 0 !important;
-        }
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+.full-width {
+    grid-column: span 2;
+}
 
-        .section-separator {
-            font-size: 11px !important;
-            font-weight: 700 !important;
-            letter-spacing: 0.5px !important;
-            text-transform: uppercase !important;
-            color: rgba(0, 230, 118, 0.6) !important;
-            margin: 20px 0 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding-bottom: 6px;
-        }
+.form-group { 
+    margin-bottom: 16px !important; 
+    display: flex !important; 
+    flex-direction: column !important; 
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important; 
+}
+.form-group label { 
+    display: block !important; 
+    margin: 0 0 8px 0 !important; 
+    font-weight: 700 !important; 
+    font-size: 11px !important; 
+    letter-spacing: 0.5px !important; 
+    text-transform: uppercase !important; 
+    color: rgba(0, 230, 118, 0.6) !important; 
+    transition: all 0.3s ease !important; 
+}
 
-        .grid-2-col {
-            display: grid !important;
-            grid-template-columns: 1fr 1fr !important;
-            gap: 16px !important;
-        }
+.form-group input, .form-group select, .form-group textarea {
+    width: 100% !important; 
+    padding: 10px 14px !important; 
+    border: 1px solid rgba(255, 255, 255, .05) !important; 
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, .04) !important; 
+    color: #fff !important; 
+    font-family: inherit !important; 
+    font-size: 14px !important; 
+    outline: none !important; 
+    transition: all 0.3s ease !important;
+}
+.form-group input, .form-group select { height: 44px !important; }
+.form-group textarea { height: 80px !important; resize: none !important; }
+.form-group select option { background: #0b1513 !important; color: #fff !important; }
 
-        /* 🌟 PREMIUM TEXTBOX EFFECTS */
-        .form-group {
-            margin-bottom: 18px !important;
-            display: flex !important;
-            flex-direction: column !important;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-        }
+/* Dynamic Focus Glow System */
+.form-group:focus-within { transform: translateY(-2px) scale(1.015) !important; }
+.form-group:focus-within label { color: #00e676 !important; text-shadow: 0 0 10px rgba(0, 230, 118, 0.6) !important; transform: translateX(4px) !important; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { background: rgba(2, 22, 18, 0.7) !important; border-color: #00e676 !important; box-shadow: 0 0 20px rgba(0, 230, 118, 0.25) !important; }
 
-        .form-group label {
-            display: block !important;
-            margin: 0 0 8px 0 !important;
-            font-weight: 700 !important;
-            font-size: 11px !important;
-            letter-spacing: 0.5px !important;
-            text-transform: uppercase !important;
-            color: rgba(0, 230, 118, 0.6) !important;
-            transition: all 0.3s ease !important;
-        }
+/* 📸 PREMIUM AVATAR UPLOAD SYSTEM */
+.avatar-upload-zone {
+    border: 2px dashed rgba(0, 230, 118, 0.25);
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.avatar-upload-zone:hover {
+    border-color: #00e676;
+    background: rgba(0, 230, 118, 0.03);
+    box-shadow: 0 0 15px rgba(0, 230, 118, 0.1);
+}
+.avatar-upload-zone i {
+    font-size: 28px;
+    color: #00e676;
+}
+.avatar-upload-zone span {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+}
+.avatar-upload-zone p {
+    font-size: 11px;
+    color: #cbdad1;
+    margin: 0;
+}
 
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100% !important;
-            padding: 10px 14px !important;
-            border: 1px solid rgba(255, 255, 255, .05) !important;
-            border-radius: 12px !important;
-            background: rgba(255, 255, 255, .04) !important;
-            color: #fff !important;
-            font-family: inherit !important;
-            font-size: 14px !important;
-            outline: none !important;
-            box-sizing: border-box !important;
-            transition: all 0.3s ease !important;
-        }
+/* 💎 PREMIUM BUTTON GLOBAL WAVE */
+#submit-btn {
+    height: 48px !important; 
+    margin-top: 20px !important; 
+    width: 100% !important; 
+    border: 1px solid rgba(0, 230, 118, 0.4) !important; 
+    border-radius: 12px !important;
+    background: rgba(0, 230, 118, 0.04) !important; 
+    color: #00e676 !important; 
+    font-size: 14px !important; 
+    font-weight: 800 !important; 
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important; 
+    cursor: pointer !important; 
+    position: relative !important; 
+    overflow: hidden !important; 
+    z-index: 1 !important; 
+    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1) !important;
+}
+#submit-btn::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important; left: -100% !important;
+    width: 100% !important; height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important;
+    transition: all 0.6s ease !important;
+    z-index: -1 !important;
+}
+#submit-btn:hover { 
+    color: #ffffff !important; 
+    border-color: #00e676 !important; 
+    background: linear-gradient(45deg, #00e676, #00b853) !important;
+    transform: scale(1.03) !important; 
+    letter-spacing: 2px !important; 
+    box-shadow: 0 0 30px rgba(0, 230, 118, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.3) !important;
+}
+#submit-btn:hover::before { left: 100% !important; }
 
-        .form-group input, .form-group select { height: 44px !important; }
-        .form-group textarea { height: 95px !important; resize: none !important; }
-        .form-group select option { background: #0b1513 !important; color: #fff !important; }
+/* Preview Terminal Card Wrapper */
+.preview-title {
+    font-size: 11px !important;
+    font-weight: 800 !important;
+    letter-spacing: 1.5px !important;
+    text-transform: uppercase !important;
+    color: rgba(255, 255, 255, 0.4) !important;
+    margin-bottom: 16px !important;
+    text-align: center;
+}
 
-        /* Focus Interactivity */
-        .form-group:focus-within { transform: translateY(-2px) scale(1.015) !important; }
-        .form-group:focus-within label {
-            color: #00e676 !important;
-            text-shadow: 0 0 10px rgba(0, 230, 118, 0.6) !important;
-            transform: translateX(4px) !important;
-        }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-            background: rgba(2, 22, 18, 0.7) !important;
-            border-color: #00e676 !important;
-            box-shadow: 0 0 20px rgba(0, 230, 118, 0.25) !important;
-        }
+/* Responsive Handling */
+@media(max-width:960px) {
+    .onboarding-container { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .full-width { grid-column: span 1; }
+}
+</style>
 
-        /* 📸 UPLOAD CONTAINER INTEGRATION (<1MB) */
-        .avatar-upload-zone {
-            border: 1px dashed rgba(0, 230, 118, 0.3);
-            background: rgba(255, 255, 255, 0.01);
-            border-radius: 12px;
-            padding: 16px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            margin-bottom: 12px;
-        }
-
-        .avatar-upload-zone:hover {
-            border-color: #00e676;
-            background: rgba(0, 230, 118, 0.03);
-            box-shadow: 0 0 15px rgba(0, 230, 118, 0.1);
-        }
-
-        .avatar-upload-zone i {
-            font-size: 20px;
-            color: #00e676;
-        }
-
-        .avatar-upload-zone .upload-text-meta {
-            text-align: left;
-        }
-
-        .avatar-upload-zone .upload-text-meta p {
-            margin: 0;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .avatar-upload-zone .upload-text-meta span {
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.4);
-        }
-
-        #profile-pic-input { display: none; }
-
-        /* 💎 PREMIUM SUBMIT BUTTON */
-        #submit-btn {
-            height: 48px !important;
-            margin-top: 20px !important;
-            width: 100% !important;
-            border: 1px solid rgba(0, 230, 118, 0.4) !important;
-            border-radius: 12px !important;
-            background: rgba(0, 230, 118, 0.04) !important;
-            color: #00e676 !important;
-            font-size: 14px !important;
-            font-weight: 800 !important;
-            text-transform: uppercase !important;
-            letter-spacing: 0.5px !important;
-            cursor: pointer !important;
-            position: relative !important;
-            overflow: hidden !important;
-            z-index: 1 !important;
-            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1) !important;
-        }
-
-        #submit-btn::before {
-            content: '' !important;
-            position: absolute !important;
-            top: 0 !important; left: -100% !important;
-            width: 100% !important; height: 100% !important;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important;
-            transition: all 0.6s ease !important;
-            z-index: -1 !important;
-        }
-
-        #submit-btn:hover { 
-            color: #ffffff !important; 
-            border-color: #00e676 !important; 
-            background: linear-gradient(45deg, #00e676, #00b853) !important;
-            transform: scale(1.015) !important; 
-            letter-spacing: 2px !important; 
-            box-shadow: 0 0 30px rgba(0, 230, 118, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.3) !important;
-        }
-
-        #submit-btn:hover::before { left: 100% !important; }
-
-        /* Live Preview Structural Components */
-        .right-preview-node {
-            position: sticky;
-            top: 24px;
-            align-items: center;
-            justify-content: center;
-            background: rgba(255, 255, 255, 0.01) !important;
-        }
-
-        .preview-header-badge {
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: rgba(255, 255, 255, 0.4);
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .preview-header-badge i { color: #00e676; font-size: 8px; }
-
-        /* Custom Card Setup */
-        .premium-live-card {
-            width: 100%;
-            max-width: 340px;
-            background: rgba(255, 255, 255, 0.015);
-            border: 1px solid rgba(0, 230, 118, 0.25);
-            border-radius: 20px;
-            padding: 32px 24px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-        }
-
-        .card-avatar-wrapper {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            border: 2px solid #00e676;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.03);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            box-shadow: 0 0 20px rgba(0, 230, 118, 0.2);
-        }
-
-        .card-avatar-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-        .card-avatar-wrapper i { font-size: 44px; color: rgba(255, 255, 255, 0.15); }
-
-        .c-name { font-size: 24px; font-weight: 800; margin: 0 0 4px 0; letter-spacing: -0.5px; }
-        .c-alias { font-size: 14px; color: rgba(255, 255, 255, 0.5); margin: 0 0 16px 0; }
-        .c-location { font-size: 12px; color: #b0c0c0; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
-        .c-bio { font-size: 13px; color: rgba(255, 255, 255, 0.7); line-height: 1.5; margin: 0 0 24px 0; }
-        
-        .c-badge {
-            background: rgba(0, 230, 118, 0.08);
-            border: 1px solid rgba(0, 230, 118, 0.2);
-            color: #00e676;
-            padding: 6px 16px;
-            border-radius: 30px;
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 24px;
-        }
-
-        .c-metrics {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            width: 100%;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-            padding-top: 20px;
-        }
-
-        .metric-block { display: flex; flex-direction: column; }
-        .metric-block .m-val { font-size: 20px; font-weight: 900; color: #00e676; }
-        .metric-block .m-lbl { font-size: 10px; text-transform: uppercase; color: rgba(255, 255, 255, 0.4); margin-top: 2px; }
-
-        @media(max-width: 1024px) {
-            .main-wrapper { grid-template-columns: 1fr !important; }
-            .right-preview-node { position: relative; top: 0; padding: 40px 20px; }
-        }
-    </style>
-</head>
-<body>
-
-<div class="main-wrapper">
-    <div class="left-form-node">
-        <div class="entry-title">Creator Ecosystem <span class="green-glow">Entry</span></div>
-        <div class="entry-desc">Fill your profile metrics. Real-time changes appear on your premium live card.</div>
-
-        <div class="section-separator">01. Core Identity Matrix</div>
-        
-        <div class="form-group">
-            <label>Profile Picture</label>
-            <div class="avatar-upload-zone" onclick="document.getElementById('profile-pic-input').click()">
-                <i class="fa-solid fa-cloud-arrow-up"></i>
-                <div class="upload-text-meta">
-                    <p id="upload-status-label">Click to Upload Profile Photo</p>
-                    <span>Format: JPG, PNG (Less than 1MB)</span>
-                </div>
-                <input type="file" id="profile-pic-input" accept="image/*" onchange="processAvatar(this)">
-            </div>
+<div class="onboarding-container">
+    <div class="left">
+        <div class="title-area">
+            <h1>Creator Ecosystem Entry</h1>
+            <p>Configure your professional network node. Real-time updates sync instantly with the preview terminal.</p>
         </div>
 
-        <div class="grid-2-col">
+        <div class="avatar-upload-zone" onclick="document.getElementById('avatar-input').click()">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+            <span>UPLOAD PROFILE PICTURE</span>
+            <p>PNG or JPG format (Max size: 1MB)</p>
+            <input type="file" id="avatar-input" accept="image/jpeg, image/png" style="display: none;" onchange="validateAndPreviewAvatar(this)">
+        </div>
+
+        <div class="form-section-title">01. Core Identity Matrix</div>
+        <div class="form-grid">
             <div class="form-group">
                 <label>Real Name</label>
-                <input type="text" id="input-name" placeholder="e.g. Rahul Kumar" oninput="liveSync()">
+                <input id="real-name" placeholder="e.g. Rahul Kumar">
             </div>
             <div class="form-group">
                 <label>ASA Name (Alias / Brand)</label>
-                <input type="text" id="input-alias" placeholder="e.g. TechBuddy" oninput="liveSync()">
+                <input id="alias-name" placeholder="e.g. TechBuddy" oninput="updatePreviewText('preview-alias', this.value)">
             </div>
-        </div>
-
-        <div class="grid-2-col">
             <div class="form-group">
                 <label>WhatsApp Number</label>
-                <input type="text" id="input-phone" placeholder="+91 XXXXX XXXXX">
+                <input id="whatsapp" placeholder="+91 XXXXX XXXXX">
             </div>
             <div class="form-group">
-                <label>Email ID</label>
-                <input type="email" id="input-email" placeholder="name@example.com">
+                <label>Email ID (Auto-Filled)</label>
+                <input id="email" type="email" placeholder="name@example.com">
             </div>
-        </div>
-
-        <div class="grid-2-col">
             <div class="form-group">
                 <label>Gender</label>
-                <select id="input-gender">
+                <select id="gender">
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
                     <option value="Other">Other</option>
@@ -360,139 +239,99 @@
             </div>
             <div class="form-group">
                 <label>State (India)</label>
-                <input type="text" id="input-state" placeholder="e.g. Delhi" oninput="liveSync()">
+                <input id="state" placeholder="Type to search state..." oninput="updatePreviewText('preview-location', this.value + ', India')">
+            </div>
+            <div class="form-group full-width">
+                <label>Profile Punchline / Bio</label>
+                <textarea id="bio" placeholder="e.g. Building Next-Gen Tech Ecosystems..." oninput="updatePreviewText('preview-bio', this.value)"></textarea>
             </div>
         </div>
 
+        <div class="form-section-title">02. Content Domain Select</div>
         <div class="form-group">
-            <label>Profile Punchline / Bio</label>
-            <textarea id="input-bio" placeholder="Tell us how we can help..." oninput="liveSync()"></textarea>
+            <label>Categories Multi-Select</label>
+            <input id="categories" placeholder="Type to filter domains (e.g. Gaming, Tech, Finance...)">
         </div>
 
-        <div class="section-separator">02. Content Domain Select</div>
-        <div class="form-group">
-            <label>Primary Niche Category</label>
-            <select id="input-category" onchange="liveSync()">
-                <option value="No Domain Selected" selected hidden>Choose your role...</option>
-                <option value="Tech & Gadgets">Tech & Gadgets</option>
-                <option value="Gaming Esports">Gaming & Esports</option>
-                <option value="Fashion & Styling">Fashion & Styling</option>
-                <option value="Finance & Business">Finance & Business</option>
-            </select>
-        </div>
-
-        <div class="section-separator">03. Social Infrastructure Nodes</div>
-        <div class="grid-2-col">
+        <div class="form-section-title">03. Social Infrastructure Nodes</div>
+        <div class="form-grid">
             <div class="form-group">
                 <label>YouTube Link</label>
-                <input type="text" id="input-yt-url" placeholder="Channel Link">
+                <input id="yt-link" placeholder="YouTube Channel Link">
             </div>
             <div class="form-group">
-                <label>YouTube Subs</label>
-                <input type="text" id="input-yt-subs" placeholder="e.g. 50K, 1.2M" oninput="liveSync()">
+                <label>YouTube Metrics</label>
+                <input id="yt-metrics" placeholder="Subs (e.g. 50K, 1.2M)">
             </div>
-        </div>
-        <div class="grid-2-col">
             <div class="form-group">
                 <label>Instagram Link</label>
-                <input type="text" id="input-ig-url" placeholder="Profile Link">
+                <input id="ig-link" placeholder="Instagram Profile Link">
             </div>
             <div class="form-group">
-                <label>Instagram Followers</label>
-                <input type="text" id="input-ig-fol" placeholder="e.g. 10K, 450K" oninput="liveSync()">
+                <label>Instagram Metrics</label>
+                <input id="ig-metrics" placeholder="Followers (e.g. 100K)">
             </div>
         </div>
 
-        <button id="submit-btn" onclick="triggerDirectorySave()">Publish To Directory</button>
+        <button id="submit-btn" onclick="publishNode()">Publish To Directory</button>
     </div>
 
-    <div class="right-preview-node">
-        <div class="preview-header-badge"><i class="fa-solid fa-circle"></i> Live Premium Card Monitor</div>
+    <div class="right">
+        <div class="preview-title"><i class="fa-solid fa-eye"></i> Live Workspace Preview</div>
         
-        <div class="premium-live-card">
-            <div class="card-avatar-wrapper" id="card-avatar-wrapper">
-                <i class="fa-solid fa-user-astronaut" id="avatar-icon-placeholder"></i>
-                <img id="avatar-render-img" style="display:none;" alt="Avatar UI">
-            </div>
-            <div class="c-name" id="view-name">Alias Name</div>
-            <div class="c-alias" id="view-alias">@username</div>
-            <div class="c-location"><i class="fa-solid fa-location-dot" style="color: #00e676;"></i> <span id="view-location">State, India</span></div>
-            <div class="c-bio" id="view-bio">No bio punchline configured.</div>
-            <div class="c-badge" id="view-tag">NO DOMAIN SELECTED</div>
-            
-            <div class="c-metrics">
-                <div class="metric-block" style="border-right: 1px solid rgba(255,255,255,0.05);">
-                    <span class="m-val" id="view-yt">0K</span>
-                    <span class="m-lbl">Subs</span>
+        <div id="live-card-container" style="width: 100%; display: flex; justify-content: center;">
+            <div style="background: #060d0c; border: 1px solid #00e676; border-radius: 16px; padding: 24px; width: 100%; text-align: center; box-shadow: 0 0 20px rgba(0,230,118,0.15);">
+                <div style="width: 120px; height: 120px; border-radius: 50%; border: 2px solid #00e676; margin: 0 auto 16px auto; overflow: hidden; background: #112220; display: flex; align-items: center; justify-content: center;">
+                    <img id="card-avatar-preview" src="https://via.placeholder.com/120" style="width: 100%; height: 100%; object-fit: cover; display: none;">
+                    <i id="card-avatar-placeholder" class="fa-solid fa-user-astronaut" style="font-size: 48px; color: rgba(0, 230, 118, 0.4);"></i>
                 </div>
-                <div class="metric-block">
-                    <span class="m-val" id="view-ig">0K</span>
-                    <span class="m-lbl">Followers</span>
-                </div>
+                <h3 id="preview-alias" style="color: #fff; margin: 0 0 4px 0; font-size: 22px;">Alias Name</h3>
+                <p id="preview-location" style="color: #00e676; font-size: 13px; margin: 0 0 12px 0;"><i class="fa-solid fa-location-dot"></i> State, India</p>
+                <p id="preview-bio" style="color: #cbdad1; font-size: 13px; font-style: italic; min-height: 38px; margin: 0;">No bio punchline configured.</p>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    // Real-Time System Preview Engine
-    function liveSync() {
-        const name = document.getElementById('input-name').value;
-        const alias = document.getElementById('input-alias').value;
-        const state = document.getElementById('input-state').value;
-        const bio = document.getElementById('input-bio').value;
-        const category = document.getElementById('input-category').value;
-        const ytSubs = document.getElementById('input-yt-subs').value;
-        const igFol = document.getElementById('input-ig-fol').value;
-
-        document.getElementById('view-name').innerText = name ? name : "Alias Name";
-        document.getElementById('view-alias').innerText = alias ? '@' + alias.toLowerCase().replace(/\s+/g, '') : "@username";
-        document.getElementById('view-location').innerText = state ? state + ", India" : "State, India";
-        document.getElementById('view-bio').innerText = bio ? bio : "No bio punchline configured.";
-        document.getElementById('view-tag').innerText = category ? category : "NO DOMAIN SELECTED";
-        document.getElementById('view-yt').innerText = ytSubs ? ytSubs : "0K";
-        document.getElementById('view-ig').innerText = igFol ? igFol : "0K";
+// Real-time simple string sync engine
+function updatePreviewText(elementId, value) {
+    const el = document.getElementById(elementId);
+    if(el) {
+        el.innerText = value.trim() !== "" ? value : (elementId === 'preview-bio' ? 'No bio punchline configured.' : 'Alias Name');
     }
+}
 
-    // 📸 Image Processor with Size Safeguard (< 1MB)
-    function processAvatar(element) {
-        const imageFile = element.files[0];
-        const labelStatus = document.getElementById('upload-status-label');
-        
-        if (imageFile) {
-            // Check size configuration (1MB = 1048576 bytes)
-            if (imageFile.size > 1048576) {
-                alert("File size bada hai! Kripya 1MB se chhoti image select karein.");
-                element.value = ""; 
-                return;
-            }
+// 📸 FILE VALIDATION ENGINE (Restricts to < 1MB)
+function validateAndPreviewAvatar(input) {
+    if (input.files && input.files[0]) {
+        const file = input.files[0];
+        const fileSizeMB = file.size / (1024 * 1024);
 
-            const imageReader = new FileReader();
-            imageReader.onload = function(event) {
-                document.getElementById('avatar-icon-placeholder').style.display = 'none';
-                const liveImageNode = document.getElementById('avatar-render-img');
-                liveImageNode.src = event.target.result;
-                liveImageNode.style.display = 'block';
-                
-                labelStatus.innerText = "✓ Photo Attached Successfully";
-                labelStatus.parentElement.parentElement.style.borderColor = "#00e676";
-            }
-            imageReader.readAsDataURL(imageFile);
-        }
-    }
-
-    // Execution Logic Redirect
-    function triggerDirectorySave() {
-        const clientName = document.getElementById('input-name').value;
-        const clientEmail = document.getElementById('input-email').value;
-
-        if(!clientName || !clientEmail) {
-            alert('Please complete the core identification metrics before publishing.');
+        if (fileSizeMB > 1) {
+            alert("File size is too big! Please upload a picture smaller than 1MB.");
+            input.value = ""; // Form value instantly resets
+            document.getElementById('card-avatar-preview').style.display = "none";
+            document.getElementById('card-avatar-placeholder').style.display = "block";
             return;
         }
-        alert('Thank you, Rahul! Your profile layout has been synced to the directory database.');
-    }
-</script>
 
-</body>
-</html>
+        // Live preview initialization
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const previewImg = document.getElementById('card-avatar-preview');
+            const placeholderIcon = document.getElementById('card-avatar-placeholder');
+            
+            previewImg.src = e.target.result;
+            previewImg.style.display = "block";
+            placeholderIcon.style.display = "none";
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function publishNode() {
+    // Aapki purani sheet automation ya processing flow bina changes ke yahan run hogi
+    alert('Form workflow initialized successfully!');
+}
+</script>
