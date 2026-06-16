@@ -1,43 +1,75 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
-/* 🌟 PREMIUM HOME-THEME INTEGRATION ENGINE */
+/* 🌟 PREMIUM DASHBOARD-STYLE TWO-COLUMN INTEGRATION */
 .onboarding-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 320px 1fr; /* Left Sidebar fix, Right Content scrollable */
+    gap: 24px;
     width: 100%;
     box-sizing: border-box;
-    min-height: calc(100vh - 80px); /* Adjusts automatically under index header */
-    background: #020808;
-    padding: 40px 20px;
+    height: calc(100vh - 110px); /* Locks page scroll, syncs cleanly with index layout */
+    background: transparent;
+    padding: 10px 4px;
 }
 
-.form-section {
+/* Left Sticky/Fixed Premium Card Component */
+.left-profile-sidebar {
+    background: rgba(255, 255, 255, 0.015) !important;
+    border: 1px solid rgba(255, 255, 255, 0.03) !important;
+    padding: 32px 24px;
+    border-radius: 18px !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    height: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    justify-content: flex-start;
+}
+
+/* Right Side Scrollable Form Content */
+.form-section-scrollable {
     color: #fff;
     display: flex;
     flex-direction: column;
-    gap: 28px;
-    width: 100%;
-    max-width: 1100px;
-    background: rgba(255, 255, 255, 0.015) !important;
-    border: 1px solid rgba(255, 255, 255, 0.03) !important;
-    padding: 36px;
+    gap: 24px;
+    background: rgba(255, 255, 255, 0.01) !important;
+    border: 1px solid rgba(255, 255, 255, 0.02) !important;
+    padding: 32px;
     border-radius: 18px !important;
-    transition: border-color 0.4s, background 0.4s !important;
+    height: 100%;
+    overflow-y: auto; /* Internal scrolling hook */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 230, 118, 0.2) transparent;
+    box-sizing: border-box;
 }
 
-.form-section:hover {
+/* Custom Scrollbar styling for Webkit */
+.form-section-scrollable::-webkit-scrollbar {
+    width: 6px;
+}
+.form-section-scrollable::-webkit-scrollbar-thumb {
+    background: rgba(0, 230, 118, 0.2);
+    border-radius: 10px;
+}
+.form-section-scrollable::-webkit-scrollbar-thumb:hover {
+    background: #00e676;
+}
+
+.left-profile-sidebar:hover {
     border-color: rgba(0, 230, 118, 0.15) !important;
     background: rgba(255, 255, 255, 0.025) !important;
 }
 
 .hero-title {
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 900;
     margin: 0;
     color: #fff;
     letter-spacing: -0.5px;
+    line-height: 1.3;
 }
 
 .green-text {
@@ -82,7 +114,7 @@
 select.premium-input-box option { background: #0b1513 !important; color: #fff !important; }
 
 /* Dynamic Focus Effects */
-.form-group-premium:focus-within { transform: translateY(-2px) scale(1.015) !important; }
+.form-group-premium:focus-within { transform: translateY(-2px) scale(1.01) !important; }
 .form-group-premium:focus-within .form-label-premium { 
     color: #00e676 !important; 
     text-shadow: 0 0 10px rgba(0, 230, 118, 0.6) !important; 
@@ -94,31 +126,31 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
     box-shadow: 0 0 20px rgba(0, 230, 118, 0.25) !important; 
 }
 
-/* 📸 PROFILE PICTURE UPLOAD STYLES */
+/* 📸 SIDEBAR PROFILE MOUNT DESIGN */
 .avatar-upload-wrapper {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 20px;
-    background: rgba(255, 255, 255, 0.01);
-    border: 1px dashed rgba(255, 255, 255, 0.08);
-    padding: 16px;
-    border-radius: 14px;
-    transition: border-color 0.3s;
-}
-.avatar-upload-wrapper:hover {
-    border-color: rgba(0, 230, 118, 0.3);
+    gap: 16px;
+    width: 100%;
 }
 .avatar-preview-box {
-    width: 80px;
-    height: 80px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.03);
-    border: 2px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.02);
+    border: 2px dashed rgba(0, 230, 118, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     position: relative;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    transition: all 0.3s;
+}
+.avatar-preview-box:hover {
+    border-color: #00e676;
+    box-shadow: 0 0 20px rgba(0, 230, 118, 0.2);
 }
 .avatar-preview-box img {
     width: 100%;
@@ -126,24 +158,26 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
     object-fit: cover;
 }
 .avatar-preview-box i {
-    font-size: 24px;
-    color: rgba(255, 255, 255, 0.3);
+    font-size: 36px;
+    color: rgba(0, 230, 118, 0.4);
 }
 .upload-btn-premium {
-    padding: 8px 16px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #cbdad1;
-    border-radius: 8px;
+    padding: 10px 20px;
+    background: rgba(0, 230, 118, 0.04);
+    border: 1px solid rgba(0, 230, 118, 0.2);
+    color: #00e676;
+    border-radius: 12px;
     font-size: 13px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700;
+    width: 100%;
     transition: all 0.3s;
 }
 .upload-btn-premium:hover {
-    background: rgba(0, 230, 118, 0.08);
-    border-color: #00e676;
-    color: #00e676;
+    background: linear-gradient(45deg, #00e676, #00b853);
+    border-color: transparent;
+    color: #010707;
+    box-shadow: 0 5px 15px rgba(0, 230, 118, 0.3);
 }
 
 /* 🔍 DROPDOWNS & CHIPS */
@@ -173,7 +207,7 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
 
 /* 🌐 SOCIAL GRID SETUPS */
 .social-input-row-premium {
-    display: grid; grid-template-columns: 44px 1fr 100px; gap: 10px; align-items: center; width: 100%;
+    display: grid; grid-template-columns: 44px 1fr 110px; gap: 10px; align-items: center; width: 100%;
 }
 .social-icon-box-premium {
     height: 44px; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 16px; background: rgba(255,255,255,0.03); color: rgba(255, 255, 255, 0.8);
@@ -199,9 +233,13 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
 }
 #submitBtn:hover::before { left: 100% !important; }
 
-@media(max-width: 900px) {
-    .onboarding-container { padding: 16px; }
-    .form-section { padding: 20px; gap: 20px; }
+@media(max-width: 1100px) {
+    .onboarding-container { grid-template-columns: 1fr; height: auto; padding: 10px; }
+    .left-profile-sidebar { height: auto; padding: 24px; }
+    .form-section-scrollable { height: auto; overflow-y: visible; padding: 20px; }
+}
+
+@media(max-width: 760px) {
     div[style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; gap: 16px !important; }
     div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 14px !important; }
     .social-input-row-premium { gap: 8px; }
@@ -209,28 +247,28 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
 </style>
 
 <div class="onboarding-container">
-    <div class="form-section">
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 16px;">
-            <h2 class="hero-title">CREATOR ECOSYSTEM <span class="green-text">ENTRY</span></h2>
-            <span style="font-size: 11px; font-weight: 700; color: rgba(0, 230, 118, 0.4); letter-spacing: 1px; text-transform: uppercase;">Direct Directory Node Sync</span>
+    <div class="left-profile-sidebar">
+        <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; width: 100%;">
+            <h2 class="hero-title">CREATOR <span class="green-text">SYNC</span></h2>
+            <p style="font-size: 10px; font-weight: 600; color: rgba(255,255,255,0.3); margin: 4px 0 0 0; letter-spacing: 0.5px; text-transform: uppercase;">Directory Node Panel</p>
         </div>
 
+        <div class="avatar-upload-wrapper">
+            <div class="avatar-preview-box" id="avatarPreviewBox">
+                <i class="fa-regular fa-user" id="defaultAvatarIcon"></i>
+                <img id="avatarImg" style="display: none;" alt="Profile Picture">
+            </div>
+            <div style="width: 100%;">
+                <button type="button" class="upload-btn-premium" onclick="document.getElementById('profilePicInput').click()">Upload Photo</button>
+                <input type="file" id="profilePicInput" accept="image/*" style="display: none;">
+                <p style="margin: 8px 0 0 0; font-size: 11px; color: rgba(255,255,255,0.3); line-height: 1.4;">Square identity asset<br>(PNG/JPG)</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-section-scrollable">
         <form id="onboardingForm" style="display: flex; flex-direction: column; gap: 24px; width: 100%;">
             
-            <div class="avatar-upload-wrapper">
-                <div class="avatar-preview-box" id="avatarPreviewBox">
-                    <i class="fa-regular fa-user" id="defaultAvatarIcon"></i>
-                    <img id="avatarImg" style="display: none;" alt="Profile Picture">
-                </div>
-                <div>
-                    <label class="form-label-premium">Profile Picture</label>
-                    <button type="button" class="upload-btn-premium" onclick="document.getElementById('profilePicInput').click()">Upload Image</button>
-                    <input type="file" id="profilePicInput" accept="image/*" style="display: none;">
-                    <p style="margin: 4px 0 0 0; font-size: 11px; color: rgba(255,255,255,0.3);">Recommended: Square JPG or PNG</p>
-                </div>
-            </div>
-
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
                 <div class="form-group-premium">
                     <label class="form-label-premium">Real Name</label>
@@ -317,7 +355,7 @@ import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/f
 const db = window.appDb;
 const uid = localStorage.getItem('userUid');
 let activeSelectedCategories = [];
-let profilePicFile = null; // Binary File Holder for Firebase Storage workflow
+let profilePicFile = null;
 
 const indiaStates = [
     "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", 
@@ -473,7 +511,7 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
     
     let uploadedImageUrl = document.getElementById('avatarImg').src || "";
     if (uploadedImageUrl.startsWith('data:')) {
-        uploadedImageUrl = ""; // Handle/ignore temporary file blobs if storage asset generation isn't hooked yet
+        uploadedImageUrl = ""; 
     }
 
     const profileData = {
@@ -496,16 +534,11 @@ document.getElementById('onboardingForm').addEventListener('submit', async (e) =
         kickMetrics: document.getElementById('kickMetrics').value,
         discordLink: document.getElementById('discordLink').value,
         discordMetrics: document.getElementById('discordMetrics').value,
-        profilePicUrl: uploadedImageUrl, // Key mapping update for user profile pic asset string
+        profilePicUrl: uploadedImageUrl,
         updatedAt: new Date().toISOString()
     };
     
     try {
-        /* NOTE: Agar image file ko Firebase Storage me bhej ke link generate karna chahein toh use:
-           await uploadBytes(storageRef, profilePicFile);
-           const url = await getDownloadURL(storageRef);
-           profileData.profilePicUrl = url;
-        */
         await setDoc(doc(db, "creators", uid), profileData);
         window.location.href = "index.html?page=creators";
     } catch (error) { alert("Execution crash: " + error.message); }
