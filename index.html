@@ -27,7 +27,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 0; /* Background stack pe bottom me rahega */
+            z-index: 0; /* Pure visual stack me sabse niche rahega */
             pointer-events: none;
             background: radial-gradient(circle at 50% 50%, #021414 0%, #000606 100%);
         }
@@ -47,7 +47,7 @@
             justify-content: flex-start;
             animation: screenReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             position: relative;
-            z-index: 1; /* Particle network ke upar content lane ke liye */
+            z-index: 1; /* Content ko canvas particle network ke upar lane ke liye */
         }
         .nav {
             display: flex;
@@ -131,7 +131,19 @@
             width: 100%;
             align-content: start;
         }
-        @media(max-width: 1100px), (max-height: 740px){
+
+        /* GLOBAL INJECTION FIX: Baaki pages (creators/onboarding) ke dark backgrounds ko transparent aur blur glass container me convert karne ke liye */
+        .wrap[data-page="creators"] > div,
+        .wrap[data-page="onboarding"] > div,
+        .wrap[data-page="creators"] .creator-card,
+        .wrap[data-page="onboarding"] .left-card,
+        .wrap[data-page="onboarding"] .right-card {
+            background: rgba(255, 255, 255, 0.015) !important;
+            backdrop-filter: blur(10px) !important;
+            border: 1px solid rgba(255, 255, 255, 0.04) !important;
+        }
+
+        @media(max-width: 1100px), (max-height: 740px) {
             body { overflow-y: auto; height: auto; display: block; }
             .container { height: auto; padding: 10px; }
             .wrap { grid-template-columns: 1fr !important; padding: 16px; }
@@ -180,16 +192,20 @@
         const urlParams = new URLSearchParams(window.location.search);
         let targetPage = (urlParams.get('page') || 'home').toLowerCase().trim();
 
+        // Active Navigation highlights setting
         if (targetPage === 'home') document.getElementById('nav-home').classList.add('active-nav');
         else if (targetPage === 'creators') document.getElementById('nav-creators').classList.add('active-nav');
         else if (targetPage === 'deals') document.getElementById('nav-deals').classList.add('active-nav');
         else if (targetPage === 'agencies') document.getElementById('nav-agencies').classList.add('active-nav');
         else if (targetPage.includes('production')) document.getElementById('nav-production').classList.add('active-nav');
 
+        const wrapper = document.getElementById('dynamic-wrapper');
+        wrapper.setAttribute('data-page', targetPage);
+
         if (targetPage === 'home') {
-            document.getElementById('dynamic-wrapper').style.gridTemplateColumns = 'minmax(0, 1.35fr) minmax(0, 1fr)';
+            wrapper.style.gridTemplateColumns = 'minmax(0, 1.35fr) minmax(0, 1fr)';
         } else {
-            document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
+            wrapper.style.gridTemplateColumns = '1fr';
         }
 
         const fileNameToLoad = targetPage + '.html';
@@ -199,8 +215,8 @@
                 return res.text();
             })
             .then(html => {
-                document.getElementById('dynamic-wrapper').innerHTML = html;
-                const scripts = document.getElementById('dynamic-wrapper').querySelectorAll('script');
+                wrapper.innerHTML = html;
+                const scripts = wrapper.querySelectorAll('script');
                 scripts.forEach(oldScript => {
                     const newScript = document.createElement('script');
                     Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
@@ -210,8 +226,8 @@
             })
             .catch(err => {
                 let pageDisplayTitle = targetPage.charAt(0).toUpperCase() + targetPage.slice(1);
-                document.getElementById('dynamic-wrapper').style.gridTemplateColumns = '1fr';
-                document.getElementById('dynamic-wrapper').innerHTML = `
+                wrapper.style.gridTemplateColumns = '1fr';
+                wrapper.innerHTML = `
                     <div style="text-align:center; padding: 120px 20px; width: 100%;">
                         <h2 style="font-size: 32px; color: #00e676; margin-bottom: 10px;">${pageDisplayTitle}</h2>
                         <p style="color: rgba(255,255,255,0.5); font-size: 16px;">This section is coming soon. We are building something awesome!</p>
@@ -223,7 +239,7 @@
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        const particleCount = 65;
+        const particleCount = 75; // Performance balance match optimized density
         const maxDistance = 140;
 
         function resizeCanvas() { 
@@ -237,8 +253,8 @@
             constructor() {
                 this.x = Math.random() * canvas.width;
                 this.y = Math.random() * canvas.height;
-                this.vx = (Math.random() - 0.5) * 0.35;
-                this.vy = (Math.random() - 0.5) * 0.35;
+                this.vx = (Math.random() - 0.5) * 0.4;
+                this.vy = (Math.random() - 0.5) * 0.4;
                 this.radius = Math.random() * 2 + 1;
             }
             update() {
@@ -250,7 +266,7 @@
             draw() {
                 ctx.beginPath(); 
                 ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(0, 230, 118, 0.4)'; 
+                ctx.fillStyle = 'rgba(0, 230, 118, 0.45)'; 
                 ctx.fill();
             }
         }
@@ -272,12 +288,12 @@
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < maxDistance) {
-                        let alpha = (1 - (dist / maxDistance)) * 0.12; // Fixed missing '=' sign here
+                        let alpha = (1 - (dist / maxDistance)) * 0.15; // Precision physics line connection logic fix
                         ctx.beginPath(); 
                         ctx.moveTo(particles[i].x, particles[i].y); 
                         ctx.lineTo(particles[j].x, particles[j].y);
                         ctx.strokeStyle = `rgba(0, 230, 118, ${alpha})`; 
-                        ctx.lineWidth = 0.8; 
+                        ctx.lineWidth = 0.85; 
                         ctx.stroke();
                     }
                 }
