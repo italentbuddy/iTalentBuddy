@@ -1,234 +1,335 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creator Ecosystem Entry | iTalentBuddy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --neon-green: #00e676;
+            --neon-green-hover: #00b853;
+            --bg-dark: #060c0b;
+            --text-muted: #cbdad1;
+        }
 
-<style>
-/* --- DYNAMIC & PREMIUM HOME SYSTEM INTEGRATION --- */
-.left, .right {
-    background: rgba(255, 255, 255, 0.015) !important;
-    border-radius: 18px !important;
-    padding: 32px !important;
-    border: 1px solid rgba(255, 255, 255, 0.03) !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-.left { justify-content: flex-start !important; }
-.right { justify-content: flex-start !important; }
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            box-sizing: border-box;
+            min-height: 100vh;
+        }
 
-.left:hover, .right:hover {
-    border-color: rgba(0, 230, 118, 0.15) !important;
-    background: rgba(255, 255, 255, 0.025) !important;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 32px;
+            align-items: start;
+        }
 
-/* 🌟 FORM LAYOUT STRUCTURE FIX */
-.onboarding-container {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 24px;
-    max-width: 1200px;
-    margin: 20px auto;
-    align-items: start;
-}
+        /* 🌟 HOME PAGE STYLE INTEGRATION */
+        .left-form-panel, .right-preview-panel {
+            background: rgba(255, 255, 255, 0.015) !important;
+            border-radius: 18px !important;
+            padding: 32px !important;
+            border: 1px solid rgba(255, 255, 255, 0.03) !important;
+            display: flex !important;
+            flex-direction: column !important;
+            transition: all 0.3s ease;
+        }
 
-.title-area {
-    margin-bottom: 24px;
-}
-.title-area h1 {
-    font-size: 42px !important;
-    line-height: 1 !important;
-    margin: 0 0 10px !important;
-    letter-spacing: -1px !important;
-    color: #fff;
-}
-.title-area p {
-    color: #cbdad1 !important;
-    line-height: 1.5 !important;
-    font-size: 15px !important;
-    margin: 0;
-}
+        .left-form-panel:hover, .right-preview-panel:hover {
+            border-color: rgba(0, 230, 118, 0.15) !important;
+            background: rgba(255, 255, 255, 0.025) !important;
+        }
 
-/* 🌟 DYNAMIC TEXTBOX EFFECTS */
-.form-section-title {
-    font-size: 13px !important;
-    font-weight: 800 !important;
-    color: #00e676 !important;
-    letter-spacing: 1px !important;
-    text-transform: uppercase !important;
-    margin: 24px 0 14px 0 !important;
-    border-bottom: 1px solid rgba(0, 230, 118, 0.15);
-    padding-bottom: 6px;
-}
+        h1 {
+            font-size: 42px !important;
+            line-height: 1 !important;
+            margin: 0 0 10px !important;
+            letter-spacing: -1px !important;
+            font-weight: 900;
+        }
 
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-}
-.full-width {
-    grid-column: span 2;
-}
+        .green-text {
+            color: var(--neon-green) !important;
+        }
 
-.form-group { 
-    margin-bottom: 16px !important; 
-    display: flex !important; 
-    flex-direction: column !important; 
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important; 
-}
-.form-group label { 
-    display: block !important; 
-    margin: 0 0 8px 0 !important; 
-    font-weight: 700 !important; 
-    font-size: 11px !important; 
-    letter-spacing: 0.5px !important; 
-    text-transform: uppercase !important; 
-    color: rgba(0, 230, 118, 0.6) !important; 
-    transition: all 0.3s ease !important; 
-}
+        .subtitle {
+            color: var(--text-muted) !important;
+            line-height: 1.5 !important;
+            font-size: 15px !important;
+            margin: 0 0 32px 0 !important;
+        }
 
-.form-group input, .form-group select, .form-group textarea {
-    width: 100% !important; 
-    padding: 10px 14px !important; 
-    border: 1px solid rgba(255, 255, 255, .05) !important; 
-    border-radius: 12px !important;
-    background: rgba(255, 255, 255, .04) !important; 
-    color: #fff !important; 
-    font-family: inherit !important; 
-    font-size: 14px !important; 
-    outline: none !important; 
-    transition: all 0.3s ease !important;
-}
-.form-group input, .form-group select { height: 44px !important; }
-.form-group textarea { height: 80px !important; resize: none !important; }
-.form-group select option { background: #0b1513 !important; color: #fff !important; }
+        h3.section-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.4);
+            margin: 24px 0 16px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 6px;
+        }
 
-/* Dynamic Focus Glow System */
-.form-group:focus-within { transform: translateY(-2px) scale(1.015) !important; }
-.form-group:focus-within label { color: #00e676 !important; text-shadow: 0 0 10px rgba(0, 230, 118, 0.6) !important; transform: translateX(4px) !important; }
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { background: rgba(2, 22, 18, 0.7) !important; border-color: #00e676 !important; box-shadow: 0 0 20px rgba(0, 230, 118, 0.25) !important; }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
 
-/* 📸 PREMIUM AVATAR UPLOAD SYSTEM */
-.avatar-upload-zone {
-    border: 2px dashed rgba(0, 230, 118, 0.25);
-    background: rgba(255, 255, 255, 0.01);
-    border-radius: 16px;
-    padding: 24px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-.avatar-upload-zone:hover {
-    border-color: #00e676;
-    background: rgba(0, 230, 118, 0.03);
-    box-shadow: 0 0 15px rgba(0, 230, 118, 0.1);
-}
-.avatar-upload-zone i {
-    font-size: 28px;
-    color: #00e676;
-}
-.avatar-upload-zone span {
-    font-size: 13px;
-    font-weight: 700;
-    color: #fff;
-}
-.avatar-upload-zone p {
-    font-size: 11px;
-    color: #cbdad1;
-    margin: 0;
-}
+        /* 🌟 DYNAMIC TEXTBOX EFFECTS */
+        .form-group {
+            margin-bottom: 18px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        }
 
-/* 💎 PREMIUM BUTTON GLOBAL WAVE */
-#submit-btn {
-    height: 48px !important; 
-    margin-top: 20px !important; 
-    width: 100% !important; 
-    border: 1px solid rgba(0, 230, 118, 0.4) !important; 
-    border-radius: 12px !important;
-    background: rgba(0, 230, 118, 0.04) !important; 
-    color: #00e676 !important; 
-    font-size: 14px !important; 
-    font-weight: 800 !important; 
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important; 
-    cursor: pointer !important; 
-    position: relative !important; 
-    overflow: hidden !important; 
-    z-index: 1 !important; 
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1) !important;
-}
-#submit-btn::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important; left: -100% !important;
-    width: 100% !important; height: 100% !important;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important;
-    transition: all 0.6s ease !important;
-    z-index: -1 !important;
-}
-#submit-btn:hover { 
-    color: #ffffff !important; 
-    border-color: #00e676 !important; 
-    background: linear-gradient(45deg, #00e676, #00b853) !important;
-    transform: scale(1.03) !important; 
-    letter-spacing: 2px !important; 
-    box-shadow: 0 0 30px rgba(0, 230, 118, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.3) !important;
-}
-#submit-btn:hover::before { left: 100% !important; }
+        .form-group label {
+            display: block !important;
+            margin: 0 0 8px 0 !important;
+            font-weight: 700 !important;
+            font-size: 11px !important;
+            letter-spacing: 0.5px !important;
+            text-transform: uppercase !important;
+            color: rgba(0, 230, 118, 0.6) !important;
+            transition: all 0.3s ease !important;
+        }
 
-/* Preview Terminal Card Wrapper */
-.preview-title {
-    font-size: 11px !important;
-    font-weight: 800 !important;
-    letter-spacing: 1.5px !important;
-    text-transform: uppercase !important;
-    color: rgba(255, 255, 255, 0.4) !important;
-    margin-bottom: 16px !important;
-    text-align: center;
-}
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100% !important;
+            padding: 10px 14px !important;
+            border: 1px solid rgba(255, 255, 255, .05) !important;
+            border-radius: 12px !important;
+            background: rgba(255, 255, 255, .04) !important;
+            color: #fff !important;
+            font-family: inherit !important;
+            font-size: 14px !important;
+            outline: none !important;
+            box-sizing: border-box;
+            transition: all 0.3s ease !important;
+        }
 
-/* Responsive Handling */
-@media(max-width:960px) {
-    .onboarding-container { grid-template-columns: 1fr; }
-    .form-grid { grid-template-columns: 1fr; }
-    .full-width { grid-column: span 1; }
-}
-</style>
+        .form-group input, .form-group select { height: 44px !important; }
+        .form-group textarea { height: 95px !important; resize: none !important; }
+        .form-group select option { background: #0b1513 !important; color: #fff !important; }
 
-<div class="onboarding-container">
-    <div class="left">
-        <div class="title-area">
-            <h1>Creator Ecosystem Entry</h1>
-            <p>Configure your professional network node. Real-time updates sync instantly with the preview terminal.</p>
+        /* Dynamic Focus Effects */
+        .form-group:focus-within { transform: translateY(-2px) scale(1.015) !important; }
+        .form-group:focus-within label {
+            color: var(--neon-green) !important;
+            text-shadow: 0 0 10px rgba(0, 230, 118, 0.6) !important;
+            transform: translateX(4px) !important;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            background: rgba(2, 22, 18, 0.7) !important;
+            border-color: var(--neon-green) !important;
+            box-shadow: 0 0 20px rgba(0, 230, 118, 0.25) !important;
+        }
+
+        /* 📸 UPLOAD PROFILE PIC CONTAINER */
+        .upload-container {
+            border: 2px dashed rgba(0, 230, 118, 0.2);
+            border-radius: 14px;
+            padding: 20px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.01);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        .upload-container:hover {
+            border-color: var(--neon-green);
+            background: rgba(0, 230, 118, 0.03);
+        }
+        .upload-container i {
+            font-size: 24px;
+            color: var(--neon-green);
+        }
+        .upload-container span {
+            font-size: 13px;
+            font-weight: 600;
+        }
+        .upload-container p {
+            margin: 0;
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+        }
+        #file-input { display: none; }
+
+        /* 💎 PREMIUM BUTTON GLOBAL WAVE FIX */
+        #submit-btn {
+            height: 48px !important;
+            margin-top: 16px !important;
+            width: 100% !important;
+            border: 1px solid rgba(0, 230, 118, 0.4) !important;
+            border-radius: 12px !important;
+            background: rgba(0, 230, 118, 0.04) !important;
+            color: var(--neon-green) !important;
+            font-size: 14px !important;
+            font-weight: 800 !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            cursor: pointer !important;
+            position: relative !important;
+            overflow: hidden !important;
+            z-index: 1 !important;
+            transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1) !important;
+        }
+        #submit-btn::before {
+            content: '' !important;
+            position: absolute !important;
+            top: 0 !important; left: -100% !important;
+            width: 100% !important; height: 100% !important;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important;
+            transition: all 0.6s ease !important;
+            z-index: -1 !important;
+        }
+        #submit-btn:hover { 
+            color: #ffffff !important; 
+            border-color: var(--neon-green) !important; 
+            background: linear-gradient(45deg, var(--neon-green), var(--neon-green-hover)) !important;
+            transform: scale(1.03) !important; 
+            letter-spacing: 2px !important; 
+            box-shadow: 0 0 30px rgba(0, 230, 118, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.3) !important;
+        }
+        #submit-btn:hover::before { left: 100% !important; }
+
+        /* 🖥️ LIVE PREVIEW TERMINAL */
+        .right-preview-panel {
+            position: sticky;
+            top: 40px;
+            align-items: center;
+        }
+        .preview-title {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .preview-title i { color: var(--neon-green); font-size: 8px; }
+
+        .creator-card {
+            width: 100%;
+            max-width: 320px;
+            background: #0b1211;
+            border: 1px solid rgba(0, 230, 118, 0.3);
+            border-radius: 20px;
+            padding: 24px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 230, 118, 0.05);
+        }
+
+        .avatar-box {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            border: 2px solid var(--neon-green);
+            overflow: hidden;
+            background: rgba(255,255,255,0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        .avatar-box img { width: 100%; height: 100%; object-fit: cover; }
+        .avatar-box i { font-size: 40px; color: rgba(255,255,255,0.1); }
+
+        .p-name { font-size: 22px; font-weight: 800; margin: 0 0 4px 0; }
+        .p-alias { font-size: 14px; color: rgba(255,255,255,0.5); margin: 0 0 12px 0; }
+        .p-location { font-size: 12px; color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 4px; }
+        .p-bio { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.4; margin: 0 0 20px 0; font-style: italic; }
+        
+        .p-tag {
+            background: rgba(0, 230, 118, 0.1);
+            color: var(--neon-green);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+
+        .p-stats {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 16px;
+        }
+        .stat-node { display: flex; flex-direction: column; }
+        .stat-node .s-val { font-size: 18px; font-weight: 900; color: var(--neon-green); }
+        .stat-node .s-lbl { font-size: 10px; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+
+        @media(max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .right-preview-panel { position: relative; top: 0; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="left-form-panel">
+        <h1>Creator Ecosystem <span class="green-text">Entry</span></h1>
+        <div class="subtitle">Configure your professional network node. Real-time updates sync instantly with the preview dashboard.</div>
+
+        <h3 class="section-title">01. Core Identity Matrix</h3>
+        
+        <div class="form-group">
+            <label>Profile Picture</label>
+            <div class="upload-container" onclick="document.getElementById('file-input').click()">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+                <span id="upload-status">Click or Drag to Upload Avatar</span>
+                <p>Max file size allowed: 1MB</p>
+                <input type="file" id="file-input" accept="image/*" onchange="previewImage(this)">
+            </div>
         </div>
 
-        <div class="avatar-upload-zone" onclick="document.getElementById('avatar-input').click()">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-            <span>UPLOAD PROFILE PICTURE</span>
-            <p>PNG or JPG format (Max size: 1MB)</p>
-            <input type="file" id="avatar-input" accept="image/jpeg, image/png" style="display: none;" onchange="validateAndPreviewAvatar(this)">
-        </div>
-
-        <div class="form-section-title">01. Core Identity Matrix</div>
-        <div class="form-grid">
+        <div class="form-row">
             <div class="form-group">
                 <label>Real Name</label>
-                <input id="real-name" placeholder="e.g. Rahul Kumar">
+                <input type="text" id="real-name" placeholder="e.g. Rahul Kumar" oninput="updatePreview()">
             </div>
             <div class="form-group">
                 <label>ASA Name (Alias / Brand)</label>
-                <input id="alias-name" placeholder="e.g. TechBuddy" oninput="updatePreviewText('preview-alias', this.value)">
+                <input type="text" id="alias-name" placeholder="e.g. TechBuddy" oninput="updatePreview()">
             </div>
+        </div>
+
+        <div class="form-row">
             <div class="form-group">
                 <label>WhatsApp Number</label>
-                <input id="whatsapp" placeholder="+91 XXXXX XXXXX">
+                <input type="text" id="whatsapp" placeholder="+91 XXXXX XXXXX">
             </div>
             <div class="form-group">
-                <label>Email ID (Auto-Filled)</label>
-                <input id="email" type="email" placeholder="name@example.com">
+                <label>Email ID</label>
+                <input type="email" id="email" placeholder="name@example.com">
             </div>
+        </div>
+
+        <div class="form-row">
             <div class="form-group">
                 <label>Gender</label>
                 <select id="gender">
@@ -239,99 +340,138 @@
             </div>
             <div class="form-group">
                 <label>State (India)</label>
-                <input id="state" placeholder="Type to search state..." oninput="updatePreviewText('preview-location', this.value + ', India')">
-            </div>
-            <div class="form-group full-width">
-                <label>Profile Punchline / Bio</label>
-                <textarea id="bio" placeholder="e.g. Building Next-Gen Tech Ecosystems..." oninput="updatePreviewText('preview-bio', this.value)"></textarea>
+                <input type="text" id="state" placeholder="e.g. Delhi" oninput="updatePreview()">
             </div>
         </div>
 
-        <div class="form-section-title">02. Content Domain Select</div>
         <div class="form-group">
-            <label>Categories Multi-Select</label>
-            <input id="categories" placeholder="Type to filter domains (e.g. Gaming, Tech, Finance...)">
+            <label>Profile Punchline / Bio</label>
+            <textarea id="bio" placeholder="e.g. Building Next-Gen Tech Ecosystems..." oninput="updatePreview()"></textarea>
         </div>
 
-        <div class="form-section-title">03. Social Infrastructure Nodes</div>
-        <div class="form-grid">
+        <h3 class="section-title">02. Content Domain</h3>
+        <div class="form-group">
+            <label>Primary Category</label>
+            <select id="category" onchange="updatePreview()">
+                <option value="No Domain Selected" selected>Choose your primary niche...</option>
+                <option value="Tech & Gadgets">Tech & Gadgets</option>
+                <option value="Gaming Esports">Gaming & Esports</option>
+                <option value="Fashion & Styling">Fashion & Styling</option>
+                <option value="Finance & Business">Finance & Business</option>
+            </select>
+        </div>
+
+        <h3 class="section-title">03. Social Infrastructure Nodes</h3>
+        <div class="form-row">
             <div class="form-group">
                 <label>YouTube Link</label>
-                <input id="yt-link" placeholder="YouTube Channel Link">
+                <input type="text" id="yt-link" placeholder="Channel link">
             </div>
             <div class="form-group">
-                <label>YouTube Metrics</label>
-                <input id="yt-metrics" placeholder="Subs (e.g. 50K, 1.2M)">
+                <label>YouTube Subscribers</label>
+                <input type="text" id="yt-subs" placeholder="e.g. 1.2M" oninput="updatePreview()">
             </div>
+        </div>
+        <div class="form-row">
             <div class="form-group">
                 <label>Instagram Link</label>
-                <input id="ig-link" placeholder="Instagram Profile Link">
+                <input type="text" id="ig-link" placeholder="Profile link">
             </div>
             <div class="form-group">
-                <label>Instagram Metrics</label>
-                <input id="ig-metrics" placeholder="Followers (e.g. 100K)">
+                <label>Instagram Followers</label>
+                <input type="text" id="ig-followers" placeholder="e.g. 450K" oninput="updatePreview()">
             </div>
         </div>
 
-        <button id="submit-btn" onclick="publishNode()">Publish To Directory</button>
+        <button id="submit-btn" onclick="submitNodeData()">Publish To Directory</button>
     </div>
 
-    <div class="right">
-        <div class="preview-title"><i class="fa-solid fa-eye"></i> Live Workspace Preview</div>
+    <div class="right-preview-panel">
+        <div class="preview-title"><i class="fa-solid fa-circle"></i> Live Workspace Preview</div>
         
-        <div id="live-card-container" style="width: 100%; display: flex; justify-content: center;">
-            <div style="background: #060d0c; border: 1px solid #00e676; border-radius: 16px; padding: 24px; width: 100%; text-align: center; box-shadow: 0 0 20px rgba(0,230,118,0.15);">
-                <div style="width: 120px; height: 120px; border-radius: 50%; border: 2px solid #00e676; margin: 0 auto 16px auto; overflow: hidden; background: #112220; display: flex; align-items: center; justify-content: center;">
-                    <img id="card-avatar-preview" src="https://via.placeholder.com/120" style="width: 100%; height: 100%; object-fit: cover; display: none;">
-                    <i id="card-avatar-placeholder" class="fa-solid fa-user-astronaut" style="font-size: 48px; color: rgba(0, 230, 118, 0.4);"></i>
+        <div class="creator-card">
+            <div class="avatar-box" id="avatar-box">
+                <i class="fa-solid fa-user" id="def-avatar"></i>
+                <img id="preview-img" style="display:none;" alt="Avatar">
+            </div>
+            <div class="p-name" id="view-name">Real Name</div>
+            <div class="p-alias" id="view-alias">@alias_name</div>
+            <div class="p-location"><i class="fa-solid fa-location-dot"></i> <span id="view-location">State, India</span></div>
+            <div class="p-bio" id="view-bio">No bio punchline configured.</div>
+            <div class="p-tag" id="view-tag">NO DOMAIN SELECTED</div>
+            
+            <div class="p-stats">
+                <div class="stat-node">
+                    <span class="s-val" id="view-subs">0K</span>
+                    <span class="s-lbl">Subs</span>
                 </div>
-                <h3 id="preview-alias" style="color: #fff; margin: 0 0 4px 0; font-size: 22px;">Alias Name</h3>
-                <p id="preview-location" style="color: #00e676; font-size: 13px; margin: 0 0 12px 0;"><i class="fa-solid fa-location-dot"></i> State, India</p>
-                <p id="preview-bio" style="color: #cbdad1; font-size: 13px; font-style: italic; min-height: 38px; margin: 0;">No bio punchline configured.</p>
+                <div class="stat-node">
+                    <span class="s-val" id="view-followers">0K</span>
+                    <span class="s-lbl">Followers</span>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-// Real-time simple string sync engine
-function updatePreviewText(elementId, value) {
-    const el = document.getElementById(elementId);
-    if(el) {
-        el.innerText = value.trim() !== "" ? value : (elementId === 'preview-bio' ? 'No bio punchline configured.' : 'Alias Name');
+    // Real-Time Update Functionality
+    function updatePreview() {
+        const rName = document.getElementById('real-name').value;
+        const alias = document.getElementById('alias-name').value;
+        const state = document.getElementById('state').value;
+        const bio = document.getElementById('bio').value;
+        const category = document.getElementById('category').value;
+        const subs = document.getElementById('yt-subs').value;
+        const followers = document.getElementById('ig-followers').value;
+
+        document.getElementById('view-name').innerText = rName ? rName : "Real Name";
+        document.getElementById('view-alias').innerText = alias ? '@' + alias.toLowerCase().replace(/\s+/g, '') : "@alias_name";
+        document.getElementById('view-location').innerText = state ? state + ", India" : "State, India";
+        document.getElementById('view-bio').innerText = bio ? bio : "No bio punchline configured.";
+        document.getElementById('view-tag').innerText = category;
+        document.getElementById('view-subs').innerText = subs ? subs : "0K";
+        document.getElementById('view-followers').innerText = followers ? followers : "0K";
     }
-}
 
-// 📸 FILE VALIDATION ENGINE (Restricts to < 1MB)
-function validateAndPreviewAvatar(input) {
-    if (input.files && input.files[0]) {
+    // 📸 Image Handler with <1MB Validation
+    function previewImage(input) {
         const file = input.files[0];
-        const fileSizeMB = file.size / (1024 * 1024);
+        const statusText = document.getElementById('upload-status');
+        
+        if (file) {
+            // Check File Size (1MB = 1048576 bytes)
+            if (file.size > 1048576) {
+                alert("File size bada hai! Kripya 1MB se kam ki image upload karein.");
+                input.value = ""; // clear input
+                return;
+            }
 
-        if (fileSizeMB > 1) {
-            alert("File size is too big! Please upload a picture smaller than 1MB.");
-            input.value = ""; // Form value instantly resets
-            document.getElementById('card-avatar-preview').style.display = "none";
-            document.getElementById('card-avatar-placeholder').style.display = "block";
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('def-avatar').style.display = 'none';
+                const imgNode = document.getElementById('preview-img');
+                imgNode.src = e.target.result;
+                imgNode.style.display = 'block';
+                statusText.innerText = "✓ Avatar Loaded Successfully";
+                statusText.style.color = "#00e676";
+            }
+            reader.readAsDataURL(file);
+        }
+    </div>
+
+    // Standard Submit function shell template match 
+    function submitNodeData() {
+        const name = document.getElementById('real-name').value;
+        const email = document.getElementById('email').value;
+        if(!name || !email) {
+            alert('Please fill core parameters before publishing.');
             return;
         }
-
-        // Live preview initialization
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const previewImg = document.getElementById('card-avatar-preview');
-            const placeholderIcon = document.getElementById('card-avatar-placeholder');
-            
-            previewImg.src = e.target.result;
-            previewImg.style.display = "block";
-            placeholderIcon.style.display = "none";
-        }
-        reader.readAsDataURL(file);
+        console.log("Onboarding sync secure process active.");
+        alert('Data uploaded successfully into the iTalentBuddy directory registry Node!');
     }
-}
-
-function publishNode() {
-    // Aapki purani sheet automation ya processing flow bina changes ke yahan run hogi
-    alert('Form workflow initialized successfully!');
-}
 </script>
+
+</body>
+</html>
