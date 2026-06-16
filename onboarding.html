@@ -133,14 +133,23 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
     background: linear-gradient(45deg, #00e676, #00b853); border-color: transparent; color: #010707; box-shadow: 0 5px 15px rgba(0, 230, 118, 0.3);
 }
 
-/* 🔍 FLOATING DROPDOWN CONTEXT */
+/* 🔍 FLOATING DROPDOWN CONTEXT (SOLID BACKGROUND ADDED) */
 .floating-dropdown {
-    display: none; position: absolute; width: 100%; background: #0b1513; 
-    border: 1px solid rgba(0, 230, 118, 0.2); border-radius: 12px; max-height: 180px; 
-    overflow-y: auto; z-index: 100; top: 100%; margin-top: 6px; box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    display: none; 
+    position: absolute; 
+    width: 100%; 
+    background: #0e1b18 !important; /* Made completely solid and deep to avoid mix-ups */
+    border: 1px solid rgba(0, 230, 118, 0.4); 
+    border-radius: 12px; 
+    max-height: 180px; 
+    overflow-y: auto; 
+    z-index: 1000 !important; /* Raised z-index significantly */
+    top: 100%; 
+    margin-top: 6px; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.95), 0 0 15px rgba(0, 230, 118, 0.1);
 }
 .dropdown-item { padding: 10px 14px; cursor: pointer; font-size: 13px; color: #cbdad1; transition: all 0.2s; }
-.dropdown-item:hover { background: rgba(0, 230, 118, 0.1); color: #00e676; }
+.dropdown-item:hover { background: rgba(0, 230, 118, 0.15); color: #00e676; }
 
 /* 🏷️ CHIPS INSIDE INPUTCONTAINER SYSTEM */
 .premium-input-container-chips {
@@ -164,29 +173,46 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
 
 /* 🌐 SOCIAL HYPNOTIC ROW HOVER SYSTEM */
 .social-input-row-premium {
-    display: grid; grid-template-columns: 44px 1fr 110px; gap: 10px; align-items: center; width: 100%; position: relative;
+    display: grid; 
+    grid-template-columns: 44px 1fr 110px; 
+    gap: 10px; 
+    align-items: center; 
+    width: 100%; 
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
+
 .social-icon-box-premium {
     height: 44px; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; display: flex;
     align-items: center; justify-content: center; font-size: 16px; background: rgba(255,255,255,0.03);
     color: rgba(255, 255, 255, 0.6); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden;
 }
 
-/* Kinetic Border Refraction & Neon Laser Track */
-.social-input-row-premium::after {
-    content: ''; position: absolute; left: 0; bottom: -2px; width: 0; height: 2px;
-    background: linear-gradient(90deg, transparent, #00e676, #00e5ff, transparent); transition: width 0.6s ease; unset: all; pointer-events: none;
-}
-.social-input-row-premium:hover::after { width: 100%; }
+/* ❌ LINE REMOVED FROM HERE (.social-input-row-premium::after completely wiped) */
 
-/* Hypnotic Rotational Glow Sequence */
+/* Uniform Textbox Transformation & Effects on Parent Hover */
 .social-input-row-premium:hover .social-icon-box-premium {
     color: #00e676; background: rgba(0, 230, 118, 0.08); border-color: rgba(0, 230, 118, 0.4);
     transform: rotate(360deg) scale(1.1); box-shadow: 0 0 15px rgba(0, 230, 118, 0.4);
 }
-.social-input-row-premium:hover .premium-input-box {
-    border-color: rgba(0, 230, 118, 0.25) !important; background: rgba(0, 230, 118, 0.01) !important;
-    box-shadow: inset 0 0 10px rgba(0, 230, 118, 0.05);
+
+/* Added proper styling matching the 'name' input parameters */
+.social-input-row-premium .premium-input-box:focus {
+    background: rgba(2, 22, 18, 0.7) !important; 
+    border-color: #00e676 !important; 
+    box-shadow: 0 0 20px rgba(0, 230, 118, 0.25) !important; 
+}
+.social-input-row-premium:focus-within {
+    transform: translateY(-2px) scale(1.01) !important;
+}
+
+/* 🔒 DROPDOWN SAFETY FILTER */
+/* Jab dropdown active ho, tab niche wale items ke pointer events disabled ho jaye */
+.dropdown-active .social-input-row-premium {
+    pointer-events: none !important;
+}
+.dropdown-active .floating-dropdown {
+    pointer-events: auto !important;
 }
 
 /* 💎 GLOBAL WAVE CTA BUTTON BUTTON */
@@ -217,7 +243,7 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
 }
 </style>
 
-<div class="onboarding-container">
+<div class="onboarding-container" id="mainOnboardingContainer">
     <div class="left-profile-sidebar">
         <div style="border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 12px; width: 100%;">
             <h2 class="hero-title">CREATOR <span class="green-text">SYNC</span></h2>
@@ -359,6 +385,17 @@ const comprehensiveCategories = [
     "Minimalism", "Tiny Homes", "Outdoor Life", "Miscellaneous / Other"
 ];
 
+const mainContainer = document.getElementById('mainOnboardingContainer');
+
+// Helper to control background collision highlights
+function setDropdownState(isActive) {
+    if (isActive) {
+        mainContainer.classList.add('dropdown-active');
+    } else {
+        mainContainer.classList.remove('dropdown-active');
+    }
+}
+
 // Profile Pic Upload Preview Pipeline
 document.getElementById('profilePicInput').addEventListener('change', function(e) {
     const file = e.target.files[0];
@@ -381,9 +418,9 @@ const stateDropdown = document.getElementById('stateDropdown');
 
 function renderStateDropdown(filter = "") {
     stateDropdown.innerHTML = "";
-    if(!filter) { stateDropdown.style.display = 'none'; return; }
+    if(!filter) { stateDropdown.style.display = 'none'; setDropdownState(false); return; }
     const filtered = indiaStates.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
-    if(filtered.length === 0) { stateDropdown.style.display = 'none'; return; }
+    if(filtered.length === 0) { stateDropdown.style.display = 'none'; setDropdownState(false); return; }
     
     filtered.forEach(state => {
         const div = document.createElement('div');
@@ -392,11 +429,16 @@ function renderStateDropdown(filter = "") {
         div.addEventListener('click', () => {
             stateSearch.value = state;
             stateDropdown.style.display = 'none';
+            setDropdownState(false);
         });
         stateDropdown.appendChild(div);
     });
 }
-stateSearch.addEventListener('input', (e) => { renderStateDropdown(e.target.value); stateDropdown.style.display = 'block'; });
+stateSearch.addEventListener('input', (e) => { 
+    renderStateDropdown(e.target.value); 
+    stateDropdown.style.display = 'block'; 
+    setDropdownState(true);
+});
 
 // Multi-Select Category Engine (Inline Chip Mounting Architecture)
 const categorySearch = document.getElementById('categorySearch');
@@ -404,7 +446,6 @@ const categoryDropdown = document.getElementById('categoryDropdown');
 const chipsWrapper = document.getElementById('categoryChipsWrapper');
 
 function renderChips() {
-    // Clear all existing chips manually except the real input element
     const existingChips = chipsWrapper.querySelectorAll('.category-chip');
     existingChips.forEach(chip => chip.remove());
     
@@ -426,10 +467,11 @@ function renderCategoryDropdown(filter = "") {
     categoryDropdown.innerHTML = "";
     if (activeSelectedCategories.length >= 5) {
         categoryDropdown.style.display = 'none';
+        setDropdownState(false);
         return;
     }
     const filtered = comprehensiveCategories.filter(c => c.toLowerCase().includes(filter.toLowerCase()) && !activeSelectedCategories.includes(c));
-    if(filtered.length === 0) { categoryDropdown.style.display = 'none'; return; }
+    if(filtered.length === 0) { categoryDropdown.style.display = 'none'; setDropdownState(false); return; }
     
     filtered.forEach(cat => {
         const div = document.createElement('div');
@@ -442,6 +484,7 @@ function renderCategoryDropdown(filter = "") {
                 categorySearch.value = "";
                 categorySearch.placeholder = "";
                 categoryDropdown.style.display = 'none';
+                setDropdownState(false);
                 renderChips();
             }
         });
@@ -450,12 +493,27 @@ function renderCategoryDropdown(filter = "") {
 }
 
 chipsWrapper.addEventListener('click', () => categorySearch.focus());
-categorySearch.addEventListener('focus', () => { renderCategoryDropdown(categorySearch.value); categoryDropdown.style.display = 'block'; });
-categorySearch.addEventListener('input', (e) => renderCategoryDropdown(e.target.value));
+categorySearch.addEventListener('focus', () => { 
+    renderCategoryDropdown(categorySearch.value); 
+    categoryDropdown.style.display = 'block'; 
+    setDropdownState(true);
+});
+categorySearch.addEventListener('input', (e) => {
+    renderCategoryDropdown(e.target.value);
+    setDropdownState(true);
+});
 
 document.addEventListener('click', (e) => {
-    if(!stateSearch.contains(e.target) && !stateDropdown.contains(e.target)) stateDropdown.style.display = 'none';
-    if(!chipsWrapper.contains(e.target) && !categoryDropdown.contains(e.target)) categoryDropdown.style.display = 'none';
+    if(!stateSearch.contains(e.target) && !stateDropdown.contains(e.target)) {
+        stateDropdown.style.display = 'none';
+    }
+    if(!chipsWrapper.contains(e.target) && !categoryDropdown.contains(e.target)) {
+        categoryDropdown.style.display = 'none';
+    }
+    // Agar dono dropdowns band ho chuke hain to state normalization
+    if (stateDropdown.style.display === 'none' && categoryDropdown.style.display === 'none') {
+        setDropdownState(false);
+    }
 });
 
 // Init & Prefill Prefetch Sync
