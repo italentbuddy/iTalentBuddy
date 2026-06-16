@@ -27,7 +27,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 0; /* Pure visual stack me sabse niche rahega */
+            z-index: 0; /* Background layer mesh setup */
             pointer-events: none;
             background: radial-gradient(circle at 50% 50%, #021414 0%, #000606 100%);
         }
@@ -47,7 +47,7 @@
             justify-content: flex-start;
             animation: screenReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
             position: relative;
-            z-index: 1; /* Content ko canvas particle network ke upar lane ke liye */
+            z-index: 1;
         }
         .nav {
             display: flex;
@@ -56,6 +56,8 @@
             margin-bottom: 24px;
             height: 54px;
             flex-shrink: 0;
+            position: relative;
+            z-index: 10;
         }
         .logo {
             font-size: 36px;
@@ -130,16 +132,20 @@
             flex: 1;
             width: 100%;
             align-content: start;
+            position: relative;
+            z-index: 2; /* Interaction click handlers ke upar ensure karne ke liye */
         }
 
-        /* GLOBAL INJECTION FIX: Baaki pages (creators/onboarding) ke dark backgrounds ko transparent aur blur glass container me convert karne ke liye */
+        /* GLOBAL GLASSMORPHISM INJECTION FIX: Isse creators aur onboarding ke deep solids transparent grid sheets ban jayenge */
         .wrap[data-page="creators"] > div,
         .wrap[data-page="onboarding"] > div,
         .wrap[data-page="creators"] .creator-card,
         .wrap[data-page="onboarding"] .left-card,
-        .wrap[data-page="onboarding"] .right-card {
-            background: rgba(255, 255, 255, 0.015) !important;
-            backdrop-filter: blur(10px) !important;
+        .wrap[data-page="onboarding"] .right-card,
+        .wrap[data-page="creators"] header,
+        .wrap[data-page="creators"] .filter-bar {
+            background: rgba(255, 255, 255, 0.01) !important;
+            backdrop-filter: blur(12px) !important;
             border: 1px solid rgba(255, 255, 255, 0.04) !important;
         }
 
@@ -216,6 +222,18 @@
             })
             .then(html => {
                 wrapper.innerHTML = html;
+                
+                // RE-ROUTING ACTION FOR DYNAMIC INTERACTIVE BUTTONS
+                // Isse agar creators page par 'Join ITB' button click hoga to onboarding index dynamic render ho jayega
+                const joinBtn = wrapper.querySelector('.join-btn, #join-itb-btn, [onclick*="onboarding"]');
+                if(joinBtn) {
+                    joinBtn.removeAttribute('onclick'); 
+                    joinBtn.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        window.location.href = 'index.html?page=onboarding';
+                    });
+                }
+
                 const scripts = wrapper.querySelectorAll('script');
                 scripts.forEach(oldScript => {
                     const newScript = document.createElement('script');
@@ -239,7 +257,7 @@
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        const particleCount = 75; // Performance balance match optimized density
+        const particleCount = 75; 
         const maxDistance = 140;
 
         function resizeCanvas() { 
@@ -288,7 +306,7 @@
                     const dy = particles[i].y - particles[j].y;
                     const dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < maxDistance) {
-                        let alpha = (1 - (dist / maxDistance)) * 0.15; // Precision physics line connection logic fix
+                        let alpha = (1 - (dist / maxDistance)) * 0.15; 
                         ctx.beginPath(); 
                         ctx.moveTo(particles[i].x, particles[i].y); 
                         ctx.lineTo(particles[j].x, particles[j].y);
