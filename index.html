@@ -123,8 +123,8 @@ html, body {
     border:1px solid rgba(255,255,255,.06);
     border-radius:24px;
     padding: 24px;
-    background: rgba(4, 16, 16, 0.45);
-    backdrop-filter:blur(25px);
+    background: rgba(4, 16, 16, 0.25); /* 🛠️ Glass Box opacity kam kari taaki network pichhe se saaf dikhe */
+    backdrop-filter:blur(20px);
     box-shadow: 0 25px 60px rgba(0,0,0,0.6);
     flex: 1;
     width: 100%;
@@ -289,10 +289,9 @@ class Particle {
 }
 function init() { particles = []; for (let i = 0; i < particleCount; i++) { particles.push(new Particle()); } }
 function animate() {
+    /* 🛠️ FIX: Solid plan background code blocks hata diye hain. Ab canvas transparently frames clear karega */
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    let grad = ctx.createRadialGradient(canvas.width/2, canvas.height/2, 10, canvas.width/2, canvas.height/2, canvas.width);
-    grad.addColorStop(0, '#021515'); grad.addColorStop(1, '#000505');
-    ctx.fillStyle = grad; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
     for (let i = 0; i < particles.length; i++) {
         particles[i].update(); particles[i].draw();
         for (let j = i + 1; j < particles.length; j++) {
