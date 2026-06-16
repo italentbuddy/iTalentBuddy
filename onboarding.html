@@ -1,817 +1,132 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<div style="display: grid; grid-template-columns: 1fr 1.6fr; gap: 2rem; max-width: 1200px; margin: 0 auto; padding: 1rem; align-items: start;">
+    
+    <div style="display: flex; flex-direction: column; gap: 1rem;">
+        <div style="background: rgba(255, 255, 255, 0.03); border-left: 3px solid #00ff66; padding: 0.85rem 1.25rem; border-radius: 4px;">
+            <p style="margin: 0; color: #e0e0e0; font-size: 0.95rem; line-height: 1.5; font-weight: 400;">
+                Fill out your details below to instantly build your professional creator card and seamlessly join the iTalentBuddy network.
+            </p>
+        </div>
 
-<style>
-/* 🌟 PREMIUM DASHBOARD-STYLE TWO-COLUMN INTEGRATION */
-.onboarding-container {
-    display: grid;
-    grid-template-columns: 340px 1fr;
-    gap: 24px;
-    width: 100%;
-    box-sizing: border-box;
-    height: auto;
-    background: transparent;
-    padding: 0px 4px;
-}
-
-/* Left Sidebar Frame configured for 9:16 Card Placement */
-.left-profile-sidebar {
-    background: transparent !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    box-sizing: border-box;
-}
-
-/* 🔥 ULTRA PREMIUM 9:16 DYNAMIC CARD COMPONENT */
-.creator-preview-card-9-16 {
-    width: 100%;
-    aspect-ratio: 9 / 16;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: 24px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.creator-preview-card-9-16::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(0, 230, 118, 0.03) 0%, transparent 70%);
-    pointer-events: none;
-}
-
-.creator-preview-card-9-16:hover {
-    border-color: rgba(0, 230, 118, 0.2);
-    box-shadow: 0 40px 80px rgba(0, 230, 118, 0.05), 0 0 40px rgba(0, 230, 118, 0.02);
-    transform: translateY(-4px);
-}
-
-/* Card Header Node Info */
-.card-node-tag {
-    font-size: 9px;
-    font-weight: 800;
-    color: rgba(255,255,255,0.2);
-    letter-spacing: 2px;
-    text-transform: uppercase;
-}
-
-/* Interactive Embedded Upload & Profile Avatar Setup (Rounded Edge Square) */
-.card-avatar-container {
-    width: 110px;
-    height: 110px;
-    border-radius: 18px;
-    position: relative;
-    margin: 0 auto 20px auto;
-    border: 2px dashed rgba(0, 230, 118, 0.25);
-    background: rgba(0,0,0,0.2);
-    padding: 4px;
-    box-sizing: border-box;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.card-avatar-inner {
-    width: 100%;
-    height: 100%;
-    border-radius: 14px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.02);
-    position: relative;
-}
-
-.card-avatar-inner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.card-avatar-inner i {
-    font-size: 32px;
-    color: rgba(0, 230, 118, 0.4);
-}
-
-.avatar-hover-overlay {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(1, 7, 7, 0.75);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.25s ease;
-}
-
-.avatar-hover-overlay i { font-size: 16px; color: #00e676; margin-bottom: 2px; }
-.avatar-hover-overlay span { font-size: 8px; font-weight: 700; color: #fff; letter-spacing: 0.5px; text-transform: uppercase; }
-.card-avatar-container:hover .avatar-hover-overlay { opacity: 1; }
-.card-avatar-container:hover { border-color: #00e676; box-shadow: 0 0 20px rgba(0, 230, 118, 0.3); }
-
-/* Card Content Specs with Enhanced Vertical Breathing Gaps */
-.card-brand-title {
-    font-size: 22px;
-    font-weight: 900;
-    color: #fff;
-    margin: 0 0 8px 0;
-    letter-spacing: -0.5px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.card-state-subtitle {
-    font-size: 12px;
-    color: rgba(255,255,255,0.4);
-    font-weight: 500;
-    margin: 0 0 20px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-}
-
-.card-state-subtitle i { color: #00e676; font-size: 11px; }
-
-/* Dynamic Categories on Card */
-.card-categories-row {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 12px;
-    height: 24px;
-}
-
-.card-mini-chip {
-    background: rgba(0, 230, 118, 0.06);
-    border: 1px solid rgba(0, 230, 118, 0.15);
-    color: rgba(0, 230, 118, 0.85);
-    padding: 4px 12px;
-    border-radius: 6px;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 0.2px;
-}
-
-/* 🟥 Custom Premium Row Design for Social Metrics */
-.card-metrics-footer {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    border-top: 1px solid rgba(255,255,255,0.04);
-    padding-top: 16px;
-    margin-top: auto;
-}
-
-.metric-pill-box {
-    background: rgba(255,255,255,0.01);
-    border: 1px solid rgba(255,255,255,0.03);
-    border-radius: 12px;
-    padding: 10px 12px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    transition: all 0.3s ease;
-}
-
-.metric-pill-box i { 
-    font-size: 18px; 
-    color: #ffffff; 
-    transition: color 0.3s ease;
-}
-
-.metric-text-side {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1px;
-}
-
-.metric-label { 
-    font-size: 8px; 
-    color: rgba(255,255,255,0.3); 
-    text-transform: uppercase; 
-    font-weight: 700; 
-    margin: 0; 
-    letter-spacing: 0.3px;
-}
-.metric-value { 
-    font-size: 13px; 
-    font-weight: 800; 
-    color: #fff; 
-    margin: 0; 
-}
-
-/* Social Footer Hover Effects */
-.metric-pill-box:hover .fa-youtube { color: #ff0000; }
-.metric-pill-box:hover .fa-instagram { color: #e1306c; }
-.metric-pill-box:hover {
-    background: rgba(255,255,255,0.03);
-    border-color: rgba(255,255,255,0.06);
-}
-
-/* Right Side Compact Non-Scrollable Form Frame Container */
-.form-section-scrollable {
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    background: rgba(255, 255, 255, 0.01) !important;
-    border: 1px solid rgba(255, 255, 255, 0.02) !important;
-    padding: 24px;
-    border-radius: 18px !important;
-    box-sizing: border-box;
-    justify-content: center;
-}
-
-/* 💎 FORM FIELD ARCHITECTURE */
-.form-group-premium {
-    position: relative;
-    display: flex; 
-    flex-direction: column; 
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-    z-index: 1;
-}
-
-.form-label-premium {
-    display: block; 
-    margin: 0 0 6px 0; 
-    font-weight: 700; 
-    font-size: 11px; 
-    letter-spacing: 0.5px; 
-    text-transform: uppercase; 
-    color: rgba(0, 230, 118, 0.6) !important; 
-    transition: all 0.3s ease !important;
-}
-
-.premium-input-box {
-    width: 100%; 
-    height: 40px;
-    padding: 8px 12px; 
-    border: 1px solid rgba(255, 255, 255, .05) !important; 
-    border-radius: 10px !important;
-    background: rgba(255, 255, 255, .04) !important; 
-    color: #fff !important; 
-    font-family: inherit; 
-    font-size: 13px; 
-    outline: none !important; 
-    box-sizing: border-box;
-    transition: all 0.3s ease !important;
-}
-
-.premium-input-box::placeholder { color: rgba(255, 255, 255, 0.2); }
-select.premium-input-box option { background: #0b1513 !important; color: #fff !important; }
-
-.form-group-premium:focus-within { 
-    transform: translateY(-1px) scale(1.005) !important; 
-    z-index: 10000 !important;
-}
-.form-group-premium:focus-within .form-label-premium { 
-    color: #00e676 !important; 
-    text-shadow: 0 0 10px rgba(0, 230, 118, 0.6) !important; 
-    transform: translateX(2px) !important;
-}
-.premium-input-box:focus { 
-    background: rgba(2, 22, 18, 0.7) !important; 
-    border-color: #00e676 !important; 
-    box-shadow: 0 0 15px rgba(0, 230, 118, 0.2) !important; 
-}
-
-/* 🔍 FLOATING DROPDOWN CONTEXT */
-.floating-dropdown {
-    display: none; 
-    position: absolute; 
-    width: 100%; 
-    background: #0b1413 !important; 
-    border: 1px solid #00e676; 
-    border-radius: 12px; 
-    max-height: 180px; 
-    overflow-y: auto; 
-    z-index: 99999 !important; 
-    top: calc(100% + 4px); 
-    left: 0;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 230, 118, 0.2);
-    box-sizing: border-box;
-}
-.dropdown-item { padding: 8px 12px; cursor: pointer; font-size: 13px; color: #cbdad1; transition: all 0.2s; }
-.dropdown-item:hover { background: rgba(0, 230, 118, 0.15); color: #00e676; }
-
-/* 🏷️ CHIPS INSIDE INPUT SYSTEM */
-.premium-input-container-chips {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 6px; min-height: 40px;
-    padding: 4px 10px; border: 1px solid rgba(255, 255, 255, .05); border-radius: 10px;
-    background: rgba(255, 255, 255, .04); box-sizing: border-box; transition: all 0.3s ease;
-}
-.premium-input-container-chips:focus-within {
-    background: rgba(2, 22, 18, 0.7); border-color: #00e676; box-shadow: 0 0 15px rgba(0, 230, 118, 0.2);
-}
-.premium-input-container-chips input {
-    flex: 1; min-width: 120px; background: transparent !important; border: none !important;
-    outline: none !important; color: #fff !important; font-size: 13px; height: 28px; padding: 0;
-}
-.category-chip {
-    display: flex; align-items: center; gap: 6px; background: rgba(0, 230, 118, 0.08);
-    border: 1px solid rgba(0, 230, 118, 0.3); color: #fff; padding: 2px 8px; border-radius: 6px; font-size: 11px; font-weight: 600;
-}
-.category-chip i { cursor: pointer; color: rgba(255,255,255,0.4); transition: color 0.2s; }
-.category-chip i:hover { color: #ff4444; }
-
-/* 🌐 SOCIAL INPUT ARCHITECTURE */
-.social-input-row-premium {
-    display: grid; 
-    grid-template-columns: 40px 1fr 100px; 
-    gap: 10px; 
-    align-items: center; 
-    width: 100%; 
-    position: relative;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
-}
-
-.social-icon-box-premium {
-    height: 40px; border: 1px solid rgba(255,255,255,0.05); border-radius: 10px; display: flex;
-    align-items: center; justify-content: center; font-size: 15px; background: rgba(255,255,255,0.03);
-    color: rgba(255, 255, 255, 0.6); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); position: relative; overflow: hidden;
-}
-
-.social-input-row-premium:hover .social-icon-box-premium {
-    color: #00e676; background: rgba(0, 230, 118, 0.08); border-color: rgba(0, 230, 118, 0.4);
-    transform: scale(1.05); box-shadow: 0 0 10px rgba(0, 230, 118, 0.3);
-}
-
-.social-input-row-premium .premium-input-box:focus {
-    background: rgba(2, 22, 18, 0.7) !important; 
-    border-color: #00e676 !important; 
-    box-shadow: 0 0 15px rgba(0, 230, 118, 0.2) !important; 
-}
-
-/* 🔒 DROPDOWN SAFETY FILTER */
-.dropdown-active .social-input-row-premium {
-    pointer-events: none !important;
-    opacity: 0.25 !important;
-    filter: blur(1px);
-    transition: all 0.3s ease;
-}
-.dropdown-active .floating-dropdown {
-    pointer-events: auto !important;
-    opacity: 1 !important;
-}
-
-/* 💎 GLOBAL CTA BUTTON */
-#submitBtn {
-    height: 44px; margin-top: 4px; width: 100%; border: 1px solid rgba(0, 230, 118, 0.4) !important; border-radius: 10px !important;
-    background: rgba(0, 230, 118, 0.04) !important; color: #00e676 !important; font-size: 13px; font-weight: 800; text-transform: uppercase;
-    letter-spacing: 0.5px; cursor: pointer; position: relative; overflow: hidden; z-index: 1; transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1) !important;
-}
-#submitBtn::before {
-    content: '' !important; position: absolute !important; top: 0; left: -100% !important; width: 100% !important; height: 100% !important;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important; transition: all 0.6s ease !important; z-index: -1 !important;
-}
-#submitBtn:hover { 
-    color: #ffffff !important; border-color: #00e676 !important; background: linear-gradient(45deg, #00e676, #00b853) !important;
-    transform: scale(1.01) !important; letter-spacing: 1.5px !important; box-shadow: 0 0 25px rgba(0, 230, 118, 0.5), inset 0 0 15px rgba(255, 255, 255, 0.3) !important;
-}
-#submitBtn:hover::before { left: 100% !important; }
-
-@media(max-width: 1100px) {
-    .onboarding-container { grid-template-columns: 1fr; padding: 10px; }
-    .left-profile-sidebar { max-width: 340px; margin: 0 auto; }
-    .form-section-scrollable { padding: 20px; }
-}
-@media(max-width: 760px) {
-    div[style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; gap: 14px !important; }
-    div[style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 14px !important; }
-    .social-input-row-premium { gap: 8px; }
-}
-</style>
-
-<div class="onboarding-container" id="mainOnboardingContainer">
-    <div class="left-profile-sidebar">
-        <div class="creator-preview-card-9-16">
-            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
-                <span class="card-node-tag">CREATOR NODE // SEC_01</span>
-                <i class="fa-solid fa-circle" style="color: #00e676; font-size: 6px; box-shadow: 0 0 8px #00e676;"></i>
-            </div>
+        <div style="background: #0b0f12; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 2rem; display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-height: 480px; position: relative;">
             
-            <div style="text-align: center; width: 100%; margin: auto 0;">
-                <div class="card-avatar-container" onclick="document.getElementById('profilePicInput').click()">
-                    <div class="card-avatar-inner">
-                        <i class="fa-regular fa-user" id="cardDefaultAvatarIcon"></i>
-                        <img id="cardAvatarImg" style="display: none;" alt="Card Profile Avatar">
-                        <div class="avatar-hover-overlay">
-                            <i class="fa-solid fa-camera"></i>
-                            <span>Change</span>
-                        </div>
-                    </div>
-                </div>
-                <input type="file" id="profilePicInput" accept="image/*" style="display: none;">
+            <div style="position: absolute; top: 1.25rem; right: 1.25rem;">
+                <span style="display: inline-block; width: 8px; height: 8px; background-color: #00ff66; border-radius: 50%; box-shadow: 0 0 8px #00ff66;"></span>
+            </div>
 
-                <h3 class="card-brand-title" id="cardBrandNamePreview">YOUR BRAND</h3>
-                <div class="card-state-subtitle">
-                    <i class="fa-solid fa-location-dot"></i>
-                    <span id="cardStatePreview">Location Node</span>
+            <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; margin-top: 1.5rem;">
+                <div style="width: 110px; height: 110px; border-radius: 50%; border: 2px dashed rgba(0, 255, 102, 0.3); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; background: rgba(0,0,0,0.2);">
+                    <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="#00ff66" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                
+                <h2 style="color: #ffffff; font-size: 1.5rem; font-weight: 700; margin: 0 0 0.35rem 0; letter-spacing: -0.02em;">ikla Pikla</h2>
+                <div style="display: flex; align-items: center; gap: 0.35rem; color: #8a99ad; font-size: 0.88rem; margin-bottom: 1rem;">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <span>Uttar Pradesh</span>
                 </div>
 
-                <div class="card-categories-row" id="cardCategoriesWrapper">
-                    <span class="card-mini-chip" style="opacity: 0.3; background: transparent; border-style: dashed;">No Tag</span>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; justify-content: center;">
+                    <span style="background: rgba(0, 255, 102, 0.08); border: 1px solid rgba(0, 255, 102, 0.15); color: #00ff66; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 500;">Gaming</span>
+                    <span style="background: rgba(0, 255, 102, 0.08); border: 1px solid rgba(0, 255, 102, 0.15); color: #00ff66; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 500;">Entertainment</span>
                 </div>
             </div>
 
-            <div class="card-metrics-footer">
-                <div class="metric-pill-box">
-                    <i class="fa-brands fa-youtube"></i>
-                    <div class="metric-text-side">
-                        <span class="metric-label">Subscribers</span>
-                        <span class="metric-value" id="cardYtMetric">0</span>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; width: 100%; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 1.25rem;">
+                <div style="background: rgba(255,255,255,0.02); padding: 0.65rem 0.75rem; border-radius: 8px; display: flex; align-items: center; gap: 0.6rem;">
+                    <span style="color: #ff0000; display: flex; align-items: center;"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></span>
+                    <div>
+                        <div style="color: #ffffff; font-weight: 700; font-size: 0.9rem; line-height: 1;">1K</div>
+                        <div style="color: #64748b; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; margin-top: 0.2rem; letter-spacing: 0.02em;">Subscribers</div>
                     </div>
                 </div>
-                <div class="metric-pill-box">
-                    <i class="fa-brands fa-instagram"></i>
-                    <div class="metric-text-side">
-                        <span class="metric-label">Followers</span>
-                        <span class="metric-value" id="cardIgMetric">0</span>
+                <div style="background: rgba(255,255,255,0.02); padding: 0.65rem 0.75rem; border-radius: 8px; display: flex; align-items: center; gap: 0.6rem;">
+                    <span style="color: #e1306c; display: flex; align-items: center;"><svg width="17" height="17" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></span>
+                    <div>
+                        <div style="color: #ffffff; font-weight: 700; font-size: 0.9rem; line-height: 1;">2K</div>
+                        <div style="color: #64748b; font-size: 0.68rem; font-weight: 600; text-transform: uppercase; margin-top: 0.2rem; letter-spacing: 0.02em;">Followers</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="form-section-scrollable">
-        <form id="onboardingForm" style="display: flex; flex-direction: column; gap: 16px; width: 100%;">
+    <div style="background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255,255,255,0.04); border-radius: 12px; padding: 1.5rem 1.75rem;">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(255,255,255,0.05);">
+            <h3 style="color: #ffffff; font-size: 1.15rem; font-weight: 700; letter-spacing: 0.03em; margin: 0; text-transform: uppercase;">Creator Ecosystem Entry</h3>
+            <span style="color: #00ff66; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em; opacity: 0.8;">DIRECT DIRECTORY NODE SYNC</span>
+        </div>
+
+        <form style="display: flex; flex-direction: column; gap: 1rem;">
             
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
-                <div class="form-group-premium">
-                    <label class="form-label-premium">Real Name</label>
-                    <input type="text" id="realName" placeholder="e.g. Rahul Kumar" required class="premium-input-box">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                    <label style="color: #00ff66; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.03em;">REAL NAME</label>
+                    <input type="text" value="kkk" style="background: #0d1114; border: 1px solid rgba(255,255,255,0.08); padding: 0.55rem 0.75rem; border-radius: 6px; color: #ffffff; font-size: 0.88rem;">
                 </div>
-                <div class="form-group-premium">
-                    <label class="form-label-premium">Alias Name (Brand)</label>
-                    <input type="text" id="brandName" placeholder="e.g. TechBuddy" required class="premium-input-box">
+                <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                    <label style="color: #00ff66; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.03em;">ALIAS NAME (BRAND)</label>
+                    <input type="text" value="ikla Pikla" style="background: #0d1114; border: 1px solid rgba(255,255,255,0.08); padding: 0.55rem 0.75rem; border-radius: 6px; color: #ffffff; font-size: 0.88rem;">
                 </div>
-                <div class="form-group-premium">
-                    <label class="form-label-premium">WhatsApp Number</label>
-                    <input type="tel" id="whatsapp" placeholder="+91 XXXXX XXXXX" required class="premium-input-box">
+                <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                    <label style="color: #00ff66; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.03em;">WHATSAPP NUMBER</label>
+                    <input type="text" value="nnn" style="background: #0d1114; border: 1px solid rgba(255,255,255,0.08); padding: 0.55rem 0.75rem; border-radius: 6px; color: #ffffff; font-size: 0.88rem;">
                 </div>
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
-                <div class="form-group-premium">
-                    <label class="form-label-premium">Email ID</label>
-                    <input type="email" id="email" readonly class="premium-input-box" style="background: rgba(255,255,255,0.01) !important; color: rgba(255,255,255,0.25) !important; cursor: not-allowed; border-color: rgba(255,255,255,0.02) !important;">
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;">
+                <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                    <label style="color: #00ff66; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.03em;">EMAIL ID</label>
+                    <input type="email" value="thakur21291@gmail.com" style="background: #0d1114; border: 1px solid rgba(255,255,255,0.08); padding: 0.55rem 0.75rem; border-radius: 6px; color: #ffffff; font-size: 0.88rem; opacity: 0.8;">
                 </div>
-                <div class="form-group-premium">
-                    <label class="form-label-premium">Gender</label>
-                    <select id="gender" class="premium-input-box" style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2300e676%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22></polyline></svg>'); background-repeat: no-repeat; background-position: right 12px center; background-size: 12px;">
-                        <option value="Male" selected>Male</option>
-                        <option value="Female">Female</option>
-                        <option value="Other">Other</option>
+                <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                    <label style="color: #00ff66; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.03em;">GENDER</label>
+                    <select style="background: #0d1114; border: 1px solid rgba(255,255,255,0.08); padding: 0.55rem 0.75rem; border-radius: 6px; color: #ffffff; font-size: 0.88rem; outline: none;">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
                     </select>
                 </div>
-                <div class="form-group-premium">
-                    <label class="form-label-premium">State (India)</label>
-                    <input type="text" id="stateSearch" placeholder="Type your state..." class="premium-input-box" autocomplete="off">
-                    <div id="stateDropdown" class="floating-dropdown"></div>
+                <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                    <label style="color: #00ff66; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.03em;">STATE (INDIA)</label>
+                    <input type="text" value="Uttar Pradesh" style="background: #0d1114; border: 1px solid rgba(255,255,255,0.08); padding: 0.55rem 0.75rem; border-radius: 6px; color: #ffffff; font-size: 0.88rem;">
                 </div>
             </div>
 
-            <div class="form-group-premium">
-                <label class="form-label-premium">Channel Category (Max 5)</label>
-                <div class="premium-input-container-chips" id="categoryChipsWrapper">
-                    <input type="text" id="categorySearch" placeholder="Type domain (e.g. Gaming, Finance)..." autocomplete="off">
-                </div>
-                <div id="categoryDropdown" class="floating-dropdown"></div>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; row-gap: 14px;">
-                <div class="social-input-row-premium">
-                    <div class="social-icon-box-premium"><i class="fa-brands fa-youtube"></i></div>
-                    <input type="text" id="ytLink" placeholder="YouTube Link" class="premium-input-box">
-                    <input type="text" id="ytSubs" placeholder="Subs" class="premium-input-box" style="text-align: center;">
-                </div>
-                <div class="social-input-row-premium">
-                    <div class="social-icon-box-premium"><i class="fa-brands fa-instagram"></i></div>
-                    <input type="text" id="igLink" placeholder="Instagram Link" class="premium-input-box">
-                    <input type="text" id="igFollowers" placeholder="Followers" class="premium-input-box" style="text-align: center;">
-                </div>
-                <div class="social-input-row-premium">
-                    <div class="social-icon-box-premium"><i class="fa-brands fa-x-twitter"></i></div>
-                    <input type="text" id="xLink" placeholder="X Link" class="premium-input-box">
-                    <input type="text" id="xMetrics" placeholder="Followers" class="premium-input-box" style="text-align: center;">
-                </div>
-                <div class="social-input-row-premium">
-                    <div class="social-icon-box-premium"><i class="fa-brands fa-facebook-f"></i></div>
-                    <input type="text" id="fbLink" placeholder="Facebook Link" class="premium-input-box">
-                    <input type="text" id="fbMetrics" placeholder="Followers" class="premium-input-box" style="text-align: center;">
-                </div>
-                <div class="social-input-row-premium">
-                    <div class="social-icon-box-premium"><i class="fa-solid fa-k"></i></div>
-                    <input type="text" id="kickLink" placeholder="Kick Link" class="premium-input-box">
-                    <input type="text" id="kickMetrics" placeholder="Followers" class="premium-input-box" style="text-align: center;">
-                </div>
-                <div class="social-input-row-premium">
-                    <div class="social-icon-box-premium"><i class="fa-brands fa-discord"></i></div>
-                    <input type="text" id="discordLink" placeholder="Discord Invite Link" class="premium-input-box">
-                    <input type="text" id="discordMetrics" placeholder="Members" class="premium-input-box" style="text-align: center;">
+            <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+                <label style="color: #00ff66; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.03em;">CHANNEL CATEGORY (MAX 5)</label>
+                <div style="background: #0d1114; border: 1px solid rgba(255,255,255,0.08); padding: 0.5rem 0.75rem; border-radius: 6px; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; min-height: 38px;">
+                    <span style="background: rgba(255,255,255,0.05); color: #ffffff; font-size: 0.78rem; padding: 0.15rem 0.5rem; border-radius: 4px; display: inline-flex; align-items: center; gap: 0.35rem;">Gaming <b style="cursor:pointer; color:#ff4d4d">×</b></span>
+                    <span style="background: rgba(255,255,255,0.05); color: #ffffff; font-size: 0.78rem; padding: 0.15rem 0.5rem; border-radius: 4px; display: inline-flex; align-items: center; gap: 0.35rem;">Entertainment <b style="cursor:pointer; color:#ff4d4d">×</b></span>
                 </div>
             </div>
 
-            <button type="submit" id="submitBtn">Save and Exit</button>
+            <style>
+                .social-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+                .social-field-group { display: flex; align-items: center; background: #0d1114; border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; transition: border-color 0.2s ease; }
+                .social-field-group:focus-within { border-color: rgba(0, 255, 102, 0.4); }
+                .social-icon-box { display: flex; align-items: center; justify-content: center; width: 42px; height: 38px; border-right: 1px solid rgba(255,255,255,0.06); color: #8a99ad; transition: all 0.25s ease; }
+                /* Custom Premium Backglow Hover Effect */
+                .social-field-group:hover .social-icon-box { color: #00ff66; background: rgba(0, 255, 102, 0.04); text-shadow: 0 0 10px rgba(0,255,102,0.6); }
+                .social-input { background: transparent; border: none; padding: 0.55rem 0.75rem; color: #ffffff; font-size: 0.88rem; flex-grow: 1; outline: none; }
+                .metric-addon { padding: 0 0.75rem; color: #64748b; font-size: 0.75rem; font-weight: 600; border-left: 1px solid rgba(255,255,255,0.06); }
+            </style>
+
+            <div class="social-row">
+                <div class="social-field-group">
+                    <div class="social-icon-box"><svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/></svg></div>
+                    <input type="text" value="nnn" class="social-input">
+                    <span class="metric-addon">1K</span>
+                </div>
+                <div class="social-field-group">
+                    <div class="social-icon-box"><svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069z"/></svg></div>
+                    <input type="text" value="nnn" class="social-input">
+                    <span class="metric-addon">2K</span>
+                </div>
+            </div>
+
+            <button type="submit" style="background: transparent; border: 1px solid #00ff66; color: #00ff66; padding: 0.65rem; border-radius: 6px; font-weight: 700; font-size: 0.85rem; letter-spacing: 0.05em; text-transform: uppercase; cursor: pointer; margin-top: 0.5rem; transition: all 0.2s ease;" onmouseover="this.style.background='rgba(0,255,102,0.05)'" onmouseout="this.style.background='transparent'">
+                Save and Exit
+            </button>
         </form>
     </div>
 </div>
-
-<script type="module">
-import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
-
-const db = window.appDb;
-const uid = localStorage.getItem('userUid');
-let activeSelectedCategories = [];
-let profilePicFile = null;
-
-const indiaStates = [
-    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", 
-    "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
-    "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", 
-    "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", 
-    "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
-];
-
-const comprehensiveCategories = [
-    "Entertainment", "Gaming", "Education", "Technology", "Science", "Finance", "Business", "Entrepreneurship",
-    "News", "Politics", "Sports", "Fitness", "Health", "Mental Health", "Lifestyle", "Vlogging", "Travel", "Food",
-    "Cooking", "Beauty", "Fashion", "Music", "Movies", "Television", "Anime", "Comics", "Books", "Literature",
-    "Art", "Design", "Photography", "Videography", "Animation", "DIY", "Crafts", "Home Improvement", "Gardening",
-    "Agriculture", "Pets", "Animals", "Nature", "Environment", "Religion", "Spirituality", "Philosophy", "History",
-    "Geography", "Culture", "Language", "Law", "Real Estate", "Automotive", "Motorcycles", "Aviation", "Boating",
-    "Luxury", "Watches", "Jewelry", "Parenting", "Family", "Relationships", "Dating", "Weddings", "Kids", "Toys",
-    "Education for Children", "Career", "Jobs", "Recruitment", "Productivity", "Self Improvement", "Motivation",
-    "Public Speaking", "Marketing", "Sales", "E-commerce", "Investing", "Cryptocurrency", "Startups",
-    "Artificial Intelligence", "Programming", "Cybersecurity", "Software", "Hardware", "Robotics", "Space",
-    "Mathematics", "Physics", "Chemistry", "Biology", "Medicine", "Nursing", "Psychology", "Sociology",
-    "Economics", "Archaeology", "Documentary", "Interviews", "Podcasts", "Talk Shows", "Reviews", "Reaction Content",
-    "Commentary", "ASMR", "Comedy", "Horror", "Mystery", "True Crime", "Paranormal", "Survival", "Prepper",
-    "Military", "Defense", "Fire & Rescue", "Social Issues", "Nonprofit", "Charity", "Community", "Events",
-    "Festivals", "Celebrities", "Influencers", "Memes", "Internet Culture", "Streaming", "Esports", "Collectibles",
-    "Antiques", "Trading Cards", "Education & Tutorials", "How-To Guides", "Unboxing", "Shopping", "Consumer Advice"
-];
-
-const mainContainer = document.getElementById('mainOnboardingContainer');
-
-function setDropdownState(isActive) {
-    if (isActive) {
-        mainContainer.classList.add('dropdown-active');
-    } else {
-        mainContainer.classList.remove('dropdown-active');
-    }
-}
-
-// 🔀 REAL-TIME SYNC BRIDGE ENGINE
-const brandInput = document.getElementById('brandName');
-const stateSearchInput = document.getElementById('stateSearch');
-const ytSubsInput = document.getElementById('ytSubs');
-const igFollowersInput = document.getElementById('igFollowers');
-
-const cardBrandPreview = document.getElementById('cardBrandNamePreview');
-const cardStatePreview = document.getElementById('cardStatePreview');
-const cardYtPreview = document.getElementById('cardYtMetric');
-const cardIgPreview = document.getElementById('cardIgMetric');
-const cardCategoriesWrapper = document.getElementById('cardCategoriesWrapper');
-
-function syncFormToCard() {
-    cardBrandPreview.innerText = brandInput.value.trim() !== "" ? brandInput.value.trim() : "YOUR BRAND";
-    cardStatePreview.innerText = stateSearchInput.value.trim() !== "" ? stateSearchInput.value.trim() : "Location Node";
-    cardYtPreview.innerText = ytSubsInput.value.trim() !== "" ? ytSubsInput.value.trim() : "0";
-    cardIgPreview.innerText = igFollowersInput.value.trim() !== "" ? igFollowersInput.value.trim() : "0";
-
-    cardCategoriesWrapper.innerHTML = "";
-    if (activeSelectedCategories.length === 0) {
-        cardCategoriesWrapper.innerHTML = `<span class="card-mini-chip" style="opacity: 0.3; background: transparent; border-style: dashed;">No Tag</span>`;
-    } else {
-        activeSelectedCategories.slice(0, 2).forEach(cat => {
-            const span = document.createElement('span');
-            span.className = 'card-mini-chip';
-            span.innerText = cat;
-            cardCategoriesWrapper.appendChild(span);
-        });
-    }
-}
-
-brandInput.addEventListener('input', syncFormToCard);
-stateSearchInput.addEventListener('input', syncFormToCard);
-ytSubsInput.addEventListener('input', syncFormToCard);
-igFollowersInput.addEventListener('input', syncFormToCard);
-
-document.getElementById('profilePicInput').addEventListener('change', function(e) {
-    const file = e.target.files[0];
-    if (file) {
-        profilePicFile = file;
-        const reader = new FileReader();
-        reader.onload = function(event) {
-            document.getElementById('cardDefaultAvatarIcon').style.display = 'none';
-            const imgEl = document.getElementById('cardAvatarImg');
-            imgEl.src = event.target.result;
-            imgEl.style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-    }
-});
-
-const stateDropdown = document.getElementById('stateDropdown');
-function renderStateDropdown(filter = "") {
-    stateDropdown.innerHTML = "";
-    if(!filter) { stateDropdown.style.display = 'none'; setDropdownState(false); return; }
-    const filtered = indiaStates.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
-    if(filtered.length === 0) { stateDropdown.style.display = 'none'; setDropdownState(false); return; }
-    
-    filtered.forEach(state => {
-        const div = document.createElement('div');
-        div.className = 'dropdown-item';
-        div.innerText = state;
-        div.addEventListener('click', () => {
-            stateSearchInput.value = state;
-            stateDropdown.style.display = 'none';
-            setDropdownState(false);
-            syncFormToCard();
-        });
-        stateDropdown.appendChild(div);
-    });
-}
-stateSearchInput.addEventListener('input', (e) => { 
-    renderStateDropdown(e.target.value); 
-    stateDropdown.style.display = 'block'; 
-    setDropdownState(true);
-});
-
-const categorySearch = document.getElementById('categorySearch');
-const categoryDropdown = document.getElementById('categoryDropdown');
-const chipsWrapper = document.getElementById('categoryChipsWrapper');
-
-function renderChips() {
-    const existingChips = chipsWrapper.querySelectorAll('.category-chip');
-    existingChips.forEach(chip => chip.remove());
-    
-    activeSelectedCategories.forEach(cat => {
-        const chip = document.createElement('div');
-        chip.className = 'category-chip';
-        chip.innerHTML = `${cat} <i class="fa-solid fa-xmark"></i>`;
-        chip.querySelector('i').addEventListener('click', (e) => {
-            e.stopPropagation();
-            activeSelectedCategories = activeSelectedCategories.filter(item => item !== cat);
-            renderChips();
-            syncFormToCard();
-            categorySearch.placeholder = activeSelectedCategories.length === 0 ? "Type domain (e.g. Gaming, Finance)..." : "";
-        });
-        chipsWrapper.insertBefore(chip, categorySearch);
-    });
-    syncFormToCard();
-}
-
-function renderCategoryDropdown(filter = "") {
-    categoryDropdown.innerHTML = "";
-    if (activeSelectedCategories.length >= 5) {
-        categoryDropdown.style.display = 'none';
-        setDropdownState(false);
-        return;
-    }
-    const filtered = comprehensiveCategories.filter(c => c.toLowerCase().includes(filter.toLowerCase()) && !activeSelectedCategories.includes(c));
-    if(filtered.length === 0) { categoryDropdown.style.display = 'none'; setDropdownState(false); return; }
-    
-    filtered.forEach(cat => {
-        const div = document.createElement('div');
-        div.className = 'dropdown-item';
-        div.innerText = cat;
-        div.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (activeSelectedCategories.length < 5) {
-                activeSelectedCategories.push(cat);
-                categorySearch.value = "";
-                categorySearch.placeholder = "";
-                categoryDropdown.style.display = 'none';
-                setDropdownState(false);
-                renderChips();
-            }
-        });
-        categoryDropdown.appendChild(div);
-    });
-}
-
-chipsWrapper.addEventListener('click', () => categorySearch.focus());
-categorySearch.addEventListener('focus', () => { 
-    renderCategoryDropdown(categorySearch.value); 
-    categoryDropdown.style.display = 'block'; 
-    setDropdownState(true);
-});
-categorySearch.addEventListener('input', (e) => {
-    renderCategoryDropdown(e.target.value);
-    setDropdownState(true);
-});
-
-document.addEventListener('click', (e) => {
-    if(!stateSearchInput.contains(e.target) && !stateDropdown.contains(e.target)) {
-        stateDropdown.style.display = 'none';
-    }
-    if(!chipsWrapper.contains(e.target) && !categoryDropdown.contains(e.target)) {
-        categoryDropdown.style.display = 'none';
-    }
-    if (stateDropdown.style.display === 'none' && categoryDropdown.style.display === 'none') {
-        setDropdownState(false);
-    }
-});
-
-async function initPrefillPipeline() {
-    if(!db || !uid) return;
-    if(localStorage.getItem('userEmail')) document.getElementById('email').value = localStorage.getItem('userEmail');
-
-    try {
-        const docRef = doc(db, "creators", uid);
-        const docSnap = await getDoc(docRef);
-
-        if (docSnap.exists()) {
-            const data = docSnap.data();
-            document.getElementById('realName').value = data.realName || '';
-            brandInput.value = data.brandName || '';
-            document.getElementById('whatsapp').value = data.whatsapp || '';
-            document.getElementById('gender').value = data.gender || 'Male';
-            stateSearchInput.value = data.state || '';
-            
-            document.getElementById('ytLink').value = data.youtubeLink || '';
-            ytSubsInput.value = data.youtubeSubs || '';
-            document.getElementById('igLink').value = data.instagramLink || '';
-            igFollowersInput.value = data.instagramFollowers || '';
-            document.getElementById('xLink').value = data.xLink || '';
-            document.getElementById('xMetrics').value = data.xMetrics || '';
-            
-            if(data.fbLink) document.getElementById('fbLink').value = data.fbLink;
-            if(data.fbMetrics) document.getElementById('fbMetrics').value = data.fbMetrics;
-            if(data.kickLink) document.getElementById('kickLink').value = data.kickLink;
-            if(data.kickMetrics) document.getElementById('kickMetrics').value = data.kickMetrics;
-            if(data.discordLink) document.getElementById('discordLink').value = data.discordLink;
-            if(data.discordMetrics) document.getElementById('discordMetrics').value = data.discordMetrics;
-
-            if(data.profilePicUrl) {
-                document.getElementById('cardDefaultAvatarIcon').style.display = 'none';
-                const imgEl = document.getElementById('cardAvatarImg');
-                imgEl.src = data.profilePicUrl;
-                imgEl.style.display = 'block';
-            }
-
-            if(data.categories) {
-                activeSelectedCategories = data.categories.slice(0, 5);
-                if(activeSelectedCategories.length > 0) categorySearch.placeholder = "";
-                renderChips();
-            }
-            syncFormToCard();
-        }
-    } catch (err) { console.error("Prefill failure pipeline: ", err); }
-}
-
-initPrefillPipeline();
-
-document.getElementById('onboardingForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    let uploadedImageUrl = document.getElementById('cardAvatarImg').src || "";
-    if (uploadedImageUrl.startsWith('data:')) { uploadedImageUrl = ""; }
-
-    const profileData = {
-        realName: document.getElementById('realName').value,
-        brandName: brandInput.value,
-        whatsapp: document.getElementById('whatsapp').value,
-        email: document.getElementById('email').value,
-        gender: document.getElementById('gender').value,
-        state: stateSearchInput.value,
-        categories: activeSelectedCategories,
-        youtubeLink: document.getElementById('ytLink').value,
-        youtubeSubs: ytSubsInput.value,
-        instagramLink: document.getElementById('igLink').value,
-        instagramFollowers: igFollowersInput.value,
-        xLink: document.getElementById('xLink').value,
-        xMetrics: document.getElementById('xMetrics').value,
-        fbLink: document.getElementById('fbLink').value,
-        fbMetrics: document.getElementById('fbMetrics').value,
-        kickLink: document.getElementById('kickLink').value,
-        kickMetrics: document.getElementById('kickMetrics').value,
-        discordLink: document.getElementById('discordLink').value,
-        discordMetrics: document.getElementById('discordMetrics').value,
-        profilePicUrl: uploadedImageUrl,
-        updatedAt: new Date().toISOString()
-    };
-    
-    try {
-        await setDoc(doc(db, "creators", uid), profileData);
-        window.location.href = "index.html?page=creators";
-    } catch (error) { alert("Execution crash: " + error.message); }
-});
-</script>
