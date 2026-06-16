@@ -1,337 +1,376 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<style>
-/* --- DYNAMIC & PREMIUM HOME SYSTEM INTEGRATION --- */
-.left, .right {
-    background: rgba(255, 255, 255, 0.015) !important;
-    border-radius: 18px !important;
-    padding: 32px !important;
-    border: 1px solid rgba(255, 255, 255, 0.03) !important;
-    display: flex !important;
-    flex-direction: column !important;
-}
-.left { justify-content: flex-start !important; }
-.right { justify-content: flex-start !important; }
-
-.left:hover, .right:hover {
-    border-color: rgba(0, 230, 118, 0.15) !important;
-    background: rgba(255, 255, 255, 0.025) !important;
-}
-
-/* 🌟 FORM LAYOUT STRUCTURE FIX */
-.onboarding-container {
-    display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 24px;
-    max-width: 1200px;
-    margin: 20px auto;
-    align-items: start;
-}
-
-.title-area {
-    margin-bottom: 24px;
-}
-.title-area h1 {
-    font-size: 42px !important;
-    line-height: 1 !important;
-    margin: 0 0 10px !important;
-    letter-spacing: -1px !important;
-    color: #fff;
-}
-.title-area p {
-    color: #cbdad1 !important;
-    line-height: 1.5 !important;
-    font-size: 15px !important;
-    margin: 0;
-}
-
-/* 🌟 DYNAMIC TEXTBOX EFFECTS */
-.form-section-title {
-    font-size: 13px !important;
-    font-weight: 800 !important;
-    color: #00e676 !important;
-    letter-spacing: 1px !important;
-    text-transform: uppercase !important;
-    margin: 24px 0 14px 0 !important;
-    border-bottom: 1px solid rgba(0, 230, 118, 0.15);
-    padding-bottom: 6px;
-}
-
-.form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-}
-.full-width {
-    grid-column: span 2;
-}
-
-.form-group { 
-    margin-bottom: 16px !important; 
-    display: flex !important; 
-    flex-direction: column !important; 
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important; 
-}
-.form-group label { 
-    display: block !important; 
-    margin: 0 0 8px 0 !important; 
-    font-weight: 700 !important; 
-    font-size: 11px !important; 
-    letter-spacing: 0.5px !important; 
-    text-transform: uppercase !important; 
-    color: rgba(0, 230, 118, 0.6) !important; 
-    transition: all 0.3s ease !important; 
-}
-
-.form-group input, .form-group select, .form-group textarea {
-    width: 100% !important; 
-    padding: 10px 14px !important; 
-    border: 1px solid rgba(255, 255, 255, .05) !important; 
-    border-radius: 12px !important;
-    background: rgba(255, 255, 255, .04) !important; 
-    color: #fff !important; 
-    font-family: inherit !important; 
-    font-size: 14px !important; 
-    outline: none !important; 
-    transition: all 0.3s ease !important;
-}
-.form-group input, .form-group select { height: 44px !important; }
-.form-group textarea { height: 80px !important; resize: none !important; }
-.form-group select option { background: #0b1513 !important; color: #fff !important; }
-
-/* Dynamic Focus Glow System */
-.form-group:focus-within { transform: translateY(-2px) scale(1.015) !important; }
-.form-group:focus-within label { color: #00e676 !important; text-shadow: 0 0 10px rgba(0, 230, 118, 0.6) !important; transform: translateX(4px) !important; }
-.form-group input:focus, .form-group select:focus, .form-group textarea:focus { background: rgba(2, 22, 18, 0.7) !important; border-color: #00e676 !important; box-shadow: 0 0 20px rgba(0, 230, 118, 0.25) !important; }
-
-/* 📸 PREMIUM AVATAR UPLOAD SYSTEM */
-.avatar-upload-zone {
-    border: 2px dashed rgba(0, 230, 118, 0.25);
-    background: rgba(255, 255, 255, 0.01);
-    border-radius: 16px;
-    padding: 24px;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-.avatar-upload-zone:hover {
-    border-color: #00e676;
-    background: rgba(0, 230, 118, 0.03);
-    box-shadow: 0 0 15px rgba(0, 230, 118, 0.1);
-}
-.avatar-upload-zone i {
-    font-size: 28px;
-    color: #00e676;
-}
-.avatar-upload-zone span {
-    font-size: 13px;
-    font-weight: 700;
-    color: #fff;
-}
-.avatar-upload-zone p {
-    font-size: 11px;
-    color: #cbdad1;
-    margin: 0;
-}
-
-/* 💎 PREMIUM BUTTON GLOBAL WAVE */
-#submit-btn {
-    height: 48px !important; 
-    margin-top: 20px !important; 
-    width: 100% !important; 
-    border: 1px solid rgba(0, 230, 118, 0.4) !important; 
-    border-radius: 12px !important;
-    background: rgba(0, 230, 118, 0.04) !important; 
-    color: #00e676 !important; 
-    font-size: 14px !important; 
-    font-weight: 800 !important; 
-    text-transform: uppercase !important;
-    letter-spacing: 0.5px !important; 
-    cursor: pointer !important; 
-    position: relative !important; 
-    overflow: hidden !important; 
-    z-index: 1 !important; 
-    transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1) !important;
-}
-#submit-btn::before {
-    content: '' !important;
-    position: absolute !important;
-    top: 0 !important; left: -100% !important;
-    width: 100% !important; height: 100% !important;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important;
-    transition: all 0.6s ease !important;
-    z-index: -1 !important;
-}
-#submit-btn:hover { 
-    color: #ffffff !important; 
-    border-color: #00e676 !important; 
-    background: linear-gradient(45deg, #00e676, #00b853) !important;
-    transform: scale(1.03) !important; 
-    letter-spacing: 2px !important; 
-    box-shadow: 0 0 30px rgba(0, 230, 118, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.3) !important;
-}
-#submit-btn:hover::before { left: 100% !important; }
-
-/* Preview Terminal Card Wrapper */
-.preview-title {
-    font-size: 11px !important;
-    font-weight: 800 !important;
-    letter-spacing: 1.5px !important;
-    text-transform: uppercase !important;
-    color: rgba(255, 255, 255, 0.4) !important;
-    margin-bottom: 16px !important;
-    text-align: center;
-}
-
-/* Responsive Handling */
-@media(max-width:960px) {
-    .onboarding-container { grid-template-columns: 1fr; }
-    .form-grid { grid-template-columns: 1fr; }
-    .full-width { grid-column: span 1; }
-}
-</style>
-
-<div class="onboarding-container">
-    <div class="left">
-        <div class="title-area">
-            <h1>Creator Ecosystem Entry</h1>
-            <p>Configure your professional network node. Real-time updates sync instantly with the preview terminal.</p>
-        </div>
-
-        <div class="avatar-upload-zone" onclick="document.getElementById('avatar-input').click()">
-            <i class="fa-solid fa-cloud-arrow-up"></i>
-            <span>UPLOAD PROFILE PICTURE</span>
-            <p>PNG or JPG format (Max size: 1MB)</p>
-            <input type="file" id="avatar-input" accept="image/jpeg, image/png" style="display: none;" onchange="validateAndPreviewAvatar(this)">
-        </div>
-
-        <div class="form-section-title">01. Core Identity Matrix</div>
-        <div class="form-grid">
-            <div class="form-group">
-                <label>Real Name</label>
-                <input id="real-name" placeholder="e.g. Rahul Kumar">
-            </div>
-            <div class="form-group">
-                <label>ASA Name (Alias / Brand)</label>
-                <input id="alias-name" placeholder="e.g. TechBuddy" oninput="updatePreviewText('preview-alias', this.value)">
-            </div>
-            <div class="form-group">
-                <label>WhatsApp Number</label>
-                <input id="whatsapp" placeholder="+91 XXXXX XXXXX">
-            </div>
-            <div class="form-group">
-                <label>Email ID (Auto-Filled)</label>
-                <input id="email" type="email" placeholder="name@example.com">
-            </div>
-            <div class="form-group">
-                <label>Gender</label>
-                <select id="gender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>State (India)</label>
-                <input id="state" placeholder="Type to search state..." oninput="updatePreviewText('preview-location', this.value + ', India')">
-            </div>
-            <div class="form-group full-width">
-                <label>Profile Punchline / Bio</label>
-                <textarea id="bio" placeholder="e.g. Building Next-Gen Tech Ecosystems..." oninput="updatePreviewText('preview-bio', this.value)"></textarea>
-            </div>
-        </div>
-
-        <div class="form-section-title">02. Content Domain Select</div>
-        <div class="form-group">
-            <label>Categories Multi-Select</label>
-            <input id="categories" placeholder="Type to filter domains (e.g. Gaming, Tech, Finance...)">
-        </div>
-
-        <div class="form-section-title">03. Social Infrastructure Nodes</div>
-        <div class="form-grid">
-            <div class="form-group">
-                <label>YouTube Link</label>
-                <input id="yt-link" placeholder="YouTube Channel Link">
-            </div>
-            <div class="form-group">
-                <label>YouTube Metrics</label>
-                <input id="yt-metrics" placeholder="Subs (e.g. 50K, 1.2M)">
-            </div>
-            <div class="form-group">
-                <label>Instagram Link</label>
-                <input id="ig-link" placeholder="Instagram Profile Link">
-            </div>
-            <div class="form-group">
-                <label>Instagram Metrics</label>
-                <input id="ig-metrics" placeholder="Followers (e.g. 100K)">
-            </div>
-        </div>
-
-        <button id="submit-btn" onclick="publishNode()">Publish To Directory</button>
-    </div>
-
-    <div class="right">
-        <div class="preview-title"><i class="fa-solid fa-eye"></i> Live Workspace Preview</div>
+<div class="onboarding-container" style="display: flex; align-items: center; justify-content: center; width: 100%; box-sizing: border-box; height: 100vh; background: #020808; overflow: hidden; padding: 40px;">
+    
+    <div class="form-section" style="color: #fff; display: flex; flex-direction: column; gap: 24px; width: 100%; max-width: 1100px; background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(255, 255, 255, 0.03); padding: 36px; border-radius: 20px; box-shadow: 0 40px 100px rgba(0, 0, 0, 0.6);">
         
-        <div id="live-card-container" style="width: 100%; display: flex; justify-content: center;">
-            <div style="background: #060d0c; border: 1px solid #00e676; border-radius: 16px; padding: 24px; width: 100%; text-align: center; box-shadow: 0 0 20px rgba(0,230,118,0.15);">
-                <div style="width: 120px; height: 120px; border-radius: 50%; border: 2px solid #00e676; margin: 0 auto 16px auto; overflow: hidden; background: #112220; display: flex; align-items: center; justify-content: center;">
-                    <img id="card-avatar-preview" src="https://via.placeholder.com/120" style="width: 100%; height: 100%; object-fit: cover; display: none;">
-                    <i id="card-avatar-placeholder" class="fa-solid fa-user-astronaut" style="font-size: 48px; color: rgba(0, 230, 118, 0.4);"></i>
-                </div>
-                <h3 id="preview-alias" style="color: #fff; margin: 0 0 4px 0; font-size: 22px;">Alias Name</h3>
-                <p id="preview-location" style="color: #00e676; font-size: 13px; margin: 0 0 12px 0;"><i class="fa-solid fa-location-dot"></i> State, India</p>
-                <p id="preview-bio" style="color: #cbdad1; font-size: 13px; font-style: italic; min-height: 38px; margin: 0;">No bio punchline configured.</p>
-            </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 16px;">
+            <h2 class="hero-title" style="font-size: 28px; font-weight: 900; margin: 0; background: linear-gradient(135deg, #fff 60%, #00f0ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; font-family: sans-serif;">CREATOR ECOSYSTEM ENTRY</h2>
+            <span style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.3); letter-spacing: 1px; font-family: sans-serif; text-transform: uppercase;">Direct Directory Node Sync</span>
         </div>
+
+        <form id="onboardingForm" style="display: flex; flex-direction: column; gap: 20px; width: 100%;">
+            
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <div class="form-group-premium">
+                    <label class="form-label-premium">Real Name</label>
+                    <input type="text" id="realName" placeholder="e.g. Rahul Kumar" required class="premium-input-box">
+                </div>
+                <div class="form-group-premium">
+                    <label class="form-label-premium">Alias Name (Brand)</label>
+                    <input type="text" id="brandName" placeholder="e.g. TechBuddy" required class="premium-input-box">
+                </div>
+                <div class="form-group-premium">
+                    <label class="form-label-premium">WhatsApp Number</label>
+                    <input type="tel" id="whatsapp" placeholder="+91 XXXXX XXXXX" required class="premium-input-box">
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <div class="form-group-premium">
+                    <label class="form-label-premium">Email ID</label>
+                    <input type="email" id="email" readonly class="premium-input-box" style="background: rgba(255,255,255,0.01) !important; color: rgba(255,255,255,0.25) !important; cursor: not-allowed; border-color: rgba(255,255,255,0.02) !important;">
+                </div>
+                <div class="form-group-premium">
+                    <label class="form-label-premium">Gender</label>
+                    <select id="gender" class="premium-input-box" style="appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23ffffff%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><polyline points=%226 9 12 15 18 9%22></polyline></svg>'); background-repeat: no-repeat; background-position: right 14px center; background-size: 14px;">
+                        <option value="Male" selected>Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group-premium" style="position: relative;">
+                    <label class="form-label-premium">State (India)</label>
+                    <input type="text" id="stateSearch" placeholder="Search state..." class="premium-input-box" autocomplete="off">
+                    <div id="stateDropdown" class="floating-dropdown"></div>
+                </div>
+            </div>
+
+            <div class="form-group-premium" style="position: relative;">
+                <label class="form-label-premium">Categories Multi-Select</label>
+                <input type="text" id="categorySearch" placeholder="Type to filter domains..." class="premium-input-box" autocomplete="off">
+                <div id="categoryDropdown" class="floating-dropdown"></div>
+                <div id="selectedCategoryChips" style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;"></div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: x; row-gap: 14px; column-gap: 24px; margin-top: 4px;">
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium"><i class="fa-brands fa-youtube"></i></div>
+                    <input type="text" id="ytLink" placeholder="YouTube Link" class="premium-input-box">
+                    <input type="text" id="ytSubs" placeholder="Subs" class="premium-input-box" style="text-align: center;">
+                </div>
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium"><i class="fa-brands fa-instagram"></i></div>
+                    <input type="text" id="igLink" placeholder="Instagram Link" class="premium-input-box">
+                    <input type="text" id="igFollowers" placeholder="Followers" class="premium-input-box" style="text-align: center;">
+                </div>
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium"><i class="fa-brands fa-x-twitter"></i></div>
+                    <input type="text" id="xLink" placeholder="X Link" class="premium-input-box">
+                    <input type="text" id="xMetrics" placeholder="Followers" class="premium-input-box" style="text-align: center;">
+                </div>
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium"><i class="fa-brands fa-facebook-f"></i></div>
+                    <input type="text" id="fbLink" placeholder="Facebook Link" class="premium-input-box">
+                    <input type="text" id="fbMetrics" placeholder="Followers" class="premium-input-box" style="text-align: center;">
+                </div>
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium"><i class="fa-brands fa-kickstarter-k"></i></div>
+                    <input type="text" id="kickLink" placeholder="Kick Link" class="premium-input-box">
+                    <input type="text" id="kickMetrics" placeholder="Followers" class="premium-input-box" style="text-align: center;">
+                </div>
+                <div class="social-input-row-premium">
+                    <div class="social-icon-box-premium"><i class="fa-brands fa-discord"></i></div>
+                    <input type="text" id="discordLink" placeholder="Discord Invite Link" class="premium-input-box">
+                    <input type="text" id="discordMetrics" placeholder="Members" class="premium-input-box" style="text-align: center;">
+                </div>
+            </div>
+
+            <button type="submit" id="submitBtn">Save and Exit</button>
+        </form>
     </div>
 </div>
 
-<script>
-// Real-time simple string sync engine
-function updatePreviewText(elementId, value) {
-    const el = document.getElementById(elementId);
-    if(el) {
-        el.innerText = value.trim() !== "" ? value : (elementId === 'preview-bio' ? 'No bio punchline configured.' : 'Alias Name');
-    }
+<script type="module">
+import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const db = window.appDb;
+const uid = localStorage.getItem('userUid');
+let activeSelectedCategories = [];
+
+const indiaStates = [
+    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", 
+    "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
+    "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", 
+    "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", 
+    "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
+];
+
+const comprehensiveCategories = [
+    "Tech AI", "Gaming Esports", "Finance Trading", "Vlogging Travel", "Fashion Lifestyle", 
+    "Education Academics", "Comedy Roasting", "Fitness Health", "Art Design", "Business Startups",
+    "Crypto Web3", "Food Cooking", "Music Dance", "Photography Film", "Infotainment", "Automobile",
+    "Motovlogging", "Beauty Skincare", "Reaction", "Unboxing Reviews", "Daily Vlogs", "Anime Manga",
+    "Gaming Walkthroughs", "Podcast Interviews", "Case Studies", "History Mythology", "Self Improvement"
+];
+
+const genderThemeMap = {
+    "Male": "#00f0ff",
+    "Female": "#ec008c",
+    "Other": "#00e676"
+};
+
+function applyDynamicLabelColors() {
+    const genVal = document.getElementById('gender').value;
+    const targetColor = genderThemeMap[genVal] || "#00f0ff";
+    
+    document.querySelectorAll('.form-label-premium').forEach(label => {
+        label.style.color = targetColor;
+    });
+    
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.style.borderColor = targetColor;
+    submitBtn.style.color = targetColor;
+}
+document.getElementById('gender').addEventListener('change', applyDynamicLabelColors);
+
+const stateSearch = document.getElementById('stateSearch');
+const stateDropdown = document.getElementById('stateDropdown');
+
+function renderStateDropdown(filter = "") {
+    stateDropdown.innerHTML = "";
+    const filtered = indiaStates.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
+    if(filtered.length === 0) { stateDropdown.style.display = 'none'; return; }
+    
+    filtered.forEach(state => {
+        const div = document.createElement('div');
+        div.className = 'dropdown-item';
+        div.innerText = state;
+        div.addEventListener('click', () => {
+            stateSearch.value = state;
+            stateDropdown.style.display = 'none';
+        });
+        stateDropdown.appendChild(div);
+    });
+}
+stateSearch.addEventListener('focus', () => { renderStateDropdown(stateSearch.value); stateDropdown.style.display = 'block'; });
+stateSearch.addEventListener('input', (e) => renderStateDropdown(e.target.value));
+
+const categorySearch = document.getElementById('categorySearch');
+const categoryDropdown = document.getElementById('categoryDropdown');
+const chipsContainer = document.getElementById('selectedCategoryChips');
+
+function renderChips() {
+    chipsContainer.innerHTML = "";
+    activeSelectedCategories.forEach(cat => {
+        const chip = document.createElement('div');
+        chip.className = 'category-chip';
+        chip.innerHTML = `${cat} <i class="fa-solid fa-xmark"></i>`;
+        chip.querySelector('i').addEventListener('click', () => {
+            activeSelectedCategories = activeSelectedCategories.filter(item => item !== cat);
+            renderChips();
+        });
+        chipsContainer.appendChild(chip);
+    });
 }
 
-// 📸 FILE VALIDATION ENGINE (Restricts to < 1MB)
-function validateAndPreviewAvatar(input) {
-    if (input.files && input.files[0]) {
-        const file = input.files[0];
-        const fileSizeMB = file.size / (1024 * 1024);
+function renderCategoryDropdown(filter = "") {
+    categoryDropdown.innerHTML = "";
+    const filtered = comprehensiveCategories.filter(c => c.toLowerCase().includes(filter.toLowerCase()) && !activeSelectedCategories.includes(c));
+    if(filtered.length === 0) { categoryDropdown.style.display = 'none'; return; }
+    
+    filtered.forEach(cat => {
+        const div = document.createElement('div');
+        div.className = 'dropdown-item';
+        div.innerText = cat;
+        div.addEventListener('click', () => {
+            activeSelectedCategories.push(cat);
+            categorySearch.value = "";
+            categoryDropdown.style.display = 'none';
+            renderChips();
+        });
+        categoryDropdown.appendChild(div);
+    });
+}
+categorySearch.addEventListener('focus', () => { renderCategoryDropdown(categorySearch.value); categoryDropdown.style.display = 'block'; });
+categorySearch.addEventListener('input', (e) => renderCategoryDropdown(e.target.value));
 
-        if (fileSizeMB > 1) {
-            alert("File size is too big! Please upload a picture smaller than 1MB.");
-            input.value = ""; // Form value instantly resets
-            document.getElementById('card-avatar-preview').style.display = "none";
-            document.getElementById('card-avatar-placeholder').style.display = "block";
-            return;
-        }
+document.addEventListener('click', (e) => {
+    if(!stateSearch.contains(e.target) && !stateDropdown.contains(e.target)) stateDropdown.style.display = 'none';
+    if(!categorySearch.contains(e.target) && !categoryDropdown.contains(e.target)) categoryDropdown.style.display = 'none';
+});
 
-        // Live preview initialization
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const previewImg = document.getElementById('card-avatar-preview');
-            const placeholderIcon = document.getElementById('card-avatar-placeholder');
+async function initPrefillPipeline() {
+    if(!db || !uid) return;
+    if(localStorage.getItem('userEmail')) document.getElementById('email').value = localStorage.getItem('userEmail');
+
+    try {
+        const docRef = doc(db, "creators", uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            document.getElementById('realName').value = data.realName || '';
+            document.getElementById('brandName').value = data.brandName || '';
+            document.getElementById('whatsapp').value = data.whatsapp || '';
+            document.getElementById('gender').value = data.gender || 'Male';
+            stateSearch.value = data.state || '';
             
-            previewImg.src = e.target.result;
-            previewImg.style.display = "block";
-            placeholderIcon.style.display = "none";
+            document.getElementById('ytLink').value = data.youtubeLink || '';
+            document.getElementById('ytSubs').value = data.youtubeSubs || '';
+            document.getElementById('igLink').value = data.instagramLink || '';
+            document.getElementById('igFollowers').value = data.instagramFollowers || '';
+            document.getElementById('xLink').value = data.xLink || '';
+            document.getElementById('xMetrics').value = data.xMetrics || '';
+            
+            if(data.fbLink) document.getElementById('fbLink').value = data.fbLink;
+            if(data.fbMetrics) document.getElementById('fbMetrics').value = data.fbMetrics;
+            if(data.kickLink) document.getElementById('kickLink').value = data.kickLink;
+            if(data.kickMetrics) document.getElementById('kickMetrics').value = data.kickMetrics;
+            if(data.discordLink) document.getElementById('discordLink').value = data.discordLink;
+            if(data.discordMetrics) document.getElementById('discordMetrics').value = data.discordMetrics;
+
+            if(data.categories) {
+                activeSelectedCategories = data.categories;
+                renderChips();
+            }
         }
-        reader.readAsDataURL(file);
-    }
+        applyDynamicLabelColors();
+    } catch (err) { console.error("Pipeline failure: ", err); }
 }
 
-function publishNode() {
-    // Aapki purani sheet automation ya processing flow bina changes ke yahan run hogi
-    alert('Form workflow initialized successfully!');
-}
+initPrefillPipeline();
+
+document.getElementById('onboardingForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const profileData = {
+        realName: document.getElementById('realName').value,
+        brandName: document.getElementById('brandName').value,
+        whatsapp: document.getElementById('whatsapp').value,
+        email: document.getElementById('email').value,
+        gender: document.getElementById('gender').value,
+        state: stateSearch.value,
+        categories: activeSelectedCategories,
+        youtubeLink: document.getElementById('ytLink').value,
+        youtubeSubs: document.getElementById('ytSubs').value,
+        instagramLink: document.getElementById('igLink').value,
+        instagramFollowers: document.getElementById('igFollowers').value,
+        xLink: document.getElementById('xLink').value,
+        xMetrics: document.getElementById('xMetrics').value,
+        fbLink: document.getElementById('fbLink').value,
+        fbMetrics: document.getElementById('fbMetrics').value,
+        kickLink: document.getElementById('kickLink').value,
+        kickMetrics: document.getElementById('kickMetrics').value,
+        discordLink: document.getElementById('discordLink').value,
+        discordMetrics: document.getElementById('discordMetrics').value,
+        updatedAt: new Date().toISOString()
+    };
+    try {
+        await setDoc(doc(db, "creators", uid), profileData);
+        window.location.href = "index.html?page=creators";
+    } catch (error) { alert("Execution crash: " + error.message); }
+});
 </script>
+
+<style>
+/* 🌟 TOYING PREMIUM FIELD INTERACTION EXCLUSIVE ENGINE */
+.form-group-premium {
+    position: relative;
+    display: flex; 
+    flex-direction: column; 
+}
+.form-label-premium {
+    display: block; 
+    margin: 0 0 6px 0; 
+    font-weight: 700; 
+    font-size: 10px; 
+    letter-spacing: 0.5px; 
+    text-transform: uppercase; 
+    color: #00f0ff; 
+    transition: text-shadow 0.3s ease, color 0.3s ease;
+    font-family: sans-serif;
+}
+
+.premium-input-box {
+    width: 100%; 
+    height: 38px;
+    padding: 8px 12px; 
+    border: 1px solid rgba(255, 255, 255, .05); 
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .03); 
+    color: #fff; 
+    font-family: inherit; 
+    font-size: 13px; 
+    outline: none; 
+    box-sizing: border-box;
+    transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+.premium-input-box::placeholder { color: rgba(255, 255, 255, 0.2); }
+select.premium-input-box option { background: #050e0e; color: #fff; }
+
+/* Dynamic Focus Glow without shifting dimensions */
+.form-group-premium:focus-within .form-label-premium {
+    text-shadow: 0 0 8px currentColor;
+}
+.premium-input-box:focus { 
+    background: rgba(2, 22, 18, 0.6); 
+    border-color: currentColor; 
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.05); 
+}
+
+/* Dropdowns & Chips Setup */
+.floating-dropdown {
+    display: none; 
+    position: absolute; 
+    width: 100%; 
+    background: #050e0e; 
+    border: 1px solid rgba(255,255,255,0.1); 
+    border-radius: 8px; 
+    max-height: 150px; 
+    overflow-y: auto; 
+    z-index: 100; 
+    top: 100%;
+    margin-top: 4px; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    font-family: sans-serif;
+}
+.dropdown-item { padding: 8px 12px; cursor: pointer; font-size: 12px; color: rgba(255,255,255,0.8); }
+.dropdown-item:hover { background: rgba(255, 255, 255, 0.05); color: #fff; }
+
+.category-chip {
+    display: flex; align-items: center; gap: 6px; background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1); color: #fff; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-family: sans-serif;
+}
+.category-chip i { cursor: pointer; color: rgba(255,255,255,0.4); }
+.category-chip i:hover { color: #ff4444; }
+
+/* Social Grid Infrastructure */
+.social-input-row-premium {
+    display: grid; grid-template-columns: 38px 1fr 90px; gap: 8px; align-items: center; width: 100%;
+}
+.social-icon-box-premium {
+    height: 38px; border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 13px; background: rgba(255,255,255,0.02); color: #fff;
+}
+
+/* SUBMIT CTA WAVE ENGINE */
+#submitBtn {
+    height: 42px; margin-top: 6px; width: 100%; border: 1px solid #00f0ff; border-radius: 8px;
+    background: rgba(255, 255, 255, 0.01); color: #00f0ff; font-size: 13px; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.5px; cursor: pointer; position: relative; overflow: hidden; z-index: 1; transition: all 0.4s ease; font-family: sans-serif;
+}
+#submitBtn::before {
+    content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent); transition: all 0.5s ease; z-index: -1;
+}
+#submitBtn:hover { 
+    color: #020808 !important; background: currentColor;
+    letter-spacing: 1.5px; box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+}
+#submitBtn:hover::before { left: 100%; }
+
+@media(max-width: 900px) {
+    .onboarding-container { height: auto !important; overflow: visible; padding: 16px; }
+    .form-section { padding: 20px; }
+    form { gap: 14px !important; }
+    div[style*="grid-template-columns: repeat(3"] { grid-template-columns: 1fr !important; gap: 12px !important; }
+    .social-input-row-premium { gap: 6px; }
+}
+</style>
