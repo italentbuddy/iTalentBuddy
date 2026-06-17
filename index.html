@@ -186,7 +186,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, setPersistence, browserLo
 import { initializeFirestore, persistentLocalCache, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
 const firebaseConfig = {
-apiKey: "AlzaSyDGJsSfxHi-DQhWulEV7rQsGumH4k3l_wY",
+apiKey: "AIzaSyDGJsSfxHi-DQhWulEV7rQsGumH4k3I_wY", // 🛠️ FIXED: Typo corrected back to Capital 'I'
 authDomain: "italentbuddy-5225d.firebaseapp.com",
 projectId: "italentbuddy-5225d",
 storageBucket: "italentbuddy-5225d.firebasestorage.app",
@@ -258,7 +258,7 @@ wrapper.innerHTML = `
 </div>`;
 });
 
-// ⚡ PERMANENT FIX: Event Delegation se dynamic buttons ko target karna (No dependency on setTimeout)
+// ⚡ EVENT DELEGATION: Fixed dynamic listener injection
 wrapper.addEventListener('click', (e) => {
 const btn = e.target.closest('button, .join-btn, #join-itb-btn, [id*="join"], [class*="join"]');
 const hasJoinText = e.target.textContent && e.target.textContent.toLowerCase().includes('join itb');
