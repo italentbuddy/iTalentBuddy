@@ -13,32 +13,24 @@
     padding: 10px 4px;
 }
 
-/* Left Sidebar Box with Home Page Styling & Hover Effect */
+/* Left Sidebar Frame configured for 9:16 Card Placement */
 .left-profile-sidebar {
-    background: rgba(255, 255, 255, 0.015) !important;
-    border-radius: 18px !important;
-    padding: 0px !important;
-    border: 1px solid rgba(255, 255, 255, 0.03) !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: flex-start !important;
+    background: transparent !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     height: 100%;
     box-sizing: border-box;
-    overflow: hidden;
-    transition: border-color 0.25s ease-out, background 0.25s ease-out !important;
-}
-.left-profile-sidebar:hover {
-    border-color: rgba(0, 230, 118, 0.15) !important;
-    background: rgba(255, 255, 255, 0.025) !important;
 }
 
-/* 🔥 ULTRA PREMIUM DYNAMIC CARD COMPONENT (Perfectly Aligned to Box) */
+/* 🔥 ULTRA PREMIUM 9:16 DYNAMIC CARD COMPONENT */
 .creator-preview-card-9-16 {
     width: 100%;
-    height: 100%;
-    background: transparent;
-    border: none !important;
+    aspect-ratio: 9 / 16;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
     padding: 24px;
     box-sizing: border-box;
     display: flex;
@@ -46,6 +38,7 @@
     justify-content: space-between;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -60,13 +53,28 @@
     pointer-events: none;
 }
 
+.creator-preview-card-9-16:hover {
+    border-color: rgba(0, 230, 118, 0.2);
+    box-shadow: 0 40px 80px rgba(0, 230, 118, 0.05), 0 0 40px rgba(0, 230, 118, 0.02);
+    transform: translateY(-4px);
+}
+
+/* Card Header Node Info */
+.card-node-tag {
+    font-size: 9px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
 /* Interactive Embedded Upload & Profile Avatar Setup */
 .card-avatar-container {
     width: 110px;
     height: 110px;
     border-radius: 50%;
     position: relative;
-    margin: 0 auto 16px auto;
+    margin: 16px auto;
     border: 2px dashed rgba(0, 230, 118, 0.25);
     background: rgba(0,0,0,0.2);
     padding: 4px;
@@ -145,7 +153,7 @@
     display: flex;
     justify-content: center;
     gap: 6px;
-    margin-bottom: 0px;
+    margin-bottom: 12px;
     height: 24px;
 }
 
@@ -188,25 +196,21 @@
 .metric-value { font-size: 13px; font-weight: 800; color: #fff; margin: 0; }
 .metric-label { font-size: 9px; color: rgba(255,255,255,0.3); text-transform: uppercase; font-weight: 600; margin: 0; }
 
-/* Right Form Section Box with Home Page Styling & Hover Effect */
+/* Right Side Scrollable Form Content */
 .form-section-scrollable {
-    background: rgba(255, 255, 255, 0.015) !important;
-    border-radius: 18px !important;
-    padding: 32px !important;
-    border: 1px solid rgba(255, 255, 255, 0.03) !important;
-    display: flex !important;
-    flex-direction: column !important;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
     gap: 24px;
+    background: rgba(255, 255, 255, 0.01) !important;
+    border: 1px solid rgba(255, 255, 255, 0.02) !important;
+    padding: 32px;
+    border-radius: 18px !important;
     height: 100%;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: rgba(0, 230, 118, 0.2) transparent;
     box-sizing: border-box;
-    transition: border-color 0.25s ease-out, background 0.25s ease-out !important;
-}
-.form-section-scrollable:hover {
-    border-color: rgba(0, 230, 118, 0.15) !important;
-    background: rgba(255, 255, 255, 0.025) !important;
 }
 
 .form-section-scrollable::-webkit-scrollbar { width: 6px; }
@@ -216,34 +220,34 @@
 /* 💎 FORM FIELD ARCHITECTURE */
 .form-group-premium {
     position: relative;
-    display: flex;
-    flex-direction: column;
+    display: flex; 
+    flex-direction: column; 
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
     z-index: 1;
 }
 
 .form-label-premium {
-    display: block;
-    margin: 0 0 8px 0;
-    font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    color: rgba(0, 230, 118, 0.6) !important;
+    display: block; 
+    margin: 0 0 8px 0; 
+    font-weight: 700; 
+    font-size: 11px; 
+    letter-spacing: 0.5px; 
+    text-transform: uppercase; 
+    color: rgba(0, 230, 118, 0.6) !important; 
     transition: all 0.3s ease !important;
 }
 
 .premium-input-box {
-    width: 100%;
+    width: 100%; 
     height: 44px;
-    padding: 10px 14px;
-    border: 1px solid rgba(255, 255, 255, .05) !important;
+    padding: 10px 14px; 
+    border: 1px solid rgba(255, 255, 255, .05) !important; 
     border-radius: 12px !important;
-    background: rgba(255, 255, 255, .04) !important;
-    color: #fff !important;
-    font-family: inherit;
-    font-size: 14px;
-    outline: none !important;
+    background: rgba(255, 255, 255, .04) !important; 
+    color: #fff !important; 
+    font-family: inherit; 
+    font-size: 14px; 
+    outline: none !important; 
     box-sizing: border-box;
     transition: all 0.3s ease !important;
 }
@@ -251,33 +255,33 @@
 .premium-input-box::placeholder { color: rgba(255, 255, 255, 0.2); }
 select.premium-input-box option { background: #0b1513 !important; color: #fff !important; }
 
-.form-group-premium:focus-within {
-    transform: translateY(-2px) scale(1.01) !important;
+.form-group-premium:focus-within { 
+    transform: translateY(-2px) scale(1.01) !important; 
     z-index: 10000 !important;
 }
-.form-group-premium:focus-within .form-label-premium {
-    color: #00e676 !important;
-    text-shadow: 0 0 10px rgba(0, 230, 118, 0.6) !important;
+.form-group-premium:focus-within .form-label-premium { 
+    color: #00e676 !important; 
+    text-shadow: 0 0 10px rgba(0, 230, 118, 0.6) !important; 
     transform: translateX(4px) !important;
 }
-.premium-input-box:focus {
-    background: rgba(2, 22, 18, 0.7) !important;
-    border-color: #00e676 !important;
-    box-shadow: 0 0 20px rgba(0, 230, 118, 0.25) !important;
+.premium-input-box:focus { 
+    background: rgba(2, 22, 18, 0.7) !important; 
+    border-color: #00e676 !important; 
+    box-shadow: 0 0 20px rgba(0, 230, 118, 0.25) !important; 
 }
 
 /* 🔍 FLOATING DROPDOWN CONTEXT (SOLID OPAQUE DARK) */
 .floating-dropdown {
-    display: none;
-    position: absolute;
-    width: 100%;
-    background: #0b1413 !important;
-    border: 1px solid #00e676;
-    border-radius: 12px;
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 99999 !important;
-    top: calc(100% + 4px);
+    display: none; 
+    position: absolute; 
+    width: 100%; 
+    background: #0b1413 !important; 
+    border: 1px solid #00e676; 
+    border-radius: 12px; 
+    max-height: 200px; 
+    overflow-y: auto; 
+    z-index: 99999 !important; 
+    top: calc(100% + 4px); 
     left: 0;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.95), 0 0 30px rgba(0, 230, 118, 0.2);
     box-sizing: border-box;
@@ -307,11 +311,11 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
 
 /* 🌐 SOCIAL INPUT ARCHITECTURE */
 .social-input-row-premium {
-    display: grid;
-    grid-template-columns: 44px 1fr 110px;
-    gap: 10px;
-    align-items: center;
-    width: 100%;
+    display: grid; 
+    grid-template-columns: 44px 1fr 110px; 
+    gap: 10px; 
+    align-items: center; 
+    width: 100%; 
     position: relative;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
@@ -328,9 +332,9 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
 }
 
 .social-input-row-premium .premium-input-box:focus {
-    background: rgba(2, 22, 18, 0.7) !important;
-    border-color: #00e676 !important;
-    box-shadow: 0 0 20px rgba(0, 230, 118, 0.25) !important;
+    background: rgba(2, 22, 18, 0.7) !important; 
+    border-color: #00e676 !important; 
+    box-shadow: 0 0 20px rgba(0, 230, 118, 0.25) !important; 
 }
 .social-input-row-premium:focus-within {
     transform: translateY(-2px) scale(1.01) !important;
@@ -358,7 +362,7 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
     content: '' !important; position: absolute !important; top: 0; left: -100% !important; width: 100% !important; height: 100% !important;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important; transition: all 0.6s ease !important; z-index: -1 !important;
 }
-#submitBtn:hover {
+#submitBtn:hover { 
     color: #ffffff !important; border-color: #00e676 !important; background: linear-gradient(45deg, #00e676, #00b853) !important;
     transform: scale(1.02) !important; letter-spacing: 2px !important; box-shadow: 0 0 30px rgba(0, 230, 118, 0.6), inset 0 0 15px rgba(255, 255, 255, 0.3) !important;
 }
@@ -379,6 +383,11 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
 <div class="onboarding-container" id="mainOnboardingContainer">
     <div class="left-profile-sidebar">
         <div class="creator-preview-card-9-16">
+            <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
+                <span class="card-node-tag">CREATOR NODE // SEC_01</span>
+                <i class="fa-solid fa-circle" style="color: #00e676; font-size: 6px; box-shadow: 0 0 8px #00e676;"></i>
+            </div>
+            
             <div style="text-align: center; width: 100%; margin: auto 0;">
                 <div class="card-avatar-container" onclick="document.getElementById('profilePicInput').click()">
                     <div class="card-avatar-inner">
@@ -420,7 +429,7 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
 
     <div class="form-section-scrollable">
         <form id="onboardingForm" style="display: flex; flex-direction: column; gap: 24px; width: 100%;">
-
+            
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
                 <div class="form-group-premium">
                     <label class="form-label-premium">Real Name</label>
@@ -503,293 +512,293 @@ select.premium-input-box option { background: #0b1513 !important; color: #fff !i
 </div>
 
 <script type="module">
-    import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+import { doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
 
-    const db = window.appDb;
-    const uid = localStorage.getItem('userUid');
-    let activeSelectedCategories = [];
-    let profilePicFile = null;
+const db = window.appDb;
+const uid = localStorage.getItem('userUid');
+let activeSelectedCategories = [];
+let profilePicFile = null;
 
-    const indiaStates = [
-        "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana",
-        "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur",
-        "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana",
-        "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh",
-        "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
-    ];
+const indiaStates = [
+    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", 
+    "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
+    "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", 
+    "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal", "Andaman and Nicobar Islands", "Chandigarh", 
+    "Dadra and Nagar Haveli and Daman and Diu", "Delhi", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry"
+];
 
-    const comprehensiveCategories = [
-        "Entertainment", "Gaming", "Education", "Technology", "Science", "Finance", "Business", "Entrepreneurship",
-        "News", "Politics", "Sports", "Fitness", "Health", "Mental Health", "Lifestyle", "Vlogging", "Travel", "Food",
-        "Cooking", "Beauty", "Fashion", "Music", "Movies", "Television", "Anime", "Comics", "Books", "Literature",
-        "Art", "Design", "Photography", "Videography", "Animation", "DIY", "Crafts", "Home Improvement", "Gardening",
-        "Agriculture", "Pets", "Animals", "Nature", "Environment", "Religion", "Spirituality", "Philosophy", "History",
-        "Geography", "Culture", "Language", "Law", "Real Estate", "Automotive", "Motorcycles", "Aviation", "Boating",
-        "Luxury", "Watches", "Jewelry", "Parenting", "Family", "Relationships", "Dating", "Weddings", "Kids", "Toys",
-        "Education for Children", "Career", "Jobs", "Recruitment", "Productivity", "Self Improvement", "Motivation",
-        "Public Speaking", "Marketing", "Sales", "E-commerce", "Investing", "Cryptocurrency", "Startups",
-        "Artificial Intelligence", "Programming", "Cybersecurity", "Software", "Hardware", "Robotics", "Space",
-        "Mathematics", "Physics", "Chemistry", "Biology", "Medicine", "Nursing", "Psychology", "Sociology",
-        "Economics", "Archaeology", "Documentary", "Interviews", "Podcasts", "Talk Shows", "Reviews", "Reaction Content",
-        "Commentary", "ASMR", "Comedy", "Horror", "Mystery", "True Crime", "Paranormal", "Survival", "Prepper",
-        "Military", "Defense", "Fire & Rescue", "Social Issues", "Nonprofit", "Charity", "Community", "Events",
-        "Festivals", "Celebrities", "Influencers", "Memes", "Internet Culture", "Streaming", "Esports", "Collectibles",
-        "Antiques", "Trading Cards", "Education & Tutorials", "How-To Guides", "Unboxing", "Shopping", "Consumer Advice"
-    ];
+const comprehensiveCategories = [
+    "Entertainment", "Gaming", "Education", "Technology", "Science", "Finance", "Business", "Entrepreneurship",
+    "News", "Politics", "Sports", "Fitness", "Health", "Mental Health", "Lifestyle", "Vlogging", "Travel", "Food",
+    "Cooking", "Beauty", "Fashion", "Music", "Movies", "Television", "Anime", "Comics", "Books", "Literature",
+    "Art", "Design", "Photography", "Videography", "Animation", "DIY", "Crafts", "Home Improvement", "Gardening",
+    "Agriculture", "Pets", "Animals", "Nature", "Environment", "Religion", "Spirituality", "Philosophy", "History",
+    "Geography", "Culture", "Language", "Law", "Real Estate", "Automotive", "Motorcycles", "Aviation", "Boating",
+    "Luxury", "Watches", "Jewelry", "Parenting", "Family", "Relationships", "Dating", "Weddings", "Kids", "Toys",
+    "Education for Children", "Career", "Jobs", "Recruitment", "Productivity", "Self Improvement", "Motivation",
+    "Public Speaking", "Marketing", "Sales", "E-commerce", "Investing", "Cryptocurrency", "Startups",
+    "Artificial Intelligence", "Programming", "Cybersecurity", "Software", "Hardware", "Robotics", "Space",
+    "Mathematics", "Physics", "Chemistry", "Biology", "Medicine", "Nursing", "Psychology", "Sociology",
+    "Economics", "Archaeology", "Documentary", "Interviews", "Podcasts", "Talk Shows", "Reviews", "Reaction Content",
+    "Commentary", "ASMR", "Comedy", "Horror", "Mystery", "True Crime", "Paranormal", "Survival", "Prepper",
+    "Military", "Defense", "Fire & Rescue", "Social Issues", "Nonprofit", "Charity", "Community", "Events",
+    "Festivals", "Celebrities", "Influencers", "Memes", "Internet Culture", "Streaming", "Esports", "Collectibles",
+    "Antiques", "Trading Cards", "Education & Tutorials", "How-To Guides", "Unboxing", "Shopping", "Consumer Advice"
+];
 
-    const mainContainer = document.getElementById('mainOnboardingContainer');
+const mainContainer = document.getElementById('mainOnboardingContainer');
 
-    // State Manager for Global Background Dropdown blur synchronization
-    function setDropdownState(isActive) {
-        if (isActive) {
-            mainContainer.classList.add('dropdown-active');
-        } else {
-            mainContainer.classList.remove('dropdown-active');
-        }
+// State Manager for Global Background Dropdown blur synchronization
+function setDropdownState(isActive) {
+    if (isActive) {
+        mainContainer.classList.add('dropdown-active');
+    } else {
+        mainContainer.classList.remove('dropdown-active');
     }
+}
 
-    // 🔀 REAL-TIME SYNC BRIDGE ENGINE (Form elements reflect instantly on 9:16 card preview)
-    const brandInput = document.getElementById('brandName');
-    const stateSearchInput = document.getElementById('stateSearch');
-    const ytSubsInput = document.getElementById('ytSubs');
-    const igFollowersInput = document.getElementById('igFollowers');
+// 🔀 REAL-TIME SYNC BRIDGE ENGINE (Form elements reflect instantly on 9:16 card preview)
+const brandInput = document.getElementById('brandName');
+const stateSearchInput = document.getElementById('stateSearch');
+const ytSubsInput = document.getElementById('ytSubs');
+const igFollowersInput = document.getElementById('igFollowers');
 
-    const cardBrandPreview = document.getElementById('cardBrandNamePreview');
-    const cardStatePreview = document.getElementById('cardStatePreview');
-    const cardYtPreview = document.getElementById('cardYtMetric');
-    const cardIgPreview = document.getElementById('cardIgMetric');
-    const cardCategoriesWrapper = document.getElementById('cardCategoriesWrapper');
+const cardBrandPreview = document.getElementById('cardBrandNamePreview');
+const cardStatePreview = document.getElementById('cardStatePreview');
+const cardYtPreview = document.getElementById('cardYtMetric');
+const cardIgPreview = document.getElementById('cardIgMetric');
+const cardCategoriesWrapper = document.getElementById('cardCategoriesWrapper');
 
-    function syncFormToCard() {
-        cardBrandPreview.innerText = brandInput.value.trim() !== "" ? brandInput.value.trim() : "YOUR BRAND";
-        cardStatePreview.innerText = stateSearchInput.value.trim() !== "" ? stateSearchInput.value.trim() : "Location Node";
-        cardYtPreview.innerText = ytSubsInput.value.trim() !== "" ? ytSubsInput.value.trim() : "0";
-        cardIgPreview.innerText = igFollowersInput.value.trim() !== "" ? igFollowersInput.value.trim() : "0";
+function syncFormToCard() {
+    cardBrandPreview.innerText = brandInput.value.trim() !== "" ? brandInput.value.trim() : "YOUR BRAND";
+    cardStatePreview.innerText = stateSearchInput.value.trim() !== "" ? stateSearchInput.value.trim() : "Location Node";
+    cardYtPreview.innerText = ytSubsInput.value.trim() !== "" ? ytSubsInput.value.trim() : "0";
+    cardIgPreview.innerText = igFollowersInput.value.trim() !== "" ? igFollowersInput.value.trim() : "0";
 
-        // Update Max 2 Categories inside 9:16 Preview Card layout
-        cardCategoriesWrapper.innerHTML = "";
-        if (activeSelectedCategories.length === 0) {
-            cardCategoriesWrapper.innerHTML = `<span class="card-mini-chip" style="opacity: 0.3; background: transparent; border-style: dashed;">No Tag</span>`;
-        } else {
-            activeSelectedCategories.slice(0, 2).forEach(cat => {
-                const span = document.createElement('span');
-                span.className = 'card-mini-chip';
-                span.innerText = cat;
-                cardCategoriesWrapper.appendChild(span);
-            });
-        }
+    // Update Max 2 Categories inside 9:16 Preview Card layout
+    cardCategoriesWrapper.innerHTML = "";
+    if (activeSelectedCategories.length === 0) {
+        cardCategoriesWrapper.innerHTML = `<span class="card-mini-chip" style="opacity: 0.3; background: transparent; border-style: dashed;">No Tag</span>`;
+    } else {
+        activeSelectedCategories.slice(0, 2).forEach(cat => {
+            const span = document.createElement('span');
+            span.className = 'card-mini-chip';
+            span.innerText = cat;
+            cardCategoriesWrapper.appendChild(span);
+        });
     }
+}
 
-    // Real-time Event Hooks
-    brandInput.addEventListener('input', syncFormToCard);
-    stateSearchInput.addEventListener('input', syncFormToCard);
-    ytSubsInput.addEventListener('input', syncFormToCard);
-    igFollowersInput.addEventListener('input', syncFormToCard);
+// Real-time Event Hooks
+brandInput.addEventListener('input', syncFormToCard);
+stateSearchInput.addEventListener('input', syncFormToCard);
+ytSubsInput.addEventListener('input', syncFormToCard);
+igFollowersInput.addEventListener('input', syncFormToCard);
 
-    // Integrated Upload Image Sync Controller
-    document.getElementById('profilePicInput').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        if (file) {
-            profilePicFile = file;
-            const reader = new FileReader();
-            reader.onload = function(event) {
+// Integrated Upload Image Sync Controller
+document.getElementById('profilePicInput').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        profilePicFile = file;
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            document.getElementById('cardDefaultAvatarIcon').style.display = 'none';
+            const imgEl = document.getElementById('cardAvatarImg');
+            imgEl.src = event.target.result;
+            imgEl.style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+// State Dropdown Core Logic
+const stateDropdown = document.getElementById('stateDropdown');
+function renderStateDropdown(filter = "") {
+    stateDropdown.innerHTML = "";
+    if(!filter) { stateDropdown.style.display = 'none'; setDropdownState(false); return; }
+    const filtered = indiaStates.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
+    if(filtered.length === 0) { stateDropdown.style.display = 'none'; setDropdownState(false); return; }
+    
+    filtered.forEach(state => {
+        const div = document.createElement('div');
+        div.className = 'dropdown-item';
+        div.innerText = state;
+        div.addEventListener('click', () => {
+            stateSearchInput.value = state;
+            stateDropdown.style.display = 'none';
+            setDropdownState(false);
+            syncFormToCard();
+        });
+        stateDropdown.appendChild(div);
+    });
+}
+stateSearchInput.addEventListener('input', (e) => { 
+    renderStateDropdown(e.target.value); 
+    stateDropdown.style.display = 'block'; 
+    setDropdownState(true);
+});
+
+// Category Multi-Select Element Handler 
+const categorySearch = document.getElementById('categorySearch');
+const categoryDropdown = document.getElementById('categoryDropdown');
+const chipsWrapper = document.getElementById('categoryChipsWrapper');
+
+function renderChips() {
+    const existingChips = chipsWrapper.querySelectorAll('.category-chip');
+    existingChips.forEach(chip => chip.remove());
+    
+    activeSelectedCategories.forEach(cat => {
+        const chip = document.createElement('div');
+        chip.className = 'category-chip';
+        chip.innerHTML = `${cat} <i class="fa-solid fa-xmark"></i>`;
+        chip.querySelector('i').addEventListener('click', (e) => {
+            e.stopPropagation();
+            activeSelectedCategories = activeSelectedCategories.filter(item => item !== cat);
+            renderChips();
+            syncFormToCard();
+            categorySearch.placeholder = activeSelectedCategories.length === 0 ? "Type domain (e.g. Gaming, Finance)..." : "";
+        });
+        chipsWrapper.insertBefore(chip, categorySearch);
+    });
+    syncFormToCard();
+}
+
+function renderCategoryDropdown(filter = "") {
+    categoryDropdown.innerHTML = "";
+    if (activeSelectedCategories.length >= 5) {
+        categoryDropdown.style.display = 'none';
+        setDropdownState(false);
+        return;
+    }
+    const filtered = comprehensiveCategories.filter(c => c.toLowerCase().includes(filter.toLowerCase()) && !activeSelectedCategories.includes(c));
+    if(filtered.length === 0) { categoryDropdown.style.display = 'none'; setDropdownState(false); return; }
+    
+    filtered.forEach(cat => {
+        const div = document.createElement('div');
+        div.className = 'dropdown-item';
+        div.innerText = cat;
+        div.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (activeSelectedCategories.length < 5) {
+                activeSelectedCategories.push(cat);
+                categorySearch.value = "";
+                categorySearch.placeholder = "";
+                categoryDropdown.style.display = 'none';
+                setDropdownState(false);
+                renderChips();
+            }
+        });
+        categoryDropdown.appendChild(div);
+    });
+}
+
+chipsWrapper.addEventListener('click', () => categorySearch.focus());
+categorySearch.addEventListener('focus', () => { 
+    renderCategoryDropdown(categorySearch.value); 
+    categoryDropdown.style.display = 'block'; 
+    setDropdownState(true);
+});
+categorySearch.addEventListener('input', (e) => {
+    renderCategoryDropdown(e.target.value);
+    setDropdownState(true);
+});
+
+document.addEventListener('click', (e) => {
+    if(!stateSearchInput.contains(e.target) && !stateDropdown.contains(e.target)) {
+        stateDropdown.style.display = 'none';
+    }
+    if(!chipsWrapper.contains(e.target) && !categoryDropdown.contains(e.target)) {
+        categoryDropdown.style.display = 'none';
+    }
+    if (stateDropdown.style.display === 'none' && categoryDropdown.style.display === 'none') {
+        setDropdownState(false);
+    }
+});
+
+// Prefill Validation Sync
+async function initPrefillPipeline() {
+    if(!db || !uid) return;
+    if(localStorage.getItem('userEmail')) document.getElementById('email').value = localStorage.getItem('userEmail');
+
+    try {
+        const docRef = doc(db, "creators", uid);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const data = docSnap.data();
+            document.getElementById('realName').value = data.realName || '';
+            brandInput.value = data.brandName || '';
+            document.getElementById('whatsapp').value = data.whatsapp || '';
+            document.getElementById('gender').value = data.gender || 'Male';
+            stateSearchInput.value = data.state || '';
+            
+            document.getElementById('ytLink').value = data.youtubeLink || '';
+            ytSubsInput.value = data.youtubeSubs || '';
+            document.getElementById('igLink').value = data.instagramLink || '';
+            igFollowersInput.value = data.instagramFollowers || '';
+            document.getElementById('xLink').value = data.xLink || '';
+            document.getElementById('xMetrics').value = data.xMetrics || '';
+            
+            if(data.fbLink) document.getElementById('fbLink').value = data.fbLink;
+            if(data.fbMetrics) document.getElementById('fbMetrics').value = data.fbMetrics;
+            if(data.kickLink) document.getElementById('kickLink').value = data.kickLink;
+            if(data.kickMetrics) document.getElementById('kickMetrics').value = data.kickMetrics;
+            if(data.discordLink) document.getElementById('discordLink').value = data.discordLink;
+            if(data.discordMetrics) document.getElementById('discordMetrics').value = data.discordMetrics;
+
+            if(data.profilePicUrl) {
                 document.getElementById('cardDefaultAvatarIcon').style.display = 'none';
                 const imgEl = document.getElementById('cardAvatarImg');
-                imgEl.src = event.target.result;
+                imgEl.src = data.profilePicUrl;
                 imgEl.style.display = 'block';
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-
-    // State Dropdown Core Logic
-    const stateDropdown = document.getElementById('stateDropdown');
-    function renderStateDropdown(filter = "") {
-        stateDropdown.innerHTML = "";
-        if(!filter) { stateDropdown.style.display = 'none'; setDropdownState(false); return; }
-        const filtered = indiaStates.filter(s => s.toLowerCase().includes(filter.toLowerCase()));
-        if(filtered.length === 0) { stateDropdown.style.display = 'none'; setDropdownState(false); return; }
-
-        filtered.forEach(state => {
-            const div = document.createElement('div');
-            div.className = 'dropdown-item';
-            div.innerText = state;
-            div.addEventListener('click', () => {
-                stateSearchInput.value = state;
-                stateDropdown.style.display = 'none';
-                setDropdownState(false);
-                syncFormToCard();
-            });
-            stateDropdown.appendChild(div);
-        });
-    }
-    stateSearchInput.addEventListener('input', (e) => {
-        renderStateDropdown(e.target.value);
-        stateDropdown.style.display = 'block';
-        setDropdownState(true);
-    });
-
-    // Category Multi-Select Element Handler
-    const categorySearch = document.getElementById('categorySearch');
-    const categoryDropdown = document.getElementById('categoryDropdown');
-    const chipsWrapper = document.getElementById('categoryChipsWrapper');
-
-    function renderChips() {
-        const existingChips = chipsWrapper.querySelectorAll('.category-chip');
-        existingChips.forEach(chip => chip.remove());
-
-        activeSelectedCategories.forEach(cat => {
-            const chip = document.createElement('div');
-            chip.className = 'category-chip';
-            chip.innerHTML = `${cat} <i class="fa-solid fa-xmark"></i>`;
-            chip.querySelector('i').addEventListener('click', (e) => {
-                e.stopPropagation();
-                activeSelectedCategories = activeSelectedCategories.filter(item => item !== cat);
-                renderChips();
-                syncFormToCard();
-                categorySearch.placeholder = activeSelectedCategories.length === 0 ? "Type domain (e.g. Gaming, Finance)..." : "";
-            });
-            chipsWrapper.insertBefore(chip, categorySearch);
-        });
-        syncFormToCard();
-    }
-
-    function renderCategoryDropdown(filter = "") {
-        categoryDropdown.innerHTML = "";
-        if (activeSelectedCategories.length >= 5) {
-            categoryDropdown.style.display = 'none';
-            setDropdownState(false);
-            return;
-        }
-        const filtered = comprehensiveCategories.filter(c => c.toLowerCase().includes(filter.toLowerCase()) && !activeSelectedCategories.includes(c));
-        if(filtered.length === 0) { categoryDropdown.style.display = 'none'; setDropdownState(false); return; }
-
-        filtered.forEach(cat => {
-            const div = document.createElement('div');
-            div.className = 'dropdown-item';
-            div.innerText = cat;
-            div.addEventListener('click', (e) => {
-                e.stopPropagation();
-                if (activeSelectedCategories.length < 5) {
-                    activeSelectedCategories.push(cat);
-                    categorySearch.value = "";
-                    categorySearch.placeholder = "";
-                    categoryDropdown.style.display = 'none';
-                    setDropdownState(false);
-                    renderChips();
-                }
-            });
-            categoryDropdown.appendChild(div);
-        });
-    }
-
-    chipsWrapper.addEventListener('click', () => categorySearch.focus());
-    categorySearch.addEventListener('focus', () => {
-        renderCategoryDropdown(categorySearch.value);
-        categoryDropdown.style.display = 'block';
-        setDropdownState(true);
-    });
-    categorySearch.addEventListener('input', (e) => {
-        renderCategoryDropdown(e.target.value);
-        setDropdownState(true);
-    });
-
-    document.addEventListener('click', (e) => {
-        if(!stateSearchInput.contains(e.target) && !stateDropdown.contains(e.target)) {
-            stateDropdown.style.display = 'none';
-        }
-        if(!chipsWrapper.contains(e.target) && !categoryDropdown.contains(e.target)) {
-            categoryDropdown.style.display = 'none';
-        }
-        if (stateDropdown.style.display === 'none' && categoryDropdown.style.display === 'none') {
-            setDropdownState(false);
-        }
-    });
-
-    // Prefill Validation Sync
-    async function initPrefillPipeline() {
-        if(!db || !uid) return;
-        if(localStorage.getItem('userEmail')) document.getElementById('email').value = localStorage.getItem('userEmail');
-
-        try {
-            const docRef = doc(db, "creators", uid);
-            const docSnap = await getDoc(docRef);
-
-            if (docSnap.exists()) {
-                const data = docSnap.data();
-                document.getElementById('realName').value = data.realName || '';
-                brandInput.value = data.brandName || '';
-                document.getElementById('whatsapp').value = data.whatsapp || '';
-                document.getElementById('gender').value = data.gender || 'Male';
-                stateSearchInput.value = data.state || '';
-
-                document.getElementById('ytLink').value = data.youtubeLink || '';
-                ytSubsInput.value = data.youtubeSubs || '';
-                document.getElementById('igLink').value = data.instagramLink || '';
-                igFollowersInput.value = data.instagramFollowers || '';
-                document.getElementById('xLink').value = data.xLink || '';
-                document.getElementById('xMetrics').value = data.xMetrics || '';
-
-                if(data.fbLink) document.getElementById('fbLink').value = data.fbLink;
-                if(data.fbMetrics) document.getElementById('fbMetrics').value = data.fbMetrics;
-                if(data.kickLink) document.getElementById('kickLink').value = data.kickLink;
-                if(data.kickMetrics) document.getElementById('kickMetrics').value = data.kickMetrics;
-                if(data.discordLink) document.getElementById('discordLink').value = data.discordLink;
-                if(data.discordMetrics) document.getElementById('discordMetrics').value = data.discordMetrics;
-
-                if(data.profilePicUrl) {
-                    document.getElementById('cardDefaultAvatarIcon').style.display = 'none';
-                    const imgEl = document.getElementById('cardAvatarImg');
-                    imgEl.src = data.profilePicUrl;
-                    imgEl.style.display = 'block';
-                }
-
-                if(data.categories) {
-                    activeSelectedCategories = data.categories.slice(0, 5);
-                    if(activeSelectedCategories.length > 0) categorySearch.placeholder = "";
-                    renderChips();
-                }
-                syncFormToCard();
             }
-        } catch (err) { console.error("Prefill failure pipeline: ", err); }
-    }
 
-    initPrefillPipeline();
+            if(data.categories) {
+                activeSelectedCategories = data.categories.slice(0, 5);
+                if(activeSelectedCategories.length > 0) categorySearch.placeholder = "";
+                renderChips();
+            }
+            syncFormToCard();
+        }
+    } catch (err) { console.error("Prefill failure pipeline: ", err); }
+}
 
-    // Submission Engine Form Listener
-    document.getElementById('onboardingForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
+initPrefillPipeline();
 
-        let uploadedImageUrl = document.getElementById('cardAvatarImg').src || "";
-        if (uploadedImageUrl.startsWith('data:')) { uploadedImageUrl = ""; }
+// Submission Engine Form Listener
+document.getElementById('onboardingForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    let uploadedImageUrl = document.getElementById('cardAvatarImg').src || "";
+    if (uploadedImageUrl.startsWith('data:')) { uploadedImageUrl = ""; }
 
-        const profileData = {
-            realName: document.getElementById('realName').value,
-            brandName: brandInput.value,
-            whatsapp: document.getElementById('whatsapp').value,
-            email: document.getElementById('email').value,
-            gender: document.getElementById('gender').value,
-            state: stateSearchInput.value,
-            categories: activeSelectedCategories,
-            youtubeLink: document.getElementById('ytLink').value,
-            youtubeSubs: ytSubsInput.value,
-            instagramLink: document.getElementById('igLink').value,
-            instagramFollowers: igFollowersInput.value,
-            xLink: document.getElementById('xLink').value,
-            xMetrics: document.getElementById('xMetrics').value,
-            fbLink: document.getElementById('fbLink').value,
-            fbMetrics: document.getElementById('fbMetrics').value,
-            kickLink: document.getElementById('kickLink').value,
-            kickMetrics: document.getElementById('kickMetrics').value,
-            discordLink: document.getElementById('discordLink').value,
-            discordMetrics: document.getElementById('discordMetrics').value,
-            profilePicUrl: uploadedImageUrl,
-            updatedAt: new Date().toISOString()
-        };
-
-        try {
-            await setDoc(doc(db, "creators", uid), profileData);
-            window.location.href = "index.html?page=creators";
-        } catch (error) { alert("Execution crash: " + error.message); }
-    });
+    const profileData = {
+        realName: document.getElementById('realName').value,
+        brandName: brandInput.value,
+        whatsapp: document.getElementById('whatsapp').value,
+        email: document.getElementById('email').value,
+        gender: document.getElementById('gender').value,
+        state: stateSearchInput.value,
+        categories: activeSelectedCategories,
+        youtubeLink: document.getElementById('ytLink').value,
+        youtubeSubs: ytSubsInput.value,
+        instagramLink: document.getElementById('igLink').value,
+        instagramFollowers: igFollowersInput.value,
+        xLink: document.getElementById('xLink').value,
+        xMetrics: document.getElementById('xMetrics').value,
+        fbLink: document.getElementById('fbLink').value,
+        fbMetrics: document.getElementById('fbMetrics').value,
+        kickLink: document.getElementById('kickLink').value,
+        kickMetrics: document.getElementById('kickMetrics').value,
+        discordLink: document.getElementById('discordLink').value,
+        discordMetrics: document.getElementById('discordMetrics').value,
+        profilePicUrl: uploadedImageUrl,
+        updatedAt: new Date().toISOString()
+    };
+    
+    try {
+        await setDoc(doc(db, "creators", uid), profileData);
+        window.location.href = "index.html?page=creators";
+    } catch (error) { alert("Execution crash: " + error.message); }
+});
 </script>
