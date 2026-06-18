@@ -14,8 +14,8 @@
   /* 🔥 OPTIMIZED COMPACT LEFT CARD (No Extra Scrolling) */
   .creator-preview-card-9-16 { 
     width: 100%; 
-    max-height: 520px; /* Sized perfectly to avoid unnecessary scrolling */
-    background: rgba(255, 255, 255, 0.015) !important; /* Perfect Home-like transparent color */
+    max-height: 520px;
+    background: rgba(255, 255, 255, 0.015) !important;
     border: 1px solid rgba(255, 255, 255, 0.03) !important;
     border-radius: 18px !important; 
     padding: 24px; 
@@ -26,26 +26,8 @@
     position: relative; 
     overflow: hidden;
     box-shadow: 0 25px 60px rgba(0,0,0,0.6); 
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
   } 
 
-  .creator-preview-card-9-16::before { 
-    content: ''; 
-    position: absolute;
-    top: -50%; 
-    left: -50%; 
-    width: 200%; 
-    height: 200%; 
-    background: radial-gradient(circle, rgba(0, 230, 118, 0.03) 0%, transparent 70%); 
-    pointer-events: none;
-  } 
-
-  .creator-preview-card-9-16:hover { 
-    border-color: rgba(0, 230, 118, 0.15) !important;  
-    background: rgba(255, 255, 255, 0.025) !important;
-  } 
-
-  /* Interactive Embedded Upload & Profile Avatar Setup */
   .card-avatar-container { 
     width: 110px; 
     height: 110px; 
@@ -55,9 +37,7 @@
     border: 2px dashed rgba(0, 230, 118, 0.25); 
     background: rgba(0,0,0,0.2); 
     padding: 4px; 
-    box-sizing: border-box; 
     cursor: pointer;
-    transition: all 0.3s ease; 
   } 
 
   .card-avatar-inner { 
@@ -68,7 +48,6 @@
     display: flex; 
     align-items: center;
     justify-content: center; 
-    background: rgba(255,255,255,0.02); 
     position: relative; 
   } 
 
@@ -78,352 +57,87 @@
     object-fit: cover;
   } 
 
-  .card-avatar-inner i { 
-    font-size: 32px; 
-    color: rgba(0, 230, 118, 0.4); 
-  }  
-
   .avatar-hover-overlay { 
     position: absolute; 
-    top: 0;
-    left: 0; 
-    width: 100%; 
-    height: 100%; 
+    top: 0; left: 0; width: 100%; height: 100%; 
     background: rgba(1, 7, 7, 0.75); 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: center;
-    opacity: 0; 
-    transition: opacity 0.25s ease; 
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.25s ease; 
   } 
 
-  .avatar-hover-overlay i { 
-    font-size: 16px; 
-    color: #00e676; 
-    margin-bottom: 2px;
-  } 
+  .card-avatar-container:hover .avatar-hover-overlay { opacity: 1; } 
 
-  .avatar-hover-overlay span { 
-    font-size: 8px; 
-    font-weight: 700; 
-    color: #fff; 
-    letter-spacing: 0.5px; 
-    text-transform: uppercase; 
-  } 
+  .card-brand-title { font-size: 20px; font-weight: 900; color: #fff; text-align: center; margin: 0 0 4px 0; } 
+  .card-state-subtitle { font-size: 12px; color: rgba(255,255,255,0.4); text-align: center; margin-bottom: 12px; } 
 
-  .card-avatar-container:hover .avatar-hover-overlay { 
-    opacity: 1;
-  } 
+  .card-categories-row { display: flex; justify-content: center; gap: 6px; margin-bottom: 12px; } 
+  .card-mini-chip { background: rgba(0, 230, 118, 0.06); border: 1px solid rgba(0, 230, 118, 0.15); color: rgba(0, 230, 118, 0.85); padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 700; } 
 
-  .card-avatar-container:hover { 
-    border-color: #00e676; 
-    box-shadow: 0 0 20px rgba(0, 230, 118, 0.3);
-  } 
-
-  /* Card Content Specs */
-  .card-brand-title { 
-    font-size: 20px; 
-    font-weight: 900; 
-    color: #fff; 
-    margin: 0 0 4px 0;
-    letter-spacing: -0.5px; 
-    white-space: nowrap; 
-    overflow: hidden; 
-    text-overflow: ellipsis; 
-    text-align: center;
-  } 
-
-  .card-state-subtitle { 
-    font-size: 12px; 
-    color: rgba(255,255,255,0.4);
-    font-weight: 500; 
-    text-align: center; 
-    margin-bottom: 12px;
-  } 
-
-  /* Dynamic Categories on Card */
-  .card-categories-row { 
-    display: flex; 
-    justify-content: center; 
-    gap: 6px; 
-    margin-bottom: 12px; 
-    height: 24px;
-    flex-wrap: wrap;
-  } 
-
-  .card-mini-chip { 
-    background: rgba(0, 230, 118, 0.06); 
-    border: 1px solid rgba(0, 230, 118, 0.15); 
-    color: rgba(0, 230, 118, 0.85);
-    padding: 4px 10px; 
-    border-radius: 6px; 
-    font-size: 10px; 
-    font-weight: 700; 
-    letter-spacing: 0.2px;
-  } 
-
-  /* Split Metrics Grid Ecosystem */
-  .card-metrics-footer { 
-    display: grid; 
-    grid-template-columns: 1fr 1fr; 
-    gap: 12px; 
-    border-top: 1px solid rgba(255,255,255,0.04);
-    padding-top: 16px; 
-    margin-top: auto; 
-  } 
-
-  .metric-pill-box { 
-    background: rgba(255,255,255,0.01); 
-    border: 1px solid rgba(255,255,255,0.03); 
-    border-radius: 12px; 
-    padding: 10px; 
-    display: flex;
-    flex-direction: column; 
-    align-items: center; 
-    gap: 4px; 
-  } 
-
-  .metric-pill-box i { 
-    font-size: 14px; 
-  } 
-
-  .metric-pill-box .fa-youtube { 
-    color: #ff0000;
-  } 
-
-  .metric-pill-box .fa-instagram { 
-    color: #e1306c; 
-  } 
-
-  .metric-value { 
-    font-size: 13px; 
-    font-weight: 800; 
-    color: #fff; 
-    margin: 0; 
-  } 
-
-  .metric-label { 
-    font-size: 9px; 
-    color: rgba(255,255,255,0.3);
-    text-transform: uppercase; 
-    font-weight: 600; 
-    margin: 0; 
-  } 
+  .card-metrics-footer { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; border-top: 1px solid rgba(255,255,255,0.04); padding-top: 16px; margin-top: auto; } 
+  .metric-pill-box { background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.03); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; align-items: center; gap: 4px; } 
+  .metric-value { font-size: 13px; font-weight: 800; color: #fff; margin: 0; } 
+  .metric-label { font-size: 9px; color: rgba(255,255,255,0.3); text-transform: uppercase; margin: 0; } 
 
   /* Right Side Scrollable Form Content */
   .form-section-scrollable { 
     color: #fff; 
-    display: flex;
-    flex-direction: column; 
-    gap: 24px; 
-    background: rgba(255, 255, 255, 0.015) !important; /* Home page exact styling matching */
+    display: flex; flex-direction: column; gap: 24px; 
+    background: rgba(255, 255, 255, 0.015) !important; 
     border: 1px solid rgba(255, 255, 255, 0.03) !important; 
-    padding: 32px;
-    border-radius: 18px !important; 
-    height: 100%; 
+    padding: 32px; border-radius: 18px !important; 
     box-sizing: border-box; 
   } 
 
-  /* 💎 FORM FIELD ARCHITECTURE */
-  .form-group-premium { 
-    position: relative; 
-    transition: all 0.3s ease !important;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  } 
-
-  .form-label-premium {
-    font-size: 14px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.8);
-    transition: all 0.3s ease;
-  }
+  .form-group-premium { position: relative; display: flex; flex-direction: column; gap: 8px; } 
+  .form-label-premium { font-size: 14px; font-weight: 600; color: rgba(255, 255, 255, 0.8); }
 
   .premium-input-box { 
-    width: 100%; 
-    height: 44px; 
-    padding: 10px 14px; 
+    width: 100%; height: 44px; padding: 10px 14px; 
     border: 1px solid rgba(255, 255, 255, .05) !important;
-    border-radius: 12px !important; 
-    background: rgba(255, 255, 255, .04) !important; 
-    color: #fff !important; 
-    font-family: inherit; 
-    font-size: 14px; 
-    outline: none !important;
-    box-sizing: border-box; 
-    transition: all 0.3s ease !important; 
-  } 
-
-  .premium-input-box::placeholder { 
-    color: rgba(255, 255, 255, 0.2);
-  } 
-
-  select.premium-input-box option { 
-    background: #0b1513 !important; 
-    color: #fff !important; 
-  } 
-
-  .form-group-premium:focus-within { 
-    transform: translateY(-2px) scale(1.015) !important; 
-  } 
-
-  .form-group-premium:focus-within .form-label-premium { 
-    color: #00e676 !important; 
-    text-shadow: 0 0 10px rgba(0, 230, 118, 0.6) !important; 
-    transform: translateX(4px) !important;
+    border-radius: 12px !important; background: rgba(255, 255, 255, .04) !important; 
+    color: #fff !important; font-size: 14px; outline: none !important; box-sizing: border-box; 
   } 
 
   .premium-input-box:focus { 
-    background: rgba(2, 22, 18, 0.7) !important;
-    border-color: #00e676 !important;
+    background: rgba(2, 22, 18, 0.7) !important; border-color: #00e676 !important;
     box-shadow: 0 0 20px rgba(0, 230, 118, 0.25) !important;
   }
 
-  /* CHIPS INSIDE INPUT SYSTEM */
-  .premium-input-container-chips { 
-    display: flex; 
-    flex-wrap: wrap; 
-    align-items: center; 
-    gap: 6px; 
-    min-height: 44px; 
-    padding: 6px 10px; 
-    border: 1px solid rgba(255, 255, 255, .05); 
-    border-radius: 12px; 
-    background: rgba(255, 255, 255, .04); 
-    box-sizing: border-box; 
-    transition: all 0.3s ease; 
-  } 
+  .social-input-row-premium { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: center; }
+  .social-icon-box-premium { height: 44px; border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; background: rgba(255,255,255,0.03); color: rgba(255, 255, 255, 0.6); } 
 
-  .premium-input-container-chips:focus-within { 
-    background: rgba(2, 22, 18, 0.7); 
-    border-color: #00e676; 
-    box-shadow: 0 0 20px rgba(0, 230, 118, 0.25); 
-  } 
-
-  .premium-input-container-chips input { 
-    flex: 1; 
-    min-width: 120px; 
-    background: transparent;
-    border: none;
-    outline: none;
-    color: #fff;
-    font-family: inherit;
-    font-size: 14px;
-  }
-
-  /* Social Inputs Style */
-  .social-input-row-premium {
-    display: grid;
-    grid-template-columns: 44px 1fr;
-    gap: 12px;
-    align-items: center;
-  }
-
-  .social-icon-box-premium { 
-    height: 44px;
-    border: 1px solid rgba(255,255,255,0.05); 
-    border-radius: 12px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    font-size: 16px; 
-    background: rgba(255,255,255,0.03);
-    color: rgba(255, 255, 255, 0.6); 
-    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-  } 
-
-  .social-input-row-premium:hover .social-icon-box-premium { 
-    color: #00e676; 
-    background: rgba(0, 230, 118, 0.08); 
-    border-color: rgba(0, 230, 118, 0.4); 
-    transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(0, 230, 118, 0.4); 
-  } 
-
-  /* Submit Button setup */
   #submitBtn {
-    position: relative;
-    width: 100%;
-    height: 50px;
-    background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 14px;
-    color: rgba(255, 255, 255, 0.8);
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    overflow: hidden;
-    z-index: 1;
-    transition: all 0.4s ease;
-    margin-top: 12px;
-    cursor: pointer;
+    width: 100%; height: 50px; background: transparent; border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px; color: rgba(255, 255, 255, 0.8); font-size: 15px; font-weight: 700;
+    cursor: pointer; transition: all 0.4s ease; margin-top: 12px;
   }
+  #submitBtn:hover { color: #010707 !important; border-color: #00e676 !important; background: #00e676 !important; box-shadow: 0 0 30px rgba(0, 230, 118, 0.6) !important; } 
 
-  #submitBtn::before { 
-    content: '' !important; 
-    position: absolute !important;
-    top: 0; 
-    left: -100% !important; 
-    width: 100% !important; 
-    height: 100% !important; 
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) !important;
-    transition: all 0.6s ease !important; 
-    z-index: -1 !important; 
-  } 
-
-  #submitBtn:hover { 
-    color: #010707 !important; 
-    border-color: #00e676 !important;
-    background: #00e676 !important; 
-    transform: scale(1.02) !important; 
-    letter-spacing: 2px !important;
-    box-shadow: 0 0 30px rgba(0, 230, 118, 0.6) !important;
-  } 
-
-  #submitBtn:hover::before { 
-    left: 100% !important; 
-  } 
-
-  @media(max-width: 1100px) { 
-    .onboarding-container { 
-      grid-template-columns: 1fr; 
-    } 
-  }
+  @media(max-width: 1100px) { .onboarding-container { grid-template-columns: 1fr; } }
 </style>
 
 <div class="onboarding-container">
-  
   <div class="creator-preview-card-9-16">
     <div class="card-avatar-container" id="avatarClickZone">
       <div class="card-avatar-inner">
         <i class="fa-solid fa-user-plus" id="avatarPlaceholderIcon"></i>
         <img id="cardAvatarImg" src="" style="display: none;">
-        <div class="avatar-hover-overlay">
-          <i class="fa-solid fa-camera"></i>
-          <span>Upload</span>
-        </div>
+        <div class="avatar-hover-overlay"><i class="fa-solid fa-camera"></i><span>Upload</span></div>
       </div>
     </div>
-    
     <div>
       <h3 class="card-brand-title" id="previewBrandName">Your Brand Name</h3>
       <p class="card-state-subtitle" id="previewState">State, India</p>
-      
-      <div class="card-categories-row" id="previewCategoriesRow">
-        <span class="card-mini-chip">Category</span>
-      </div>
+      <div class="card-categories-row" id="previewCategoriesRow"><span class="card-mini-chip">Category</span></div>
     </div>
-
     <div class="card-metrics-footer">
       <div class="metric-pill-box">
-        <i class="fa-brands fa-youtube"></i>
+        <i class="fa-brands fa-youtube" style="color: #ff0000;"></i>
         <p class="metric-value" id="previewYtSubs">0</p>
         <p class="metric-label">Subscribers</p>
       </div>
       <div class="metric-pill-box">
-        <i class="fa-brands fa-instagram"></i>
+        <i class="fa-brands fa-instagram" style="color: #e1306c;"></i>
         <p class="metric-value" id="previewInstaFollowers">0</p>
         <p class="metric-label">Followers</p>
       </div>
@@ -432,7 +146,7 @@
 
   <div class="form-section-scrollable">
     <h2 style="margin: 0 0 8px 0; font-size: 24px; font-weight: 800; color: #00e676;">Creator Onboarding</h2>
-    <p style="margin: 0 0 12px 0; color: rgba(255,255,255,0.5); font-size: 14px;">Fill in your details to completely setup your premium digital creator identity.</p>
+    <p style="margin: 0 0 12px 0; color: rgba(255,255,255,0.5); font-size: 14px;">Fill in your details to setup your premium identity.</p>
 
     <div class="form-group-premium">
       <label class="form-label-premium">Real Name</label>
@@ -441,7 +155,7 @@
 
     <div class="form-group-premium">
       <label class="form-label-premium">Brand / Channel Name</label>
-      <input type="text" id="brandName" class="premium-input-box" placeholder="e.g. Technical Guru, CarryMinati">
+      <input type="text" id="brandName" class="premium-input-box" placeholder="e.g. Technical Guru">
     </div>
 
     <div class="form-group-premium">
@@ -454,14 +168,13 @@
       <input type="email" id="email" class="premium-input-box" placeholder="name@example.com">
     </div>
 
-    <div class="form-grid-two-col" style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
       <div class="form-group-premium">
         <label class="form-label-premium">Gender</label>
         <select id="gender" class="premium-input-box">
           <option value="" disabled selected hidden>Select...</option>
           <option value="Male">Male</option>
           <option value="Female">Female</option>
-          <option value="Other">Other</option>
         </select>
       </div>
       <div class="form-group-premium">
@@ -471,21 +184,21 @@
     </div>
 
     <div class="form-group-premium">
-      <label class="form-label-premium">YouTube Channel Link & Subscribers</label>
+      <label class="form-label-premium">YouTube Link & Subscribers</label>
       <div class="social-input-row-premium">
         <div class="social-icon-box-premium"><i class="fa-brands fa-youtube"></i></div>
-        <input type="text" id="ytLink" class="premium-input-box" placeholder="https://youtube.com/c/yourchannel">
+        <input type="text" id="ytLink" class="premium-input-box" placeholder="YouTube Link">
       </div>
-      <input type="text" id="ytSubs" class="premium-input-box" placeholder="Total Subscribers Count (e.g. 500K, 1M)" style="margin-top: 8px;">
+      <input type="text" id="ytSubs" class="premium-input-box" placeholder="Subscribers Count" style="margin-top: 8px;">
     </div>
 
     <div class="form-group-premium">
-      <label class="form-label-premium">Instagram Handle Link & Followers</label>
+      <label class="form-label-premium">Instagram Handle & Followers</label>
       <div class="social-input-row-premium">
         <div class="social-icon-box-premium"><i class="fa-brands fa-instagram"></i></div>
-        <input type="text" id="instaLink" class="premium-input-box" placeholder="https://instagram.com/username">
+        <input type="text" id="instaLink" class="premium-input-box" placeholder="Instagram Link">
       </div>
-      <input type="text" id="instaFollowers" class="premium-input-box" placeholder="Total Followers Count (e.g. 25K, 100K)" style="margin-top: 8px;">
+      <input type="text" id="instaFollowers" class="premium-input-box" placeholder="Followers Count" style="margin-top: 8px;">
     </div>
 
     <button id="submitBtn" type="button">Save Profile Identity</button>
@@ -493,25 +206,18 @@
 </div>
 
 <script>
-  // Dynamic Input Syncing To Left Card Preview Panel
-  const brandInput = document.getElementById('brandName');
-  const stateInput = document.getElementById('stateSearch');
-  const ytSubsInput = document.getElementById('ytSubs');
-  const instaFollowersInput = document.getElementById('instaFollowers');
-
-  brandInput.addEventListener('input', (e) => {
+  // 🟢 IMPORTANT FIX: UI INPUT LIVE SYNC SCRIPT
+  // Is script ke neeche aap apna original Google Auth/Firebase redirect script jo PDF me tha, use bina chhede paste kar dena!
+  document.getElementById('brandName').addEventListener('input', (e) => {
     document.getElementById('previewBrandName').textContent = e.target.value.trim() || "Your Brand Name";
   });
-
-  stateInput.addEventListener('input', (e) => {
-    document.getElementById('previewState').textContent = (e.target.value.trim() ? e.target.value.trim() + ", India" : "State, India");
+  document.getElementById('stateSearch').addEventListener('input', (e) => {
+    document.getElementById('previewState').textContent = e.target.value.trim() ? e.target.value.trim() + ", India" : "State, India";
   });
-
-  ytSubsInput.addEventListener('input', (e) => {
+  document.getElementById('ytSubs').addEventListener('input', (e) => {
     document.getElementById('previewYtSubs').textContent = e.target.value.trim() || "0";
   });
-
-  instaFollowersInput.addEventListener('input', (e) => {
+  document.getElementById('instaFollowers').addEventListener('input', (e) => {
     document.getElementById('previewInstaFollowers').textContent = e.target.value.trim() || "0";
   });
 </script>
