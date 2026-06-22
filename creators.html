@@ -1,34 +1,29 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-/* ─── PARENT OVERRIDES (Pink Box / Extra Borders hatane ke liye) ─── */
-#dynamic-wrapper[data-page="creators"] {
-    border: none !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    backdrop-filter: none !important;
-    /* Pura page overflow hone se rokne ke liye fix layout height */
-    height: calc(100vh - 110px); 
-    overflow: hidden !important;
-    display: block !important;
-}
-
-/* ─── SCROLLABLE MAIN BOX (Bada rounded corner box cards ke liye) ─── */
-.creators-main-box {
+/* ─── SCROLL LOCK FOR MAIN BOX ONLY ─── */
+/* Yeh class ensure karegi ki pure page ka scroll lock ho jaye aur sirf bade box ke andar scroll ho */
+.creators-page-wrapper {
     width: 100%;
-    height: 100%;
-    background: rgba(4, 16, 16, 0.25);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 24px;
-    box-shadow: 0 25px 60px rgba(0,0,0,0.6);
-    overflow-y: auto; /* Sirf is bade box ke andar scroll hoga */
-    padding: 30px 24px;
+    height: calc(100vh - 140px); /* Aapke nav bar ke niche perfect clean height */
+    overflow: hidden !important; /* Pura page scroll nahi hoga */
     position: relative;
 }
 
-/* Smooth Chrome/Safari Scrollbar for the Main Box */
+/* ─── BADA ROUNDED CORNER BOX ─── */
+.creators-main-box {
+    width: 100%;
+    height: 100%;
+    background: rgba(4, 16, 16, 0.3);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    border-radius: 24px;
+    padding: 30px 24px;
+    overflow-y: auto; /* SIRF IS BOX KE ANDAR SCROLL HOGA */
+    box-sizing: border-box;
+}
+
+/* Custom Scrollbar For Inside Main Box Only */
 .creators-main-box::-webkit-scrollbar {
     width: 6px;
 }
@@ -36,17 +31,17 @@
     background: transparent;
 }
 .creators-main-box::-webkit-scrollbar-thumb {
-    background: rgba(0, 230, 118, 0.2);
+    background: rgba(0, 230, 118, 0.25);
     border-radius: 10px;
 }
 .creators-main-box::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 230, 118, 0.4);
+    background: rgba(0, 230, 118, 0.45);
 }
 
-/* ─── CARDS GRID STRUCTURE (1 Row me exact 6 cards) ─── */
+/* ─── EXACT 6 CARDS IN ONE LINE GRID ─── */
 .creators-grid {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
+    grid-template-columns: repeat(6, minmax(0, 1fr)); /* Exact 6 cards per row */
     gap: 20px;
     width: 100%;
 }
@@ -54,7 +49,7 @@
 /* ─── CREATOR CARD DESIGN (Perfect Vertical look) ─── */
 .creator-card {
     background: rgba(255, 255, 255, 0.015) !important;
-    border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    border: 1px solid rgba(255, 255, 255, 0.03) !important;
     backdrop-filter: blur(10px) !important;
     border-radius: 20px;
     padding: 24px 16px 20px 16px;
@@ -189,14 +184,15 @@
 .stat-num { font-size: 15px; font-weight: 900; color: #fff; line-height: 1.2; }
 .stat-label { font-size: 9px; text-transform: uppercase; color: rgba(255, 255, 255, 0.4); margin-top: 1px; }
 
-/* ─── DYNAMIC EXPANDING FLOATING BUTTON (Bottom Right Corner) ─── */
+
+/* ─── ANIMATED FLOATING BUTTON (Icon turns into Expandable Details Rectangle on Hover) ─── */
 .floating-cta-trigger {
     position: fixed;
     bottom: 35px;
     right: 35px;
     z-index: 999;
     height: 56px;
-    width: 56px; /* Shuru me rounded square/box icon rahega */
+    width: 56px; /* Shuru me exact chhota rounded square box hoga */
     background: #010707;
     border: 1px solid rgba(0, 230, 118, 0.4);
     border-radius: 16px;
@@ -210,9 +206,9 @@
                 border-color 0.3s, box-shadow 0.3s, border-radius 0.3s;
 }
 
-/* Hover hone pe width smoothly expand hokar pure details dikhayegi */
+/* Hover hone pe width smoothly rectangle me badi ho jayegi */
 .floating-cta-trigger:hover {
-    width: 340px; /* Expands smoothly into an interactive rectangle box */
+    width: 350px; 
     border-color: #00e676;
     border-radius: 18px;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 230, 118, 0.3);
@@ -230,11 +226,10 @@
 .cta-icon-box i {
     font-size: 20px;
     color: #00e676;
-    animation: pulseGlow 2s infinite alternate;
 }
 
 .cta-expanded-content {
-    width: 284px;
+    width: 294px;
     padding-right: 18px;
     opacity: 0;
     visibility: hidden;
@@ -245,7 +240,7 @@
     gap: 6px;
 }
 
-/* Hover effect par content dynamically fade-in hoga */
+/* Hover par text display hoga smoothly */
 .floating-cta-trigger:hover .cta-expanded-content {
     opacity: 1;
     visibility: visible;
@@ -259,10 +254,10 @@
     color: rgba(255, 255, 255, 0.9);
     margin: 0;
     font-weight: 500;
+    text-align: left;
 }
 
-.cta-text strong { color: #fff; }
-.cta-text span.highlight { color: #00e676; font-weight: 700; }
+.cta-text span.highlight { color: #00e676; font-weight: 600; }
 
 .cta-action-link {
     font-size: 10px;
@@ -275,85 +270,78 @@
     letter-spacing: 0.5px;
 }
 
-@keyframes pulseGlow {
-    from { transform: scale(1); filter: drop-shadow(0 0 2px rgba(0,230,118,0.4)); }
-    to { transform: scale(1.08); filter: drop-shadow(0 0 8px rgba(0,230,118,0.8)); }
-}
-
-/* ─── RESPONSIVE BREAKPOINTS ─── */
+/* Responsive configurations for mobile sizes */
 @media(max-width: 1450px) {
     .creators-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 @media(max-width: 1024px) {
     .creators-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    #dynamic-wrapper[data-page="creators"] { height: auto; overflow: visible !important; }
-    .creators-main-box { height: auto; overflow: visible; }
 }
 @media(max-width: 600px) {
     .creators-grid { grid-template-columns: 1fr; }
-    .floating-cta-trigger { bottom: 20px; right: 20px; }
-    .floating-cta-trigger:hover { width: 290px; }
-    .cta-expanded-content { width: 234px; }
+    .floating-cta-trigger:hover { width: 300px; }
+    .cta-expanded-content { width: 244px; }
 }
 </style>
 
-<div class="creators-main-box">
-    <div class="creators-grid">
-        
-        <div class="creator-card">
-            <div class="card-node-info">
-                <span>Node // SEC_01</span>
-                <div class="online-dot"></div>
-            </div>
-            <div class="avatar-container">
-                <div class="avatar-inner">
-                    <i class="fa-solid fa-user"></i>
+<div class="creators-page-wrapper">
+    <div class="creators-main-box">
+        <div class="creators-grid">
+            
+            <div class="creator-card">
+                <div class="card-node-info">
+                    <span>Node // SEC_01</span>
+                    <div class="online-dot"></div>
+                </div>
+                <div class="avatar-container">
+                    <div class="avatar-inner">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                </div>
+                <div class="creator-details">
+                    <div class="creator-name">Ikla Pikla</div>
+                    <div class="creator-location"><i class="fa-solid fa-location-dot"></i> Uttar Pradesh</div>
+                    <div class="creator-tags">
+                        <span class="tag">Gaming</span>
+                        <span class="tag">Entertainment</span>
+                    </div>
+                </div>
+                <div class="card-stats">
+                    <div class="stat-box">
+                        <i class="fa-brands fa-youtube"></i>
+                        <div class="stat-num">1K</div>
+                        <div class="stat-label">Subs</div>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fa-brands fa-instagram"></i>
+                        <div class="stat-num">2K</div>
+                        <div class="stat-label">Followers</div>
+                    </div>
                 </div>
             </div>
-            <div class="creator-details">
-                <div class="creator-name">Ikla Pikla</div>
-                <div class="creator-location"><i class="fa-solid fa-location-dot"></i> Uttar Pradesh</div>
-                <div class="creator-tags">
-                    <span class="tag">Gaming</span>
-                    <span class="tag">Entertainment</span>
-                </div>
-            </div>
-            <div class="card-stats">
-                <div class="stat-box">
-                    <i class="fa-brands fa-youtube"></i>
-                    <div class="stat-num">1K</div>
-                    <div class="stat-label">Subs</div>
-                </div>
-                <div class="stat-box">
-                    <i class="fa-brands fa-instagram"></i>
-                    <div class="stat-num">2K</div>
-                    <div class="stat-label">Followers</div>
-                </div>
-            </div>
-        </div>
 
+        </div>
     </div>
 </div>
 
-<div class="floating-cta-trigger" id="custom-join-trigger">
+<div class="floating-cta-trigger" id="google-login-trigger">
     <div class="cta-icon-box">
-        <i class="fa-solid fa-id-card-clip"></i>
-    </div>
+        <i class="fa-solid fa-id-card-clip"></i> </div>
     <div class="cta-expanded-content">
         <p class="cta-text">
-            You can also <strong>create your profile card</strong> by joining <span class="highlight">iTalentBuddy</span>. Get instant deal notifications directly on your <strong>Email or WhatsApp</strong>!
+            You can also create your profile card by joining <span class="highlight">iTalentBuddy</span>. Get instant deal notifications directly on your Email or WhatsApp!
         </p>
         <div class="cta-action-link">
-            <span>Join Now & Sign In</span>
+            <span>Click to Join with Google</span>
             <i class="fa-solid fa-chevron-right"></i>
         </div>
     </div>
 </div>
 
 <script>
-    // 23 Dummy cards loop pattern initialization
-    const gridContainer = document.querySelector('.creators-grid');
-    const templateCardMarkup = `
+    // Automating remaining 23 cards inside the main grid container 
+    const grid = document.querySelector('.creators-grid');
+    const dummyCardHtml = `
     <div class="creator-card">
         <div class="card-node-info">
             <span>Node // SEC_02</span>
@@ -387,18 +375,13 @@
     </div>`;
 
     for (let i = 0; i < 23; i++) {
-        gridContainer.insertAdjacentHTML('beforeend', templateCardMarkup);
+        grid.insertAdjacentHTML('beforeend', dummyCardHtml);
     }
 
-    // Floating Button Event Listener (Triggers direct safe Google Popup Integration via index.html Router)
-    document.getElementById('custom-join-trigger').addEventListener('click', function(event) {
-        event.preventDefault();
-        if (typeof window.triggerGmailVerificationWorkflow === 'function') {
-            window.triggerGmailVerificationWorkflow();
-        } else if (typeof window.navigateToOnboarding === 'function') {
-            window.navigateToOnboarding();
-        } else {
-            console.warn("Auth router instance sequence missing.");
-        }
+    // Google Login popup verification workflow on floating button click
+    document.getElementById('google-login-trigger').addEventListener('click', function() {
+        console.log("Triggering Google Login Process...");
+        // Yahan aap dummy blank redirect open kar sakte hain ya login window load kar sakte hain
+        window.open('about:blank', '_blank');
     });
 </script>
