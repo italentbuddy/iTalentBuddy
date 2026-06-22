@@ -1,17 +1,18 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-/* ─── GLOBAL SCROLL LOCK (POORA PAGE SCROLL FREEZE) ─── */
-html, body {
-    overflow: hidden !important;
-    height: 100vh !important;
-}
-
-#dynamic-wrapper, .wrap {
-    height: calc(100vh - 120px) !important;
-    overflow: hidden !important;
-    padding: 0 !important;
+/* ─── PARENT CONTROLLER RESET (Pink box completely removed) ─── */
+#dynamic-wrapper[data-page="creators"] {
     border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    backdrop-filter: none !important;
+    
+    /* ⚠️ CRITICAL FIXED VIEWPORT HEIGHT (Isse bahar ka page scroll block hoga) */
+    height: calc(100vh - 130px) !important; 
+    overflow: hidden !important;
+    display: block !important;
 }
 
 /* ─── BADA ROUNDED CORNER BOX (SIRF YEH SCROLL HOGA) ─── */
@@ -22,13 +23,15 @@ html, body {
     backdrop-filter: blur(20px);
     border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: 24px;
-    padding: 30px 24px;
-    overflow-y: auto !important; /* CRITICAL: Sirf cards is box ke andar scroll honge */
+    padding: 24px;
+    
+    /* 👑 SIRF ISME SCROLL KARENGE CARDS */
+    overflow-y: auto !important; 
     overflow-x: hidden !important;
     box-sizing: border-box;
 }
 
-/* Custom Scrollbar Inside Main Box */
+/* Custom Scrollbar Elements inside Main Box Only */
 .creators-main-box::-webkit-scrollbar {
     width: 6px;
 }
@@ -39,21 +42,18 @@ html, body {
     background: rgba(0, 230, 118, 0.3);
     border-radius: 10px;
 }
-.creators-main-box::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 230, 118, 0.5);
-}
 
-/* ─── GRID LAYOUT (EXACT 6 CARDS IN ONE ROW) ─── */
+/* ─── EXACT GRID LAYOUT (1 ROW ME 6 CARDS, TOTAL 18 CARDS) ─── */
 .creators-grid {
     display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr)); /* 6 Cards Per Row */
-    gap: 24px;
+    grid-template-columns: repeat(6, minmax(0, 1fr)); /* Exact 6 per row */
+    gap: 20px;
     width: 100%;
-    padding: 15px 10px 40px 10px; /* Safe space taaki hover cut na ho */
+    padding: 10px 5px 30px 5px; /* Cards hover cutting safe zone padding */
     box-sizing: border-box;
 }
 
-/* ─── CARD DESIGN (9:16 vertical look) ─── */
+/* ─── CARD STRUCTURE DESIGN ─── */
 .creator-card {
     background: rgba(255, 255, 255, 0.015) !important;
     border: 1px solid rgba(255, 255, 255, 0.03) !important;
@@ -73,7 +73,7 @@ html, body {
 .creator-card:hover {
     border-color: rgba(0, 230, 118, 0.35) !important;
     background: rgba(0, 230, 118, 0.03) !important;
-    transform: translateY(-8px);
+    transform: translateY(-6px);
     box-shadow: 0 15px 35px rgba(0, 230, 118, 0.15);
     z-index: 10;
 }
@@ -86,7 +86,6 @@ html, body {
     font-size: 10px;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.3);
-    text-transform: uppercase;
 }
 
 .online-dot {
@@ -119,43 +118,20 @@ html, body {
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-.avatar-inner i {
-    font-size: 22px;
-    color: #00e676;
-}
-
-.creator-details {
-    text-align: center;
-    width: 100%;
-}
-
-.creator-name {
-    font-size: 18px;
-    font-weight: 800;
-    color: #fff;
-    margin: 0 0 4px 0;
-}
+.avatar-inner i { font-size: 22px; color: #00e676; }
+.creator-name { font-size: 18px; font-weight: 800; color: #fff; margin: 0; }
 
 .creator-location {
     font-size: 11px;
     color: rgba(255, 255, 255, 0.5);
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 4px;
     margin-bottom: 10px;
 }
+.creator-location i { color: #00e676; }
 
-.creator-location i { color: #00e676; font-size: 10px; }
-
-.creator-tags {
-    display: flex;
-    gap: 5px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 10px;
-}
-
+.creator-tags { display: flex; gap: 5px; margin-bottom: 10px; }
 .tag {
     background: rgba(0, 230, 118, 0.05);
     border: 1px solid rgba(0, 230, 118, 0.15);
@@ -174,7 +150,6 @@ html, body {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding-top: 10px;
 }
-
 .stat-box {
     background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.03);
@@ -182,41 +157,39 @@ html, body {
     padding: 6px;
     text-align: center;
 }
-
-.stat-box i { font-size: 11px; margin-bottom: 3px; }
 .stat-box .fa-youtube { color: #ff0000; }
 .stat-box .fa-instagram { color: #e1306c; }
-
-.stat-num { font-size: 14px; font-weight: 900; color: #fff; line-height: 1.2; }
+.stat-num { font-size: 14px; font-weight: 900; color: #fff; }
 .stat-label { font-size: 9px; text-transform: uppercase; color: rgba(255, 255, 255, 0.4); }
 
 
-/* ─── DYNAMIC EXPANDING FLOATING BUTTON ─── */
+/* ─── 👑 PERFECT HOVER FLOATING BUTTON (DYNAMIC RECTANGLE EXPANSION) ─── */
 .floating-cta-trigger {
     position: fixed;
     bottom: 35px;
     right: 35px;
-    z-index: 99999;
-    height: 56px;   /* Initial Circle/Box Height */
-    width: 56px;    /* Initial Circle/Box Width */
+    z-index: 9999;
+    height: 56px;   /* Initial circle round-box size */
+    width: 56px;    /* Initial circle round-box size */
     background: #010707;
     border: 1px solid rgba(0, 230, 118, 0.4);
     border-radius: 16px;
     display: flex;
-    align-items: flex-start;
+    align-items: flex-start; 
     justify-content: flex-start;
     overflow: hidden;
     cursor: pointer;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 230, 118, 0.15);
+    /* Dual height & width animations for absolute text safety */
     transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1), 
                 height 0.4s cubic-bezier(0.19, 1, 0.22, 1), 
-                border-color 0.3s, box-shadow 0.3s;
+                border-color 0.3s;
 }
 
-/* Hover par dynamic expansion bina text kata-fita dikhe */
+/* Hover hone par clean rectangle me bada hoga, height automatic auto content shift manage karegi */
 .floating-cta-trigger:hover {
     width: 380px; 
-    height: 140px; /* Safe fixed expansion height to cleanly display wrap text */
+    height: 155px; /* Clean explicit dynamic layout space allocation */
     border-color: #00e676;
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 230, 118, 0.3);
 }
@@ -229,12 +202,9 @@ html, body {
     justify-content: center;
     flex-shrink: 0;
 }
+.cta-icon-box i { font-size: 20px; color: #00e676; }
 
-.cta-icon-box i {
-    font-size: 20px;
-    color: #00e676;
-}
-
+/* Text Content Handler */
 .cta-expanded-content {
     width: 310px;
     padding: 14px 16px 14px 2px;
@@ -244,13 +214,13 @@ html, body {
     flex-direction: column;
     gap: 8px;
     box-sizing: border-box;
-    transition: opacity 0.25s ease;
+    transition: opacity 0.2s ease;
 }
 
 .floating-cta-trigger:hover .cta-expanded-content {
     opacity: 1;
     visibility: visible;
-    transition-delay: 0.12s;
+    transition-delay: 0.12s; /* Box expand hote hi text dynamic smooth enter hoga */
 }
 
 .cta-text {
@@ -261,11 +231,7 @@ html, body {
     font-weight: 500;
     text-align: left;
 }
-
-.cta-text span.highlight { 
-    color: #00e676; 
-    font-weight: 700; 
-}
+.cta-text span.highlight { color: #00e676; font-weight: 700; }
 
 .cta-action-link {
     font-size: 10px;
@@ -275,8 +241,6 @@ html, body {
     display: flex;
     align-items: center;
     gap: 6px;
-    letter-spacing: 0.5px;
-    margin-top: 2px;
 }
 </style>
 
@@ -334,8 +298,8 @@ html, body {
 </div>
 
 <script>
-    // EXACTLY TOTAL 18 CARDS GENERATION (1 Row me 6 Cards, Total 3 Rows layout)
-    const targetGrid = document.querySelector('.creators-grid');
+    // EXACTLY 18 CARDS POPULATION BLOCK (6 Columns * 3 Completed Rows Layout)
+    const gridInstance = document.querySelector('.creators-grid');
     const blueprintMarkup = `
     <div class="creator-card">
         <div class="card-node-info">
@@ -369,14 +333,14 @@ html, body {
         </div>
     </div>`;
 
-    // 1st Card HTML me h, bache hue 17 loop elements compile honge total 18 grid space banane ke liye
+    // 1st Card upar markup me h, loop exact 17 additional elements compile karke 18 balance karega
     for (let i = 0; i < 17; i++) {
-        targetGrid.insertAdjacentHTML('beforeend', blueprintMarkup);
+        gridInstance.insertAdjacentHTML('beforeend', blueprintMarkup);
     }
 
-    // Connect trigger button routing function setup
+    // Google Sign-In redirect execution flow logic bind
     document.getElementById('google-login-trigger').addEventListener('click', function() {
-        console.log("Redirecting to Google Login Pop-up container workflow...");
+        console.log("Triggering official standard Google Popup Authentication integration link...");
         window.open('about:blank', '_blank');
     });
 </script>
