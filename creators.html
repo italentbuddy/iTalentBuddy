@@ -1,227 +1,38 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
-/* ─── PARENT OVERRIDES (Page scroll freeze) ─── */
-#dynamic-wrapper[data-page="creators"] {
-    border: none !important;
-    background: transparent !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    backdrop-filter: none !important;
-    height: calc(100vh - 140px); 
-    overflow: hidden !important;
-    display: block !important;
-}
-
-/* ─── BADA ROUNDED CORNER BOX ─── */
-.creators-main-box {
-    width: 100%;
-    height: 100%;
-    background: rgba(4, 16, 16, 0.3);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    border-radius: 24px;
-    padding: 24px; /* Default inner box padding */
-    overflow-y: auto; /* Sirf cards scroll honge */
-    box-sizing: border-box;
-}
-
-/* Custom Scrollbar */
-.creators-main-box::-webkit-scrollbar {
-    width: 6px;
-}
-.creators-main-box::-webkit-scrollbar-track {
-    background: transparent;
-}
-.creators-main-box::-webkit-scrollbar-thumb {
-    background: rgba(0, 230, 118, 0.25);
-    border-radius: 10px;
-}
-.creators-main-box::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 230, 118, 0.45);
-}
-
-/* ─── EXACT 6 CARDS IN ONE LINE GRID (With Hover Space) ─── */
-.creators-grid {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr)); /* Exact 6 cards per row */
-    gap: 20px;
-    width: 100%;
-    /* ⚠️ CRITICAL FIX: Padding add ki hai taaki hover animation par edge waale cards cut na ho */
-    padding: 12px 10px; 
-    box-sizing: border-box;
-}
-
-/* ─── CREATOR CARD DESIGN (9:16 Ratio Look) ─── */
-.creator-card {
-    background: rgba(255, 255, 255, 0.015) !important;
-    border: 1px solid rgba(255, 255, 255, 0.03) !important;
-    backdrop-filter: blur(10px) !important;
-    border-radius: 20px;
-    padding: 24px 14px 20px 14px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    position: relative;
-    aspect-ratio: 9 / 14.5;
-    justify-content: space-between;
-    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-/* Smooth Scale Hover - No cutting anymore */
-.creator-card:hover {
-    border-color: rgba(0, 230, 118, 0.3) !important;
-    background: rgba(0, 230, 118, 0.03) !important;
-    transform: translateY(-6px);
-    box-shadow: 0 15px 35px rgba(0, 230, 118, 0.12);
-    z-index: 5; /* Card hover pe upar dikhega background se */
-}
-
-.card-node-info {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    color: rgba(255, 255, 255, 0.3);
-    text-transform: uppercase;
-}
-
-.online-dot {
-    width: 6px;
-    height: 6px;
-    background: #00e676;
-    border-radius: 50%;
-    box-shadow: 0 0 8px #00e676;
-}
-
-.avatar-container {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    border: 1px dashed rgba(0, 230, 118, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 12px 0 8px 0;
-}
-
-.avatar-inner {
-    width: 68px;
-    height: 68px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.03);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.avatar-inner i {
-    font-size: 24px;
-    color: #00e676;
-}
-
-.creator-details {
-    text-align: center;
-    width: 100%;
-}
-
-.creator-name {
-    font-size: 18px;
-    font-weight: 800;
-    color: #fff;
-    margin: 0 0 4px 0;
-    letter-spacing: -0.5px;
-}
-
-.creator-location {
-    font-size: 11px;
-    color: rgba(255, 255, 255, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-    margin-bottom: 12px;
-}
-
-.creator-location i { color: #00e676; font-size: 10px; }
-
-.creator-tags {
-    display: flex;
-    gap: 5px;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 12px;
-}
-
-.tag {
-    background: rgba(0, 230, 118, 0.05);
-    border: 1px solid rgba(0, 230, 118, 0.15);
-    color: #00e676;
-    padding: 3px 8px;
-    border-radius: 6px;
-    font-size: 10px;
-    font-weight: 600;
-}
-
-.card-stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 6px;
-    width: 100%;
-    margin-top: auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 10px;
-}
-
-.stat-box {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.03);
-    border-radius: 10px;
-    padding: 6px;
-    text-align: center;
-}
-
-.stat-box i { font-size: 11px; margin-bottom: 3px; }
-.stat-box .fa-youtube { color: #ff0000; }
-.stat-box .fa-instagram { color: #e1306c; }
-
-.stat-num { font-size: 14px; font-weight: 900; color: #fff; line-height: 1.2; }
-.stat-label { font-size: 9px; text-transform: uppercase; color: rgba(255, 255, 255, 0.4); margin-top: 1px; }
-
-
-/* ─── EXPANDABLE CHHOTA ROUND CORNER FLOATING BUTTON ─── */
+/* ─── FIXED OVERFLOW & DYNAMIC HEIGHT FLOATING BUTTON ─── */
 .floating-cta-trigger {
     position: fixed;
     bottom: 35px;
     right: 35px;
-    z-index: 999;
-    height: 56px;
-    width: 56px; /* Initial chhota box shape */
+    z-index: 99999;
+    height: 56px;   /* Initial State Height */
+    width: 56px;    /* Initial State Width */
     background: #010707;
     border: 1px solid rgba(0, 230, 118, 0.4);
     border-radius: 16px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-start; /* Taaki height badhne par icon top pe align rahe */
+    justify-content: flex-start;
     overflow: hidden;
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 230, 118, 0.15);
-    transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2), 
-                border-color 0.3s, box-shadow 0.3s, border-radius 0.3s;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 230, 118, 0.15);
+    /* Transition parameters for ultra smooth growth */
+    transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1), 
+                height 0.4s cubic-bezier(0.19, 1, 0.22, 1), 
+                border-color 0.3s, box-shadow 0.3s;
 }
 
-/* Hover par dynamic rectangle expansion */
+/* 👑 NO MORE TEXT CUTTING: Hover hone pe height aur width dono smoothly text ke hisab se badhenge */
 .floating-cta-trigger:hover {
-    width: 350px; 
+    width: 380px; 
+    height: 140px; /* Safe expanded dynamic height for text block */
     border-color: #00e676;
-    border-radius: 18px;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 25px rgba(0, 230, 118, 0.3);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.8), 0 0 25px rgba(0, 230, 118, 0.3);
 }
 
+/* Icon Area Styling */
 .cta-icon-box {
     width: 54px;
     height: 54px;
@@ -236,36 +47,41 @@
     color: #00e676;
 }
 
+/* Expanded Text Wrapper Container */
 .cta-expanded-content {
-    width: 294px;
-    padding-right: 18px;
+    width: 310px;
+    padding: 14px 16px 14px 2px; /* Uniform padding inside card */
     opacity: 0;
     visibility: hidden;
-    transform: translateX(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
+    box-sizing: border-box;
+    transition: opacity 0.25s ease;
 }
 
+/* Hover Content Trigger Logic */
 .floating-cta-trigger:hover .cta-expanded-content {
     opacity: 1;
     visibility: visible;
-    transform: translateX(0);
-    transition-delay: 0.1s;
+    transition-delay: 0.12s; /* Text tabhi aayega jab box expand ho chuka hoga */
 }
 
 .cta-text {
     font-size: 12px;
-    line-height: 1.45;
-    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.95);
     margin: 0;
     font-weight: 500;
     text-align: left;
 }
 
-.cta-text span.highlight { color: #00e676; font-weight: 600; }
+.cta-text span.highlight { 
+    color: #00e676; 
+    font-weight: 700; 
+}
 
+/* Join Now Link Label */
 .cta-action-link {
     font-size: 10px;
     font-weight: 800;
@@ -273,122 +89,31 @@
     text-transform: uppercase;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
     letter-spacing: 0.5px;
-}
-
-/* Responsive configurations */
-@media(max-width: 1450px) {
-    .creators-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-}
-@media(max-width: 1024px) {
-    .creators-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media(max-width: 600px) {
-    .creators-grid { grid-template-columns: 1fr; }
-    .floating-cta-trigger:hover { width: 300px; }
-    .cta-expanded-content { width: 244px; }
+    margin-top: 2px;
 }
 </style>
 
-<div class="creators-page-wrapper">
-    <div class="creators-main-box">
-        <div class="creators-grid">
-            
-            <div class="creator-card">
-                <div class="card-node-info">
-                    <span>Node // SEC_01</span>
-                    <div class="online-dot"></div>
-                </div>
-                <div class="avatar-container">
-                    <div class="avatar-inner">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                </div>
-                <div class="creator-details">
-                    <div class="creator-name">Ikla Pikla</div>
-                    <div class="creator-location"><i class="fa-solid fa-location-dot"></i> Uttar Pradesh</div>
-                    <div class="creator-tags">
-                        <span class="tag">Gaming</span>
-                        <span class="tag">Music</span>
-                    </div>
-                </div>
-                <div class="card-stats">
-                    <div class="stat-box">
-                        <i class="fa-brands fa-youtube"></i>
-                        <div class="stat-num">1K</div>
-                        <div class="stat-label">Subs</div>
-                    </div>
-                    <div class="stat-box">
-                        <i class="fa-brands fa-instagram"></i>
-                        <div class="stat-num">2K</div>
-                        <div class="stat-label">Followers</div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
 <div class="floating-cta-trigger" id="google-login-trigger">
     <div class="cta-icon-box">
-        <i class="fa-solid fa-wand-magic-sparkles"></i> </div>
+        <i class="fa-solid fa-id-card"></i> 
+    </div>
     <div class="cta-expanded-content">
         <p class="cta-text">
             You can also create your profile card by joining <span class="highlight">iTalentBuddy</span>. Get instant deal notifications directly on your Email or WhatsApp!
         </p>
         <div class="cta-action-link">
-            <span>Join with Google</span>
-            <i class="fa-solid fa-chevron-right"></i>
+            <span>Click to Join with Google</span>
+            <i class="fa-solid fa-arrow-right-to-bracket"></i>
         </div>
     </div>
 </div>
 
 <script>
-    // Exact 18 Cards Logic Generator (6 columns * 3 lines)
-    const gridInstance = document.querySelector('.creators-grid');
-    const singleCardMarkup = `
-    <div class="creator-card">
-        <div class="card-node-info">
-            <span>Node // SEC_02</span>
-            <div class="online-dot"></div>
-        </div>
-        <div class="avatar-container">
-            <div class="avatar-inner">
-                <i class="fa-solid fa-user"></i>
-            </div>
-        </div>
-        <div class="creator-details">
-            <div class="creator-name">Alpha Creator</div>
-            <div class="creator-location"><i class="fa-solid fa-location-dot"></i> New Delhi</div>
-            <div class="creator-tags">
-                <span class="tag">Vlogs</span>
-                <span class="tag">Tech</span>
-            </div>
-        </div>
-        <div class="card-stats">
-            <div class="stat-box">
-                <i class="fa-brands fa-youtube"></i>
-                <div class="stat-num">45K</div>
-                <div class="stat-label">Subs</div>
-            </div>
-            <div class="stat-box">
-                <i class="fa-brands fa-instagram"></i>
-                <div class="stat-num">120K</div>
-                <div class="stat-label">Followers</div>
-            </div>
-        </div>
-    </div>`;
-
-    // 17 more dummy items loop to fill 18 total active cards
-    for (let i = 0; i < 17; i++) {
-        gridInstance.insertAdjacentHTML('beforeend', singleCardMarkup);
-    }
-
-    // Google Login redirection bridge trigger
-    document.getElementById('google-login-trigger').addEventListener('click', function() {
-        console.log("Initializing Firebase Google Login Flow...");
+    // Click behavior to trigger dynamic auth wrapper popup sequence
+    document.getElementById('google-login-trigger').addEventListener('click', function(e) {
+        console.log("Initializing Firebase Auth Routing Flow...");
         window.open('about:blank', '_blank');
     });
 </script>
